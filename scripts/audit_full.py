@@ -66,7 +66,7 @@ async def check_completed(page, idx, slug, title, year, mobile=False):
         prev_img = page.locator('[data-testid="floor-plan-preview"] img')
         prev = await prev_img.get_attribute("src")
         dl = await page.locator('[data-testid="download-plan-button"]').get_attribute("href")
-        view = await page.locator('[data-testid="view-full-plan-button"]').get_attribute("href")
+        view = await page.locator('[data-testid="view-full-plan-button"]').get_attribute("data-pdf")
         for label, val in [("hero", hero), ("elevation", elev), ("preview", prev), ("download", dl), ("view", view)]:
             assert f"/assets/projects/{slug}/" in val, f"{label} wrong folder: {val}"
             for o in ALL_SLUGS:
@@ -116,7 +116,7 @@ async def check_ongoing(page, idx, slug, title, floors, mobile=False):
         prev_img = page.locator('[data-testid="floor-plan-preview"] img')
         prev = await prev_img.get_attribute("src")
         dl = await page.locator('[data-testid="download-plan-button"]').get_attribute("href")
-        view = await page.locator('[data-testid="view-full-plan-button"]').get_attribute("href")
+        view = await page.locator('[data-testid="view-full-plan-button"]').get_attribute("data-pdf")
         for label, val in [("preview", prev), ("download", dl), ("view", view)]:
             assert f"/assets/projects/{slug}/" in val, f"{label} wrong: {val}"
             for o in ALL_SLUGS:

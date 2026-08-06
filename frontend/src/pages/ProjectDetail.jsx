@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import FloorPlanViewer from "../components/FloorPlanViewer";
 import { getProject, getAdjacent } from "../data/projects";
 
 const EASE = [0.16, 1, 0.3, 1];
 
 export default function ProjectDetail() {
   const { slug } = useParams();
+  const [planOpen, setPlanOpen] = useState(false);
   const project = getProject(slug);
   if (!project) return <Navigate to="/projects" replace />;
   const { prev, next } = getAdjacent(slug);
@@ -234,16 +237,16 @@ export default function ProjectDetail() {
                 {project.planTagline || "Typical floor layout. Open the full-resolution plan for dimensions and details."}
               </p>
               <div className="flex flex-wrap gap-4 mt-8">
-                <a
-                  href={project.floorPlan.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={() => setPlanOpen(true)}
                   data-testid="view-full-plan-button"
+                  data-pdf={project.floorPlan.pdf}
                   className="group inline-flex items-center gap-3 border border-bone/25 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
                 >
                   View Full Plan
                   <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
-                </a>
+                </button>
                 <a
                   href={project.floorPlan.pdf}
                   download={project.floorPlan.fileName}
@@ -255,16 +258,17 @@ export default function ProjectDetail() {
                 </a>
               </div>
             </div>
-            <motion.a
-              href={project.floorPlan.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.div
+              role="button"
+              tabIndex={0}
+              onClick={() => setPlanOpen(true)}
+              onKeyDown={(e) => e.key === "Enter" && setPlanOpen(true)}
               data-testid="floor-plan-preview"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-              className="col-span-12 md:col-span-8 block border border-line bg-bone p-2 md:p-3 hover:border-ember/50 transition-colors duration-500"
+              className="col-span-12 md:col-span-8 block border border-line bg-bone p-2 md:p-3 hover:border-ember/50 transition-colors duration-500 cursor-zoom-in"
             >
               <img
                 src={project.floorPlan.preview}
@@ -272,7 +276,7 @@ export default function ProjectDetail() {
                 className="w-full h-auto block"
                 loading="lazy"
               />
-            </motion.a>
+            </motion.div>
           </div>
         </section>
       )}
@@ -325,6 +329,16 @@ export default function ProjectDetail() {
           </Link>
         </div>
       </nav>
+
+      {project.floorPlan && (
+        <FloorPlanViewer
+          open={planOpen}
+          onClose={() => setPlanOpen(false)}
+          image={project.floorPlan.preview}
+          pdf={project.floorPlan.pdf}
+          title={`${project.title} — Floor Plan`}
+        />
+      )}
     </div>
   );
 }

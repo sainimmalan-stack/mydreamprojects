@@ -143,6 +143,13 @@ Premium, production-quality responsive website for residential construction comp
 - Fixed one real bug found in verification: 12-col grid gap-10 caused 461px mobile overflow on contact page → gap-6
 - Verified: desktop + 390px mobile; all projects + About re-verified unchanged
 
+## Iteration 21 (2026-08-06) — Full-screen floor plan viewer (all 19 projects)
+- New reusable `src/components/FloorPlanViewer.jsx`: portal-mounted (escapes main stacking context), dark backdrop, title auto per project ("MY DREAM X — FLOOR PLAN"), controls − / % / + / RESET / ×, OPEN ORIGINAL PDF secondary link, ESC close
+- Interactions: button zoom, wheel zoom anchored at cursor (desktop), pointer-drag pan when zoomed, two-pointer pinch zoom + midpoint pan (mobile), scroll lock via lenis.stop() + body overflow (restored on close), touch-action none so the page never moves while inspecting
+- ProjectDetail: preview click and VIEW FULL PLAN now open the viewer; DOWNLOAD PDF unchanged; viewer shows the high-res rendered plan (faithful to source, no enhancement)
+- Two real bugs found & fixed in verification: viewer trapped under site header (main's z-10 stacking context → createPortal), Lenis momentum moving background on open (→ lenis.stop())
+- Verified: dedicated viewer suite (desktop Nest+Atlantis; mobile Nest, Atlantis, Aurelia, Ivy — pinch via CDP touch) + full 41-check audit green; zero data/asset changes
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
