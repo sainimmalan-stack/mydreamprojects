@@ -107,6 +107,11 @@ Premium, production-quality responsive website for residential construction comp
 - Ongoing order: Aurelia → Elysium → Aura; placeholders now 17–19 (3 remaining); site = 13 completed + 3 ongoing with real content
 - Full 39-check audit re-run and passed — Projects 01–15 unchanged
 
+## Iteration 15 (2026-08-06) — Project 17: My Dream Echelon (Ongoing 4 of 6)
+- `/projects/my-dream-echelon` (ONGOING, G+5, Residential Apartment, no year) — plan-only assets in `/assets/projects/my-dream-echelon/`, same COMING SOON elevation placeholder
+- Ongoing order: Aurelia → Elysium → Aura → Echelon; placeholders now 18–19 (Vale and Ivy awaiting content per user); site = 13 completed + 4 ongoing with real content
+- Full 39-check audit re-run and passed — Projects 01–16 unchanged
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

@@ -17,8 +17,8 @@ COMPLETED = [
     ("12", "my-dream-solace", "MY DREAM SOLACE", "2026"),
     ("13", "my-dream-zenith", "MY DREAM ZENITH", "2026"),
 ]
-PLACEHOLDERS = [f"project-{n:02d}" for n in range(17, 20)]
-ONGOING_REAL = [("14", "my-dream-aurelia", "MY DREAM AURELIA"), ("15", "my-dream-elysium", "MY DREAM ELYSIUM"), ("16", "my-dream-aura", "MY DREAM AURA")]
+PLACEHOLDERS = [f"project-{n:02d}" for n in range(18, 20)]
+ONGOING_REAL = [("14", "my-dream-aurelia", "MY DREAM AURELIA"), ("15", "my-dream-elysium", "MY DREAM ELYSIUM"), ("16", "my-dream-aura", "MY DREAM AURA"), ("17", "my-dream-echelon", "MY DREAM ECHELON")]
 FOLDERS = [s for _, s, _, _ in COMPLETED] + [s for _, s, _ in ONGOING_REAL]
 results = []
 
