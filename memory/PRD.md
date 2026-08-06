@@ -117,6 +117,12 @@ Premium, production-quality responsive website for residential construction comp
 - Ongoing order: Aurelia → Elysium → Aura → Echelon → Vale; only placeholder 19 (My Dream Ivy) remains; site = 13 completed + 5 ongoing with real content
 - Full 39-check audit re-run and passed — Projects 01–17 unchanged
 
+## Iteration 17 (2026-08-06) — Project 19: My Dream Ivy (Ongoing 6 of 6, FINAL)
+- `/projects/my-dream-ivy` (ONGOING, G+4, 3 BHK, Residential Apartment, no year) — plan-only assets in `/assets/projects/my-dream-ivy/`
+- Exclusive-but-restrained concept presentation via new optional data fields: `headline` ("ONE HOME. ONE FLOOR."), `headlineSub` ("Private Living, Elevated."), `configuration` ("3 BHK" in chips), `glance` (Project at a Glance 4-cell grid: G+4 / 3 BHK / 1,600 SQ.FT. / ONE HOME PER FLOOR), `planTagline` ("One thoughtfully planned residence. An entire floor to call your own.")
+- Same COMING SOON elevation placeholder; no placeholders remain — ALL 19 PROJECTS HAVE REAL CONTENT (13 completed + 6 ongoing)
+- Verified: G+4 not G+5, headline/subline/glance present, ongoing order Aurelia→Elysium→Aura→Echelon→Vale→Ivy, full 39-check audit green (Projects 01–18 unchanged)
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

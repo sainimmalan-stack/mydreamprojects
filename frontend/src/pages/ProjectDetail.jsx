@@ -88,7 +88,7 @@ export default function ProjectDetail() {
                 data-testid="project-meta-floors-type"
                 className="border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2"
               >
-                {project.floors} · {project.type}
+                {[project.floors, project.configuration, project.type].filter(Boolean).join(" · ")}
               </span>
             )}
           </motion.div>
@@ -118,6 +118,45 @@ export default function ProjectDetail() {
           ))}
         </div>
       </section>
+
+      {project.headline && (
+        <section data-testid="project-concept" className="border-b border-line bg-coal">
+          <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32">
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, ease: EASE }}
+            >
+              <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">The Concept</p>
+              <h2 className="font-display font-bold uppercase tracking-tighter leading-[0.95] text-4xl md:text-6xl lg:text-7xl text-bone">
+                {project.headline}
+              </h2>
+              <p className="text-sm md:text-base text-concrete tracking-wide mt-5">{project.headlineSub}</p>
+            </motion.div>
+            {project.glance && (
+              <div data-testid="project-glance" className="grid grid-cols-2 md:grid-cols-4 border border-line mt-14 md:mt-20">
+                {project.glance.map((g, i) => (
+                  <motion.div
+                    key={g.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: i * 0.06, ease: EASE }}
+                    data-testid={`glance-${i}`}
+                    className={`px-5 md:px-8 py-8 md:py-12 ${i > 0 ? "md:border-l border-line" : ""} ${i > 1 ? "border-t md:border-t-0 border-line" : ""} ${i % 2 === 1 ? "border-l" : ""}`}
+                  >
+                    <p className="font-display font-semibold uppercase tracking-tight text-lg md:text-2xl text-bone leading-tight">
+                      {g.value}
+                    </p>
+                    <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-concrete mt-3">{g.label}</p>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-8">
         <div className="col-span-12 md:col-span-3">
@@ -192,7 +231,7 @@ export default function ProjectDetail() {
                 The plan.
               </h2>
               <p className="text-sm text-concrete leading-relaxed mt-5 max-w-sm">
-                Typical floor layout. Open the full-resolution plan for dimensions and details.
+                {project.planTagline || "Typical floor layout. Open the full-resolution plan for dimensions and details."}
               </p>
               <div className="flex flex-wrap gap-4 mt-8">
                 <a

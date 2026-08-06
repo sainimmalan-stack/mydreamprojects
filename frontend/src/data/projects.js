@@ -355,23 +355,36 @@ const MY_DREAM_VALE = {
   },
 };
 
-const placeholders = Array.from({ length: 1 }, (_, i) => {
-  const n = i + 19;
-  return {
-    id: n,
-    slug: `project-${pad(n)}`,
-    index: pad(n),
-    title: `Project ${pad(n)}`,
-    status: "ongoing",
-    location: "Ameenpur, Hyderabad",
-    type: "Residential",
-    year: "—",
-    description:
-      "Full project narrative, specifications and photography will be added here. This template is ready to receive the real content.",
-  };
-});
+const MY_DREAM_IVY = {
+  id: 19,
+  slug: "my-dream-ivy",
+  index: "19",
+  title: "My Dream Ivy",
+  status: "ongoing",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "—",
+  floors: "G+4",
+  configuration: "3 BHK",
+  description:
+    "My Dream Ivy is an intimate residential development designed around privacy, spacious living and practical family needs. With one generously planned 3BHK residence on each residential floor, the project offers an exclusive living experience with thoughtfully arranged family living, dining, puja, utility and balcony spaces.",
+  headline: "One Home. One Floor.",
+  headlineSub: "Private Living, Elevated.",
+  glance: [
+    { value: "G+4", label: "Floors" },
+    { value: "3 BHK", label: "Configuration" },
+    { value: "1,600 sq.ft.", label: "Residence Size" },
+    { value: "One Home per Floor", label: "Private Residential Concept" },
+  ],
+  planTagline: "One thoughtfully planned residence. An entire floor to call your own.",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-ivy/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-ivy/floor-plan-p1.jpg",
+    fileName: "My-Dream-Ivy-Floor-Plan.pdf",
+  },
+};
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, MY_DREAM_ZENITH, MY_DREAM_AURELIA, MY_DREAM_ELYSIUM, MY_DREAM_AURA, MY_DREAM_ECHELON, MY_DREAM_VALE, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, MY_DREAM_ZENITH, MY_DREAM_AURELIA, MY_DREAM_ELYSIUM, MY_DREAM_AURA, MY_DREAM_ECHELON, MY_DREAM_VALE, MY_DREAM_IVY];
 
 export const projectStats = {
   total: projects.length,
