@@ -79,6 +79,11 @@ Premium, production-quality responsive website for residential construction comp
 - Chronological index: Nest 2020 → … → Perch 2026 → Solace 2026, then 7 placeholders (19 total; 12 real covers)
 - Full automated 12-project integrity sweep passed (desktop + mobile)
 
+## Iteration 10 (2026-08-06) — Project 13: My Dream Zenith (final completed project)
+- Zenith (Completed, 2026, G+5) at `/projects/my-dream-zenith`; placeholders are now 14–19 all "ongoing" (6), so counts are exactly 13 completed / 6 ongoing and the Completed/Ongoing filters read (13)/(6)
+- Zenith data rule honored: no residence/flat count anywhere (asserted in sweep)
+- Full 13-project integrity sweep passed (desktop + mobile): all assets self-referential, heroes are elevations, no overflow
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

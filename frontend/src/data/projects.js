@@ -240,15 +240,34 @@ const MY_DREAM_SOLACE = {
   },
 };
 
-const placeholders = Array.from({ length: 7 }, (_, i) => {
-  const n = i + 13;
-  const status = n <= 13 ? "completed" : "ongoing";
+const MY_DREAM_ZENITH = {
+  id: 13,
+  slug: "my-dream-zenith",
+  index: "13",
+  title: "My Dream Zenith",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2026",
+  floors: "G+5",
+  description:
+    "My Dream Zenith is a contemporary residential development characterized by bold geometric forms, clean façade lines and thoughtfully planned living spaces. Completed in 2026, its modern architectural language and practical layouts create a distinctive residential environment designed around comfortable family living.",
+  cover: "/assets/projects/my-dream-zenith/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-zenith/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-zenith/floor-plan-p1.jpg",
+    fileName: "My-Dream-Zenith-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 6 }, (_, i) => {
+  const n = i + 14;
   return {
     id: n,
     slug: `project-${pad(n)}`,
     index: pad(n),
     title: `Project ${pad(n)}`,
-    status,
+    status: "ongoing",
     location: "Ameenpur, Hyderabad",
     type: "Residential",
     year: "—",
@@ -257,7 +276,7 @@ const placeholders = Array.from({ length: 7 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, MY_DREAM_ZENITH, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
