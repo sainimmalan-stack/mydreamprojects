@@ -29,7 +29,9 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
           {project.cover ? (
             <img
               src={project.cover}
-              alt={project.title}
+              srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              alt={`${project.title} residential apartment elevation in Ameenpur`}
               loading="lazy"
               className="texture-img absolute inset-0 w-full h-full object-cover"
             />

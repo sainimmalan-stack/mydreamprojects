@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import FloorPlanViewer from "../components/FloorPlanViewer";
 import { getProject, getAdjacent } from "../data/projects";
+import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -11,6 +12,17 @@ export default function ProjectDetail() {
   const { slug } = useParams();
   const [planOpen, setPlanOpen] = useState(false);
   const project = getProject(slug);
+  useSeo({
+    title: project
+      ? `${project.title} | Residential Project in Ameenpur | My Dream Projects`
+      : "Project | My Dream Projects",
+    description: project
+      ? `Explore ${project.title} by My Dream Projects in Ameenpur, Hyderabad. ${
+          project.status === "completed" ? `Completed in ${project.year}.` : "Currently under development."
+        } View the project ${project.cover ? "elevation, details" : "details"} and residential floor plan.`
+      : "Residential project by My Dream Projects in Ameenpur, Hyderabad.",
+    image: project?.cover || "/assets/og-image.jpg",
+  });
   if (!project) return <Navigate to="/projects" replace />;
   const { prev, next } = getAdjacent(slug);
 
@@ -31,7 +43,9 @@ export default function ProjectDetail() {
             animate={{ scale: 1 }}
             transition={{ duration: 1.6, ease: EASE }}
             src={project.cover}
-            alt={`${project.title} elevation`}
+            srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+            sizes="100vw"
+            alt={`${project.title} residential apartment elevation in Ameenpur`}
             data-testid="project-hero-image"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -161,7 +175,7 @@ export default function ProjectDetail() {
         </section>
       )}
 
-      <section className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-8">
+      <section className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-6">
         <div className="col-span-12 md:col-span-3">
           <p className="text-[10px] uppercase tracking-[0.4em] text-ember">About the Project</p>
         </div>
@@ -191,8 +205,11 @@ export default function ProjectDetail() {
             <div className="border border-line overflow-hidden">
               <img
                 src={project.cover}
-                alt={`${project.title} — architectural elevation`}
+                srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+                sizes="(max-width: 1600px) 100vw, 1600px"
+                alt={`${project.title} residential apartment elevation in Ameenpur`}
                 data-testid="project-elevation-image"
+                loading="lazy"
                 className="w-full h-auto block"
               />
             </div>
@@ -272,7 +289,7 @@ export default function ProjectDetail() {
             >
               <img
                 src={project.floorPlan.preview}
-                alt={`${project.title} floor plan preview`}
+                alt={`${project.title} residential floor plan`}
                 className="w-full h-auto block"
                 loading="lazy"
               />

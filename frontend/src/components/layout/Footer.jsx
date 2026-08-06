@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 export const Footer = () => (
   <footer data-testid="site-footer" className="relative border-t border-line bg-ink">
     <div className="max-w-[1600px] mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-8">
-      <div className="grid grid-cols-12 gap-8 md:gap-6 pb-16 md:pb-24">
+      <div className="grid grid-cols-12 gap-6 pb-16 md:pb-24">
         <div className="col-span-12 md:col-span-6">
           <img
             src="/assets/logo-full-dark.png"

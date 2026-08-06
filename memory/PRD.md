@@ -158,6 +158,14 @@ Premium, production-quality responsive website for residential construction comp
 - Marquee retired from homepage per pacing spec; no banned marketing phrases; no invented stats
 - Verified: dedicated home suite desktop+mobile (hero image=Skylark naturalWidth 1200, stats, card links/order/meta, ongoing rows incl. Ivy identity, office teaser, CTA hrefs, deep link, no overflow) + full 41-check portfolio audit green
 
+## Iteration 23 (2026-08-06) — Launch readiness pass
+- Performance: responsive WebP variants (800w/1600w, q86, originals untouched) for all 13 elevations + 3 office photos, wired via srcset/sizes; hero fetchPriority=high; below-fold images lazy; route-based code splitting (lazy pages); OG share image (1200×630 from real office exterior, signage preserved)
+- SEO: exact homepage title/description; per-page useSeo hook (dynamic titles/descriptions/og for all 19 projects — own elevation as og:image, branded fallback for ongoing); JSON-LD HomeAndConstructionBusiness (name, 2020, Ameenpur, founders, both phones — no invented fields); favicon = real logo mark (already)
+- A11y: skip-to-content link, ember focus-visible rings, viewer focus management (focus close on open, Tab trap, focus restore, ESC), aria on mobile menu, contrast bump concrete #7A7A7A→#8C8C8C, natural alt text everywhere
+- 404 page: "404 / THIS ONE ISN'T IN THE PLAN." + BACK TO HOME (route * → NotFound)
+- Real bugs fixed: 12-col grid gap overflow at 360px (footer + project About grid → gap-6)
+- Final QA: 8/8 site-wide suites + 41/41 portfolio audit + all 24 routes clean at 360px/390px
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

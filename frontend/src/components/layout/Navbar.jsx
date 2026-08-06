@@ -92,7 +92,8 @@ export const Navbar = () => {
               data-testid="mobile-menu-button"
               onClick={() => setOpen(true)}
               aria-label="Open menu"
-              className="md:hidden flex flex-col justify-center items-end gap-1.5 w-10 h-10"
+              aria-expanded={open}
+              className="md:hidden flex flex-col justify-center items-end gap-1.5 w-11 h-11"
             >
               <span className="block w-7 h-px bg-bone" />
               <span className="block w-5 h-px bg-ember" />
@@ -105,6 +106,9 @@ export const Navbar = () => {
         {open && (
           <motion.div
             data-testid="mobile-menu-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -119,7 +123,7 @@ export const Navbar = () => {
                 data-testid="mobile-menu-close"
                 onClick={() => setOpen(false)}
                 aria-label="Close menu"
-                className="relative w-10 h-10 flex items-center justify-center"
+                className="relative w-11 h-11 flex items-center justify-center"
               >
                 <span className="absolute w-6 h-px bg-bone rotate-45" />
                 <span className="absolute w-6 h-px bg-bone -rotate-45" />

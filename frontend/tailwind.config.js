@@ -18,7 +18,7 @@ module.exports = {
         ink: '#0A0A0A',
         coal: '#121212',
         bone: '#F4F4F0',
-        concrete: '#7A7A7A',
+        concrete: '#8C8C8C',
         beige: '#D9D4C7',
         ember: '#E85D22',
         line: 'rgba(255,255,255,0.08)',

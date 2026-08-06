@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation }
 import ProjectCard from "../components/ProjectCard";
 import { getProject, projectStats } from "../data/projects";
 import { waLink, WHATSAPP_GREETING, PHONE_SAI, MAPS_URL } from "../data/contact";
+import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation.jpg";
@@ -34,7 +35,10 @@ const Hero = () => {
       <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10">
         <img
           src={HERO_IMAGE}
-          alt="My Dream Skylark — completed residential elevation by My Dream Projects"
+          srcSet={`${HERO_IMAGE.replace("elevation.jpg", "elevation-800.webp")} 800w, ${HERO_IMAGE.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+          sizes="100vw"
+          fetchPriority="high"
+          alt="My Dream Skylark residential apartment elevation in Ameenpur"
           data-testid="hero-elevation-image"
           className="absolute inset-0 w-full h-[112%] object-cover object-center"
         />
@@ -369,7 +373,9 @@ const OfficeTeaser = () => (
       <Reveal className="col-span-12 md:col-span-7 relative overflow-hidden min-h-[280px] md:min-h-[480px]">
         <img
           src="/assets/office/office-exterior.webp"
-          alt="My Dream Projects two-storey container office at night with illuminated signage"
+          srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1600w"
+          sizes="(max-width: 768px) 100vw, 58vw"
+          alt="My Dream Projects container office in Ameenpur"
           data-testid="office-teaser-image"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
@@ -448,6 +454,12 @@ const Cta = () => (
 );
 
 export default function Home() {
+  useSeo({
+    title: "My Dream Projects | Residential Projects in Ameenpur, Hyderabad",
+    description:
+      "Explore My Dream Projects — thoughtfully planned residential developments in Ameenpur, Hyderabad. Discover our completed and ongoing projects, architectural elevations and floor plans.",
+    image: "/assets/og-image.jpg",
+  });
   return (
     <>
       <Hero />

@@ -15,6 +15,8 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
   const lastPinch = useRef(null);
   const scaleRef = useRef(1);
   const posRef = useRef({ x: 0, y: 0 });
+  const closeRef = useRef(null);
+  const lastFocus = useRef(null);
 
   const apply = (s, p) => {
     scaleRef.current = s;
@@ -33,14 +35,35 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
 
   useEffect(() => {
     if (!open) return;
+    lastFocus.current = document.activeElement;
     lenis?.stop();
     document.body.style.overflow = "hidden";
-    const onKey = (e) => e.key === "Escape" && onClose();
+    const t = setTimeout(() => closeRef.current?.focus(), 60);
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        const focusables = areaRef.current
+          ?.closest('[data-testid="floor-plan-viewer"]')
+          ?.querySelectorAll('button, a[href]');
+        if (!focusables?.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
+      clearTimeout(t);
       lenis?.start();
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      lastFocus.current?.focus?.();
     };
   }, [open, onClose, lenis]);
 
@@ -214,6 +237,7 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
                 data-testid="viewer-close"
                 aria-label="Close viewer"
                 onClick={onClose}
+                ref={closeRef}
                 className="w-11 h-11 md:w-12 md:h-12 flex items-center justify-center bg-ember text-ink hover:bg-bone transition-colors duration-300"
               >
                 <X className="w-4 h-4" strokeWidth={2} />

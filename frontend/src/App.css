@@ -83,6 +83,15 @@ html.lenis body {
   transform: scale(1.045);
 }
 
+/* Accessible focus states */
+:focus-visible {
+  outline: 2px solid #E85D22;
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* Hero elevation fallback — faint blueprint lines until real elevation photo lands */
 .elevation-fallback {
   background:

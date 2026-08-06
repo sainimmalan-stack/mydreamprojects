@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "../components/ProjectCard";
 import { projects, projectStats } from "../data/projects";
+import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -18,6 +19,12 @@ export default function Projects() {
     searchParams.get("filter") === "ongoing" ? "ongoing" : "all"
   );
   const visible = filter === "all" ? projects : projects.filter((p) => p.status === filter);
+
+  useSeo({
+    title: "Projects | My Dream Projects — Ameenpur, Hyderabad",
+    description:
+      "Browse all 19 My Dream Projects residential developments in Ameenpur, Hyderabad — 13 completed and 6 ongoing, with real elevations and floor plans.",
+  });
 
   return (
     <div data-testid="projects-page" className="pt-28 md:pt-40">

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { projectStats } from "../data/projects";
+import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -43,6 +44,8 @@ const OfficeImage = ({ src, alt, testid, className = "", label }) => {
       </div>
       <img
         src={src}
+        srcSet={`${src.replace(".webp", "-800.webp")} 800w, ${src.replace(".webp", "-1600.webp")} 1600w`}
+        sizes="(max-width: 768px) 100vw, 50vw"
         alt={alt}
         loading="lazy"
         onLoad={() => setLoaded(true)}
@@ -267,6 +270,12 @@ const Philosophy = () => (
 );
 
 export default function About() {
+  useSeo({
+    title: "About My Dream Projects | Ameenpur, Hyderabad",
+    description:
+      "Founded in 2020 by Nimmala Sai and Kotapati Akhil, My Dream Projects creates thoughtfully designed residential developments in Ameenpur, Hyderabad.",
+    image: "/assets/og-image.jpg",
+  });
   return (
     <div data-testid="about-page">
       <Story />

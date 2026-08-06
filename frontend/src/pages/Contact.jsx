@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, MapPin, Phone, MessageCircle, Navigation } fr
 const EASE = [0.16, 1, 0.3, 1];
 
 import { PHONE_SAI, PHONE_AKHIL, WHATSAPP_GREETING, MAPS_URL, waLink } from "../data/contact";
+import useSeo from "../hooks/useSeo";
 
 const PROJECT_OPTIONS = [
   "My Dream Aurelia",
@@ -64,6 +65,12 @@ const QuickActions = () => (
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", project: "General Enquiry", message: "" });
   const [error, setError] = useState("");
+
+  useSeo({
+    title: "Contact My Dream Projects | Ameenpur, Hyderabad",
+    description:
+      "Talk to My Dream Projects about residential developments in Ameenpur, Hyderabad — call, WhatsApp or visit our two-level container office.",
+  });
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
