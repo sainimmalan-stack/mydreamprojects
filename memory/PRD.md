@@ -23,21 +23,29 @@ Premium, production-quality responsive website for residential construction comp
 ## Implemented (2026-08-06)
 - Full design system, routing, 4 pages + project detail template
 - Kinetic hero with masked line-by-line reveal + parallax
-- Editorial marquee, numbered manifesto chapters, stats band
+- Editorial marquee, stats band, reusable components
 - Projects index with All/Completed(13)/Ongoing(6) filters + animated grid
 - Full-screen mobile menu, verified at iPhone 390px (no horizontal overflow)
 - Design-only contact form with preview note
+
+## Iteration 2 (2026-08-06) — Real logo + homepage rebuild
+- Extracted real logo from uploaded vector PDF (unmodified): logo-full.png, logo-full-dark.png (reversed for dark UI, orange mark untouched), logo-stacked-dark.png, logo-icon.png, favicon.png, apple-touch-icon.png — all in `/app/frontend/public/assets/`
+- Logo now in navbar (icon + wordmark), mobile menu (full logo), footer (full logo), favicon
+- Homepage rebuilt to user spec: full-screen hero (MY DREAM PROJECTS / YOU DREAM. / WE BUILD. / tagline / Ameenpur, Hyderabad · Since 2020 / EXPLORE OUR PROJECTS → + GET IN TOUCH), count-up stats (2020/19/13/06) immediately below hero, WHO WE ARE — BUILDING MORE THAN HOMES with exact supplied copy + OUR STORY →, SELECTED WORK placeholders (no imagery), WHAT WE'RE BUILDING NEXT ongoing rows
+- ALL stock imagery removed site-wide (no Unsplash anywhere): project cards and detail headers are now solid architectural blocks with oversized outline index numbers, awaiting real photography
+- Hero background: reserved slot at `/assets/hero-elevation.jpg` with graceful dark blueprint-line fallback — awaiting the actual elevation image (was NOT included in the logo PDF; user to upload)
 
 ## Verified
 - Desktop: home hero/manifesto/projects sections, projects filters (6 ongoing cards), detail page nav, contact page
 - Mobile (390×844 emulation): hero, hamburger → full-screen menu → projects nav, no h-overflow
 
 ## Backlog
+- P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
-- P0: Real logo file, founder photos/bios, phone/email on Contact
+- P0: Founder photos/bios, phone/email on Contact
 - P1: Wire contact form to backend/email delivery
-- P1: Favicon/OG images, SEO meta per page
-- P2: Project gallery lightbox, floor-plan viewer, site-progress updates per project
+- P1: OG image per page, SEO meta
+- P2: Project gallery lightbox, floor-plan viewer, site-progress updates
 
 ## Next Tasks
 1. Receive real content/assets and populate projects data file

@@ -6,11 +6,12 @@ export const Footer = () => (
     <div className="max-w-[1600px] mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-8">
       <div className="grid grid-cols-12 gap-8 md:gap-6 pb-16 md:pb-24">
         <div className="col-span-12 md:col-span-6">
-          <p className="font-display font-bold uppercase tracking-tight text-4xl md:text-6xl leading-[0.95] text-bone">
-            You Dream.
-            <br />
-            <span className="text-ember">We Build.</span>
-          </p>
+          <img
+            src="/assets/logo-full-dark.png"
+            alt="My Dream Projects — You Dream, We Build"
+            data-testid="footer-logo"
+            className="w-52 md:w-64 h-auto"
+          />
         </div>
         <div className="col-span-6 md:col-span-3">
           <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-5">Sitemap</p>

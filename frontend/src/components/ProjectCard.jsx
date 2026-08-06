@@ -2,56 +2,68 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-export const ProjectCard = ({ project, aspect = "aspect-[4/5]" }) => (
-  <motion.div
-    layout
-    initial={{ opacity: 0, y: 32 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-60px" }}
-    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-  >
-    <Link
-      to={`/projects/${project.slug}`}
-      data-testid={`project-card-${project.slug}`}
-      className="group block"
+const TONES = [
+  { surface: "bg-coal", index: "text-outline", title: "text-bone", meta: "text-concrete" },
+  { surface: "bg-beige", index: "tone-index-light", title: "text-ink", meta: "text-ink/50" },
+  { surface: "bg-[#17170f]", index: "text-outline", title: "text-bone", meta: "text-concrete" },
+];
+
+export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note = true }) => {
+  const t = TONES[tone % TONES.length];
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className={`relative overflow-hidden bg-coal ${aspect}`}>
-        <img
-          src={project.texture}
-          alt={project.title}
-          loading="lazy"
-          className="texture-img absolute inset-0 w-full h-full object-cover"
-        />
-        <span className="absolute top-4 left-4 font-display text-xs tracking-[0.3em] text-bone/60">
-          {project.index}
-        </span>
-        <span
-          className={`absolute top-4 right-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] ${
-            project.status === "ongoing" ? "text-ember" : "text-beige/70"
-          }`}
+      <Link
+        to={`/projects/${project.slug}`}
+        data-testid={`project-card-${project.slug}`}
+        className="group block"
+      >
+        <div
+          className={`relative overflow-hidden ${t.surface} ${aspect} border border-line group-hover:border-ember/40 transition-colors duration-500`}
         >
           <span
-            className={`w-1.5 h-1.5 rounded-full ${
-              project.status === "ongoing" ? "bg-ember animate-pulse" : "bg-beige/50"
+            className={`absolute -bottom-6 -left-2 font-display font-bold leading-none tracking-tighter text-[9rem] md:text-[11rem] select-none ${t.index} group-hover:-translate-y-2 transition-transform duration-700`}
+          >
+            {project.index}
+          </span>
+          <span
+            className={`absolute top-4 right-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] ${
+              project.status === "ongoing" ? "text-ember" : t.meta
             }`}
-          />
-          {project.status}
-        </span>
-      </div>
-      <div className="flex items-start justify-between pt-5 border-t border-transparent">
-        <div>
-          <h3 className="font-display text-lg md:text-xl font-medium uppercase tracking-tight text-bone group-hover:text-ember transition-colors duration-500">
-            {project.title}
-          </h3>
-          <p className="text-xs text-concrete mt-1 tracking-wide">{project.location}</p>
+          >
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                project.status === "ongoing" ? "bg-ember animate-pulse" : tone % 3 === 1 ? "bg-ink/40" : "bg-beige/50"
+              }`}
+            />
+            {project.status}
+          </span>
+          {note && (
+            <span className={`absolute bottom-4 right-4 text-[9px] uppercase tracking-[0.3em] ${t.meta} opacity-70`}>
+              Photography coming soon
+            </span>
+          )}
         </div>
-        <ArrowUpRight
-          className="w-5 h-5 text-concrete group-hover:text-ember group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-[transform,color] duration-500"
-          strokeWidth={1.5}
-        />
-      </div>
-    </Link>
-  </motion.div>
-);
+        <div className="flex items-start justify-between pt-5">
+          <div>
+            <h3 className="font-display text-lg md:text-xl font-medium uppercase tracking-tight text-bone group-hover:text-ember transition-colors duration-500">
+              {project.title}
+            </h3>
+            <p className="text-xs text-concrete mt-1 tracking-wide">{project.location}</p>
+          </div>
+          <ArrowUpRight
+            className="w-5 h-5 text-concrete group-hover:text-ember group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-[transform,color] duration-500"
+            strokeWidth={1.5}
+          />
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
 
 export default ProjectCard;

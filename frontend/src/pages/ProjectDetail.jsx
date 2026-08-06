@@ -20,16 +20,14 @@ export default function ProjectDetail() {
 
   return (
     <div data-testid="project-detail-page" className="pt-20 md:pt-24">
-      <section className="relative h-[70svh] md:h-[85svh] overflow-hidden">
-        <motion.img
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.6, ease: EASE }}
-          src={project.texture}
-          alt={project.title}
-          className="texture-img absolute inset-0 w-full h-full object-cover opacity-70"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/50" />
+      <section className="relative h-[62svh] md:h-[80svh] overflow-hidden bg-coal border-b border-line">
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-10 right-0 font-display font-bold leading-none tracking-tighter text-[42vw] md:text-[26vw] text-outline select-none"
+        >
+          {project.index}
+        </span>
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
         <div className="absolute inset-x-0 bottom-0 max-w-[1600px] mx-auto px-5 md:px-10 pb-10 md:pb-16">
           <Link
             to="/projects"
@@ -52,9 +50,6 @@ export default function ProjectDetail() {
                 </motion.span>
               </span>
             </h1>
-            <span className="hidden md:block font-display text-outline text-8xl font-bold leading-none select-none">
-              {project.index}
-            </span>
           </div>
         </div>
       </section>

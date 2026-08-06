@@ -1,10 +1,3 @@
-const TEXTURES = [
-  "https://images.unsplash.com/photo-1617713965103-9fda56c89fad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwyfHxyYXclMjBjb25jcmV0ZSUyMHRleHR1cmUlMjBtaW5pbWFsfGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-  "https://images.unsplash.com/photo-1579492450119-80542d516179?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwxfHxyYXclMjBjb25jcmV0ZSUyMHRleHR1cmUlMjBtaW5pbWFsfGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-  "https://images.unsplash.com/photo-1637088059539-ad62cba57895?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyYWwlMjBtaW5pbWFsJTIwc2hhZG93fGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-  "https://images.unsplash.com/photo-1632667680404-572c57873c21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyYWwlMjBtaW5pbWFsJTIwc2hhZG93fGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-];
-
 const pad = (n) => String(n).padStart(2, "0");
 
 export const projects = Array.from({ length: 19 }, (_, i) => {
@@ -21,7 +14,6 @@ export const projects = Array.from({ length: 19 }, (_, i) => {
     year: "—",
     description:
       "Full project narrative, specifications and photography will be added here. This template is ready to receive the real content.",
-    texture: TEXTURES[i % TEXTURES.length],
   };
 });
 

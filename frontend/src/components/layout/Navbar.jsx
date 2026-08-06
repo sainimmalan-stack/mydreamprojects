@@ -15,12 +15,16 @@ export const Logo = ({ onClick }) => (
     to="/"
     onClick={onClick}
     data-testid="nav-logo"
-    className="flex items-baseline gap-2 group"
+    className="flex items-center gap-3 group"
   >
-    <span className="font-display font-bold text-base md:text-lg tracking-tight uppercase text-bone">
+    <img
+      src="/assets/logo-icon.png"
+      alt="My Dream Projects"
+      className="h-8 md:h-9 w-auto group-hover:scale-105 transition-transform duration-300"
+    />
+    <span className="font-display font-semibold text-sm md:text-base tracking-[0.18em] uppercase text-bone">
       My Dream Projects
     </span>
-    <span className="w-2 h-2 bg-ember group-hover:scale-125 transition-transform duration-300" />
   </Link>
 );
 
@@ -107,8 +111,10 @@ export const Navbar = () => {
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-[100] bg-ink flex flex-col"
           >
-            <div className="flex items-center justify-between px-5 h-16 border-b border-line">
-              <Logo onClick={() => setOpen(false)} />
+            <div className="flex items-center justify-between px-5 h-20 border-b border-line">
+              <Link to="/" onClick={() => setOpen(false)} data-testid="mobile-menu-logo">
+                <img src="/assets/logo-full-dark.png" alt="My Dream Projects" className="h-14 w-auto" />
+              </Link>
               <button
                 data-testid="mobile-menu-close"
                 onClick={() => setOpen(false)}
