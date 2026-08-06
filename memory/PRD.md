@@ -135,6 +135,14 @@ Premium, production-quality responsive website for residential construction comp
 - OfficeImage uses load-fade pattern with premium coming-soon fallback behind (robust to transient load races)
 - Verified desktop + mobile: all copy blocks, founder names, counts, CTA href, 3 photos loaded (naturalWidth>500), no overflow; no emails/bios/stock added
 
+## Iteration 20 (2026-08-06) — Contact / Visit Us finalized
+- Contact page: "LET'S BUILD SOMETHING TOGETHER." hero + exact copy; CONTACT DETAILS (Nimmala Sai +91 77804 29845, Kotapati Akhil +91 95660 67922, both tel: links); CHAT ON WHATSAPP → wa.me/917780429845 with pre-filled greeting; VISIT OUR OFFICE + GET DIRECTIONS → exact goo.gl link (new tab); NO embedded map (shortened URL can't embed reliably, coordinates not guessed); NO email anywhere
+- Enquiry form: Name/Phone/Message required + project select (6 ongoing + General Enquiry) → SEND ENQUIRY validates then opens WhatsApp with formatted message (verified popup URL contents)
+- Mobile: non-floating CALL / WHATSAPP / DIRECTIONS quick-action row under the hero (mobile only)
+- Footer: both phones as tel: links + Get Directions link added; logo (wordmark + tagline), address, sitemap retained
+- Fixed one real bug found in verification: 12-col grid gap-10 caused 461px mobile overflow on contact page → gap-6
+- Verified: desktop + 390px mobile; all projects + About re-verified unchanged
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

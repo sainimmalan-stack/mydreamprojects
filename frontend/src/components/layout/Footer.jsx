@@ -41,14 +41,32 @@ export const Footer = () => (
             <br />
             Telangana, India
           </p>
-          <Link
-            to="/contact"
-            data-testid="footer-lets-talk-link"
+          <div className="mt-5 space-y-2.5">
+            <a
+              href="tel:+917780429845"
+              data-testid="footer-call-sai"
+              className="block text-sm text-bone/70 hover:text-ember transition-colors duration-300"
+            >
+              +91 77804 29845
+            </a>
+            <a
+              href="tel:+919566067922"
+              data-testid="footer-call-akhil"
+              className="block text-sm text-bone/70 hover:text-ember transition-colors duration-300"
+            >
+              +91 95660 67922
+            </a>
+          </div>
+          <a
+            href="https://maps.app.goo.gl/oPvjJJn6EHedKRz89?g_st=ic"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="footer-directions-link"
             className="inline-flex items-center gap-1.5 mt-5 text-sm text-ember hover:text-bone transition-colors duration-300"
           >
-            Start a project
+            Get Directions
             <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />
-          </Link>
+          </a>
         </div>
       </div>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pt-6 border-t border-line">
