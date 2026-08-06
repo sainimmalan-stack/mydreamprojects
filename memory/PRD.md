@@ -84,6 +84,12 @@ Premium, production-quality responsive website for residential construction comp
 - Zenith data rule honored: no residence/flat count anywhere (asserted in sweep)
 - Full 13-project integrity sweep passed (desktop + mobile): all assets self-referential, heroes are elevations, no overflow
 
+## Iteration 11 (2026-08-06) — Completed Projects Verification Audit
+- Full audit PASSED with zero errors found — nothing was changed
+- Reusable audit script saved at `/app/scripts/audit_projects.py` (39 checks: all 13 completed pages + 6 placeholders on desktop AND mobile, index counts/filters/links)
+- File-level: md5 of all 13 elevations, 13 PDFs, 13 previews all unique (no cross-copied files); Nest files match original upload checksums
+- Page-level: every project shows correct title, year chip, Ameenpur Hyderabad, G+5 · Residential Apartment, 5-stat band; every hero/elevation/preview/VIEW FULL PLAN/DOWNLOAD PDF self-referential; no "flats" text anywhere (Solace/Zenith rule); Atlantis uses only its own folder (packaged plan PDF from supplied JPG); all PDFs and elevations return HTTP 200
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
