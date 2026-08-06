@@ -298,8 +298,27 @@ const MY_DREAM_ELYSIUM = {
   },
 };
 
-const placeholders = Array.from({ length: 4 }, (_, i) => {
-  const n = i + 16;
+const MY_DREAM_AURA = {
+  id: 16,
+  slug: "my-dream-aura",
+  index: "16",
+  title: "My Dream Aura",
+  status: "ongoing",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "—",
+  floors: "G+5",
+  description:
+    "My Dream Aura is an ongoing residential development by My Dream Projects in Ameenpur, planned around comfortable family living, efficient spaces and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-aura/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-aura/floor-plan-p1.jpg",
+    fileName: "My-Dream-Aura-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 3 }, (_, i) => {
+  const n = i + 17;
   return {
     id: n,
     slug: `project-${pad(n)}`,
@@ -314,7 +333,7 @@ const placeholders = Array.from({ length: 4 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, MY_DREAM_ZENITH, MY_DREAM_AURELIA, MY_DREAM_ELYSIUM, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, MY_DREAM_ZENITH, MY_DREAM_AURELIA, MY_DREAM_ELYSIUM, MY_DREAM_AURA, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
