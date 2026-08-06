@@ -160,8 +160,48 @@ const MY_DREAM_GRIFFIN = {
   },
 };
 
-const placeholders = Array.from({ length: 11 }, (_, i) => {
-  const n = i + 9;
+const MY_DREAM_SELENE = {
+  id: 9,
+  slug: "my-dream-selene",
+  index: "09",
+  title: "My Dream Selene",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2025",
+  floors: "G+5",
+  description:
+    "My Dream Selene is a contemporary residential development combining spacious homes with a bold and elegant architectural expression. Completed in 2025, its layered balconies, warm façade accents and thoughtfully planned interiors create a refined environment for modern family living.",
+  cover: "/assets/projects/my-dream-selene/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-selene/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-selene/floor-plan-p1.jpg",
+    fileName: "My-Dream-Selene-Floor-Plan.pdf",
+  },
+};
+
+const MY_DREAM_ATLANTIS = {
+  id: 10,
+  slug: "my-dream-atlantis",
+  index: "10",
+  title: "My Dream Atlantis",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2025",
+  floors: "G+5",
+  description:
+    "My Dream Atlantis is a contemporary residential development designed around spacious living, thoughtful planning and modern architectural detailing. Completed in 2025 and located near Ameenpur Lake, the project combines well-planned residences with a sophisticated façade and comfortable residential setting.",
+  cover: "/assets/projects/my-dream-atlantis/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-atlantis/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-atlantis/floor-plan-p1.jpg",
+    fileName: "My-Dream-Atlantis-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 9 }, (_, i) => {
+  const n = i + 11;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -177,7 +217,7 @@ const placeholders = Array.from({ length: 11 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
