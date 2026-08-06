@@ -24,26 +24,35 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
         className="group block"
       >
         <div
-          className={`relative overflow-hidden ${t.surface} ${aspect} border border-line group-hover:border-ember/40 transition-colors duration-500`}
+          className={`relative overflow-hidden ${project.cover ? "bg-coal" : t.surface} ${aspect} border border-line group-hover:border-ember/40 transition-colors duration-500`}
         >
-          <span
-            className={`absolute -bottom-6 -left-2 font-display font-bold leading-none tracking-tighter text-[9rem] md:text-[11rem] select-none ${t.index} group-hover:-translate-y-2 transition-transform duration-700`}
-          >
-            {project.index}
-          </span>
+          {project.cover ? (
+            <img
+              src={project.cover}
+              alt={project.title}
+              loading="lazy"
+              className="texture-img absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            <span
+              className={`absolute -bottom-6 -left-2 font-display font-bold leading-none tracking-tighter text-[9rem] md:text-[11rem] select-none ${t.index} group-hover:-translate-y-2 transition-transform duration-700`}
+            >
+              {project.index}
+            </span>
+          )}
           <span
             className={`absolute top-4 right-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] ${
-              project.status === "ongoing" ? "text-ember" : t.meta
+              project.cover ? "bg-ink/55 backdrop-blur px-2.5 py-1.5 text-bone" : project.status === "ongoing" ? "text-ember" : t.meta
             }`}
           >
             <span
               className={`w-1.5 h-1.5 rounded-full ${
-                project.status === "ongoing" ? "bg-ember animate-pulse" : tone % 3 === 1 ? "bg-ink/40" : "bg-beige/50"
+                project.status === "ongoing" ? "bg-ember animate-pulse" : tone % 3 === 1 && !project.cover ? "bg-ink/40" : "bg-beige/50"
               }`}
             />
             {project.status}
           </span>
-          {note && (
+          {note && !project.cover && (
             <span className={`absolute bottom-4 right-4 text-[9px] uppercase tracking-[0.3em] ${t.meta} opacity-70`}>
               Photography coming soon
             </span>

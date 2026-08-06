@@ -1,7 +1,27 @@
 const pad = (n) => String(n).padStart(2, "0");
 
-export const projects = Array.from({ length: 19 }, (_, i) => {
-  const n = i + 1;
+const MY_DREAM_NEST = {
+  id: 1,
+  slug: "my-dream-nest",
+  index: "01",
+  title: "My Dream Nest",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2020",
+  floors: "G+5",
+  description:
+    "My Dream Nest represents the beginning of the My Dream Projects journey. Completed in 2020, the residential development combines practical planning, comfortable living spaces and a contemporary architectural approach in Ameenpur.",
+  cover: "/assets/projects/my-dream-nest/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-nest/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-nest/floor-plan-p1.jpg",
+    fileName: "My-Dream-Nest-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 18 }, (_, i) => {
+  const n = i + 2;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -16,6 +36,8 @@ export const projects = Array.from({ length: 19 }, (_, i) => {
       "Full project narrative, specifications and photography will be added here. This template is ready to receive the real content.",
   };
 });
+
+export const projects = [MY_DREAM_NEST, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
