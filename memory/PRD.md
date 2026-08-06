@@ -123,6 +123,12 @@ Premium, production-quality responsive website for residential construction comp
 - Same COMING SOON elevation placeholder; no placeholders remain — ALL 19 PROJECTS HAVE REAL CONTENT (13 completed + 6 ongoing)
 - Verified: G+4 not G+5, headline/subline/glance present, ongoing order Aurelia→Elysium→Aura→Echelon→Vale→Ivy, full 39-check audit green (Projects 01–18 unchanged)
 
+## Iteration 18 (2026-08-06) — Full 19-Project Portfolio Audit
+- Comprehensive audit script: `/app/scripts/audit_full.py` — 41 checks, ALL PASS (desktop + 390px mobile)
+- Coverage: asset mapping (per-folder isolation + cross-association scan + md5 uniqueness of all 13 elevations & 19 PDFs), all 19 URLs, title/location/status/floors/type/about/year rules, plan previews render, VIEW FULL PLAN + DOWNLOAD PDF (HTTP 200 + content-type pdf), filters ALL=19/COMPLETED=13(chronological)/ONGOING=6(Aurelia→…→Ivy), card links, Ivy special data (G+4, 3 BHK, 1,600 SQ.FT., ONE HOME. ONE FLOOR., no G+5), Solace/Zenith no-flat-count, mobile no-overflow + tap targets ≥40px
+- Filesystem: ongoing folders contain ONLY plan files (no elevations anywhere fake)
+- One audit-side fix only: lazy-loaded previews required scrolling before assertion — test script corrected (settle/scroll step); NO website changes were needed
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
