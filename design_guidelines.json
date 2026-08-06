@@ -1,0 +1,116 @@
+{
+  "theme": "dark",
+  "typography": {
+    "headings": {
+      "font": "Outfit, Clash Display, or Playfair Display",
+      "style": "Premium, structural, and uppercase for section titles. Use tight tracking (tracking-tighter) for large headings to mimic architectural precision."
+    },
+    "body": {
+      "font": "Manrope, Inter, or DM Sans",
+      "style": "Clean, highly legible, modern sans-serif. Loose line-height (leading-relaxed)."
+    }
+  },
+  "colors": {
+    "primary_background": "#0A0A0A",
+    "primary_text": "#F4F4F0",
+    "accent_orange": "#E85D22",
+    "concrete_grey": "#7A7A7A",
+    "warm_beige": "#D9D4C7",
+    "surface": "#121212",
+    "border_subtle": "rgba(255,255,255,0.1)"
+  },
+  "visual_enhancers": [
+    "Subtle noise/grain overlay spanning the entire site for physical depth.",
+    "1px structural grid lines in subtle white/grey opacity (border-white/10).",
+    "Optical clarity glassmorphism for sticky navigation (backdrop-blur-xl bg-black/60).",
+    "Avoid standard box-shadows. Use sharp architectural borders."
+  ],
+  "components": [
+    {
+      "name": "Kinetic Hero",
+      "instructions": "Full viewport height. Use Framer Motion to animate large typography ('YOU DREAM. WE BUILD.'). Wrap text lines in 'overflow-hidden' divs and animate inner 'motion.h1' from y: '100%' to y: 0. Stagger the lines for a cinematic reveal."
+    },
+    {
+      "name": "Editorial Marquee",
+      "instructions": "Use 'react-fast-marquee'. Extremely slow speed. Use massive outline text (text-transparent stroke-white/20) traversing horizontally."
+    },
+    {
+      "name": "Manifesto Chapters",
+      "instructions": "Vertical list of numbered principles (e.g. 01, 02). As user scrolls, use Framer Motion 'whileInView' to reveal text and number. High contrast numbers in accent_orange or concrete_grey."
+    },
+    {
+      "name": "Project Index & Filter",
+      "instructions": "Grid-based or list-based layout. Include a filter toggle for 'Completed (13)' vs 'Ongoing (6)'. DO NOT use actual building images. Use solid blocks of charcoal/beige or the provided concrete textures as placeholders with the project name overlaid beautifully."
+    },
+    {
+      "name": "Project Detail Template",
+      "instructions": "Reusable layout. Large abstract header area, modular grid for stats (Location, Status, Type) with concrete lines, and ample whitespace."
+    },
+    {
+      "name": "Navigation",
+      "instructions": "Desktop: Fixed/Sticky with backdrop-blur. Logo left, links center, 'LET'S TALK ->' CTA on right in accent color. Mobile: Hamburger opening a full-screen Framer Motion overlay (100vh)."
+    },
+    {
+      "name": "Design-Only Contact Form",
+      "instructions": "Minimalist fields (border-b only, no full boxes). Deep architectural feel. Use Shadcn inputs with custom styling."
+    }
+  ],
+  "grids_layouts": {
+    "spacing": "Generous. Use p-12, p-24, or p-32 for section padding. Negative space is a feature.",
+    "alignment": "Strict architectural grid. Break standard symmetry. Use 'Tetris' grid modes (col-span-8, col-span-4) for visual tension."
+  },
+  "motion_and_animations": {
+    "smooth_scroll": "Wrap the app root in ReactLenis from '@studio-freight/react-lenis' for premium physics.",
+    "scroll_reveals": "Use framer-motion 'whileInView' with 'viewport={{ once: true, margin: \"-100px\" }}'.",
+    "parallax": "Use 'useScroll' and 'useTransform' for a subtle hero background parallax or 3D float moment."
+  },
+  "accessibility": {
+    "contrast": "Ensure text passes APCA contrast ratios against the dark backgrounds.",
+    "reduced_motion": "Respect 'prefers-reduced-motion' via Framer Motion's useReducedMotion hook.",
+    "testing": "All interactive elements MUST include data-testid (e.g., data-testid='nav-contact-button')."
+  },
+  "media": {
+    "strategy": "Minimal abstract placeholders. NO fake building imagery, hard-hats, or apartment stocks.",
+    "image_urls": {
+      "concrete_texture_1": {
+        "url": "https://images.unsplash.com/photo-1617713965103-9fda56c89fad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwyfHxyYXclMjBjb25jcmV0ZSUyMHRleHR1cmUlMjBtaW5pbWFsfGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Minimal concrete texture",
+        "category": "project_placeholder"
+      },
+      "concrete_texture_2": {
+        "url": "https://images.unsplash.com/photo-1579492450119-80542d516179?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwxfHxyYXclMjBjb25jcmV0ZSUyMHRleHR1cmUlMjBtaW5pbWFsfGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Black and white concrete",
+        "category": "project_placeholder"
+      },
+      "abstract_architectural_1": {
+        "url": "https://images.unsplash.com/photo-1637088059539-ad62cba57895?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyYWwlMjBtaW5pbWFsJTIwc2hhZG93fGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Dark abstract minimal architecture",
+        "category": "project_placeholder"
+      },
+      "abstract_architectural_2": {
+        "url": "https://images.unsplash.com/photo-1632667680404-572c57873c21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyYWwlMjBtaW5pbWFsJTIwc2hhZG93fGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Building abstract shadows",
+        "category": "project_placeholder"
+      }
+    }
+  },
+  "instructions_to_main_agent": [
+    "Run `yarn add framer-motion @studio-freight/react-lenis react-fast-marquee react-router-dom lucide-react`.",
+    "Replace default boilerplate in `src/App.js` with a HashRouter/BrowserRouter setup containing Home, Projects, About, Contact, and ProjectDetail routes.",
+    "Implement the kinetic line-by-line reveal in the Home hero section. This is a hard requirement for the Awwwards feel.",
+    "Mock the 19 projects data (13 completed, 6 ongoing) in a reusable data file (e.g., `src/data/projects.js`).",
+    "Use solid color rectangles with the project title overlaid OR the provided concrete/abstract textures as project placeholders.",
+    "Ensure 'LET'S TALK' CTA is highly visible in nav.",
+    "Apply smooth scrolling using Lenis to the entire app root."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "DO NOT use generic centered text alignment globally.",
+    "DO NOT use generic gradients or standard blue SaaS colors. Stick to the premium deep charcoal, concrete, beige, and orange palette.",
+    "Use 2-3x more padding than usual (e.g., py-24 or py-32 for sections).",
+    "Include 'data-testid' attributes on all interactive elements (MUST DO).",
+    "Implement subtle hover states (e.g., slightly changing border color, opacity, or a small y-translate).",
+    "NEVER use generic placeholder imagery or dummy text loops. Use provided abstract architectural textures.",
+    "Never use `transition: all`. Target specific properties.",
+    "Avoid emojis for icons."
+  ]
+}
