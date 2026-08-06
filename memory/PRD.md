@@ -90,6 +90,13 @@ Premium, production-quality responsive website for residential construction comp
 - File-level: md5 of all 13 elevations, 13 PDFs, 13 previews all unique (no cross-copied files); Nest files match original upload checksums
 - Page-level: every project shows correct title, year chip, Ameenpur Hyderabad, G+5 · Residential Apartment, 5-stat band; every hero/elevation/preview/VIEW FULL PLAN/DOWNLOAD PDF self-referential; no "flats" text anywhere (Solace/Zenith rule); Atlantis uses only its own folder (packaged plan PDF from supplied JPG); all PDFs and elevations return HTTP 200
 
+## Iteration 12 (2026-08-06) — Project 14: My Dream Aurelia (Ongoing 1 of 6)
+- First ONGOING project: `/projects/my-dream-aurelia` (G+5, Residential Apartment, no completion year shown — not provided)
+- Plan-only asset: `/assets/projects/my-dream-aurelia/` (floor-plan.pdf + preview); NO elevation exists — dedicated premium "ARCHITECTURAL ELEVATION / COMING SOON" placeholder section (blueprint-line panel, ghost outline type, ember pulse dot) renders when a project has a plan but no cover; to add the real elevation later, drop `elevation.jpg` in the folder and set `cover` in data — page structure unchanged
+- Template tweaks: status chip now always renders (ONGOING in ember when active; "STATUS · YEAR" when year known); generic "photography coming soon" block now only for projects with neither cover nor plan
+- Aurelia appears in Ongoing filter + first in homepage "What We're Building Next"; Completed filter still exactly 13
+- Full 39-check audit re-run and passed (script updated: project-14 moved from placeholders to ongoing-real)
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

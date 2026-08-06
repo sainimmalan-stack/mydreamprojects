@@ -67,31 +67,31 @@ export default function ProjectDetail() {
               </span>
             </h1>
           </div>
-          {(project.year !== "—" || project.floors) && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-              className="flex flex-wrap gap-3 mt-7"
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
+            className="flex flex-wrap gap-3 mt-7"
+          >
+            <span
+              data-testid="project-meta-status-year"
+              className={`border text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2 ${
+                project.status === "ongoing"
+                  ? "border-ember/50 bg-ink/40 backdrop-blur text-ember"
+                  : "border-bone/25 bg-ink/40 backdrop-blur text-bone/90"
+              }`}
             >
-              {project.year !== "—" && (
-                <span
-                  data-testid="project-meta-status-year"
-                  className="border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2"
-                >
-                  {project.status} · {project.year}
-                </span>
-              )}
-              {project.floors && (
-                <span
-                  data-testid="project-meta-floors-type"
-                  className="border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2"
-                >
-                  {project.floors} · {project.type}
-                </span>
-              )}
-            </motion.div>
-          )}
+              {project.year !== "—" ? `${project.status} · ${project.year}` : project.status}
+            </span>
+            {project.floors && (
+              <span
+                data-testid="project-meta-floors-type"
+                className="border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2"
+              >
+                {project.floors} · {project.type}
+              </span>
+            )}
+          </motion.div>
         </div>
       </section>
 
@@ -158,6 +158,31 @@ export default function ProjectDetail() {
         </section>
       )}
 
+      {!project.cover && project.floorPlan && (
+        <section data-testid="project-elevation-placeholder" className="max-w-[1600px] mx-auto px-5 md:px-10 pb-20 md:pb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: EASE }}
+          >
+            <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-6">Elevation</p>
+            <div className="relative border border-line overflow-hidden elevation-fallback aspect-[16/10] md:aspect-[16/7] flex flex-col items-center justify-center gap-4">
+              <span className="w-2 h-2 bg-ember animate-pulse" />
+              <p className="text-[10px] md:text-xs uppercase tracking-[0.45em] text-concrete">
+                Architectural Elevation
+              </p>
+              <p
+                data-testid="elevation-coming-soon"
+                className="font-display font-bold uppercase tracking-tighter leading-none text-4xl md:text-6xl text-outline select-none"
+              >
+                Coming Soon
+              </p>
+            </div>
+          </motion.div>
+        </section>
+      )}
+
       {project.floorPlan && (
         <section data-testid="project-floor-plan" className="border-t border-line bg-coal">
           <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-6 md:gap-8 items-start">
@@ -213,7 +238,7 @@ export default function ProjectDetail() {
         </section>
       )}
 
-      {!project.cover && (
+      {!project.cover && !project.floorPlan && (
       <section className="max-w-[1600px] mx-auto px-5 md:px-10 pb-24 md:pb-32">
         <div className="grid grid-cols-12 gap-4 md:gap-6">
           <div className="col-span-12 md:col-span-8 aspect-[16/10] bg-coal border border-line flex items-center justify-center">

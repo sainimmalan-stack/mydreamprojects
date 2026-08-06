@@ -17,8 +17,9 @@ COMPLETED = [
     ("12", "my-dream-solace", "MY DREAM SOLACE", "2026"),
     ("13", "my-dream-zenith", "MY DREAM ZENITH", "2026"),
 ]
-PLACEHOLDERS = [f"project-{n:02d}" for n in range(14, 20)]
-FOLDERS = [s for _, s, _, _ in COMPLETED]
+PLACEHOLDERS = [f"project-{n:02d}" for n in range(15, 20)]
+ONGOING_REAL = [("14", "my-dream-aurelia", "MY DREAM AURELIA")]
+FOLDERS = [s for _, s, _, _ in COMPLETED] + [s for _, s, _ in ONGOING_REAL]
 results = []
 
 def http200(url):
@@ -77,12 +78,39 @@ async def audit_placeholder(page, slug, mobile=False):
     assert not overflow
     results.append(f"PASS placeholder {slug} (ongoing, no assets)" + (" [mobile]" if mobile else ""))
 
+async def audit_ongoing_real(page, idx, slug, title, mobile=False):
+    r = await page.goto(f"{BASE}/projects/{slug}", wait_until="domcontentloaded")
+    assert r.status == 200
+    await page.wait_for_timeout(3500)
+    h1 = (await page.locator("h1").first.inner_text()).replace("\n", " ").strip()
+    assert h1.upper() == title, f"{slug} title: {h1!r}"
+    chip1 = await page.locator('[data-testid="project-meta-status-year"]').inner_text()
+    assert chip1.strip().upper() == "ONGOING", f"{slug} chip1: {chip1!r}"
+    assert await page.locator('[data-testid="project-hero-image"]').count() == 0, f"{slug} unexpected hero image"
+    assert await page.locator('[data-testid="elevation-coming-soon"]').count() == 1, f"{slug} coming-soon missing"
+    prev = await page.locator('[data-testid="floor-plan-preview"] img').get_attribute("src")
+    dl = await page.locator('[data-testid="download-plan-button"]').get_attribute("href")
+    view = await page.locator('[data-testid="view-full-plan-button"]').get_attribute("href")
+    for label, val in [("preview", prev), ("download", dl), ("view", view)]:
+        assert f"/assets/projects/{slug}/" in val, f"{slug} {label} WRONG: {val}"
+        for o in FOLDERS:
+            if o != slug:
+                assert o not in val, f"{slug} {label} CROSS-> {o}"
+    assert "—" in await page.locator('[data-testid="project-stat-year"]').inner_text(), f"{slug} year invented"
+    low = (await page.evaluate("document.body.innerText")).lower()
+    assert "flats" not in low
+    overflow = await page.evaluate("document.documentElement.scrollWidth > document.documentElement.clientWidth")
+    assert not overflow
+    results.append(f"PASS {idx} {title} (ongoing, coming-soon elevation, own plan)" + (" [mobile]" if mobile else ""))
+
 async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch(executable_path="/root/bin/chromium", args=["--no-sandbox"])
         page = await (await browser.new_context(viewport={"width": 1920, "height": 900})).new_page()
         for idx, slug, title, year in COMPLETED:
             await audit_completed(page, idx, slug, title, year)
+        for idx, slug, title in ONGOING_REAL:
+            await audit_ongoing_real(page, idx, slug, title)
         for slug in PLACEHOLDERS:
             await audit_placeholder(page, slug)
         await page.goto(f"{BASE}/projects", wait_until="domcontentloaded")
@@ -94,7 +122,7 @@ async def main():
         fong = await page.locator('[data-testid="filter-ongoing-button"]').inner_text()
         assert "(13)" in fcomp and "(6)" in fong
         links = await page.evaluate("Array.from(document.querySelectorAll('[data-testid^=\"project-card-\"]')).map(a => a.getAttribute('href'))")
-        expect = [f"/projects/{s}" for _, s, _, _ in COMPLETED] + [f"/projects/{s}" for s in PLACEHOLDERS]
+        expect = [f"/projects/{s}" for _, s, _, _ in COMPLETED] + [f"/projects/{s}" for _, s, _ in ONGOING_REAL] + [f"/projects/{s}" for s in PLACEHOLDERS]
         assert links == expect, f"card links mismatch: {links}"
         await page.click('[data-testid="filter-completed-button"]', force=True)
         await page.wait_for_timeout(1000)
@@ -108,6 +136,8 @@ async def main():
         mp = await (await browser.new_context(viewport={"width": 390, "height": 844}, is_mobile=True, has_touch=True)).new_page()
         for idx, slug, title, year in COMPLETED:
             await audit_completed(mp, idx, slug, title, year, mobile=True)
+        for idx, slug, title in ONGOING_REAL:
+            await audit_ongoing_real(mp, idx, slug, title, mobile=True)
         for slug in PLACEHOLDERS:
             await audit_placeholder(mp, slug, mobile=True)
         await browser.close()
