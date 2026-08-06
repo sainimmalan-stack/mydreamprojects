@@ -120,8 +120,48 @@ const MY_DREAM_HILLOCK = {
   },
 };
 
-const placeholders = Array.from({ length: 13 }, (_, i) => {
-  const n = i + 7;
+const MY_DREAM_SUMMIT = {
+  id: 7,
+  slug: "my-dream-summit",
+  index: "07",
+  title: "My Dream Summit",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2024",
+  floors: "G+5",
+  description:
+    "My Dream Summit is a contemporary residential development designed around spacious layouts and comfortable family living. Completed in 2024, its strong geometric façade, warm architectural accents and generous balconies create a distinctive modern identity in Ameenpur.",
+  cover: "/assets/projects/my-dream-summit/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-summit/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-summit/floor-plan-p1.jpg",
+    fileName: "My-Dream-Summit-Floor-Plan.pdf",
+  },
+};
+
+const MY_DREAM_GRIFFIN = {
+  id: 8,
+  slug: "my-dream-griffin",
+  index: "08",
+  title: "My Dream Griffin",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2024",
+  floors: "G+5",
+  description:
+    "My Dream Griffin is a contemporary residential development defined by clean vertical lines, layered balconies and warm architectural accents. Completed in 2024, thoughtful planning combines comfortable interiors with a distinctive modern façade and strong architectural presence.",
+  cover: "/assets/projects/my-dream-griffin/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-griffin/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-griffin/floor-plan-p1.jpg",
+    fileName: "My-Dream-Griffin-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 11 }, (_, i) => {
+  const n = i + 9;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -137,7 +177,7 @@ const placeholders = Array.from({ length: 13 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
