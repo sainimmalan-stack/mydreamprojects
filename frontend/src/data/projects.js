@@ -40,8 +40,48 @@ const MY_DREAM_CASA = {
   },
 };
 
-const placeholders = Array.from({ length: 17 }, (_, i) => {
-  const n = i + 3;
+const MY_DREAM_AVASA = {
+  id: 3,
+  slug: "my-dream-avasa",
+  index: "03",
+  title: "My Dream Avasa",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2022",
+  floors: "G+5",
+  description:
+    "My Dream Avasa is a contemporary residential development created around efficient planning and comfortable family living. Completed in 2022, its vertical architectural form, textured accents and thoughtfully designed homes give the project a distinctive modern identity in Ameenpur.",
+  cover: "/assets/projects/my-dream-avasa/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-avasa/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-avasa/floor-plan-p1.jpg",
+    fileName: "My-Dream-Avasa-Floor-Plan.pdf",
+  },
+};
+
+const MY_DREAM_SKYLARK = {
+  id: 4,
+  slug: "my-dream-skylark",
+  index: "04",
+  title: "My Dream Skylark",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2023",
+  floors: "G+5",
+  description:
+    "My Dream Skylark is a contemporary residential development designed around spacious family living and modern architecture. Completed in 2023, its broad façade, warm material accents, generous balconies and thoughtfully planned residences give the project a distinctive architectural presence in Ameenpur.",
+  cover: "/assets/projects/my-dream-skylark/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-skylark/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-skylark/floor-plan-p1.jpg",
+    fileName: "My-Dream-Skylark-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 15 }, (_, i) => {
+  const n = i + 5;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -57,7 +97,7 @@ const placeholders = Array.from({ length: 17 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
