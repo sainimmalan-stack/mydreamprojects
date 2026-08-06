@@ -160,7 +160,7 @@ export default function ProjectDetail() {
 
       {project.floorPlan && (
         <section data-testid="project-floor-plan" className="border-t border-line bg-coal">
-          <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-10 md:gap-8 items-start">
+          <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-6 md:gap-8 items-start">
             <div className="col-span-12 md:col-span-4">
               <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">Floor Plan</p>
               <h2 className="font-display font-semibold uppercase tracking-tighter leading-[1.02] text-3xl md:text-4xl text-bone">

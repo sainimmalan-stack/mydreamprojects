@@ -20,8 +20,28 @@ const MY_DREAM_NEST = {
   },
 };
 
-const placeholders = Array.from({ length: 18 }, (_, i) => {
-  const n = i + 2;
+const MY_DREAM_CASA = {
+  id: 2,
+  slug: "my-dream-casa",
+  index: "02",
+  title: "My Dream Casa",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2021",
+  floors: "G+5",
+  description:
+    "My Dream Casa is a contemporary residential development designed to balance comfortable family living with efficient planning. Completed in 2021, its clean architectural lines, warm façade accents and thoughtfully planned residences create a modern and welcoming residential environment in Ameenpur.",
+  cover: "/assets/projects/my-dream-casa/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-casa/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-casa/floor-plan-p1.jpg",
+    fileName: "My-Dream-Casa-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 17 }, (_, i) => {
+  const n = i + 3;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -37,7 +57,7 @@ const placeholders = Array.from({ length: 18 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
