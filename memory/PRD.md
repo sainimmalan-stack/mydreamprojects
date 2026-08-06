@@ -129,6 +129,12 @@ Premium, production-quality responsive website for residential construction comp
 - Filesystem: ongoing folders contain ONLY plan files (no elevations anywhere fake)
 - One audit-side fix only: lazy-loaded previews required scrolling before assertion — test script corrected (settle/scroll step); NO website changes were needed
 
+## Iteration 19 (2026-08-06) — About page finalized with real office photography
+- About rebuilt per spec: OUR STORY ("DREAMS, DRAWN INTO REALITY." + exact copy), OUR JOURNEY minimal timeline (2020 founded → 2020 Nest → 2021–2023 → 2024–2025 → 2026: 19 Projects / 13 Completed · 06 Ongoing), FOUNDERS (Nimmala Sai + Kotapati Akhil, typography-only monogram blocks, no invented bios), OUR OFFICE ("THE SPACE WE BUILT FOR OURSELVES / DESIGNED BY US. BUILT BY US. HOME TO US." + exact copy), closing OUR PHILOSOPHY with EXPLORE OUR PROJECTS → /projects
+- Office gallery uses the 3 REAL uploaded photos (unmodified, no filters): exterior night w/ illuminated signage = primary large panel; garden + interior = stacked secondaries; files at `/assets/office/office-exterior.webp`, `office-garden.webp`, `office-interior.webp`
+- OfficeImage uses load-fade pattern with premium coming-soon fallback behind (robust to transient load races)
+- Verified desktop + mobile: all copy blocks, founder names, counts, CTA href, 3 photos loaded (naturalWidth>500), no overflow; no emails/bios/stock added
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
