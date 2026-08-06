@@ -200,8 +200,48 @@ const MY_DREAM_ATLANTIS = {
   },
 };
 
-const placeholders = Array.from({ length: 9 }, (_, i) => {
-  const n = i + 11;
+const MY_DREAM_PERCH = {
+  id: 11,
+  slug: "my-dream-perch",
+  index: "11",
+  title: "My Dream Perch",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2026",
+  floors: "G+5",
+  description:
+    "My Dream Perch is a thoughtfully designed residential development combining contemporary architecture with efficient, comfortable living spaces. Completed in 2026, its warm façade textures, framed balconies and clean vertical elements create an elegant architectural identity for modern family living.",
+  cover: "/assets/projects/my-dream-perch/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-perch/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-perch/floor-plan-p1.jpg",
+    fileName: "My-Dream-Perch-Floor-Plan.pdf",
+  },
+};
+
+const MY_DREAM_SOLACE = {
+  id: 12,
+  slug: "my-dream-solace",
+  index: "12",
+  title: "My Dream Solace",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2026",
+  floors: "G+5",
+  description:
+    "My Dream Solace is a contemporary residential development designed to offer spacious, comfortable homes within a refined architectural setting. Completed in 2026, its elegant vertical façade, generous balconies and contrasting material finishes create a sophisticated residential identity.",
+  cover: "/assets/projects/my-dream-solace/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-solace/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-solace/floor-plan-p1.jpg",
+    fileName: "My-Dream-Solace-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 7 }, (_, i) => {
+  const n = i + 13;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -217,7 +257,7 @@ const placeholders = Array.from({ length: 9 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
