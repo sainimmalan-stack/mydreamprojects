@@ -8,7 +8,7 @@ const TONES = [
   { surface: "bg-[#17170f]", index: "text-outline", title: "text-bone", meta: "text-concrete" },
 ];
 
-export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note = true }) => {
+export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note = true, homeMeta = false }) => {
   const t = TONES[tone % TONES.length];
   return (
     <motion.div
@@ -63,7 +63,11 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
             <h3 className="font-display text-lg md:text-xl font-medium uppercase tracking-tight text-bone group-hover:text-ember transition-colors duration-500">
               {project.title}
             </h3>
-            <p className="text-xs text-concrete mt-1 tracking-wide">{project.location}</p>
+            <p className="text-xs text-concrete mt-1 tracking-wide">
+              {homeMeta && project.year !== "—"
+                ? `Ameenpur · Completed ${project.year}`
+                : project.location}
+            </p>
           </div>
           <ArrowUpRight
             className="w-5 h-5 text-concrete group-hover:text-ember group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-[transform,color] duration-500"

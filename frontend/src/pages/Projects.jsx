@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "../components/ProjectCard";
 import { projects, projectStats } from "../data/projects";
@@ -12,7 +13,10 @@ const FILTERS = [
 ];
 
 export default function Projects() {
-  const [filter, setFilter] = useState("all");
+  const [searchParams] = useSearchParams();
+  const [filter, setFilter] = useState(() =>
+    searchParams.get("filter") === "ongoing" ? "ongoing" : "all"
+  );
   const visible = filter === "all" ? projects : projects.filter((p) => p.status === filter);
 
   return (

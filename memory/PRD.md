@@ -150,6 +150,14 @@ Premium, production-quality responsive website for residential construction comp
 - Two real bugs found & fixed in verification: viewer trapped under site header (main's z-10 stacking context → createPortal), Lenis momentum moving background on open (→ lenis.stop())
 - Verified: dedicated viewer suite (desktop Nest+Atlantis; mobile Nest, Atlantis, Aurelia, Ivy — pinch via CDP touch) + full 41-check audit green; zero data/asset changes
 
+## Iteration 22 (2026-08-06) — Final homepage polish
+- Hero now uses the REAL My Dream Skylark elevation (1200×900, widest composition) with a light readability overlay — building fully visible; new copy + EXPLORE PROJECTS → and VIEW ONGOING PROJECTS (→ /projects?filter=ongoing, deep-link supported via useSearchParams)
+- Flow: Hero → Stats (19/13/6/2020, count-up) → Building With Purpose (OUR STORY + VIEW ALL PROJECTS) → Selected Work (6 real-elevation cards: Griffin, Selene, Zenith, Solace, Skylark, Glenmore; meta "Ameenpur · Completed YEAR") → Journey (2020 Nest → 2026 19 Projects) → What We're Building Next (6 rows with floors/config meta — Ivy shows G+4 · 3 BHK) → Office teaser (real exterior photo → About) → Final CTA (WhatsApp / Call / Directions)
+- Shared contact constants moved to `src/data/contact.js` (Contact.jsx imports them; no behavior change)
+- Real bug fixed: stats count-up used framer useInView which never fired for left-column cells on mobile → replaced with hand-rolled IntersectionObserver
+- Marquee retired from homepage per pacing spec; no banned marketing phrases; no invented stats
+- Verified: dedicated home suite desktop+mobile (hero image=Skylark naturalWidth 1200, stats, card links/order/meta, ongoing rows incl. Ivy identity, office teaser, CTA hrefs, deep link, no overflow) + full 41-check portfolio audit green
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
