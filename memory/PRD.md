@@ -97,6 +97,11 @@ Premium, production-quality responsive website for residential construction comp
 - Aurelia appears in Ongoing filter + first in homepage "What We're Building Next"; Completed filter still exactly 13
 - Full 39-check audit re-run and passed (script updated: project-14 moved from placeholders to ongoing-real)
 
+## Iteration 13 (2026-08-06) — Project 15: My Dream Elysium (Ongoing 2 of 6)
+- `/projects/my-dream-elysium` (ONGOING, G+5, Residential Apartment, no year) with plan-only assets in `/assets/projects/my-dream-elysium/` and the same COMING SOON elevation placeholder as Aurelia
+- Elysium follows Aurelia in the Ongoing filter and homepage "What We're Building Next"; placeholders now 16–19 (4 remaining)
+- Full 39-check audit re-run and passed — Projects 01–14 unchanged
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
