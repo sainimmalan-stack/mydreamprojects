@@ -80,8 +80,48 @@ const MY_DREAM_SKYLARK = {
   },
 };
 
-const placeholders = Array.from({ length: 15 }, (_, i) => {
-  const n = i + 5;
+const MY_DREAM_GLENMORE = {
+  id: 5,
+  slug: "my-dream-glenmore",
+  index: "05",
+  title: "My Dream Glenmore",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2023",
+  floors: "G+5",
+  description:
+    "My Dream Glenmore is a contemporary residential development with a refined architectural character and thoughtfully planned homes. Completed in 2023, its striking dark façade, warm lighting accents and clean geometric composition give the project a distinctive modern identity in Ameenpur.",
+  cover: "/assets/projects/my-dream-glenmore/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-glenmore/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-glenmore/floor-plan-p1.jpg",
+    fileName: "My-Dream-Glenmore-Floor-Plan.pdf",
+  },
+};
+
+const MY_DREAM_HILLOCK = {
+  id: 6,
+  slug: "my-dream-hillock",
+  index: "06",
+  title: "My Dream Hillock",
+  status: "completed",
+  location: "Ameenpur, Hyderabad",
+  type: "Residential Apartment",
+  year: "2024",
+  floors: "G+5",
+  description:
+    "My Dream Hillock is a contemporary residential development characterized by bold architectural lines, contrasting façade elements and generous balconies. Completed in 2024, the project combines efficient residential planning with a distinctive modern exterior designed for comfortable family living.",
+  cover: "/assets/projects/my-dream-hillock/elevation.jpg",
+  floorPlan: {
+    pdf: "/assets/projects/my-dream-hillock/floor-plan.pdf",
+    preview: "/assets/projects/my-dream-hillock/floor-plan-p1.jpg",
+    fileName: "My-Dream-Hillock-Floor-Plan.pdf",
+  },
+};
+
+const placeholders = Array.from({ length: 13 }, (_, i) => {
+  const n = i + 7;
   const status = n <= 13 ? "completed" : "ongoing";
   return {
     id: n,
@@ -97,7 +137,7 @@ const placeholders = Array.from({ length: 15 }, (_, i) => {
   };
 });
 
-export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, ...placeholders];
+export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, ...placeholders];
 
 export const projectStats = {
   total: projects.length,
