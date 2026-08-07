@@ -299,6 +299,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 (day default, night click, heights identical 2024.62px — no shift) + mobile 390 (pill bottom-center 16px gap, 154×36, tap works, no overflow); Nest unchanged
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 46 (2026-08-07) — Avasa + Skylark: Day/Night elevations
+- Uploads matched strictly by filename: Avasa Day/Night (1125×2000) → my-dream-avasa folder; Skylark Day/Night (1448×1086) → my-dream-skylark folder; each saved as elevation-day.webp / elevation-night.webp + -800.webp variants; brightness-verified day vs night content
+- `elevationModes` added to Avasa (width 1125) and Skylark (width 1448) only; Nest + Casa untouched
+- Verified individually on desktop + mobile: Avasa DAY→Avasa Day image, NIGHT→Avasa Night image; Skylark DAY→Skylark Day, NIGHT→Skylark Night; default day, 0.7s cross-fade, identical container heights (no shift), pill bottom-center 16px on mobile, no overflow at 390px
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 - NOTE: goes live on mydreamprojects.in on next redeploy
 

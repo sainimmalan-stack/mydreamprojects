@@ -62,6 +62,11 @@ const MY_DREAM_AVASA = {
   description:
     "My Dream Avasa is a contemporary residential development created around efficient planning and comfortable family living. Completed in 2022, its vertical architectural form, textured accents and thoughtfully designed homes give the project a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-avasa/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-avasa/elevation-day.webp",
+    night: "/assets/projects/my-dream-avasa/elevation-night.webp",
+    width: 1125,
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-avasa/floor-plan.pdf",
     preview: "/assets/projects/my-dream-avasa/floor-plan-p1.jpg",
@@ -82,6 +87,11 @@ const MY_DREAM_SKYLARK = {
   description:
     "My Dream Skylark is a contemporary residential development designed around spacious family living and modern architecture. Completed in 2023, its broad façade, warm material accents, generous balconies and thoughtfully planned residences give the project a distinctive architectural presence in Ameenpur.",
   cover: "/assets/projects/my-dream-skylark/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-skylark/elevation-day.webp",
+    night: "/assets/projects/my-dream-skylark/elevation-night.webp",
+    width: 1448,
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-skylark/floor-plan.pdf",
     preview: "/assets/projects/my-dream-skylark/floor-plan-p1.jpg",
