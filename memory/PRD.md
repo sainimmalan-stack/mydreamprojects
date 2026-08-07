@@ -225,6 +225,11 @@ Premium, production-quality responsive website for residential construction comp
 - Production (https://mydreamprojects.in) initially served a cached platform placeholder sitemap (sitemapindex, 1 URL, http) — confirmed it was CDN cache (max-age=300); production now serves the real files: 23-URL https urlset sitemap + correct robots.txt
 - robots.txt updated to explicitly allow Googlebot (`User-agent: Googlebot / Allow: /`) alongside `User-agent: * Allow: /` and `Sitemap: https://mydreamprojects.in/sitemap.xml`
 - Verified: sitemap XML valid, 23 URLs all https://mydreamprojects.in, sampled live routes all return 200; preview serves updated robots.txt
+
+## Iteration 34 (2026-08-07) — Deployment health check + production verification
+- Deployment agent readiness check: PASS (no blockers; one non-blocking WARN — scaffold `/api/status` endpoint uses `.to_list(1000)`, unused by the frontend, revisit only if that collection ever grows)
+- Production verified after user's redeploy: https://mydreamprojects.in home 200, robots.txt now includes explicit Googlebot allow + https sitemap reference, sitemap.xml serving all 23 URLs
+
 - NOTE: the Googlebot-explicit robots.txt reaches production on the user's next redeploy (current prod robots already allows all + https sitemap line)
 
 - PENDING from before: Site Progress Updates feature — awaiting user's answers (photos availability, layout choice, homepage badge)
