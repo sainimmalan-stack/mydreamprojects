@@ -248,6 +248,10 @@ const MY_DREAM_ATLANTIS = {
   description:
     "My Dream Atlantis is a contemporary residential development designed around spacious living, thoughtful planning and modern architectural detailing. Completed in 2025 and located near Ameenpur Lake, the project combines well-planned residences with a sophisticated façade and comfortable residential setting.",
   cover: "/assets/projects/my-dream-atlantis/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/9GnZ5a8ZdT9iACzVA?g_st=ic",
+    embed: "https://www.google.com/maps?q=G8MJ+J5R+My+Dream+Atlantis,+Shanthi+Sree+Nagar+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-atlantis/floor-plan.pdf",
     preview: "/assets/projects/my-dream-atlantis/floor-plan-p1.jpg",

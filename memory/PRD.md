@@ -383,6 +383,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 60 (2026-08-07) — Atlantis: VISIT PROJECT SITE section
+- Added `siteLocation` to Atlantis: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/9GnZ5a8ZdT9iACzVA?g_st=ic (_blank); resolves to registered place "My Dream Atlantis" (4.7★) — embed uses that exact place query
+- Atlantis elevation/floor plan/PDF asset mapping/description/status/year untouched; siteLocation now on all 6 ongoing + Nest, Casa, Avasa, Skylark, Glenmore, Hillock, Summit, Griffin, Selene, Atlantis
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 
