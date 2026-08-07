@@ -395,6 +395,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 62 (2026-08-07) — Solace: VISIT PROJECT SITE section
+- Added `siteLocation` to Solace: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/RAaGeQa5no16juuJ6?g_st=ic (_blank); resolves to registered place "My Dream Solace" (5.0★) — embed uses that exact place query
+- Solace elevation/floor plan/description/status/year untouched; no residence/flat count added (rule re-verified); siteLocation now on all 6 ongoing + all completed except Zenith
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 

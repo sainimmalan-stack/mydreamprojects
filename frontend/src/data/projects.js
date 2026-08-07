@@ -296,6 +296,10 @@ const MY_DREAM_SOLACE = {
   description:
     "My Dream Solace is a contemporary residential development designed to offer spacious, comfortable homes within a refined architectural setting. Completed in 2026, its elegant vertical façade, generous balconies and contrasting material finishes create a sophisticated residential identity.",
   cover: "/assets/projects/my-dream-solace/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/RAaGeQa5no16juuJ6?g_st=ic",
+    embed: "https://www.google.com/maps?q=My+Dream+Solace,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-solace/floor-plan.pdf",
     preview: "/assets/projects/my-dream-solace/floor-plan-p1.jpg",
