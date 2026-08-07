@@ -293,6 +293,13 @@ Premium, production-quality responsive website for residential construction comp
 - Only the toggle classes changed in DayNightImage.jsx — images, transition, layout untouched; verified fade still works + no overflow at 390px
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 45 (2026-08-07) — Casa: Day/Night elevation
+- Casa uploads (elevation_day.png / elevation_night.png, both 768×1024) processed to `elevation-day.webp` / `elevation-night.webp` + `-800.webp` variants in the casa folder; `elevationModes` added to Casa data with `width: 768`
+- DayNightImage component made width-agnostic (`fullWidth` prop, default 1402 = Nest) so srcSet descriptors stay accurate per project
+- Verified desktop 1920 (day default, night click, heights identical 2024.62px — no shift) + mobile 390 (pill bottom-center 16px gap, 154×36, tap works, no overflow); Nest unchanged
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 - NOTE: goes live on mydreamprojects.in on next redeploy

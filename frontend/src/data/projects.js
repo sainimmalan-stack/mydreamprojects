@@ -37,6 +37,11 @@ const MY_DREAM_CASA = {
   description:
     "My Dream Casa is a contemporary residential development designed to balance comfortable family living with efficient planning. Completed in 2021, its clean architectural lines, warm façade accents and thoughtfully planned residences create a modern and welcoming residential environment in Ameenpur.",
   cover: "/assets/projects/my-dream-casa/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-casa/elevation-day.webp",
+    night: "/assets/projects/my-dream-casa/elevation-night.webp",
+    width: 768,
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-casa/floor-plan.pdf",
     preview: "/assets/projects/my-dream-casa/floor-plan-p1.jpg",

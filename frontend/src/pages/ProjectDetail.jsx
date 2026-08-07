@@ -210,6 +210,7 @@ export default function ProjectDetail() {
                   nightSrc={project.elevationModes.night}
                   alt={`${project.title} residential apartment elevation in Ameenpur`}
                   testid="elevation"
+                  fullWidth={project.elevationModes.width}
                 />
               ) : (
                 <img
