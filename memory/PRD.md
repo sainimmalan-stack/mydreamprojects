@@ -274,6 +274,14 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, Aura coords in embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 42 (2026-08-07) — Echelon: VISIT PROJECT SITE section (all 6 ongoing complete)
+- Added `siteLocation` to Echelon only: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/Ty6BEn1S7gRjMEzHA?g_st=ic (_blank); embedded map uses resolved exact pin 17.5334550,78.3300480 (distinct from all other pins — verified)
+- Echelon data re-verified intact: ONGOING · G+5 · Residential Apartment, floor plan, COMING SOON elevation, description untouched
+- ALL 6 ongoing projects now have exact Visit Project Site locations: Aurelia, Elysium, Aura, Echelon, Vale, Ivy
+- Verified desktop 1920 + mobile 390: exact href, Echelon coords in embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 

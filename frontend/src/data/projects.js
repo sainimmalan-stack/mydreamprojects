@@ -346,6 +346,10 @@ const MY_DREAM_ECHELON = {
     preview: "/assets/projects/my-dream-echelon/floor-plan-p1.jpg",
     fileName: "My-Dream-Echelon-Floor-Plan.pdf",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/Ty6BEn1S7gRjMEzHA?g_st=ic",
+    embed: "https://www.google.com/maps?q=17.5334550,78.3300480&output=embed",
+  },
 };
 
 const MY_DREAM_VALE = {
