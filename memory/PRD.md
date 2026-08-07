@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 76 (2026-08-07) — Flat mix sub-line + deployment readiness
+- flatMix added to all 19 projects in projects.js, rendered as a small uppercase sub-line under the TOTAL FLATS value in the stats grid (e.g. "2 BHK + 3 BHK"): 2+3 BHK — Nest, Casa, Skylark, Summit, Griffin, Zenith, Aura; 2 BHK only — Avasa, Glenmore, Hillock, Atlantis, Perch, Aurelia, Elysium, Echelon; 3 BHK only — Selene, Solace, Ivy; Vale special: "2½ BHK + 3 BHK" (plan explicitly labels unit 02 as 2½-BHK 1,440 sft — verified visually after text extraction garbled it)
+- Vale's plan read visually to resolve the garbled label — no invented data
+- Verified: testing-agent iteration_7 = 38/38 checks PASS (19 pages × desktop+mobile), ½ unicode renders correctly, regression clean
+- Deployment readiness check: PASS, zero blockers — awaiting user's Deploy button press to push flat counts + flat mix + polished map to mydreamprojects.in
+
 ## Iteration 75 (2026-08-07) — TOTAL FLATS added to all 19 project pages
 - Full plan audit: text-extracted all 19 floor-plan PDFs (PyMuPDF) + visually inspected drawings; per-floor unit counts cross-verified against each plan's own saleable-area arithmetic (area/floor × floors = stated total)
 - Three internally-contradictory plans (Summit & Aurelia summary labels said "-10" while drawing + area math + flats column said 3/floor=15; Atlantis image-plan with 3 architect-numbered units, no area statement) were flagged to the owner — owner confirmed 15/15/15
