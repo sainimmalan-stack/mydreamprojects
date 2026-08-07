@@ -184,6 +184,18 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 73 (2026-08-07) — PROJECT MAP premium polish pass (UI/UX only, zero data changes)
+- Top spacing: pt-28 → pt-36 mobile (md:pt-44) — intro (OUR FOOTPRINT / BUILT AROUND AMEENPUR. / 19-developments copy) fully clear of fixed navbar on iPhone
+- Readability: retina @2x Carto dark_all tiles (tileSize 512) + raster paint (brightness-min 0.07, contrast 0.12, saturation -0.1) — roads/water/locality names crisp; STILL the reliable raster implementation (no vector)
+- ROOT-CAUSE bug found & fixed: custom marker elements lacked position:absolute (maplibre v6 doesn't add it) — all pins were stacking in normal flow, displaced ~34px × index from their true spots. Added `absolute top-0 left-0` to marker className (creation + highlight effect)
+- Collision handling: iterative relaxation spiderfy (pins <40px apart pushed apart over ≤40 iterations, screen-space offsets only — coordinates NEVER altered); overview + fly-to now flat (pitch 0) so offsets are exact; min pin separation verified 39px; every pin individually tappable
+- Auto-fit: cameraForBounds over all visible projects + responsive padding (mobile 48/96/24, desktop 90/60) + maxZoom 15.5; runs on init and every filter change; VIEW ALL PROJECTS reset control (map-view-all) appears while a project is selected
+- Mobile: map height 58vh → 68svh; selected-project card is a bottom sheet over the lower map (bottom-4 left-4 right-4), fly-to offset lifts the pin above the card; chips selector unchanged
+- Typography nit fixed: ongoing projects no longer show "ONGOING · —" (year "—" in data treated as no-year in map UI only; data file untouched)
+- Attribution preserved (compact OSM/CARTO, bottom-right, never obscured); zoom controls top-right
+- Verified: testing-agent iteration_3 = 100% PASS (mobile 390 + desktop 1920): header visible, 0 overflow, 19 markers auto-fit, filters 19/13/6, bottom card, view-all reset, exact GD URLs, attribution visible, regression clean (home, /projects, nest, ivy); plus main-agent cluster-click sweep (10 dense pins all select correctly)
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 ## Iteration 72 (2026-08-07) — PROJECT MAP page fixed + critical ongoing-pages crash fixed
 - MapLibre blank/black canvas FIXED: replaced remote Carto vector style.json (glyph/sprite fetches failed) with an inline raster style using Carto Dark Matter raster tiles (a–d subdomains, OSM/CARTO attribution); added map 'error' + 'load' console diagnostics; smoke-verified styleLoaded=true, tilesLoaded=true, 19 markers render
 - CRITICAL regression found & fixed: ALL 6 ongoing project detail pages (Aurelia, Elysium, Aura, Echelon, Vale, Ivy) were crashing blank with "Cannot read properties of undefined (reading 'replace')" — ProjectDetail.jsx computed heroSrcSet via project.cover.replace() unconditionally, but ongoing projects have no cover (introduced in Iteration 71 hero srcSet change). Fixed: heroSrcSet returns undefined when no cover. Ivy's G+4 / 3 BHK / ONE HOME. ONE FLOOR. / glance grid all render again; Solace/Zenith no-flat-count rules hold

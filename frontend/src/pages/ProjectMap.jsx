@@ -111,7 +111,8 @@ const InfoCard = ({ project, onClose }) => (
         </p>
         <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-bone/70 mt-2">
           <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[project.status]}`} />
-          {project.status} · {project.year}
+          {project.status}
+          {project.year && project.year !== "—" ? ` · ${project.year}` : ""}
         </p>
         <div className="flex items-center gap-5 mt-4">
           <Link
@@ -437,7 +438,8 @@ export default function ProjectMap() {
                   </span>
                   <span className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.2em] text-concrete mt-1">
                     <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[p.status]}`} />
-                    {p.status} · {p.year}
+                    {p.status}
+                    {p.year && p.year !== "—" ? ` · ${p.year}` : ""}
                   </span>
                 </span>
                 <ArrowRight className="w-4 h-4 text-concrete shrink-0" strokeWidth={1.5} />
