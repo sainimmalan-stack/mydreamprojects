@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import FloorPlanViewer from "../components/FloorPlanViewer";
+import DayNightImage from "../components/DayNightImage";
 import { getProject, getAdjacent } from "../data/projects";
 import useSeo from "../hooks/useSeo";
 
@@ -203,15 +204,24 @@ export default function ProjectDetail() {
           >
             <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-6">Elevation</p>
             <div className="border border-line overflow-hidden">
-              <img
-                src={project.cover}
-                srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
-                sizes="(max-width: 1600px) 100vw, 1600px"
-                alt={`${project.title} residential apartment elevation in Ameenpur`}
-                data-testid="project-elevation-image"
-                loading="lazy"
-                className="w-full h-auto block"
-              />
+              {project.elevationModes ? (
+                <DayNightImage
+                  daySrc={project.elevationModes.day}
+                  nightSrc={project.elevationModes.night}
+                  alt={`${project.title} residential apartment elevation in Ameenpur`}
+                  testid="elevation"
+                />
+              ) : (
+                <img
+                  src={project.cover}
+                  srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+                  sizes="(max-width: 1600px) 100vw, 1600px"
+                  alt={`${project.title} residential apartment elevation in Ameenpur`}
+                  data-testid="project-elevation-image"
+                  loading="lazy"
+                  className="w-full h-auto block"
+                />
+              )}
             </div>
           </motion.div>
         </section>

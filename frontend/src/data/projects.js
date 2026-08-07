@@ -13,6 +13,10 @@ const MY_DREAM_NEST = {
   description:
     "My Dream Nest represents the beginning of the My Dream Projects journey. Completed in 2020, the residential development combines practical planning, comfortable living spaces and a contemporary architectural approach in Ameenpur.",
   cover: "/assets/projects/my-dream-nest/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-nest/elevation-day.webp",
+    night: "/assets/projects/my-dream-nest/elevation-night.webp",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-nest/floor-plan.pdf",
     preview: "/assets/projects/my-dream-nest/floor-plan-p1.jpg",

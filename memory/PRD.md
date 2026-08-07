@@ -279,6 +279,15 @@ Premium, production-quality responsive website for residential construction comp
 - Echelon data re-verified intact: ONGOING · G+5 · Residential Apartment, floor plan, COMING SOON elevation, description untouched
 - ALL 6 ongoing projects now have exact Visit Project Site locations: Aurelia, Elysium, Aura, Echelon, Vale, Ivy
 - Verified desktop 1920 + mobile 390: exact href, Echelon coords in embed, display texts, no overflow
+
+## Iteration 43 (2026-08-07) — Day/Night elevation switcher (reusable component)
+- New reusable `src/components/DayNightImage.jsx`: minimal glass pill toggle (lucide Sun/Moon, "DAY | NIGHT", active = ember) overlaid top-right; Day default; 0.7s opacity cross-fade (night image is the static base, day absolute overlay fades out); identical container/dimensions/crop → zero layout shift; aria-pressed buttons; no reload
+- Nest uploads processed: day (1402×1122) + night (1402×1122) saved as `elevation-day.webp` / `elevation-night.webp` + `-800.webp` variants in the nest folder; wired via new optional `elevationModes` field in projects.js (Nest only)
+- ProjectDetail elevation section renders DayNightImage when `elevationModes` exists, else the original single image — all other 18 projects unchanged (Casa verified)
+- Verified desktop + mobile: day default (aria-pressed), mid-fade opacity ~0.16 at 350ms, final 0, container height identical before/after (1214.83px desktop / 278.48px mobile), no overflow at 390px
+- TO EXTEND: drop `elevation-day.webp`/`elevation-night.webp` (+800 variants) into any project folder and add `elevationModes` to its data entry
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 
