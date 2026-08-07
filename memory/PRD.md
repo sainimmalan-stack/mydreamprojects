@@ -317,6 +317,14 @@ Premium, production-quality responsive website for residential construction comp
 - Footer considered FINISHED per user
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 49 (2026-08-07) — Status indicator LEDs: green completed / red ongoing
+- ProjectCard status dot: completed → emerald-400 with subtle glow `0 0 7px 2px rgba(52,211,153,.45)`; ongoing → red-500 with `rgba(239,68,68,.45)` glow (kept existing pulse); badge size/position/typography/text untouched (dot-only change, tone-based dot colors removed)
+- Homepage "What We're Building Next" ongoing row dot: ember → red-500 + same red glow
+- ProjectDetail pages have no dot (text chip only) — unchanged, per "if applicable"
+- Verified computed styles on desktop (Nest=green+glow, Ivy=red+glow) and mobile (Aurelia red glow visible); status text/logic unchanged
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 
