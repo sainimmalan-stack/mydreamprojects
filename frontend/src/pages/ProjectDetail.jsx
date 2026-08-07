@@ -211,6 +211,7 @@ export default function ProjectDetail() {
                   alt={`${project.title} residential apartment elevation in Ameenpur`}
                   testid="elevation"
                   fullWidth={project.elevationModes.width}
+                  aspect={project.elevationModes.aspect}
                 />
               ) : (
                 <img

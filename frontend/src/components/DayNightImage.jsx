@@ -7,13 +7,13 @@ import { Sun, Moon } from "lucide-react";
  * the night image defines the frame, the day image sits on top and cross-fades
  * (0.7s opacity) — no layout shift, no page reload.
  */
-export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", fullWidth = 1402 }) => {
+export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", fullWidth = 1402, aspect = null }) => {
   const [mode, setMode] = useState("day");
   const srcSet = (s) => `${s.replace(".webp", "-800.webp")} 800w, ${s} ${fullWidth}w`;
   const sizes = "(max-width: 1600px) 100vw, 1600px";
 
   return (
-    <div className="relative overflow-hidden" data-testid={`${testid}-switcher`}>
+    <div className={`relative overflow-hidden ${aspect || ""}`} data-testid={`${testid}-switcher`}>
       <img
         src={nightSrc}
         srcSet={srcSet(nightSrc)}
@@ -21,7 +21,7 @@ export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", full
         alt={`${alt} — night view`}
         data-testid={`${testid}-night-image`}
         loading="lazy"
-        className="w-full h-auto block"
+        className={aspect ? "absolute inset-0 w-full h-full object-cover" : "w-full h-auto block"}
       />
       <img
         src={daySrc}

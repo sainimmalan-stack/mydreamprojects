@@ -128,6 +128,12 @@ const MY_DREAM_GLENMORE = {
   description:
     "My Dream Glenmore is a contemporary residential development with a refined architectural character and thoughtfully planned homes. Completed in 2023, its striking dark façade, warm lighting accents and clean geometric composition give the project a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-glenmore/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-glenmore/elevation-day.webp",
+    night: "/assets/projects/my-dream-glenmore/elevation-night.webp",
+    width: 1178,
+    aspect: "aspect-[16/9]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/Mfog5oGVdqRZTp9r7?g_st=ic",
     embed: "https://www.google.com/maps?q=G8PJ+7P7+My+Dream+Glenmore,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
@@ -152,6 +158,11 @@ const MY_DREAM_HILLOCK = {
   description:
     "My Dream Hillock is a contemporary residential development characterized by bold architectural lines, contrasting façade elements and generous balconies. Completed in 2024, the project combines efficient residential planning with a distinctive modern exterior designed for comfortable family living.",
   cover: "/assets/projects/my-dream-hillock/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-hillock/elevation-day.webp",
+    night: "/assets/projects/my-dream-hillock/elevation-night.webp",
+    width: 1327,
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/8btoDtghTJtTwWBm7?g_st=ic",
     embed: "https://www.google.com/maps?q=Phase+2,+My+Dream+Hillock,+Ameenpur,+Ramachandrapuram+(BHEL+Township),+Miyapur,+Telangana+502033&output=embed",

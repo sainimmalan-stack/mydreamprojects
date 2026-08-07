@@ -418,6 +418,14 @@ Premium, production-quality responsive website for residential construction comp
 - Toggle repositioned to bottom-right corner of the card image (latest user preference), same compact pill design
 - Performance: night image has NO src until first Night tap (0 night-image requests on initial load — verified via request listener); on first tap it loads then onLoad triggers the 0.7s cross-fade; cached afterwards
 - Verified: Projects page desktop (4 eligible toggles, 0 preload requests, night tap fades without navigation), homepage mobile (day→night→day, card body tap still navigates to detail page)
+
+## Iteration 66 (2026-08-07) — Glenmore + Hillock: Day/Night elevations
+- 4 uploads matched by filename AND cross-verified against existing elevations (Glenmore = white-Audi building 1178×751 day / 1178×580 night; Hillock = gate/red-Audi building 1322×1190 day / 1327×1186 night); saved as webp + 800 variants in correct folders only
+- DayNightImage gained optional `aspect` prop (fixed frame, both images object-cover, equal crop) for mismatched pairs — Glenmore uses aspect-[16/9]; Hillock pair is same-ratio so natural mode; images never altered
+- `elevationModes` added to Glenmore (width 1178 + aspect) and Hillock (width 1327) → toggles now live on detail pages, homepage cards (Hillock is in Selected Work), and Projects page cards automatically
+- Full PASS/FAIL checklist verified (desktop + mobile): Glenmore Day PASS, Glenmore Night PASS, Hillock Day PASS, Hillock Night PASS, Homepage Toggle PASS, Projects Page Toggle PASS, Project Detail Toggle PASS (both), Mobile Toggle PASS, Correct Asset Mapping PASS; no layout shift (identical heights), toggle tap never navigates, card tap navigates correctly
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 
