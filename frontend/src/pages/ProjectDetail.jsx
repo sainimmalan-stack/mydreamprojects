@@ -41,6 +41,7 @@ export default function ProjectDetail() {
     { label: "Location", value: project.location },
     { label: "Type", value: project.type },
     ...(project.floors ? [{ label: "Floors", value: project.floors }] : []),
+    ...(project.totalFlats ? [{ label: "Total Flats", value: `${project.totalFlats} Flats` }] : []),
     { label: "Year", value: project.year },
   ];
 
@@ -125,7 +126,7 @@ export default function ProjectDetail() {
       <section className="border-b border-line">
         <div
           data-testid="project-stats-grid"
-          className={`max-w-[1600px] mx-auto grid grid-cols-2 ${stats.length === 5 ? "md:grid-cols-5" : "md:grid-cols-4"}`}
+          className={`max-w-[1600px] mx-auto grid grid-cols-2 ${stats.length === 6 ? "md:grid-cols-6" : stats.length === 5 ? "md:grid-cols-5" : "md:grid-cols-4"}`}
         >
           {stats.map((s, i) => (
             <motion.div
