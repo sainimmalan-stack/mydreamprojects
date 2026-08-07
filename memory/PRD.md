@@ -322,6 +322,12 @@ Premium, production-quality responsive website for residential construction comp
 - Homepage "What We're Building Next" ongoing row dot: ember → red-500 + same red glow
 - ProjectDetail pages have no dot (text chip only) — unchanged, per "if applicable"
 - Verified computed styles on desktop (Nest=green+glow, Ivy=red+glow) and mobile (Aurelia red glow visible); status text/logic unchanged
+
+## Iteration 50 (2026-08-07) — Homepage Selected Work lineup changed
+- SELECTED_SLUGS in Home.jsx now: Nest, Casa, Hillock, Griffin, Solace (removed Selene, Zenith, Glenmore, Skylark from homepage ONLY — all remain on Projects page + detail pages; projects.js untouched, 19 slugs intact)
+- Card design/layout/animations untouched; verified desktop: exactly 5 cards, each image/name/link matches its project, all images loaded, removed names absent from section
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 

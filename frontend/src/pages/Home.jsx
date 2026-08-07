@@ -228,12 +228,11 @@ const Purpose = () => (
 );
 
 const SELECTED_SLUGS = [
+  "my-dream-nest",
+  "my-dream-casa",
+  "my-dream-hillock",
   "my-dream-griffin",
-  "my-dream-selene",
-  "my-dream-zenith",
   "my-dream-solace",
-  "my-dream-skylark",
-  "my-dream-glenmore",
 ];
 
 const SelectedWork = () => {
