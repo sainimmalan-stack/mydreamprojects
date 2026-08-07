@@ -214,6 +214,14 @@ Premium, production-quality responsive website for residential construction comp
 - Profile blocks: ember focus line ("CO-FOUNDER · CREATIVE & BRAND DIRECTION" / "CO-FOUNDER · PROJECT EXECUTION & OPERATIONS") + 4 short supplied bio paragraphs each (first two in bone, personal notes in concrete); family details (Amulya/Aadhyant, Yamuna/Ayaansh) included exactly as provided — no invented claims
 - Closing: "TWO FRIENDS. TWO COMPLEMENTARY STRENGTHS. ONE SHARED DREAM." (ember accent) + "Since 2013, a friendship built on trust — now building homes together."
 - Monogram fallback branch removed (both founders have photos — dead code); mobile pairing = Sai card → Sai bio → Akhil card → Akhil bio
+
+## Iteration 32 (2026-08-07) — SEO sitemap + robots.txt
+- Created `/app/frontend/public/sitemap.xml`: 23 URLs (Home, Projects, About, Contact + all 19 project pages) under https://mydreamprojects.in with lastmod 2026-08-07, changefreq (weekly: home/projects/ongoing; monthly: rest) and priorities (1.0 home → 0.7 projects); XML validated
+- Created `/app/frontend/public/robots.txt`: `User-agent: * Allow: /` + `Sitemap: https://mydreamprojects.in/sitemap.xml`
+- Verified in preview: /sitemap.xml → 200 application/xml (23 locs), /robots.txt → 200 text/plain with our block present (preview domain also shows a platform-level Cloudflare block — not present on the custom domain)
+- Deployment readiness check: PASS, no blockers. NOTE: production deploy is user-triggered (Deploy button) — changes go live on mydreamprojects.in after redeploy
+- PENDING from before: Site Progress Updates feature — awaiting user's answers (photos availability, layout choice, homepage badge)
+
 - Verified desktop + mobile 390: all story/bio/closing copy present, photos unchanged, no overflow, no walls of text
 
 - Verified desktop + mobile 390: both portraits load, face fully visible, subject in frame, no distortion, no overflow
