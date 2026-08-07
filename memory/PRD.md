@@ -430,6 +430,14 @@ Premium, production-quality responsive website for residential construction comp
 - Both pairs have slightly mismatched aspects → both use `aspect-[2/1]` fixed frame (equal crop, no distortion, buildings preserved); elevationModes added (width 1254)
 - Toggles live on: both detail pages, Projects page cards (both), homepage (Griffin only — Summit correctly NOT in Selected Work, unchanged)
 - Full checklist verified (desktop + mobile): Summit Day PASS, Summit Night PASS, Griffin Day PASS, Griffin Night PASS, Homepage PASS (Griffin only), Projects Page PASS (both), Detail Pages PASS, Mobile PASS, Asset Mapping PASS; no layout shift, toggle taps never navigate
+
+## Iteration 68 (2026-08-07) — Selene + Atlantis: Day/Night elevations
+- 4 uploads matched by filename AND cross-verified against existing elevations (Selene = grey/beige stacked balconies 1252×643 day, 1254×494 night; Atlantis = tan/cream corner w/ MY DREAM sign 1343×1171 day, 1345×1169 night); webp + 800 variants saved in correct folders only
+- Selene pair mismatched aspect → `aspect-[2.2/1]` fixed frame; Atlantis pair near-identical aspect → natural mode; elevationModes added (widths 1254 / 1345)
+- Neither is in Selected Work → homepage correctly unchanged; toggles live on both detail pages + Projects page cards
+- Full checklist: Selene Day/Night PASS, Atlantis Day/Night PASS, Homepage PASS (n/a — not in Selected Work), Projects Page PASS, Detail Pages PASS, Mobile PASS, Asset Mapping PASS, Atlantis Floor Plan/PDF Preserved PASS (href verified unchanged)
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 - NOTE: goes live on mydreamprojects.in on next redeploy

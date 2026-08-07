@@ -247,6 +247,12 @@ const MY_DREAM_SELENE = {
   description:
     "My Dream Selene is a contemporary residential development combining spacious homes with a bold and elegant architectural expression. Completed in 2025, its layered balconies, warm façade accents and thoughtfully planned interiors create a refined environment for modern family living.",
   cover: "/assets/projects/my-dream-selene/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-selene/elevation-day.webp",
+    night: "/assets/projects/my-dream-selene/elevation-night.webp",
+    width: 1254,
+    aspect: "aspect-[2.2/1]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/zwRTdaahm97KMpRy8?g_st=ic",
     embed: "https://www.google.com/maps?q=MY+DREAM+SELENE,+Sai+Rajeshwari+phase+2,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
@@ -271,6 +277,11 @@ const MY_DREAM_ATLANTIS = {
   description:
     "My Dream Atlantis is a contemporary residential development designed around spacious living, thoughtful planning and modern architectural detailing. Completed in 2025 and located near Ameenpur Lake, the project combines well-planned residences with a sophisticated façade and comfortable residential setting.",
   cover: "/assets/projects/my-dream-atlantis/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-atlantis/elevation-day.webp",
+    night: "/assets/projects/my-dream-atlantis/elevation-night.webp",
+    width: 1345,
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/9GnZ5a8ZdT9iACzVA?g_st=ic",
     embed: "https://www.google.com/maps?q=G8MJ+J5R+My+Dream+Atlantis,+Shanthi+Sree+Nagar+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
