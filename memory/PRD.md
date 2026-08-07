@@ -230,6 +230,12 @@ Premium, production-quality responsive website for residential construction comp
 - Deployment agent readiness check: PASS (no blockers; one non-blocking WARN — scaffold `/api/status` endpoint uses `.to_list(1000)`, unused by the frontend, revisit only if that collection ever grows)
 - Production verified after user's redeploy: https://mydreamprojects.in home 200, robots.txt now includes explicit Googlebot allow + https sitemap reference, sitemap.xml serving all 23 URLs
 
+## Iteration 35 (2026-08-07) — Safari "server can't be found" diagnosis (no changes made)
+- User reported Safari error on https://mydreamprojects.in/sitemap.xml while homepage worked; diagnosed without modifying anything
+- Findings: sitemap serves 200 application/xml with 23 URLs, zero redirects, same hostname; http→https 301 and www→apex 308 both clean; DNS A records correct for apex + www; no broken AAAA; TLS cert valid; robots.txt correct
+- Conclusion: server-side is perfect — error is client-side DNS resolution failure, almost certainly negative DNS caching / incomplete propagation (custom domain was connected the same day); advised airplane-mode toggle / DNS flush / wait; escalate to Emergent Support only if it persists 24-48h across networks
+
+
 - NOTE: the Googlebot-explicit robots.txt reaches production on the user's next redeploy (current prod robots already allows all + https sitemap line)
 
 - PENDING from before: Site Progress Updates feature — awaiting user's answers (photos availability, layout choice, homepage badge)
