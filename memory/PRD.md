@@ -401,6 +401,14 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 63 (2026-08-07) — Zenith: VISIT PROJECT SITE section (ALL 19 COMPLETE)
+- Added `siteLocation` to Zenith: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/p9xH9LbbQWnG8emi6?g_st=ic (_blank); resolves to registered place "My Dream Zenith" (5.0★) — embed uses that exact place query
+- Zenith elevation/floor plan/description/status/year untouched; no residence/flat count added (rule re-verified)
+- MILESTONE: ALL 19 projects now have their exact Visit Project Site locations (13 completed + 6 ongoing)
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 
