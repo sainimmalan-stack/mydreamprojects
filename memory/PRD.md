@@ -341,6 +341,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 53 (2026-08-07) — Avasa: VISIT PROJECT SITE section
+- Added `siteLocation` to Avasa: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/VuYbWjcUoZxPMcdw7?g_st=ic (_blank); resolves to registered place "MY Dream Avasa" so the embed uses that exact place query (distinct pin from Nest/Casa — visible separately on the map)
+- Avasa elevation/day-night/floor plan/description/status/year untouched; siteLocation now on all 6 ongoing + Nest + Casa + Avasa
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 - NOTE: goes live on mydreamprojects.in on next redeploy
 

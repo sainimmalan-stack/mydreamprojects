@@ -75,6 +75,10 @@ const MY_DREAM_AVASA = {
     night: "/assets/projects/my-dream-avasa/elevation-night.webp",
     width: 1125,
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/VuYbWjcUoZxPMcdw7?g_st=ic",
+    embed: "https://www.google.com/maps?q=G8MF+PXG+MY+Dream+Avasa,+Sai+Ambica+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-avasa/floor-plan.pdf",
     preview: "/assets/projects/my-dream-avasa/floor-plan-p1.jpg",
