@@ -335,6 +335,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 52 (2026-08-07) — Casa: VISIT PROJECT SITE section
+- Added `siteLocation` to Casa: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/WQvmq3LFSyWB5nMM9?g_st=ic (_blank); resolves to registered place "My Dream - Casa" so the embed uses that exact place query (map shows the official place card)
+- Casa elevation/day-night/floor plan/description untouched; siteLocation now on all 6 ongoing + Nest + Casa
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 

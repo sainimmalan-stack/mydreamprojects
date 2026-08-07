@@ -46,6 +46,10 @@ const MY_DREAM_CASA = {
     night: "/assets/projects/my-dream-casa/elevation-night.webp",
     width: 768,
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/WQvmq3LFSyWB5nMM9?g_st=ic",
+    embed: "https://www.google.com/maps?q=G8MF+CJC+My+Dream+-+Casa,+6,+Sai+Ambica+Colony+Rd,+Narendra+Nagar+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-casa/floor-plan.pdf",
     preview: "/assets/projects/my-dream-casa/floor-plan-p1.jpg",
