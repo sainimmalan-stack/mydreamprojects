@@ -323,6 +323,10 @@ const MY_DREAM_AURA = {
     preview: "/assets/projects/my-dream-aura/floor-plan-p1.jpg",
     fileName: "My-Dream-Aura-Floor-Plan.pdf",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/3kcuMTU8QhjjJ5Xr7?g_st=ic",
+    embed: "https://www.google.com/maps?q=17.5361670,78.3327710&output=embed",
+  },
 };
 
 const MY_DREAM_ECHELON = {

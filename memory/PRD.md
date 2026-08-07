@@ -267,6 +267,13 @@ Premium, production-quality responsive website for residential construction comp
 - Other 6 plans verified clean already: atlantis (image-based, no block), aura/echelon/elysium/ivy/vale (title blocks have only client/project info)
 - Verified: text extraction of ALL 19 PDFs shows zero contact patterns with room labels/dimensions intact; visual checks of nest/skylark/glenmore/aurelia/zenith clean; site plan preview + download work (200s)
 - FUTURE PLANS: run `/app/scripts/redact_plans.py` pattern (token-based redaction) on any new plan PDF before upload so no architect contact details ever appear
+
+## Iteration 41 (2026-08-07) — Aura: VISIT PROJECT SITE section
+- Added `siteLocation` to Aura only: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/3kcuMTU8QhjjJ5Xr7?g_st=ic (_blank); embedded map uses resolved exact pin 17.5361670,78.3327710 (distinct from all other project pins — verified)
+- Aura data re-verified intact: ONGOING · G+5 · Residential Apartment, floor plan, COMING SOON elevation, description untouched; siteLocation now on Aurelia, Elysium, Ivy, Vale, Aura
+- Verified desktop 1920 + mobile 390: exact href, Aura coords in embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 
