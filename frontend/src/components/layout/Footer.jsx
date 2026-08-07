@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 export const Footer = () => (
   <footer data-testid="site-footer" className="relative border-t border-line bg-ink">
     <div className="max-w-[1600px] mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-8">
-      <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12 md:gap-y-0 pb-14 md:pb-20">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12 md:gap-y-0 pb-10 md:pb-14">
         <div className="col-span-2 md:col-span-6 flex justify-center md:justify-start">
           <img
             src="/assets/logo-full-dark.png"
@@ -69,7 +69,7 @@ export const Footer = () => (
           </a>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pt-6 border-t border-line">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 pt-6 border-t border-line">
         <p className="text-[10px] uppercase tracking-[0.3em] text-concrete">
           © {new Date().getFullYear()} My Dream Projects
         </p>
