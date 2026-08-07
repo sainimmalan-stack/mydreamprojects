@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Sun, Moon } from "lucide-react";
 
 const TONES = [
   { surface: "bg-coal", index: "text-outline", title: "text-bone", meta: "text-concrete" },
@@ -10,6 +11,9 @@ const TONES = [
 
 export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note = true, homeMeta = false }) => {
   const t = TONES[tone % TONES.length];
+  const [mode, setMode] = useState("day");
+  const modes = homeMeta && project.cover && project.elevationModes ? project.elevationModes : null;
+  const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
   return (
     <motion.div
       layout
@@ -26,7 +30,73 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
         <div
           className={`relative overflow-hidden ${project.cover ? "bg-coal" : t.surface} ${aspect} border border-line group-hover:border-ember/40 transition-colors duration-500`}
         >
-          {project.cover ? (
+          {modes ? (
+            <>
+              <img
+                src={modes.night}
+                srcSet={`${modes.night.replace(".webp", "-800.webp")} 800w, ${modes.night} ${modes.width || 1402}w`}
+                sizes={cardSizes}
+                alt={`${project.title} residential apartment elevation in Ameenpur — night view`}
+                data-testid={`card-night-image-${project.slug}`}
+                loading="lazy"
+                className="texture-img absolute inset-0 w-full h-full object-cover"
+              />
+              <img
+                src={modes.day}
+                srcSet={`${modes.day.replace(".webp", "-800.webp")} 800w, ${modes.day} ${modes.width || 1402}w`}
+                sizes={cardSizes}
+                alt={`${project.title} residential apartment elevation in Ameenpur — day view`}
+                data-testid={`card-day-image-${project.slug}`}
+                loading="lazy"
+                className={`texture-img absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
+                  mode === "day" ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              <div
+                data-testid={`card-daynight-toggle-${project.slug}`}
+                role="group"
+                aria-label={`${project.title} day night preview`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+                className="absolute right-4 top-[3.75rem] flex items-center rounded-full border border-bone/15 bg-ink/45 backdrop-blur-md p-0.5 shadow-lg shadow-ink/30"
+              >
+                <button
+                  type="button"
+                  data-testid={`card-day-button-${project.slug}`}
+                  aria-pressed={mode === "day"}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setMode("day");
+                  }}
+                  className={`flex items-center gap-1 rounded-full px-2.5 py-1.5 font-display font-semibold text-[9px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                    mode === "day" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
+                  }`}
+                >
+                  <Sun className="w-3 h-3" strokeWidth={1.8} />
+                  Day
+                </button>
+                <button
+                  type="button"
+                  data-testid={`card-night-button-${project.slug}`}
+                  aria-pressed={mode === "night"}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setMode("night");
+                  }}
+                  className={`flex items-center gap-1 rounded-full px-2.5 py-1.5 font-display font-semibold text-[9px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                    mode === "night" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
+                  }`}
+                >
+                  <Moon className="w-3 h-3" strokeWidth={1.8} />
+                  Night
+                </button>
+              </div>
+            </>
+          ) : project.cover ? (
             <img
               src={project.cover}
               srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}

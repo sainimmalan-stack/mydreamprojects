@@ -406,6 +406,13 @@ Premium, production-quality responsive website for residential construction comp
 - Zenith elevation/floor plan/description/status/year untouched; no residence/flat count added (rule re-verified)
 - MILESTONE: ALL 19 projects now have their exact Visit Project Site locations (13 completed + 6 ongoing)
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+
+## Iteration 64 (2026-08-07) — Homepage cards: Day/Night quick-preview
+- ProjectCard (reusable component) now shows a mini DAY | NIGHT pill (top-right, below the status badge, rounded-full translucent ink/45 + blur, ember active, 3px sun/moon icons) ONLY when `homeMeta` (homepage) AND `project.elevationModes` exist — currently Nest + Casa cards; Hillock/Griffin/Solace and all Projects-page cards unchanged
+- Per-card local state; day default; tapping NIGHT cross-fades only that card's image (0.7s opacity) with preventDefault/stopPropagation so the card link does NOT fire; tapping elsewhere still navigates to the project page (verified: lands on /projects/my-dream-casa)
+- Verified desktop 1920 + mobile 390: default day, night swap without reload, no toggle on single-elevation/ongoing projects, Projects page unchanged; detail-page Day/Night switchers untouched
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 
