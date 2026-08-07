@@ -24,32 +24,21 @@ const Reveal = ({ children, delay = 0, className = "" }) => (
   </motion.div>
 );
 
-const OfficeImage = ({ src, alt, testid, className = "", label }) => {
+const OfficeImage = ({ src, srcSet, sizes, alt, testid, className = "" }) => {
   const [loaded, setLoaded] = useState(false);
   return (
     <div
       data-testid={testid}
-      className={`relative overflow-hidden border border-line group elevation-fallback ${className}`}
+      className={`relative overflow-hidden border border-line group bg-ink ${className}`}
     >
-      <div
-        className={`absolute inset-0 flex flex-col items-center justify-center gap-4 transition-opacity duration-700 ${
-          loaded ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        <span className="w-2 h-2 bg-ember animate-pulse" />
-        <p className="text-[10px] uppercase tracking-[0.45em] text-concrete">{label}</p>
-        <p className="font-display font-bold uppercase tracking-tighter text-2xl md:text-3xl text-outline select-none">
-          Coming Soon
-        </p>
-      </div>
       <img
         src={src}
-        srcSet={`${src.replace(".webp", "-800.webp")} 800w, ${src.replace(".webp", "-1600.webp")} 1600w`}
-        sizes="(max-width: 768px) 100vw, 50vw"
+        srcSet={srcSet}
+        sizes={sizes}
         alt={alt}
         loading="lazy"
         onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-[transform,opacity] duration-[1.2s] ${
+        className={`w-full h-auto block group-hover:scale-[1.03] transition-[transform,opacity] duration-[1.2s] ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
         style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
@@ -204,36 +193,25 @@ const Office = () => (
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-4 md:gap-6">
-        <Reveal className="col-span-12 md:col-span-8">
+      <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+        <Reveal className="w-full md:w-[62%]">
           <OfficeImage
             src="/assets/office/office-exterior.webp"
-            alt="My Dream Projects two-storey container office at night with illuminated signage"
+            srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1600w"
+            sizes="(max-width: 768px) 100vw, 62vw"
+            alt="My Dream Projects two-storey container office at night with illuminated signage and car parked in front"
             testid="office-photo-primary"
-            label="Office Exterior"
-            className="aspect-[4/3] md:aspect-[16/10]"
           />
         </Reveal>
-        <div className="col-span-12 md:col-span-4 grid grid-rows-2 gap-4 md:gap-6">
-          <Reveal delay={0.1} className="h-full">
-            <OfficeImage
-              src="/assets/office/office-garden.webp"
-              alt="Landscaped outdoor area of the My Dream Projects office at night"
-              testid="office-photo-garden"
-              label="Outdoor Spaces"
-              className="h-full min-h-[220px]"
-            />
-          </Reveal>
-          <Reveal delay={0.2} className="h-full">
-            <OfficeImage
-              src="/assets/office/office-interior.webp"
-              alt="My Dream Projects office interior with desk, seating and wall logo"
-              testid="office-photo-interior"
-              label="Workspace Interior"
-              className="h-full min-h-[220px]"
-            />
-          </Reveal>
-        </div>
+        <Reveal delay={0.1} className="w-full md:w-[38%]">
+          <OfficeImage
+            src="/assets/office/office-interior.webp"
+            srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1500w"
+            sizes="(max-width: 768px) 100vw, 38vw"
+            alt="My Dream Projects office interior with desk, chairs and My Dream Projects logo on the wall"
+            testid="office-photo-interior"
+          />
+        </Reveal>
       </div>
     </div>
   </section>

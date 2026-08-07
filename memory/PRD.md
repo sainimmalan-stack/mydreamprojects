@@ -175,6 +175,13 @@ Premium, production-quality responsive website for residential construction comp
 - Microcopy double-space sweep clean; tel:/wa.me links verified; OG/SEO hook verified
 - FINAL PRE-LAUNCH CHECK report printed to user; site handed over for owner review — no further changes per user instruction
 
+
+## Iteration 25 (2026-08-07) — Office gallery reduced to exactly 2 photos
+- Per user: office gallery now contains ONLY (1) exterior night photo with car (primary) and (2) interior photo with desk/chairs/wall logo (secondary); garden/moon photo removed (files deleted) and the "WORKSPACE INTERIOR — COMING SOON" placeholder removed entirely
+- Root cause of placeholder: interior srcSet pointed at a non-existent `-1600.webp` (source is 1500×2000 portrait) so the image 404'd and the loading fallback stayed visible — fixed with an explicit correct srcSet
+- `OfficeImage` rewritten: natural aspect ratios (exterior 4:3, interior 3:4), no cropping, no fallback overlay, per-image srcSet/sizes; layout = flex row on desktop (62%/38%, top-aligned), stacked full-width on mobile
+- Verified desktop 1920 + mobile 390: exactly 2 images, both load, no "Coming Soon"/garden text, no horizontal overflow; all office asset URLs 200
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
