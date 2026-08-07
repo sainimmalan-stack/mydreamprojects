@@ -166,6 +166,15 @@ Premium, production-quality responsive website for residential construction comp
 - Real bugs fixed: 12-col grid gap overflow at 360px (footer + project About grid → gap-6)
 - Final QA: 8/8 site-wide suites + 41/41 portfolio audit + all 24 routes clean at 360px/390px
 
+
+## Iteration 24 (2026-08-07) — Final pre-launch visual & content consistency pass
+- Visual QA: analyzed full screenshot batch (desktop 1920px + mobile 390px) across Home, Projects, Project Detail (Nest/Skylark/Ivy/Zenith), About, Contact
+- One real nit found & fixed: navbar was fully transparent at scroll-top, washing out nav links over bright hero elevations → subtle top scrim gradient (`bg-gradient-to-b from-ink/70 via-ink/40 to-transparent`) when not scrolled; verified on desktop + mobile home hero
+- Two suspected nits confirmed as screenshot artifacts (no fix needed): Ivy/Skylark back-link + overline stack correctly (mb-8), Zenith elevation renders full uncropped building (earlier shot was mid-scroll/lazy-load)
+- Full 41-check audit (`/app/scripts/audit_full.py`) re-run post-fix: 41 PASS / 0 FAIL
+- Microcopy double-space sweep clean; tel:/wa.me links verified; OG/SEO hook verified
+- FINAL PRE-LAUNCH CHECK report printed to user; site handed over for owner review — no further changes per user instruction
+
 ## Backlog
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)

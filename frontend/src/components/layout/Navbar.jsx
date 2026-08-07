@@ -58,7 +58,7 @@ export const Navbar = () => {
         className={`fixed top-0 inset-x-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 border-b ${
           scrolled
             ? "bg-ink/70 backdrop-blur-xl border-line"
-            : "bg-transparent border-transparent"
+            : "bg-gradient-to-b from-ink/70 via-ink/40 to-transparent border-transparent"
         }`}
       >
         <div className="max-w-[1600px] mx-auto flex items-center justify-between px-5 md:px-10 h-16 md:h-20">
