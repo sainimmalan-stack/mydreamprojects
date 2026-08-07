@@ -128,6 +128,10 @@ const MY_DREAM_GLENMORE = {
   description:
     "My Dream Glenmore is a contemporary residential development with a refined architectural character and thoughtfully planned homes. Completed in 2023, its striking dark façade, warm lighting accents and clean geometric composition give the project a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-glenmore/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/Mfog5oGVdqRZTp9r7?g_st=ic",
+    embed: "https://www.google.com/maps?q=G8PJ+7P7+My+Dream+Glenmore,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-glenmore/floor-plan.pdf",
     preview: "/assets/projects/my-dream-glenmore/floor-plan-p1.jpg",
