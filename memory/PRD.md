@@ -184,6 +184,14 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 75 (2026-08-07) — TOTAL FLATS added to all 19 project pages
+- Full plan audit: text-extracted all 19 floor-plan PDFs (PyMuPDF) + visually inspected drawings; per-floor unit counts cross-verified against each plan's own saleable-area arithmetic (area/floor × floors = stated total)
+- Three internally-contradictory plans (Summit & Aurelia summary labels said "-10" while drawing + area math + flats column said 3/floor=15; Atlantis image-plan with 3 architect-numbered units, no area statement) were flagged to the owner — owner confirmed 15/15/15
+- Final verified counts stored as `totalFlats` in projects.js (data-only change): 10 flats — Nest, Casa, Avasa, Glenmore, Hillock, Griffin, Selene, Perch, Solace, Zenith, Aura, Echelon, Vale (13 projects); 15 flats — Skylark, Summit, Atlantis, Aurelia, Elysium (5 projects); 4 flats — Ivy (1/floor × 4, matches ONE HOME. ONE FLOOR.)
+- ProjectDetail stats grid: TOTAL FLATS cell between FLOORS and YEAR, identical typography/borders; grid extended to md:grid-cols-6 (mobile stays 2-col, 3 clean rows)
+- Verified: testing-agent iteration_6 = 19/19 desktop + 19/19 mobile exact-value PASS, regression clean (day/night, floor plan viewer, visit site, Ivy G+4 + glance), zero pageerrors
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 ## Iteration 74 (2026-08-07) — PROJECT MAP marker refinement round (UI-only)
 - Markers ~25-30% smaller (pl-1.5 pr-2 py-1, text-[9px], 4px status dots, touch-manipulation) — rendered ~36×30px, numbers still legible on mobile; collision relaxation MIN tightened 40→32px to match
 - Selected marker now gets subtle ember glow `shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]`; completed pins keep green dots, ongoing keep red dots
