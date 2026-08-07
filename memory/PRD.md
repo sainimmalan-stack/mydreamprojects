@@ -359,6 +359,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 56 (2026-08-07) — Hillock: VISIT PROJECT SITE section
+- Added `siteLocation` to Hillock: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/8btoDtghTJtTwWBm7?g_st=ic (_blank); resolves to registered place "My Dream Hillock" (5.0★) — embed uses that exact place query
+- Hillock elevation/floor plan/description/status/year untouched; siteLocation now on all 6 ongoing + Nest, Casa, Avasa, Skylark, Glenmore, Hillock
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 

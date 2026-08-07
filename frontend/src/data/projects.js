@@ -152,6 +152,10 @@ const MY_DREAM_HILLOCK = {
   description:
     "My Dream Hillock is a contemporary residential development characterized by bold architectural lines, contrasting façade elements and generous balconies. Completed in 2024, the project combines efficient residential planning with a distinctive modern exterior designed for comfortable family living.",
   cover: "/assets/projects/my-dream-hillock/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/8btoDtghTJtTwWBm7?g_st=ic",
+    embed: "https://www.google.com/maps?q=Phase+2,+My+Dream+Hillock,+Ameenpur,+Ramachandrapuram+(BHEL+Township),+Miyapur,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-hillock/floor-plan.pdf",
     preview: "/assets/projects/my-dream-hillock/floor-plan-p1.jpg",
