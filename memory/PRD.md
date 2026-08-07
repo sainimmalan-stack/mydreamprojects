@@ -242,6 +242,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, map shows the exact pin, no overflow; floor plan and all other project data untouched; no other project renders the section
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 37 (2026-08-07) — Elysium: VISIT PROJECT SITE section
+- Added `siteLocation` to Elysium only: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/tNxdZWptsQZUD8A5A?g_st=ic (_blank); embedded map preview uses the resolved exact pin 17.5324900,78.3343810 (distinct from Aurelia's 17.5351890,78.3342360 — verified different)
+- Reuses the same conditional visit-site section (renders only for projects with siteLocation — now Aurelia + Elysium only); Elysium floor plan, COMING SOON elevation and description untouched
+- Verified desktop 1920 + mobile 390: exact href, Elysium coords in embed, all display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 - NOTE: the Googlebot-explicit robots.txt reaches production on the user's next redeploy (current prod robots already allows all + https sitemap line)

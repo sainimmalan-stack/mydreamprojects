@@ -300,6 +300,10 @@ const MY_DREAM_ELYSIUM = {
     preview: "/assets/projects/my-dream-elysium/floor-plan-p1.jpg",
     fileName: "My-Dream-Elysium-Floor-Plan.pdf",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/tNxdZWptsQZUD8A5A?g_st=ic",
+    embed: "https://www.google.com/maps?q=17.5324900,78.3343810&output=embed",
+  },
 };
 
 const MY_DREAM_AURA = {
