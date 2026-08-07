@@ -187,6 +187,12 @@ const MY_DREAM_SUMMIT = {
   description:
     "My Dream Summit is a contemporary residential development designed around spacious layouts and comfortable family living. Completed in 2024, its strong geometric façade, warm architectural accents and generous balconies create a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-summit/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-summit/elevation-day.webp",
+    night: "/assets/projects/my-dream-summit/elevation-night.webp",
+    width: 1254,
+    aspect: "aspect-[2/1]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/XSiRLgM3bvgYk8yZ6?g_st=ic",
     embed: "https://www.google.com/maps?q=G8C8+Q9C+My+Dream+Summit,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
@@ -211,6 +217,12 @@ const MY_DREAM_GRIFFIN = {
   description:
     "My Dream Griffin is a contemporary residential development defined by clean vertical lines, layered balconies and warm architectural accents. Completed in 2024, thoughtful planning combines comfortable interiors with a distinctive modern façade and strong architectural presence.",
   cover: "/assets/projects/my-dream-griffin/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-griffin/elevation-day.webp",
+    night: "/assets/projects/my-dream-griffin/elevation-night.webp",
+    width: 1254,
+    aspect: "aspect-[2/1]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/n4baoGjFLi1yEzzM6?g_st=ic",
     embed: "https://www.google.com/maps?q=G8HF+QRW+My+Dream+Griffin,+Road+No.+2,+PNR+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",

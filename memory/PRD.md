@@ -424,6 +424,14 @@ Premium, production-quality responsive website for residential construction comp
 - DayNightImage gained optional `aspect` prop (fixed frame, both images object-cover, equal crop) for mismatched pairs — Glenmore uses aspect-[16/9]; Hillock pair is same-ratio so natural mode; images never altered
 - `elevationModes` added to Glenmore (width 1178 + aspect) and Hillock (width 1327) → toggles now live on detail pages, homepage cards (Hillock is in Selected Work), and Projects page cards automatically
 - Full PASS/FAIL checklist verified (desktop + mobile): Glenmore Day PASS, Glenmore Night PASS, Hillock Day PASS, Hillock Night PASS, Homepage Toggle PASS, Projects Page Toggle PASS, Project Detail Toggle PASS (both), Mobile Toggle PASS, Correct Asset Mapping PASS; no layout shift (identical heights), toggle tap never navigates, card tap navigates correctly
+
+## Iteration 67 (2026-08-07) — Summit + Griffin: Day/Night elevations
+- 4 uploads matched by filename AND cross-verified against existing elevations (Summit = brown/black stacked w/ white SUV 1252×628 day, 1254×615 night; Griffin = white louvers + roof sign w/ white Audi 1252×686 day, 1254×559 night); saved as webp + 800 variants in correct folders only
+- Both pairs have slightly mismatched aspects → both use `aspect-[2/1]` fixed frame (equal crop, no distortion, buildings preserved); elevationModes added (width 1254)
+- Toggles live on: both detail pages, Projects page cards (both), homepage (Griffin only — Summit correctly NOT in Selected Work, unchanged)
+- Full checklist verified (desktop + mobile): Summit Day PASS, Summit Night PASS, Griffin Day PASS, Griffin Night PASS, Homepage PASS (Griffin only), Projects Page PASS (both), Detail Pages PASS, Mobile PASS, Asset Mapping PASS; no layout shift, toggle taps never navigate
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 - NOTE: goes live on mydreamprojects.in on next redeploy
