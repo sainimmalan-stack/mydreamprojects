@@ -19,6 +19,8 @@ const MY_DREAM_NEST = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/xyW7NFt7epe782966?g_st=ic",
+    lat: 17.5334039,
+    lng: 78.3249575,
     embed: "https://www.google.com/maps?q=My+Dream+Nest,+Janachithanya+layout,+Aminpur+Rd,+Ameenpur,+Miyapur,+Telangana+502032&output=embed",
   },
   floorPlan: {
@@ -48,6 +50,8 @@ const MY_DREAM_CASA = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/WQvmq3LFSyWB5nMM9?g_st=ic",
+    lat: 17.5345951,
+    lng: 78.3249708,
     embed: "https://www.google.com/maps?q=G8MF+CJC+My+Dream+-+Casa,+6,+Sai+Ambica+Colony+Rd,+Narendra+Nagar+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",
   },
   floorPlan: {
@@ -77,6 +81,8 @@ const MY_DREAM_AVASA = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/VuYbWjcUoZxPMcdw7?g_st=ic",
+    lat: 17.5343212,
+    lng: 78.3249423,
     embed: "https://www.google.com/maps?q=G8MF+PXG+MY+Dream+Avasa,+Sai+Ambica+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",
   },
   floorPlan: {
@@ -106,6 +112,8 @@ const MY_DREAM_SKYLARK = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/VXZCpHzKvFzrJr717?g_st=ic",
+    lat: 17.5364912,
+    lng: 78.3262729,
     embed: "https://www.google.com/maps?q=My+Dream+Skylark,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -136,6 +144,8 @@ const MY_DREAM_GLENMORE = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/Mfog5oGVdqRZTp9r7?g_st=ic",
+    lat: 17.5356631,
+    lng: 78.3317983,
     embed: "https://www.google.com/maps?q=G8PJ+7P7+My+Dream+Glenmore,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -165,6 +175,8 @@ const MY_DREAM_HILLOCK = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/8btoDtghTJtTwWBm7?g_st=ic",
+    lat: 17.5324672,
+    lng: 78.3262888,
     embed: "https://www.google.com/maps?q=Phase+2,+My+Dream+Hillock,+Ameenpur,+Ramachandrapuram+(BHEL+Township),+Miyapur,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -195,6 +207,8 @@ const MY_DREAM_SUMMIT = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/XSiRLgM3bvgYk8yZ6?g_st=ic",
+    lat: 17.5219264,
+    lng: 78.3158885,
     embed: "https://www.google.com/maps?q=G8C8+Q9C+My+Dream+Summit,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -225,6 +239,8 @@ const MY_DREAM_GRIFFIN = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/n4baoGjFLi1yEzzM6?g_st=ic",
+    lat: 17.5294786,
+    lng: 78.3245638,
     embed: "https://www.google.com/maps?q=G8HF+QRW+My+Dream+Griffin,+Road+No.+2,+PNR+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",
   },
   floorPlan: {
@@ -255,6 +271,8 @@ const MY_DREAM_SELENE = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/zwRTdaahm97KMpRy8?g_st=ic",
+    lat: 17.5334676,
+    lng: 78.3293553,
     embed: "https://www.google.com/maps?q=MY+DREAM+SELENE,+Sai+Rajeshwari+phase+2,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -284,6 +302,8 @@ const MY_DREAM_ATLANTIS = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/9GnZ5a8ZdT9iACzVA?g_st=ic",
+    lat: 17.533505,
+    lng: 78.3301387,
     embed: "https://www.google.com/maps?q=G8MJ+J5R+My+Dream+Atlantis,+Shanthi+Sree+Nagar+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -314,6 +334,8 @@ const MY_DREAM_PERCH = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/kUNaT2Qcbtp11dEe9?g_st=ic",
+    lat: 17.5333656,
+    lng: 78.3276148,
     embed: "https://www.google.com/maps?q=My+Dream+Perch,+Sai+Rajeswari+Phase+II,+Ameenpur+Coco+Cola+Road,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -344,6 +366,8 @@ const MY_DREAM_SOLACE = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/RAaGeQa5no16juuJ6?g_st=ic",
+    lat: 17.5366479,
+    lng: 78.326096,
     embed: "https://www.google.com/maps?q=My+Dream+Solace,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -374,6 +398,8 @@ const MY_DREAM_ZENITH = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/p9xH9LbbQWnG8emi6?g_st=ic",
+    lat: 17.533623,
+    lng: 78.328863,
     embed: "https://www.google.com/maps?q=My+Dream+Zenith,+Rajeshwari,+Phase+2,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
   },
   floorPlan: {
@@ -402,6 +428,8 @@ const MY_DREAM_AURELIA = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/VqmwyFVcZNFkjSi76?g_st=ic",
+    lat: 17.535189,
+    lng: 78.334236,
     embed: "https://www.google.com/maps?q=17.5351890,78.3342360&output=embed",
   },
 };
@@ -425,6 +453,8 @@ const MY_DREAM_ELYSIUM = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/tNxdZWptsQZUD8A5A?g_st=ic",
+    lat: 17.53249,
+    lng: 78.334381,
     embed: "https://www.google.com/maps?q=17.5324900,78.3343810&output=embed",
   },
 };
@@ -448,6 +478,8 @@ const MY_DREAM_AURA = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/3kcuMTU8QhjjJ5Xr7?g_st=ic",
+    lat: 17.536167,
+    lng: 78.332771,
     embed: "https://www.google.com/maps?q=17.5361670,78.3327710&output=embed",
   },
 };
@@ -471,6 +503,8 @@ const MY_DREAM_ECHELON = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/Ty6BEn1S7gRjMEzHA?g_st=ic",
+    lat: 17.533455,
+    lng: 78.330048,
     embed: "https://www.google.com/maps?q=17.5334550,78.3300480&output=embed",
   },
 };
@@ -494,6 +528,8 @@ const MY_DREAM_VALE = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/TViJG2MA5VW5vc3T8?g_st=ic",
+    lat: 17.535383,
+    lng: 78.320801,
     embed: "https://www.google.com/maps?q=17.5353830,78.3208010&output=embed",
   },
 };
@@ -527,6 +563,8 @@ const MY_DREAM_IVY = {
   },
   siteLocation: {
     url: "https://maps.app.goo.gl/cs9kAFywur9v2sH68?g_st=ic",
+    lat: 17.532469,
+    lng: 78.320335,
     embed: "https://www.google.com/maps?q=17.5324690,78.3203350&output=embed",
   },
 };
