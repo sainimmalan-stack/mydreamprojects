@@ -8,7 +8,7 @@ import useSeo from "../hooks/useSeo";
 const EASE = [0.16, 1, 0.3, 1];
 
 const FOUNDERS = [
-  { name: "Nimmala Sai", role: "Co-Founder", testid: "founder-sai" },
+  { name: "Nimmala Sai", role: "Co-Founder", testid: "founder-sai", photo: "/assets/founders/nimmala-sai.png" },
   { name: "Kotapati Akhil", role: "Co-Founder", testid: "founder-akhil" },
 ];
 
@@ -137,21 +137,45 @@ const Founders = () => (
     </div>
     <div className="grid sm:grid-cols-2 gap-6 md:gap-10">
       {FOUNDERS.map((f, i) => (
-        <Reveal key={f.name} delay={0.1 + i * 0.1}>
-          <div
-            data-testid={f.testid}
-            className="group border border-line hover:border-ember/40 transition-colors duration-500 p-10 md:p-16 flex flex-col justify-between min-h-[280px] md:min-h-[340px]"
-          >
-            <span className="font-display font-bold uppercase tracking-tighter text-6xl md:text-8xl text-outline group-hover:text-ember transition-colors duration-700 select-none leading-none">
-              {f.name.split(" ").map((w) => w[0]).join("")}
-            </span>
-            <div>
-              <h3 className="font-display font-medium uppercase tracking-tight text-2xl md:text-3xl text-bone">
-                {f.name}
-              </h3>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">{f.role}</p>
+        <Reveal key={f.name} delay={0.1 + i * 0.1} className="h-full">
+          {f.photo ? (
+            <div
+              data-testid={f.testid}
+              className="group h-full border border-line hover:border-ember/40 transition-colors duration-500 overflow-hidden flex flex-col md:flex-row bg-coal"
+            >
+              <div className="md:shrink-0 overflow-hidden">
+                <img
+                  src={f.photo}
+                  alt={`${f.name}, Co-Founder of My Dream Projects`}
+                  data-testid="founder-sai-portrait"
+                  loading="lazy"
+                  className="w-full h-auto md:h-[440px] md:w-auto block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                />
+              </div>
+              <div className="flex flex-col justify-end p-10 md:p-12">
+                <h3 className="font-display font-medium uppercase tracking-tight text-2xl md:text-3xl text-bone">
+                  {f.name}
+                </h3>
+                <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">{f.role}</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div
+              data-testid={f.testid}
+              className="group h-full border border-line hover:border-ember/40 transition-colors duration-500 p-10 md:p-16 flex flex-col justify-between min-h-[280px] md:min-h-[340px]"
+            >
+              <span className="font-display font-bold uppercase tracking-tighter text-6xl md:text-8xl text-outline group-hover:text-ember transition-colors duration-700 select-none leading-none">
+                {f.name.split(" ").map((w) => w[0]).join("")}
+              </span>
+              <div>
+                <h3 className="font-display font-medium uppercase tracking-tight text-2xl md:text-3xl text-bone">
+                  {f.name}
+                </h3>
+                <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">{f.role}</p>
+              </div>
+            </div>
+          )}
         </Reveal>
       ))}
     </div>

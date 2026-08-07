@@ -187,6 +187,14 @@ Premium, production-quality responsive website for residential construction comp
 ## Iteration 26 (2026-08-07) — Footer heading rename
 - Footer column heading "STUDIO" → "OUR OFFICE"; address, phones, Get Directions, layout, typography and all other footer elements unchanged; verified live (heading present, STUDIO absent)
 
+
+## Iteration 27 (2026-08-07) — Founder 1 portrait: Nimmala Sai
+- Uploaded portrait saved UNMODIFIED (no retouch/crop/re-encode) at `/app/frontend/public/assets/founders/nimmala-sai.png` (941×1672 PNG, 0.563 ratio)
+- Founders section: Sai's card is now an editorial split card — portrait at natural aspect (zero cropping: full-width h-auto on mobile, h-[440px] w-auto on desktop) + "NIMMALA SAI / CO-FOUNDER"; Kotapati Akhil's monogram card untouched (portrait NOT added yet, per user)
+- No biography added (awaiting approved bio); no other part of the site changed
+- Verified desktop 1920 + mobile 390: image loads, display ratio exactly 0.563 both viewports, no overflow, Akhil card intact
+- STOPPED per user instruction — waiting for biography + second founder
+
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
 - P0: Founder photos/bios, phone/email on Contact
