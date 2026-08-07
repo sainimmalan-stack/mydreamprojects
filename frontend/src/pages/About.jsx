@@ -9,7 +9,7 @@ const EASE = [0.16, 1, 0.3, 1];
 
 const FOUNDERS = [
   { name: "Nimmala Sai", role: "Co-Founder", testid: "founder-sai", photo: "/assets/founders/nimmala-sai.webp" },
-  { name: "Kotapati Akhil", role: "Co-Founder", testid: "founder-akhil" },
+  { name: "Kotapati Akhil", role: "Co-Founder", testid: "founder-akhil", photo: "/assets/founders/kotapati-akhil.jpg" },
 ];
 
 const Reveal = ({ children, delay = 0, className = "" }) => (
@@ -147,7 +147,7 @@ const Founders = () => (
                 <img
                   src={f.photo}
                   alt={`${f.name}, Co-Founder of My Dream Projects`}
-                  data-testid="founder-sai-portrait"
+                  data-testid={`${f.testid}-portrait`}
                   loading="lazy"
                   className="w-full aspect-[4/5] object-cover object-[50%_45%] md:aspect-auto md:h-[440px] md:w-auto block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
                   style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}

@@ -204,6 +204,13 @@ Premium, production-quality responsive website for residential construction comp
 - Founder cards confirmed identical height on desktop (442px each); typography/section design unchanged; nothing else touched
 - Verified: mobile 348×435 (0.8 ratio), no overflow at 390px; desktop 248×440 @ natural 0.562
 
+## Iteration 30 (2026-08-07) — Founder 2 portrait: Kotapati Akhil
+- Uploaded photo saved UNMODIFIED at `/app/frontend/public/assets/founders/kotapati-akhil.jpg` (960×1280, 3:4)
+- Akhil's card now uses the same photo-card branch as Sai (identical crop style/spacing/typography: KOTAPATI AKHIL / CO-FOUNDER); mobile 4:5 object-cover crop (348×435 — identical to Sai's), desktop natural h-[440px] (330×440); both cards exactly 442px tall and balanced
+- Portrait img testid made dynamic (`{testid}-portrait`) to avoid duplicates; no bio added; Sai's card and rest of site untouched
+- Verified desktop + mobile 390: both portraits load, face fully visible, subject in frame, no distortion, no overflow
+
+
 
 - STOPPED per user instruction — waiting for biography + second founder
 
