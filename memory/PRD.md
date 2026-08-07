@@ -377,6 +377,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 59 (2026-08-07) — Selene: VISIT PROJECT SITE section
+- Added `siteLocation` to Selene: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/zwRTdaahm97KMpRy8?g_st=ic (_blank); resolves to registered place "MY DREAM SELENE" (5.0★) — embed uses that exact place query
+- Selene elevation/floor plan/description/status/year untouched; siteLocation now on all 6 ongoing + Nest, Casa, Avasa, Skylark, Glenmore, Hillock, Summit, Griffin, Selene
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 

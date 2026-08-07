@@ -224,6 +224,10 @@ const MY_DREAM_SELENE = {
   description:
     "My Dream Selene is a contemporary residential development combining spacious homes with a bold and elegant architectural expression. Completed in 2025, its layered balconies, warm façade accents and thoughtfully planned interiors create a refined environment for modern family living.",
   cover: "/assets/projects/my-dream-selene/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/zwRTdaahm97KMpRy8?g_st=ic",
+    embed: "https://www.google.com/maps?q=MY+DREAM+SELENE,+Sai+Rajeshwari+phase+2,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-selene/floor-plan.pdf",
     preview: "/assets/projects/my-dream-selene/floor-plan-p1.jpg",
