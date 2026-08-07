@@ -438,6 +438,14 @@ Premium, production-quality responsive website for residential construction comp
 - Full checklist: Selene Day/Night PASS, Atlantis Day/Night PASS, Homepage PASS (n/a — not in Selected Work), Projects Page PASS, Detail Pages PASS, Mobile PASS, Asset Mapping PASS, Atlantis Floor Plan/PDF Preserved PASS (href verified unchanged)
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 69 (2026-08-07) — Perch + Solace: Day/Night elevations
+- 4 uploads matched by filename (note: night file was named "Solacd night.jpg" — typo, it IS the Solace night) AND cross-verified against existing elevations (Perch = white/tan MYDREAM-sign building 1252×665 day, 1254×576 night; Solace = black/white/brown w/ black SUV 1182×714 day, 1182×591 night); webp + 800 variants in correct folders only
+- Both pairs mismatched aspect → fixed frames: Perch `aspect-[2/1]`, Solace `aspect-[9/5]` (equal crop, no distortion); elevationModes added (widths 1254 / 1182)
+- Toggles live: both detail pages, both Projects page cards, homepage Solace card (Solace IS in Selected Work; Perch correctly NOT on homepage)
+- Full checklist: Perch Day/Night PASS, Solace Day/Night PASS, Homepage PASS (Solace only), Projects Page PASS, Detail Pages PASS, Mobile PASS, Asset Mapping PASS; Solace no-flat-count rule re-verified
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 - NOTE: goes live on mydreamprojects.in on next redeploy

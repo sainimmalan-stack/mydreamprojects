@@ -306,6 +306,12 @@ const MY_DREAM_PERCH = {
   description:
     "My Dream Perch is a thoughtfully designed residential development combining contemporary architecture with efficient, comfortable living spaces. Completed in 2026, its warm façade textures, framed balconies and clean vertical elements create an elegant architectural identity for modern family living.",
   cover: "/assets/projects/my-dream-perch/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-perch/elevation-day.webp",
+    night: "/assets/projects/my-dream-perch/elevation-night.webp",
+    width: 1254,
+    aspect: "aspect-[2/1]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/kUNaT2Qcbtp11dEe9?g_st=ic",
     embed: "https://www.google.com/maps?q=My+Dream+Perch,+Sai+Rajeswari+Phase+II,+Ameenpur+Coco+Cola+Road,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
@@ -330,6 +336,12 @@ const MY_DREAM_SOLACE = {
   description:
     "My Dream Solace is a contemporary residential development designed to offer spacious, comfortable homes within a refined architectural setting. Completed in 2026, its elegant vertical façade, generous balconies and contrasting material finishes create a sophisticated residential identity.",
   cover: "/assets/projects/my-dream-solace/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-solace/elevation-day.webp",
+    night: "/assets/projects/my-dream-solace/elevation-night.webp",
+    width: 1182,
+    aspect: "aspect-[9/5]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/RAaGeQa5no16juuJ6?g_st=ic",
     embed: "https://www.google.com/maps?q=My+Dream+Solace,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
