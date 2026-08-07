@@ -3,19 +3,19 @@ import { ArrowUpRight } from "lucide-react";
 
 export const Footer = () => (
   <footer data-testid="site-footer" className="relative border-t border-line bg-ink">
-    <div className="max-w-[1600px] mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-8">
-      <div className="grid grid-cols-12 gap-6 pb-16 md:pb-24">
-        <div className="col-span-12 md:col-span-6">
+    <div className="max-w-[1600px] mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-8">
+      <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-12 md:gap-y-0 pb-14 md:pb-20">
+        <div className="col-span-2 md:col-span-6 flex justify-center md:justify-start">
           <img
             src="/assets/logo-full-dark.png"
             alt="My Dream Projects — You Dream, We Build"
             data-testid="footer-logo"
-            className="w-52 md:w-64 h-auto"
+            className="w-40 md:w-48 h-auto"
           />
         </div>
-        <div className="col-span-6 md:col-span-3">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-5">Sitemap</p>
-          <ul className="space-y-3">
+        <div className="col-span-1 md:col-span-3">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-6">Sitemap</p>
+          <ul className="space-y-3.5">
             {[
               { to: "/", label: "Home", id: "footer-home-link" },
               { to: "/projects", label: "Projects", id: "footer-projects-link" },
@@ -34,14 +34,14 @@ export const Footer = () => (
             ))}
           </ul>
         </div>
-        <div className="col-span-6 md:col-span-3">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-5">Our Office</p>
+        <div className="col-span-1 md:col-span-3">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-6">Our Office</p>
           <p className="text-sm text-bone/70 leading-relaxed">
             Ameenpur, Hyderabad
             <br />
             Telangana, India
           </p>
-          <div className="mt-5 space-y-2.5">
+          <div className="mt-6 space-y-3.5">
             <a
               href="tel:+917780429845"
               data-testid="footer-call-sai"
@@ -62,7 +62,7 @@ export const Footer = () => (
             target="_blank"
             rel="noopener noreferrer"
             data-testid="footer-directions-link"
-            className="inline-flex items-center gap-1.5 mt-5 text-sm text-ember hover:text-bone transition-colors duration-300"
+            className="inline-flex items-center gap-1.5 mt-6 text-sm text-ember hover:text-bone transition-colors duration-300"
           >
             Get Directions
             <ArrowUpRight className="w-4 h-4" strokeWidth={1.5} />

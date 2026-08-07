@@ -305,6 +305,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified individually on desktop + mobile: Avasa DAY→Avasa Day image, NIGHT→Avasa Night image; Skylark DAY→Skylark Day, NIGHT→Skylark Night; default day, 0.7s cross-fade, identical container heights (no shift), pill bottom-center 16px on mobile, no overflow at 390px
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 47 (2026-08-07) — Footer layout rebalanced
+- Layout-only refinement (no content/color/link changes): logo reduced (w-52/64 → w-40/48) and centered on mobile; mobile grid now 2 equal columns (SITEMAP | OUR OFFICE — verified tops exactly aligned at same y, equal 159px widths); desktop keeps 6/3/3 with smaller logo
+- Consistent rhythm: both column headers mb-6; link lists space-y-3.5; office groups mt-6 with space-y-3.5; slightly tightened block padding (pb-16/24 → pb-14/20); mobile edge padding px-5 → px-6
+- Verified mobile 390 (centered logo, aligned equal columns), tablet 834, desktop 1920 — all text, phones, address, links, colors unchanged
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 - NOTE: goes live on mydreamprojects.in on next redeploy
