@@ -184,6 +184,16 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 74 (2026-08-07) — PROJECT MAP marker refinement round (UI-only)
+- Markers ~25-30% smaller (pl-1.5 pr-2 py-1, text-[9px], 4px status dots, touch-manipulation) — rendered ~36×30px, numbers still legible on mobile; collision relaxation MIN tightened 40→32px to match
+- Selected marker now gets subtle ember glow `shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]`; completed pins keep green dots, ongoing keep red dots
+- Map contrast raised slightly (raster brightness-min 0.09, contrast 0.15) — still the reliable raster implementation
+- doubleClickZoom disabled + touch-manipulation on pins — rapid marker taps on touch devices no longer cause accidental zoom (verified: zoom caps at intentional 16)
+- Mobile ergonomics: tapping a pin/chip auto-scrolls the map container into viewport (block:'center') so the bottom card is never below the fold; closing the card now refits the map to the full footprint (zoom returns to ~14.35 overview)
+- Verified: testing-agent iteration_4 = exhaustive ALL-19-marker individual click test (name, number, status, exact GET DIRECTIONS URL, thumbnail/COMING SOON per project) 19/19 PASS + filters desktop+mobile + regression clean; iteration_5 targeted retest of the two ergonomics changes = 100% PASS, zero pageerrors, no mismatches reported
+- Coordinates, Google Maps links, names, numbering, statuses, filters, routing and all other pages: UNCHANGED
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 ## Iteration 73 (2026-08-07) — PROJECT MAP premium polish pass (UI/UX only, zero data changes)
 - Top spacing: pt-28 → pt-36 mobile (md:pt-44) — intro (OUR FOOTPRINT / BUILT AROUND AMEENPUR. / 19-developments copy) fully clear of fixed navbar on iPhone
 - Readability: retina @2x Carto dark_all tiles (tileSize 512) + raster paint (brightness-min 0.07, contrast 0.12, saturation -0.1) — roads/water/locality names crisp; STILL the reliable raster implementation (no vector)
