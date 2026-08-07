@@ -11,6 +11,7 @@ const MY_DREAM_NEST = {
   year: "2020",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Nest represents the beginning of the My Dream Projects journey. Completed in 2020, the residential development combines practical planning, comfortable living spaces and a contemporary architectural approach in Ameenpur.",
   cover: "/assets/projects/my-dream-nest/elevation.jpg",
@@ -42,6 +43,7 @@ const MY_DREAM_CASA = {
   year: "2021",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Casa is a contemporary residential development designed to balance comfortable family living with efficient planning. Completed in 2021, its clean architectural lines, warm façade accents and thoughtfully planned residences create a modern and welcoming residential environment in Ameenpur.",
   cover: "/assets/projects/my-dream-casa/elevation.jpg",
@@ -74,6 +76,7 @@ const MY_DREAM_AVASA = {
   year: "2022",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK",
   description:
     "My Dream Avasa is a contemporary residential development created around efficient planning and comfortable family living. Completed in 2022, its vertical architectural form, textured accents and thoughtfully designed homes give the project a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-avasa/elevation.jpg",
@@ -106,6 +109,7 @@ const MY_DREAM_SKYLARK = {
   year: "2023",
   floors: "G+5",
   totalFlats: 15,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Skylark is a contemporary residential development designed around spacious family living and modern architecture. Completed in 2023, its broad façade, warm material accents, generous balconies and thoughtfully planned residences give the project a distinctive architectural presence in Ameenpur.",
   cover: "/assets/projects/my-dream-skylark/elevation.jpg",
@@ -138,6 +142,7 @@ const MY_DREAM_GLENMORE = {
   year: "2023",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK",
   description:
     "My Dream Glenmore is a contemporary residential development with a refined architectural character and thoughtfully planned homes. Completed in 2023, its striking dark façade, warm lighting accents and clean geometric composition give the project a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-glenmore/elevation.jpg",
@@ -171,6 +176,7 @@ const MY_DREAM_HILLOCK = {
   year: "2024",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK",
   description:
     "My Dream Hillock is a contemporary residential development characterized by bold architectural lines, contrasting façade elements and generous balconies. Completed in 2024, the project combines efficient residential planning with a distinctive modern exterior designed for comfortable family living.",
   cover: "/assets/projects/my-dream-hillock/elevation.jpg",
@@ -203,6 +209,7 @@ const MY_DREAM_SUMMIT = {
   year: "2024",
   floors: "G+5",
   totalFlats: 15,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Summit is a contemporary residential development designed around spacious layouts and comfortable family living. Completed in 2024, its strong geometric façade, warm architectural accents and generous balconies create a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-summit/elevation.jpg",
@@ -236,6 +243,7 @@ const MY_DREAM_GRIFFIN = {
   year: "2024",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Griffin is a contemporary residential development defined by clean vertical lines, layered balconies and warm architectural accents. Completed in 2024, thoughtful planning combines comfortable interiors with a distinctive modern façade and strong architectural presence.",
   cover: "/assets/projects/my-dream-griffin/elevation.jpg",
@@ -269,6 +277,7 @@ const MY_DREAM_SELENE = {
   year: "2025",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "3 BHK",
   description:
     "My Dream Selene is a contemporary residential development combining spacious homes with a bold and elegant architectural expression. Completed in 2025, its layered balconies, warm façade accents and thoughtfully planned interiors create a refined environment for modern family living.",
   cover: "/assets/projects/my-dream-selene/elevation.jpg",
@@ -302,6 +311,7 @@ const MY_DREAM_ATLANTIS = {
   year: "2025",
   floors: "G+5",
   totalFlats: 15,
+  flatMix: "2 BHK",
   description:
     "My Dream Atlantis is a contemporary residential development designed around spacious living, thoughtful planning and modern architectural detailing. Completed in 2025 and located near Ameenpur Lake, the project combines well-planned residences with a sophisticated façade and comfortable residential setting.",
   cover: "/assets/projects/my-dream-atlantis/elevation.jpg",
@@ -334,6 +344,7 @@ const MY_DREAM_PERCH = {
   year: "2026",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK",
   description:
     "My Dream Perch is a thoughtfully designed residential development combining contemporary architecture with efficient, comfortable living spaces. Completed in 2026, its warm façade textures, framed balconies and clean vertical elements create an elegant architectural identity for modern family living.",
   cover: "/assets/projects/my-dream-perch/elevation.jpg",
@@ -367,6 +378,7 @@ const MY_DREAM_SOLACE = {
   year: "2026",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "3 BHK",
   description:
     "My Dream Solace is a contemporary residential development designed to offer spacious, comfortable homes within a refined architectural setting. Completed in 2026, its elegant vertical façade, generous balconies and contrasting material finishes create a sophisticated residential identity.",
   cover: "/assets/projects/my-dream-solace/elevation.jpg",
@@ -400,6 +412,7 @@ const MY_DREAM_ZENITH = {
   year: "2026",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Zenith is a contemporary residential development characterized by bold geometric forms, clean façade lines and thoughtfully planned living spaces. Completed in 2026, its modern architectural language and practical layouts create a distinctive residential environment designed around comfortable family living.",
   cover: "/assets/projects/my-dream-zenith/elevation.jpg",
@@ -433,6 +446,7 @@ const MY_DREAM_AURELIA = {
   year: "—",
   floors: "G+5",
   totalFlats: 15,
+  flatMix: "2 BHK",
   description:
     "My Dream Aurelia is an upcoming residential development by My Dream Projects in Ameenpur, thoughtfully planned for contemporary family living. The project is currently under development, with its architectural elevation to be revealed soon.",
   floorPlan: {
@@ -459,6 +473,7 @@ const MY_DREAM_ELYSIUM = {
   year: "—",
   floors: "G+5",
   totalFlats: 15,
+  flatMix: "2 BHK",
   description:
     "My Dream Elysium is an ongoing residential development by My Dream Projects in Ameenpur, thoughtfully planned to combine contemporary living with efficient and comfortable residential spaces. Its architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
@@ -485,6 +500,7 @@ const MY_DREAM_AURA = {
   year: "—",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK + 3 BHK",
   description:
     "My Dream Aura is an ongoing residential development by My Dream Projects in Ameenpur, planned around comfortable family living, efficient spaces and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
@@ -511,6 +527,7 @@ const MY_DREAM_ECHELON = {
   year: "—",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2 BHK",
   description:
     "My Dream Echelon is an ongoing residential development by My Dream Projects in Ameenpur, thoughtfully planned around contemporary family living, efficient layouts and comfortable residential spaces. The project’s architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
@@ -537,6 +554,7 @@ const MY_DREAM_VALE = {
   year: "—",
   floors: "G+5",
   totalFlats: 10,
+  flatMix: "2½ BHK + 3 BHK",
   description:
     "My Dream Vale is an ongoing residential development by My Dream Projects in Ameenpur, thoughtfully planned to provide comfortable family living through efficient layouts and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
@@ -563,6 +581,7 @@ const MY_DREAM_IVY = {
   year: "—",
   floors: "G+4",
   totalFlats: 4,
+  flatMix: "3 BHK",
   configuration: "3 BHK",
   description:
     "My Dream Ivy is an intimate residential development designed around privacy, spacious living and practical family needs. With one generously planned 3BHK residence on each residential floor, the project offers an exclusive living experience with thoughtfully arranged family living, dining, puja, utility and balcony spaces.",

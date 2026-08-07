@@ -41,7 +41,9 @@ export default function ProjectDetail() {
     { label: "Location", value: project.location },
     { label: "Type", value: project.type },
     ...(project.floors ? [{ label: "Floors", value: project.floors }] : []),
-    ...(project.totalFlats ? [{ label: "Total Flats", value: `${project.totalFlats} Flats` }] : []),
+    ...(project.totalFlats
+      ? [{ label: "Total Flats", value: `${project.totalFlats} Flats`, sub: project.flatMix }]
+      : []),
     { label: "Year", value: project.year },
   ];
 
@@ -142,6 +144,9 @@ export default function ProjectDetail() {
               <p className={`font-display uppercase tracking-tight text-base md:text-xl ${s.label === "Status" && project.status === "ongoing" ? "text-ember" : "text-bone"}`}>
                 {s.value}
               </p>
+              {s.sub && (
+                <p className="text-[10px] uppercase tracking-[0.25em] text-concrete mt-2">{s.sub}</p>
+              )}
             </motion.div>
           ))}
         </div>
