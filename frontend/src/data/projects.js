@@ -176,6 +176,10 @@ const MY_DREAM_SUMMIT = {
   description:
     "My Dream Summit is a contemporary residential development designed around spacious layouts and comfortable family living. Completed in 2024, its strong geometric façade, warm architectural accents and generous balconies create a distinctive modern identity in Ameenpur.",
   cover: "/assets/projects/my-dream-summit/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/XSiRLgM3bvgYk8yZ6?g_st=ic",
+    embed: "https://www.google.com/maps?q=G8C8+Q9C+My+Dream+Summit,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-summit/floor-plan.pdf",
     preview: "/assets/projects/my-dream-summit/floor-plan-p1.jpg",
