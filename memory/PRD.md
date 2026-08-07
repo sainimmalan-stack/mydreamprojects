@@ -413,6 +413,14 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: default day, night swap without reload, no toggle on single-elevation/ongoing projects, Projects page unchanged; detail-page Day/Night switchers untouched
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 65 (2026-08-07) — Day/Night card toggle extended to Projects page + performance
+- `homeMeta` gate removed: card toggle now appears on ANY ProjectCard with `elevationModes` — homepage Selected Work (Nest, Casa) AND Projects page (Nest, Casa, Avasa, Skylark); ongoing + single-elevation cards show none
+- Toggle repositioned to bottom-right corner of the card image (latest user preference), same compact pill design
+- Performance: night image has NO src until first Night tap (0 night-image requests on initial load — verified via request listener); on first tap it loads then onLoad triggers the 0.7s cross-fade; cached afterwards
+- Verified: Projects page desktop (4 eligible toggles, 0 preload requests, night tap fades without navigation), homepage mobile (day→night→day, card body tap still navigates to detail page)
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 

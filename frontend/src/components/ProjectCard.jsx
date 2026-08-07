@@ -12,7 +12,8 @@ const TONES = [
 export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note = true, homeMeta = false }) => {
   const t = TONES[tone % TONES.length];
   const [mode, setMode] = useState("day");
-  const modes = homeMeta && project.cover && project.elevationModes ? project.elevationModes : null;
+  const [nightTouched, setNightTouched] = useState(false);
+  const modes = project.cover && project.elevationModes ? project.elevationModes : null;
   const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
   return (
     <motion.div
@@ -33,12 +34,20 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
           {modes ? (
             <>
               <img
-                src={modes.night}
-                srcSet={`${modes.night.replace(".webp", "-800.webp")} 800w, ${modes.night} ${modes.width || 1402}w`}
+                {...(nightTouched
+                  ? {
+                      src: modes.night,
+                      srcSet: `${modes.night.replace(".webp", "-800.webp")} 800w, ${modes.night} ${modes.width || 1402}w`,
+                    }
+                  : {})}
                 sizes={cardSizes}
-                alt={`${project.title} residential apartment elevation in Ameenpur — night view`}
+                alt=""
+                aria-hidden="true"
                 data-testid={`card-night-image-${project.slug}`}
                 loading="lazy"
+                onLoad={() => {
+                  if (nightTouched) setMode("night");
+                }}
                 className="texture-img absolute inset-0 w-full h-full object-cover"
               />
               <img
@@ -60,7 +69,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
                   e.preventDefault();
                   e.stopPropagation();
                 }}
-                className="absolute right-4 top-[3.75rem] flex items-center rounded-full border border-bone/15 bg-ink/45 backdrop-blur-md p-0.5 shadow-lg shadow-ink/30"
+                className="absolute bottom-4 right-4 flex items-center rounded-full border border-bone/15 bg-ink/45 backdrop-blur-md p-0.5 shadow-lg shadow-ink/30"
               >
                 <button
                   type="button"
@@ -85,7 +94,8 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    setMode("night");
+                    if (nightTouched) setMode("night");
+                    else setNightTouched(true);
                   }}
                   className={`flex items-center gap-1 rounded-full px-2.5 py-1.5 font-display font-semibold text-[9px] uppercase tracking-[0.16em] transition-colors duration-300 ${
                     mode === "night" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
