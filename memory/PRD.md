@@ -248,6 +248,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, Elysium coords in embed, all display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 38 (2026-08-07) — Ivy: VISIT PROJECT SITE section
+- Added `siteLocation` to Ivy only: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/cs9kAFywur9v2sH68?g_st=ic (_blank); embedded map uses resolved exact pin 17.5324690,78.3203350 (distinct from Aurelia + Elysium — verified)
+- Ivy rules re-verified intact: ONGOING, G+4, ONE HOME. ONE FLOOR., 3 BHK, floor plan untouched; no other project renders the section (siteLocation now on Aurelia, Elysium, Ivy only)
+- Verified desktop 1920 + mobile 390: exact href, Ivy coords in embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 

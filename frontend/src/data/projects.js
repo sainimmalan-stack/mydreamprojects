@@ -390,6 +390,10 @@ const MY_DREAM_IVY = {
     preview: "/assets/projects/my-dream-ivy/floor-plan-p1.jpg",
     fileName: "My-Dream-Ivy-Floor-Plan.pdf",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/cs9kAFywur9v2sH68?g_st=ic",
+    embed: "https://www.google.com/maps?q=17.5324690,78.3203350&output=embed",
+  },
 };
 
 export const projects = [MY_DREAM_NEST, MY_DREAM_CASA, MY_DREAM_AVASA, MY_DREAM_SKYLARK, MY_DREAM_GLENMORE, MY_DREAM_HILLOCK, MY_DREAM_SUMMIT, MY_DREAM_GRIFFIN, MY_DREAM_SELENE, MY_DREAM_ATLANTIS, MY_DREAM_PERCH, MY_DREAM_SOLACE, MY_DREAM_ZENITH, MY_DREAM_AURELIA, MY_DREAM_ELYSIUM, MY_DREAM_AURA, MY_DREAM_ECHELON, MY_DREAM_VALE, MY_DREAM_IVY];
