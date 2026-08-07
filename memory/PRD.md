@@ -260,6 +260,16 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, Vale coords in embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 40 (2026-08-07) — Architect contact info removed from all floor plans
+- 13 plan PDFs (aurelia, avasa, casa, glenmore, griffin, hillock, nest, perch, selene, skylark, solace, summit, zenith) contained an embedded architect block: "GUNNAM GROUP / ARCHITECTS & PLANNERS / KPHB, HYDERABAD / architect_ashokbabu@yahoo.com / +91-9000444255" + GG vector logo
+- Surgical PDF redaction via PyMuPDF (`/app/scripts/redact_plans.py`): only the 9 contact words + logo line-art removed; drawings, dimensions, room labels, area statements, "PROPOSED RESIDENTIAL APARTMENT FOR…" lines and north arrows untouched; previews re-rendered at 150 DPI
+- Glenmore initially over-redacted (its block sits higher — caught the PROPOSED line) → restored from backup and re-redacted token-based (`/app/scripts/fix_glenmore.py`); originals backed up at `/app/backups/plan_originals/` (outside public/, not served)
+- Other 6 plans verified clean already: atlantis (image-based, no block), aura/echelon/elysium/ivy/vale (title blocks have only client/project info)
+- Verified: text extraction of ALL 19 PDFs shows zero contact patterns with room labels/dimensions intact; visual checks of nest/skylark/glenmore/aurelia/zenith clean; site plan preview + download work (200s)
+- FUTURE PLANS: run `/app/scripts/redact_plans.py` pattern (token-based redaction) on any new plan PDF before upload so no architect contact details ever appear
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 
