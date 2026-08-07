@@ -184,6 +184,14 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 72 (2026-08-07) — PROJECT MAP page fixed + critical ongoing-pages crash fixed
+- MapLibre blank/black canvas FIXED: replaced remote Carto vector style.json (glyph/sprite fetches failed) with an inline raster style using Carto Dark Matter raster tiles (a–d subdomains, OSM/CARTO attribution); added map 'error' + 'load' console diagnostics; smoke-verified styleLoaded=true, tilesLoaded=true, 19 markers render
+- CRITICAL regression found & fixed: ALL 6 ongoing project detail pages (Aurelia, Elysium, Aura, Echelon, Vale, Ivy) were crashing blank with "Cannot read properties of undefined (reading 'replace')" — ProjectDetail.jsx computed heroSrcSet via project.cover.replace() unconditionally, but ongoing projects have no cover (introduced in Iteration 71 hero srcSet change). Fixed: heroSrcSet returns undefined when no cover. Ivy's G+4 / 3 BHK / ONE HOME. ONE FLOOR. / glance grid all render again; Solace/Zenith no-flat-count rules hold
+- Overlapping marker fix: Nest/Casa/Avasa pins are ~100m apart and overlap at fit-bounds zoom — pins now raise z-index on hover/selection, and repeated clicks at a stacked spot (<28px screen distance) cycle through the stack (Casa → Avasa → …), so every pin is reachable without moving any pin off its exact coordinates
+- Code review items applied: marker rebuild effect dep simplified to [filter]; window.__map now dev-only (NODE_ENV guard)
+- Testing: full testing-agent pass x2 — iteration_1 (found crash + overlap issues), fixes applied, iteration_2 retest = 100% PASS, 0 pageerrors across home, /projects, /project-map, all 6 ongoing + 2 completed detail pages, desktop + mobile 390px; filters 19/13/6, sidebar/chip selection, info card links, GET DIRECTIONS hrefs all verified
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 ## Iteration 26 (2026-08-07) — Footer heading rename
 - Footer column heading "STUDIO" → "OUR OFFICE"; address, phones, Get Directions, layout, typography and all other footer elements unchanged; verified live (heading present, STUDIO absent)
 
