@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Map as MapLibreMap, Marker as MapLibreMarker, LngLatBounds, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, X } from "lucide-react";
+import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
 import { projects } from "../data/projects";
 import useSeo from "../hooks/useSeo";
 
@@ -16,12 +16,12 @@ const MAP_STYLE = {
     "carto-dark": {
       type: "raster",
       tiles: [
-        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
       ],
-      tileSize: 256,
+      tileSize: 512,
       maxzoom: 19,
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -32,6 +32,15 @@ const MAP_STYLE = {
       id: "carto-dark",
       type: "raster",
       source: "carto-dark",
+      paint: {
+        // lift the black point + gentle contrast so roads, water and locality
+        // labels read clearly while staying a premium dark basemap
+        "raster-brightness-min": 0.07,
+        "raster-brightness-max": 1,
+        "raster-contrast": 0.12,
+        "raster-saturation": -0.1,
+        "raster-fade-duration": 0,
+      },
     },
   ],
 };
@@ -48,6 +57,12 @@ const thumbOf = (p) =>
       ? p.cover.replace("elevation.jpg", "elevation-800.webp")
       : null;
 
+// responsive fit padding — tighter on phones so the footprint fills the view
+const fitPadding = () =>
+  typeof window !== "undefined" && window.innerWidth < 1024
+    ? { top: 48, bottom: 96, left: 24, right: 24 }
+    : { top: 90, bottom: 90, left: 60, right: 60 };
+
 const InfoCard = ({ project, onClose }) => (
   <motion.div
     key={project.slug}
@@ -56,7 +71,7 @@ const InfoCard = ({ project, onClose }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 16 }}
     transition={{ duration: 0.45, ease: EASE }}
-    className="absolute bottom-3 left-3 right-3 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
+    className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
   >
     <div className="flex">
       <div className="w-24 md:w-28 shrink-0 border-r border-line">
@@ -143,6 +158,68 @@ export default function ProjectMap() {
     selectedRef.current = selected;
   }, [selected]);
 
+  // fit the map to every currently-visible project (all 19 by default).
+  // Overview is flat (pitch 0) so pins render exactly where projected —
+  // the 3D tilt is reserved for the single-project fly-to.
+  const fitVisible = (animate = true) => {
+    const map = mapRef.current;
+    if (!map) return;
+    const bounds = new LngLatBounds();
+    visible.forEach((p) => bounds.extend([p.siteLocation.lng, p.siteLocation.lat]));
+    const cam = map.cameraForBounds(bounds, { padding: fitPadding(), maxZoom: 15.5 });
+    map.flyTo({
+      center: cam.center,
+      zoom: cam.zoom,
+      pitch: 0,
+      bearing: 0,
+      duration: animate ? 1000 : 0,
+    });
+  };
+
+  // marker collision handling: iterative relaxation — any two pins closer than
+  // one pill-width are gently pushed apart until every pin is identifiable.
+  // Screen-space offsets only; geographic coordinates are never altered.
+  const resolveCollisions = () => {
+    const map = mapRef.current;
+    if (!map || markersRef.current.length === 0) return;
+    const MIN = 40; // px — minimum separation between pill centres
+    const pts = markersRef.current.map(({ marker }) => {
+      const p = map.project(marker.getLngLat());
+      return { marker, bx: p.x, by: p.y, x: p.x, y: p.y };
+    });
+    for (let iter = 0; iter < 40; iter++) {
+      let moved = false;
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const a = pts[i];
+          const b = pts[j];
+          let dx = b.x - a.x;
+          let dy = b.y - a.y;
+          let d = Math.hypot(dx, dy);
+          if (d === 0) {
+            dx = 0.01;
+            dy = 0;
+            d = 0.01;
+          }
+          if (d < MIN) {
+            const push = (MIN - d) / 2;
+            const ux = dx / d;
+            const uy = dy / d;
+            a.x -= ux * push;
+            a.y -= uy * push;
+            b.x += ux * push;
+            b.y += uy * push;
+            moved = true;
+          }
+        }
+      }
+      if (!moved) break;
+    }
+    pts.forEach((p) =>
+      p.marker.setOffset([Math.round(p.x - p.bx), Math.round(p.y - p.by)])
+    );
+  };
+
   const visible = useMemo(
     () => projects.filter((p) => filter === "all" || p.status === filter),
     [filter]
@@ -153,11 +230,19 @@ export default function ProjectMap() {
     setSelected(slug);
     const p = projects.find((x) => x.slug === slug);
     if (mapRef.current && p && fly) {
+      // on phones the info card sits at the bottom of the map — nudge the
+      // target up so the pin stays visible above the card
+      const mobileLift =
+        typeof window !== "undefined" && window.innerWidth < 1024
+          ? [0, -Math.round(window.innerHeight * 0.13)]
+          : [0, 0];
       mapRef.current.flyTo({
         center: [p.siteLocation.lng, p.siteLocation.lat],
         zoom: 16,
-        pitch: 55,
+        pitch: 0,
+        bearing: 0,
         duration: 1200,
+        offset: mobileLift,
       });
     }
   };
@@ -171,9 +256,9 @@ export default function ProjectMap() {
       container: containerRef.current,
       style: MAP_STYLE,
       bounds,
-      fitBoundsOptions: { padding: { top: 90, bottom: 90, left: 60, right: 60 } },
-      pitch: 52,
-      bearing: -12,
+      fitBoundsOptions: { padding: fitPadding(), maxZoom: 15.5 },
+      pitch: 0,
+      bearing: 0,
       attributionControl: { compact: true },
     });
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
@@ -184,7 +269,9 @@ export default function ProjectMap() {
     map.on("load", () => {
       // eslint-disable-next-line no-console
       console.log("[maplibre] style loaded:", map.isStyleLoaded());
+      resolveCollisions();
     });
+    map.on("moveend", resolveCollisions);
     if (process.env.NODE_ENV !== "production") window.__map = map;
     mapRef.current = map;
     return () => {
@@ -204,7 +291,7 @@ export default function ProjectMap() {
       el.type = "button";
       el.setAttribute("data-testid", `map-marker-${p.slug}`);
       el.setAttribute("aria-label", `${p.title} — ${p.status}`);
-      el.className = `flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
+      el.className = `absolute top-0 left-0 flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
         selected === p.slug
           ? "bg-ember border-ember"
           : "bg-ink/85 border-bone/15 hover:border-ember/60"
@@ -216,25 +303,9 @@ export default function ProjectMap() {
       `;
       el.addEventListener("click", (e) => {
         e.stopPropagation();
-        // stacked pins: if several markers sit within one pill-width on screen,
-        // each click cycles to the next project in the stack so every pin
-        // stays reachable without moving any pin off its exact location
-        const m = mapRef.current;
-        let target = p.slug;
-        if (m) {
-          const here = m.project([p.siteLocation.lng, p.siteLocation.lat]);
-          const stack = markersRef.current
-            .filter(({ marker }) => {
-              const pt = m.project(marker.getLngLat());
-              return Math.hypot(pt.x - here.x, pt.y - here.y) < 28;
-            })
-            .map(({ slug }) => slug);
-          if (stack.length > 1) {
-            const idx = stack.indexOf(selectedRef.current);
-            if (idx !== -1) target = stack[(idx + 1) % stack.length];
-          }
-        }
-        focusProject(target, true);
+        // collided pins are visually fanned out by resolveCollisions(),
+        // so the tapped marker is always the intended project
+        focusProject(p.slug, true);
       });
       // raise hovered marker above overlapping neighbours so clustered
       // pins (e.g. 01-04) stay individually clickable
@@ -249,9 +320,8 @@ export default function ProjectMap() {
         .addTo(map);
       markersRef.current.push({ slug: p.slug, marker, el });
     });
-    const bounds = new LngLatBounds();
-    visible.forEach((p) => bounds.extend([p.siteLocation.lng, p.siteLocation.lat]));
-    map.fitBounds(bounds, { padding: { top: 90, bottom: 90, left: 60, right: 60 }, duration: 1000 });
+    fitVisible(true);
+    resolveCollisions();
   }, [filter]);
 
   // highlight selected marker without full rebuild
@@ -260,7 +330,7 @@ export default function ProjectMap() {
       const isSel = slug === selected;
       const p = projects.find((x) => x.slug === slug);
       el.style.zIndex = isSel ? 6 : "";
-      el.className = `flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
+      el.className = `absolute top-0 left-0 flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
         isSel ? "bg-ember border-ember" : "bg-ink/85 border-bone/15 hover:border-ember/60"
       }`;
       el.innerHTML = `
@@ -286,7 +356,7 @@ export default function ProjectMap() {
 
   return (
     <div data-testid="project-map-page">
-      <section className="max-w-[1600px] mx-auto px-5 md:px-10 pt-28 md:pt-40 pb-10 md:pb-14">
+      <section className="max-w-[1600px] mx-auto px-5 md:px-10 pt-36 md:pt-44 pb-10 md:pb-14">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -377,7 +447,21 @@ export default function ProjectMap() {
 
           {/* map */}
           <div className="relative border border-line" data-testid="map-container">
-            <div ref={containerRef} className="w-full h-[58vh] lg:h-[640px]" />
+            <div ref={containerRef} className="w-full h-[68svh] lg:h-[640px]" />
+            {selectedProject && (
+              <button
+                type="button"
+                data-testid="map-view-all"
+                onClick={() => {
+                  setSelected(null);
+                  fitVisible(true);
+                }}
+                className="absolute top-3 left-3 z-20 inline-flex items-center gap-2 bg-ink/85 backdrop-blur-md border border-bone/15 px-3.5 py-2 font-display font-semibold text-[9px] uppercase tracking-[0.25em] text-bone/80 hover:border-ember/60 hover:text-bone transition-colors duration-300"
+              >
+                <LocateFixed className="w-3 h-3" strokeWidth={1.8} />
+                View All Projects
+              </button>
+            )}
             {selectedProject && (
               <InfoCard project={selectedProject} onClose={() => setSelected(null)} />
             )}

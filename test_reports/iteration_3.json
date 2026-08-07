@@ -1,0 +1,24 @@
+{
+  "summary": "UI/UX polish pass verification on /project-map. All requested checks pass on mobile 390x844 and desktop 1920x1080 with zero pageerrors. Mobile header ('OUR FOOTPRINT' + 'BUILT AROUND AMEENPUR.' + 19-developments intro) is fully visible below the fixed navbar (H1 top y=179px). Horizontal overflow = 0. Map container reports 350x576px (~h-[68svh] on 844px viewport). All 19 numbered markers render on initial fit; minimum on-screen pin-to-pin separation is 39.3px (between casa & solace) — collision relaxation working as intended (~MIN=40px), no stacking observed. Mobile bottom InfoCard opens over lower portion of map on marker/chip tap; shows PROJECT xx, name, status+year, COMING SOON block for ongoing (ivy), VIEW PROJECT and GET DIRECTIONS links. GD URLs are exact: nest=https://maps.app.goo.gl/xyW7NFt7epe782966?g_st=ic, ivy=https://maps.app.goo.gl/cs9kAFywur9v2sH68?g_st=ic. Close button (map-info-close) dismisses card. VIEW ALL PROJECTS button (map-view-all) appears while selected, resets map (markers back to 19, card closed). Filters ALL(19)/COMPLETED(13)/ONGOING(06) update both marker count and mobile chip count consistently. Zoom controls top-right visible; CARTO/OSM attribution visible: '© OpenStreetMap contributors © CARTO'. Desktop: all 19 markers auto-fit inside map viewport (inside=19, outside=[]). Sidebar list click on zenith flies map + opens info card; zenith card contains zero 'flat' mentions (STRICT rule holds). Regression on /, /projects, /projects/my-dream-nest, /projects/my-dream-ivy → 0 pageerrors. Ivy detail confirms G+4 present, G+5 absent, COMING SOON present.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "resolveCollisions() is O(n^2 * 40 iterations) — fine for 19 pins but should be memoised/short-circuited if project count grows.",
+    "map.on('moveend', resolveCollisions) will keep re-running while user pans; harmless with 19 pins but a small render cost.",
+    "The InfoCard 'ONGOING · —' year rendering (em dash from missing year) is fine visually; consider hiding the ' · —' suffix when year is absent for cleaner typography. Non-blocking.",
+    "Marker <button> uses class 'absolute top-0 left-0' — this is the fix from this session; verified in DOM. Do not remove."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped)", "frontend": "100%"},
+  "test_credentials": "n/a (no auth)",
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 3 verified the /project-map polish pass end-to-end on both mobile (390x844) and desktop (1920x1080). All 10 acceptance criteria in the review request are green. Key measured values: min pin separation 39.3px, 19 desktop markers inside viewport, GD URLs for nest & ivy match exactly. Zero pageerrors across home, projects list, and both a completed (nest) and an ongoing (ivy) detail page. No code was modified in this run."
+}
