@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only testing of the new /project-map page + regression pass on rest of site. Map renders correctly with Carto Dark raster tiles (styleLoaded=true, tilesLoaded=true), all 19 numbered markers show, filters work (All=19, Completed=13, Ongoing=06), info card opens/closes, sidebar list, mobile chip selector, legend, and filter-based selection clearing all function. Regression: home, /projects (19 cards), /projects/my-dream-nest (DAY|NIGHT + VISIT section), /about, /contact, and navbar PROJECT MAP link all load. Two issues noted: a JS pageerror `Cannot read properties of undefined (reading 'replace')` fires during navigation, and clicking overlapping markers at initial zoom may select an adjacent project (marker-01 nest opened marker-03 avasa info card).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ProjectMap markers", "issue": "Clicking data-testid='map-marker-my-dream-nest' at initial zoom opened the info card for my-dream-avasa (View Project href=/projects/my-dream-avasa). Markers 01-04 overlap tightly at the fit-bounds zoom (~14.35). Playwright force-click on the exact testid still triggered a neighboring marker's onClick, suggesting hit-testing/z-order issue when marker DOM elements overlap. Real user taps on mobile/desktop near clustered markers would hit the same problem.", "selector": "[data-testid='map-marker-my-dream-nest']", "priority": "MEDIUM"},
+      {"component": "Global / possibly ProjectMap InfoCard thumbOf()", "issue": "Uncaught pageerror observed during navigation: `Cannot read properties of undefined (reading 'replace')`. Likely from thumbOf() when a project has cover set but the string does not contain 'elevation.jpg' — OR from a similar .replace() call elsewhere. Recommend guarding replace() calls and adding a try/catch or optional chaining.", "selector": "n/a", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Ivy project detail (/projects/my-dream-ivy)", "issues": ["Page body text contains NEITHER 'G+4' nor 'G+5'. Per STRICT DATA RULE 'Ivy is G+4 (never G+5)'. If the spec is to display the G+4 designation on the detail page, it is missing. If it's only a data-model attribute, this is fine — please verify."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Investigate & fix the 'Cannot read properties of undefined (reading replace)' pageerror (likely thumbOf() or a project field missing).",
+    "Improve marker click hit-testing so overlapping markers (01-04 near Ameenpur) correctly select the tapped one — e.g., raise z-index of the hovered marker, or nudge duplicate lat/lng with a small offset, or use pointer-events routing.",
+    "Verify whether Ivy detail page should show 'G+4' label; if yes, add it (it is currently absent)."
+  ],
+  "critical_code_review_comments": [
+    "ProjectMap.jsx marker rebuild useEffect dependency is `[filter, selected === null]` — passing a boolean expression is unusual; consider `[filter]` and letting the separate highlight effect manage selection styles (already present).",
+    "thumbOf() blindly calls .replace on p.cover; if cover exists but lacks 'elevation.jpg', replace returns the same string (safe), but if cover is a non-string it will throw. Add typeof guard.",
+    "window.__map is exposed globally — fine for debugging but should be gated behind NODE_ENV !== 'production' before ship."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped)", "frontend": "90%"},
+  "seed_data_creation": "none",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Map page is functionally solid (tiles load, 19 markers, filters, sidebar, mobile chips, info card, close, filter-clears-selection all verified). Two remaining issues: (1) pageerror on .replace of undefined — reproduce by navigating through home->projects->/projects/my-dream-nest->/projects/my-dream-ivy while watching pageerror listener; (2) overlapping-marker click routing issue at the default fit-bounds zoom for clustered slugs my-dream-nest/casa/avasa/skylark. window.__map is available on /project-map for debugging."
+}

@@ -8,7 +8,33 @@ import { projects } from "../data/projects";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
-const MAP_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+// Inline raster style (Carto Dark Matter raster tiles) — no glyph/sprite
+// dependencies, which are the usual cause of a blank canvas with vector styles.
+const MAP_STYLE = {
+  version: 8,
+  sources: {
+    "carto-dark": {
+      type: "raster",
+      tiles: [
+        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+      ],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    },
+  },
+  layers: [
+    {
+      id: "carto-dark",
+      type: "raster",
+      source: "carto-dark",
+    },
+  ],
+};
 
 const STATUS_DOT = {
   completed: "bg-emerald-400 shadow-[0_0_6px_1.5px_rgba(52,211,153,0.5)]",
@@ -146,6 +172,14 @@ export default function ProjectMap() {
       attributionControl: { compact: true },
     });
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+    map.on("error", (e) => {
+      // eslint-disable-next-line no-console
+      console.error("[maplibre] tile/style error:", e?.error?.message || e);
+    });
+    map.on("load", () => {
+      // eslint-disable-next-line no-console
+      console.log("[maplibre] style loaded:", map.isStyleLoaded());
+    });
     window.__map = map;
     mapRef.current = map;
     return () => {
