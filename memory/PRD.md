@@ -347,6 +347,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 54 (2026-08-07) — Skylark: VISIT PROJECT SITE section
+- Added `siteLocation` to Skylark: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/VXZCpHzKvFzrJr717?g_st=ic (_blank); resolves to registered place "My Dream Skylark" (4.7★) — embed uses that exact place query
+- Skylark elevation/day-night/floor plan/description/status/year untouched; siteLocation now on all 6 ongoing + Nest + Casa + Avasa + Skylark
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 - NOTE: goes live on mydreamprojects.in on next redeploy

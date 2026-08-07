@@ -104,6 +104,10 @@ const MY_DREAM_SKYLARK = {
     night: "/assets/projects/my-dream-skylark/elevation-night.webp",
     width: 1448,
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/VXZCpHzKvFzrJr717?g_st=ic",
+    embed: "https://www.google.com/maps?q=My+Dream+Skylark,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-skylark/floor-plan.pdf",
     preview: "/assets/projects/my-dream-skylark/floor-plan-p1.jpg",
