@@ -366,6 +366,12 @@ const MY_DREAM_ZENITH = {
   description:
     "My Dream Zenith is a contemporary residential development characterized by bold geometric forms, clean façade lines and thoughtfully planned living spaces. Completed in 2026, its modern architectural language and practical layouts create a distinctive residential environment designed around comfortable family living.",
   cover: "/assets/projects/my-dream-zenith/elevation.jpg",
+  elevationModes: {
+    day: "/assets/projects/my-dream-zenith/elevation-day.webp",
+    night: "/assets/projects/my-dream-zenith/elevation-night.webp",
+    width: 1287,
+    aspect: "aspect-[2.15/1]",
+  },
   siteLocation: {
     url: "https://maps.app.goo.gl/p9xH9LbbQWnG8emi6?g_st=ic",
     embed: "https://www.google.com/maps?q=My+Dream+Zenith,+Rajeshwari,+Phase+2,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502033&output=embed",

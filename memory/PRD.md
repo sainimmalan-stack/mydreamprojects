@@ -443,6 +443,14 @@ Premium, production-quality responsive website for residential construction comp
 - Both pairs mismatched aspect → fixed frames: Perch `aspect-[2/1]`, Solace `aspect-[9/5]` (equal crop, no distortion); elevationModes added (widths 1254 / 1182)
 - Toggles live: both detail pages, both Projects page cards, homepage Solace card (Solace IS in Selected Work; Perch correctly NOT on homepage)
 - Full checklist: Perch Day/Night PASS, Solace Day/Night PASS, Homepage PASS (Solace only), Projects Page PASS, Detail Pages PASS, Mobile PASS, Asset Mapping PASS; Solace no-flat-count rule re-verified
+
+## Iteration 70 (2026-08-07) — Zenith: Day/Night elevation (ALL 13 completed projects done)
+- Zenith pair matched by filename + cross-verified against existing elevation (white/brown building, white SUV, MY DREAM CONSTRUCTIONS wall); day 1287×633 (2.03), night 1287×571 (2.25) → `aspect-[2.15/1]` fixed frame (minimal equal crop, full building, no excessive foreground — addresses Zenith's known cropping concern)
+- elevationModes added to Zenith (width 1287); toggles live on detail page + Projects page card; Zenith NOT in Selected Work → homepage untouched
+- Full checklist: Zenith Day PASS, Night PASS, Projects Page PASS, Detail PASS, Homepage PASS (n/a), Mobile PASS, Framing Match PASS, Asset Mapping PASS; no-flat-count rule re-verified
+- MILESTONE: all 13 completed projects now have Day/Night (Nest, Casa, Avasa, Skylark, Glenmore, Hillock, Summit, Griffin, Selene, Atlantis, Perch, Solace, Zenith)
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 
