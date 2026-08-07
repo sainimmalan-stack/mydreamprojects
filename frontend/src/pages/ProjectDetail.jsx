@@ -30,9 +30,11 @@ export default function ProjectDetail() {
   const { prev, next } = getAdjacent(slug);
 
   const heroSrc = project.elevationModes?.day || project.cover;
-  const heroSrcSet = project.elevationModes
-    ? `${heroSrc.replace(".webp", "-800.webp")} 800w, ${heroSrc} ${project.elevationModes.width || 1402}w`
-    : `${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`;
+  const heroSrcSet = !project.cover
+    ? undefined
+    : project.elevationModes
+      ? `${heroSrc.replace(".webp", "-800.webp")} 800w, ${heroSrc} ${project.elevationModes.width || 1402}w`
+      : `${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`;
 
   const stats = [
     { label: "Status", value: project.status },

@@ -137,6 +137,11 @@ export default function ProjectMap() {
   const mapRef = useRef(null);
   const markersRef = useRef([]);
   const listItemRefs = useRef({});
+  const selectedRef = useRef(null);
+
+  useEffect(() => {
+    selectedRef.current = selected;
+  }, [selected]);
 
   const visible = useMemo(
     () => projects.filter((p) => filter === "all" || p.status === filter),
@@ -180,7 +185,7 @@ export default function ProjectMap() {
       // eslint-disable-next-line no-console
       console.log("[maplibre] style loaded:", map.isStyleLoaded());
     });
-    window.__map = map;
+    if (process.env.NODE_ENV !== "production") window.__map = map;
     mapRef.current = map;
     return () => {
       map.remove();
@@ -211,7 +216,33 @@ export default function ProjectMap() {
       `;
       el.addEventListener("click", (e) => {
         e.stopPropagation();
-        focusProject(p.slug, true);
+        // stacked pins: if several markers sit within one pill-width on screen,
+        // each click cycles to the next project in the stack so every pin
+        // stays reachable without moving any pin off its exact location
+        const m = mapRef.current;
+        let target = p.slug;
+        if (m) {
+          const here = m.project([p.siteLocation.lng, p.siteLocation.lat]);
+          const stack = markersRef.current
+            .filter(({ marker }) => {
+              const pt = m.project(marker.getLngLat());
+              return Math.hypot(pt.x - here.x, pt.y - here.y) < 28;
+            })
+            .map(({ slug }) => slug);
+          if (stack.length > 1) {
+            const idx = stack.indexOf(selectedRef.current);
+            if (idx !== -1) target = stack[(idx + 1) % stack.length];
+          }
+        }
+        focusProject(target, true);
+      });
+      // raise hovered marker above overlapping neighbours so clustered
+      // pins (e.g. 01-04) stay individually clickable
+      el.addEventListener("mouseenter", () => {
+        el.style.zIndex = 5;
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.zIndex = selectedRef.current === p.slug ? 6 : "";
       });
       const marker = new MapLibreMarker({ element: el })
         .setLngLat([p.siteLocation.lng, p.siteLocation.lat])
@@ -221,13 +252,14 @@ export default function ProjectMap() {
     const bounds = new LngLatBounds();
     visible.forEach((p) => bounds.extend([p.siteLocation.lng, p.siteLocation.lat]));
     map.fitBounds(bounds, { padding: { top: 90, bottom: 90, left: 60, right: 60 }, duration: 1000 });
-  }, [filter, selected === null]);
+  }, [filter]);
 
   // highlight selected marker without full rebuild
   useEffect(() => {
     markersRef.current.forEach(({ slug, el }) => {
       const isSel = slug === selected;
       const p = projects.find((x) => x.slug === slug);
+      el.style.zIndex = isSel ? 6 : "";
       el.className = `flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
         isSel ? "bg-ember border-ember" : "bg-ink/85 border-bone/15 hover:border-ember/60"
       }`;
