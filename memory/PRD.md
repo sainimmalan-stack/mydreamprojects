@@ -199,6 +199,12 @@ Premium, production-quality responsive website for residential construction comp
 - Only change in code: file extension in FOUNDERS data (.png → .webp); section design, typography, spacing, layout untouched; Akhil card untouched
 - Verified desktop (248×440 @ 0.562) + mobile 390 (348×619 @ natural ratio, no overflow): new mountain portrait renders, old image gone
 
+## Iteration 29 (2026-08-07) — Nimmala Sai portrait display refined
+- Display-only change (original webp untouched): mobile now uses `aspect-[4/5] object-cover object-[50%_45%]` — tasteful head-to-mid-thigh framing, face fully visible, mountain background preserved, no stretch/distortion; desktop unchanged (natural ratio, h-[440px] w-auto)
+- Founder cards confirmed identical height on desktop (442px each); typography/section design unchanged; nothing else touched
+- Verified: mobile 348×435 (0.8 ratio), no overflow at 390px; desktop 248×440 @ natural 0.562
+
+
 - STOPPED per user instruction — waiting for biography + second founder
 
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
