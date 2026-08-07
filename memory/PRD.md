@@ -183,6 +183,10 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exactly 2 images, both load, no "Coming Soon"/garden text, no horizontal overflow; all office asset URLs 200
 
 ## Backlog
+
+## Iteration 26 (2026-08-07) — Footer heading rename
+- Footer column heading "STUDIO" → "OUR OFFICE"; address, phones, Get Directions, layout, typography and all other footer elements unchanged; verified live (heading present, STUDIO absent)
+
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
 - P0: Real project names, locations, years, descriptions, photography (drop into `src/data/projects.js`)
 - P0: Founder photos/bios, phone/email on Contact

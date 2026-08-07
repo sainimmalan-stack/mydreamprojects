@@ -35,7 +35,7 @@ export const Footer = () => (
           </ul>
         </div>
         <div className="col-span-6 md:col-span-3">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-5">Studio</p>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mb-5">Our Office</p>
           <p className="text-sm text-bone/70 leading-relaxed">
             Ameenpur, Hyderabad
             <br />
