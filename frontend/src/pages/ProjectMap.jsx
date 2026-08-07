@@ -35,9 +35,9 @@ const MAP_STYLE = {
       paint: {
         // lift the black point + gentle contrast so roads, water and locality
         // labels read clearly while staying a premium dark basemap
-        "raster-brightness-min": 0.07,
+        "raster-brightness-min": 0.09,
         "raster-brightness-max": 1,
-        "raster-contrast": 0.12,
+        "raster-contrast": 0.15,
         "raster-saturation": -0.1,
         "raster-fade-duration": 0,
       },
@@ -183,7 +183,7 @@ export default function ProjectMap() {
   const resolveCollisions = () => {
     const map = mapRef.current;
     if (!map || markersRef.current.length === 0) return;
-    const MIN = 40; // px — minimum separation between pill centres
+    const MIN = 32; // px — minimum separation between pill centres
     const pts = markersRef.current.map(({ marker }) => {
       const p = map.project(marker.getLngLat());
       return { marker, bx: p.x, by: p.y, x: p.x, y: p.y };
@@ -263,6 +263,8 @@ export default function ProjectMap() {
       attributionControl: { compact: true },
     });
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+    // prevent accidental zoom jumps when tapping pins on touch devices
+    map.doubleClickZoom.disable();
     map.on("error", (e) => {
       // eslint-disable-next-line no-console
       console.error("[maplibre] tile/style error:", e?.error?.message || e);
@@ -292,15 +294,15 @@ export default function ProjectMap() {
       el.type = "button";
       el.setAttribute("data-testid", `map-marker-${p.slug}`);
       el.setAttribute("aria-label", `${p.title} — ${p.status}`);
-      el.className = `absolute top-0 left-0 flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
+      el.className = `absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
         selected === p.slug
-          ? "bg-ember border-ember"
+          ? "bg-ember border-ember shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]"
           : "bg-ink/85 border-bone/15 hover:border-ember/60"
       }`;
       const isSel = selected === p.slug;
       el.innerHTML = `
-        <span class="w-1.5 h-1.5 rounded-full ${isSel ? "bg-ink" : STATUS_DOT[p.status]}"></span>
-        <span class="font-display font-semibold text-[10px] tracking-[0.15em] ${isSel ? "text-ink" : "text-bone"}">${p.index}</span>
+        <span class="w-1 h-1 rounded-full ${isSel ? "bg-ink" : STATUS_DOT[p.status]}"></span>
+        <span class="font-display font-semibold text-[9px] tracking-[0.15em] ${isSel ? "text-ink" : "text-bone"}">${p.index}</span>
       `;
       el.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -331,12 +333,14 @@ export default function ProjectMap() {
       const isSel = slug === selected;
       const p = projects.find((x) => x.slug === slug);
       el.style.zIndex = isSel ? 6 : "";
-      el.className = `absolute top-0 left-0 flex items-center gap-1.5 pl-2 pr-2.5 py-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
-        isSel ? "bg-ember border-ember" : "bg-ink/85 border-bone/15 hover:border-ember/60"
+      el.className = `absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
+        isSel
+          ? "bg-ember border-ember shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]"
+          : "bg-ink/85 border-bone/15 hover:border-ember/60"
       }`;
       el.innerHTML = `
-        <span class="w-1.5 h-1.5 rounded-full ${isSel ? "bg-ink" : STATUS_DOT[p.status]}"></span>
-        <span class="font-display font-semibold text-[10px] tracking-[0.15em] ${isSel ? "text-ink" : "text-bone"}">${p.index}</span>
+        <span class="w-1 h-1 rounded-full ${isSel ? "bg-ink" : STATUS_DOT[p.status]}"></span>
+        <span class="font-display font-semibold text-[9px] tracking-[0.15em] ${isSel ? "text-ink" : "text-bone"}">${p.index}</span>
       `;
     });
     if (selected && listItemRefs.current[selected]) {

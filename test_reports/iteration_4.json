@@ -1,0 +1,24 @@
+{
+  "summary": "Frontend-only exhaustive verification of /project-map polish round (iteration 4). Individually clicked all 19 markers on desktop 1920x1080 and verified name, project index (01-19), status, GET DIRECTIONS href (exact match to spec), thumbnail for completed / COMING SOON for ongoing, and selected-marker ember background + orange glow shadow rgba(232,93,34,0.5). All 19/19 PASSED. Filters (ALL 19 / COMPLETED 13 / ONGOING 06) work correctly on desktop and mobile 390x844 with auto-refit. Legend intact. Marker rendered pill size ~35.7 x 30 px (smaller than the previous ~40x28+ target). doubleClickZoom disabled — rapid triple-tap on a marker did not overshoot zoom beyond the intentional focus zoom (16). No horizontal overflow on mobile (scrollWidth 390 == innerWidth 390). Attribution present. Regression: /, /projects, /projects/my-dream-nest, /projects/my-dream-ivy all load with 200 and zero pageerrors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/project-map (mobile 390x844)", "issues": ["When a marker/chip is tapped on mobile, the info card renders at absolute bottom of the map container which sits partially below the viewport fold (card top ~855px in an 844px viewport). Card is reachable by scrolling and by design flyTo lifts the marker up, but on first tap the card itself is initially below the fold. Consider auto-scrolling the map container into view or clamping card position to viewport when opened on mobile. Minor UX polish, not a functional bug."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ProjectMap.jsx has duplicate marker className/innerHTML template (build in [filter] effect and re-apply in [selected] effect) — could be extracted into a small helper to keep selected/unselected styling in one place and avoid drift.",
+    "map-info-close only clears `selected` but does not re-fit bounds; after a flyTo(zoom 16) the map remains zoomed even after closing the card. Consider calling fitVisible() on close for symmetry with map-view-all. Not a bug per spec, but improves ergonomics."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 4 verified all 19 markers by slug with expected name/index/status/GET DIRECTIONS URL match, selected marker ember bg + orange glow, thumbnails for completed vs COMING SOON for ongoing, filters (13/6/19) with auto-refit desktop+mobile, doubleClickZoom disabled (no accidental zoom on rapid taps beyond intentional 16), no horizontal overflow at 390 width, attribution visible, and all regression routes clean. Test methodology tip for future runs: click map-view-all between marker clicks to reset the flyTo zoom so subsequent markers stay in-viewport (or dispatch clicks via page.evaluate).",
+  "rca of the issue": "n/a — no defects found."
+}
