@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import FloorPlanViewer from "../components/FloorPlanViewer";
 import DayNightImage from "../components/DayNightImage";
+import ElevationViewer from "../components/ElevationViewer";
 import { getProject, getAdjacent } from "../data/projects";
 import useSeo from "../hooks/useSeo";
 
@@ -12,6 +13,7 @@ const EASE = [0.16, 1, 0.3, 1];
 export default function ProjectDetail() {
   const { slug } = useParams();
   const [planOpen, setPlanOpen] = useState(false);
+  const [elevOpen, setElevOpen] = useState(false);
   const project = getProject(slug);
   useSeo({
     title: project
@@ -26,6 +28,11 @@ export default function ProjectDetail() {
   });
   if (!project) return <Navigate to="/projects" replace />;
   const { prev, next } = getAdjacent(slug);
+
+  const heroSrc = project.elevationModes?.day || project.cover;
+  const heroSrcSet = project.elevationModes
+    ? `${heroSrc.replace(".webp", "-800.webp")} 800w, ${heroSrc} ${project.elevationModes.width || 1402}w`
+    : `${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`;
 
   const stats = [
     { label: "Status", value: project.status },
@@ -43,8 +50,8 @@ export default function ProjectDetail() {
             initial={{ scale: 1.06 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.6, ease: EASE }}
-            src={project.cover}
-            srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+            src={heroSrc}
+            srcSet={heroSrcSet}
             sizes="100vw"
             alt={`${project.title} residential apartment elevation in Ameenpur`}
             data-testid="project-hero-image"
@@ -212,6 +219,7 @@ export default function ProjectDetail() {
                   testid="elevation"
                   fullWidth={project.elevationModes.width}
                   aspect={project.elevationModes.aspect}
+                  onImageClick={() => setElevOpen(true)}
                 />
               ) : (
                 <img
@@ -413,6 +421,15 @@ export default function ProjectDetail() {
           image={project.floorPlan.preview}
           pdf={project.floorPlan.pdf}
           title={`${project.title} — Floor Plan`}
+        />
+      )}
+      {project.elevationModes && (
+        <ElevationViewer
+          open={elevOpen}
+          onClose={() => setElevOpen(false)}
+          daySrc={project.elevationModes.day}
+          nightSrc={project.elevationModes.night}
+          title={`${project.title} — Elevation`}
         />
       )}
     </div>

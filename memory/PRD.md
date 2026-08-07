@@ -451,6 +451,17 @@ Premium, production-quality responsive website for residential construction comp
 - MILESTONE: all 13 completed projects now have Day/Night (Nest, Casa, Avasa, Skylark, Glenmore, Hillock, Summit, Griffin, Selene, Atlantis, Perch, Solace, Zenith)
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 71 (2026-08-07) — FINAL elevation image quality & alignment pass (all 13 completed)
+- Re-encoded ALL 26 day/night elevations from the pristine originals at max practical quality (full-size q92 webp, 800w q88) — no upscaling, no sharpening/filters, architecture untouched; originals preserved at /app/backups/elevation_originals/ (26 files, persistent)
+- Detail-page HEROES now serve the hi-res day webp (were low-res 560–1206px elevation.jpg bases); homepage hero switched to skylark elevation-day.webp (1448w) with corrected srcset — verified text contrast intact
+- NEW: full-screen ElevationViewer (ElevationViewer.jsx) — tap the elevation on any completed project's detail page → fullscreen premium viewer with DAY | NIGHT pill + close button, wheel/pinch/drag zoom (1-5x), dblclick reset, Esc/scroll-lock; toggle taps isolated from image click
+- Alignment: pairs with mismatched source aspects use per-project fixed frames (glenmore 16/9, summit/griffin/perch 2/1, selene 2.2/1, solace 9/5, zenith 2.15/1) so buildings stay stationary across day/night; same-aspect pairs use natural frames
+- Performance: night images load on demand on cards (0 preload requests — verified), lazy below fold elsewhere, day-first
+- Automated QA sweep (qa_daynight.py): 13 desktop + 4 mobile projects + viewer = ALL PASS, 0 fails (hero hi-res, day/night loaded full-res, no cross-association, no layout shift, no overflow)
+- SOURCE-LIMITED ASSETS (original upload resolution, not upscaled): Casa 768×1024 (softest on large desktop), Glenmore night 1178×580, Selene night 1254×494, Perch night 1254×576, Summit night 1254×615, Solace 1182w pair, Zenith 1287w pair; best: Skylark 1448w, Nest 1402w, Atlantis ~1345w, Hillock ~1325w
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 

@@ -8,7 +8,7 @@ import { waLink, WHATSAPP_GREETING, PHONE_SAI, MAPS_URL } from "../data/contact"
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
-const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation.jpg";
+const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation-day.webp";
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -35,7 +35,7 @@ const Hero = () => {
       <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10">
         <img
           src={HERO_IMAGE}
-          srcSet={`${HERO_IMAGE.replace("elevation.jpg", "elevation-800.webp")} 800w, ${HERO_IMAGE.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
+          srcSet={`${HERO_IMAGE.replace(".webp", "-800.webp")} 800w, ${HERO_IMAGE} 1448w`}
           sizes="100vw"
           fetchPriority="high"
           alt="My Dream Skylark residential apartment elevation in Ameenpur"

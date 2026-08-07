@@ -7,13 +7,21 @@ import { Sun, Moon } from "lucide-react";
  * the night image defines the frame, the day image sits on top and cross-fades
  * (0.7s opacity) — no layout shift, no page reload.
  */
-export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", fullWidth = 1402, aspect = null }) => {
+export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", fullWidth = 1402, aspect = null, onImageClick = null }) => {
   const [mode, setMode] = useState("day");
   const srcSet = (s) => `${s.replace(".webp", "-800.webp")} 800w, ${s} ${fullWidth}w`;
   const sizes = "(max-width: 1600px) 100vw, 1600px";
 
   return (
-    <div className={`relative overflow-hidden ${aspect || ""}`} data-testid={`${testid}-switcher`}>
+    <div
+      className={`relative overflow-hidden ${aspect || ""} ${onImageClick ? "cursor-zoom-in" : ""}`}
+      data-testid={`${testid}-switcher`}
+      onClick={onImageClick || undefined}
+      role={onImageClick ? "button" : undefined}
+      aria-label={onImageClick ? "Open full-screen elevation viewer" : undefined}
+      tabIndex={onImageClick ? 0 : undefined}
+      onKeyDown={onImageClick ? (e) => { if (e.key === "Enter") onImageClick(); } : undefined}
+    >
       <img
         src={nightSrc}
         srcSet={srcSet(nightSrc)}
@@ -38,6 +46,7 @@ export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", full
         data-testid={`${testid}-toggle`}
         role="group"
         aria-label="Elevation day night switcher"
+        onClick={(e) => e.stopPropagation()}
         className="absolute bottom-4 left-1/2 -translate-x-1/2 md:bottom-auto md:left-auto md:translate-x-0 md:top-5 md:right-5 flex items-center rounded-full border border-bone/15 bg-ink/45 backdrop-blur-md p-1 shadow-lg shadow-ink/30"
       >
         <button
