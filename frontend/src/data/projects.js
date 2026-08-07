@@ -200,6 +200,10 @@ const MY_DREAM_GRIFFIN = {
   description:
     "My Dream Griffin is a contemporary residential development defined by clean vertical lines, layered balconies and warm architectural accents. Completed in 2024, thoughtful planning combines comfortable interiors with a distinctive modern façade and strong architectural presence.",
   cover: "/assets/projects/my-dream-griffin/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/n4baoGjFLi1yEzzM6?g_st=ic",
+    embed: "https://www.google.com/maps?q=G8HF+QRW+My+Dream+Griffin,+Road+No.+2,+PNR+Colony,+Ameenpur,+Miyapur,+Hyderabad,+Telangana+502032&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-griffin/floor-plan.pdf",
     preview: "/assets/projects/my-dream-griffin/floor-plan-p1.jpg",

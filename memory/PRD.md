@@ -371,6 +371,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 58 (2026-08-07) — Griffin: VISIT PROJECT SITE section
+- Added `siteLocation` to Griffin: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/n4baoGjFLi1yEzzM6?g_st=ic (_blank); resolves to registered place "My Dream Griffin" (5.0★) — embed uses that exact place query
+- Griffin elevation/floor plan/description/status/year untouched; siteLocation now on all 6 ongoing + Nest, Casa, Avasa, Skylark, Glenmore, Hillock, Summit, Griffin
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 
