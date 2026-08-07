@@ -328,6 +328,13 @@ Premium, production-quality responsive website for residential construction comp
 - Card design/layout/animations untouched; verified desktop: exactly 5 cards, each image/name/link matches its project, all images loaded, removed names absent from section
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+
+## Iteration 51 (2026-08-07) — Nest: VISIT PROJECT SITE section
+- Added `siteLocation` to Nest: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/xyW7NFt7epe782966?g_st=ic (_blank); this link resolves to a registered Google Maps PLACE ("My Dream Nest, Janachithanya layout, Aminpur Rd, Ameenpur") so the embed uses that exact place query — map preview even shows the place card with its rating
+- First completed project with a site location; section design identical to ongoing projects; Nest elevation/floor plan/day-night/description untouched
+- Verified desktop 1920 + mobile 390: exact href, place embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 

@@ -17,6 +17,10 @@ const MY_DREAM_NEST = {
     day: "/assets/projects/my-dream-nest/elevation-day.webp",
     night: "/assets/projects/my-dream-nest/elevation-night.webp",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/xyW7NFt7epe782966?g_st=ic",
+    embed: "https://www.google.com/maps?q=My+Dream+Nest,+Janachithanya+layout,+Aminpur+Rd,+Ameenpur,+Miyapur,+Telangana+502032&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-nest/floor-plan.pdf",
     preview: "/assets/projects/my-dream-nest/floor-plan-p1.jpg",
