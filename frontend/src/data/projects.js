@@ -272,6 +272,10 @@ const MY_DREAM_PERCH = {
   description:
     "My Dream Perch is a thoughtfully designed residential development combining contemporary architecture with efficient, comfortable living spaces. Completed in 2026, its warm façade textures, framed balconies and clean vertical elements create an elegant architectural identity for modern family living.",
   cover: "/assets/projects/my-dream-perch/elevation.jpg",
+  siteLocation: {
+    url: "https://maps.app.goo.gl/kUNaT2Qcbtp11dEe9?g_st=ic",
+    embed: "https://www.google.com/maps?q=My+Dream+Perch,+Sai+Rajeswari+Phase+II,+Ameenpur+Coco+Cola+Road,+Ameenpur,+Hyderabad,+Telangana+502033&output=embed",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-perch/floor-plan.pdf",
     preview: "/assets/projects/my-dream-perch/floor-plan-p1.jpg",
