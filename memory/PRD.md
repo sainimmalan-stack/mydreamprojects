@@ -254,6 +254,13 @@ Premium, production-quality responsive website for residential construction comp
 - Verified desktop 1920 + mobile 390: exact href, Ivy coords in embed, display texts, no overflow
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
+## Iteration 39 (2026-08-07) — Vale: VISIT PROJECT SITE section
+- Added `siteLocation` to Vale only: GET DIRECTIONS ↗ opens exact supplied link https://maps.app.goo.gl/TViJG2MA5VW5vc3T8?g_st=ic (_blank); embedded map uses resolved exact pin 17.5353830,78.3208010 (distinct from Aurelia/Elysium/Ivy — verified)
+- Vale data re-verified intact: ONGOING · G+5 · Residential Apartment, floor plan + COMING SOON elevation + description untouched; siteLocation now on Aurelia, Elysium, Ivy, Vale only
+- Verified desktop 1920 + mobile 390: exact href, Vale coords in embed, display texts, no overflow
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 
 

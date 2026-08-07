@@ -361,6 +361,10 @@ const MY_DREAM_VALE = {
     preview: "/assets/projects/my-dream-vale/floor-plan-p1.jpg",
     fileName: "My-Dream-Vale-Floor-Plan.pdf",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/TViJG2MA5VW5vc3T8?g_st=ic",
+    embed: "https://www.google.com/maps?q=17.5353830,78.3208010&output=embed",
+  },
 };
 
 const MY_DREAM_IVY = {
