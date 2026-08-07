@@ -286,6 +286,13 @@ Premium, production-quality responsive website for residential construction comp
 - ProjectDetail elevation section renders DayNightImage when `elevationModes` exists, else the original single image — all other 18 projects unchanged (Casa verified)
 - Verified desktop + mobile: day default (aria-pressed), mid-fade opacity ~0.16 at 350ms, final 0, container height identical before/after (1214.83px desktop / 278.48px mobile), no overflow at 390px
 - TO EXTEND: drop `elevation-day.webp`/`elevation-night.webp` (+800 variants) into any project folder and add `elevationModes` to its data entry
+
+## Iteration 44 (2026-08-07) — Day/Night toggle refined
+- Toggle redesigned per spec: compact rounded-full segmented pill (translucent ink/45 + backdrop-blur, subtle border + shadow, 3px sun/moon icons, 9-10px labels); selected mode keeps ember accent
+- Mobile: bottom-center of the elevation image, 16px from bottom, 154×36px; desktop: compact 167×37px at top-right
+- Only the toggle classes changed in DayNightImage.jsx — images, transition, layout untouched; verified fade still works + no overflow at 390px
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
 - NOTE: goes live on mydreamprojects.in on next redeploy
 
 - NOTE: goes live on mydreamprojects.in on next redeploy

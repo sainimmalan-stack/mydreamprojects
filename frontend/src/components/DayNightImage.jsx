@@ -38,18 +38,18 @@ export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight" }) =>
         data-testid={`${testid}-toggle`}
         role="group"
         aria-label="Elevation day night switcher"
-        className="absolute top-4 right-4 md:top-5 md:right-5 flex items-center border border-bone/20 bg-ink/55 backdrop-blur-md"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 md:bottom-auto md:left-auto md:translate-x-0 md:top-5 md:right-5 flex items-center rounded-full border border-bone/15 bg-ink/45 backdrop-blur-md p-1 shadow-lg shadow-ink/30"
       >
         <button
           type="button"
           data-testid="day-mode-button"
           aria-pressed={mode === "day"}
           onClick={() => setMode("day")}
-          className={`flex items-center gap-2 px-4 py-2.5 md:px-5 md:py-3 font-display font-semibold text-[10px] md:text-[11px] uppercase tracking-[0.2em] transition-colors duration-300 ${
-            mode === "day" ? "bg-ember text-ink" : "text-bone/85 hover:text-bone"
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 md:px-3.5 font-display font-semibold text-[9px] md:text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+            mode === "day" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
           }`}
         >
-          <Sun className="w-3.5 h-3.5" strokeWidth={1.8} />
+          <Sun className="w-3 h-3" strokeWidth={1.8} />
           Day
         </button>
         <button
@@ -57,11 +57,11 @@ export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight" }) =>
           data-testid="night-mode-button"
           aria-pressed={mode === "night"}
           onClick={() => setMode("night")}
-          className={`flex items-center gap-2 px-4 py-2.5 md:px-5 md:py-3 font-display font-semibold text-[10px] md:text-[11px] uppercase tracking-[0.2em] transition-colors duration-300 ${
-            mode === "night" ? "bg-ember text-ink" : "text-bone/85 hover:text-bone"
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 md:px-3.5 font-display font-semibold text-[9px] md:text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+            mode === "night" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
           }`}
         >
-          <Moon className="w-3.5 h-3.5" strokeWidth={1.8} />
+          <Moon className="w-3 h-3" strokeWidth={1.8} />
           Night
         </button>
       </div>
