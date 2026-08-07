@@ -1,0 +1,34 @@
+{
+  "summary": "Targeted retest of /project-map for the two changes made after iteration_4: (1) mobile scrollIntoView on focusProject, (2) InfoCard close now triggers fitVisible. All 5 scenarios PASSED with zero pageerrors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "mobile_390x844": {
+      "chip_nest_auto_scroll": "PASS - card_top=525, card_bottom=693, vh=844, fully in viewport; zoom=16; title=My Dream Nest",
+      "mobile_close_refit": "PASS - card removed, zoom returned to 13.48 (overview) from 16",
+      "chip_ivy_ongoing": "PASS - card in viewport (bottom=693 <= 844), contains IVY + ONGOING + COMING SOON; close refits to 13.48",
+      "rapid_triple_tap_marker": "PASS - zoom capped at 16 (not beyond), card visible in viewport, no horizontal overflow",
+      "horizontal_overflow": "PASS - none",
+      "pageerrors": 0
+    },
+    "desktop_1920": {
+      "marker_click_opens_card": "PASS - clicked map-marker-my-dream-glenmore, card visible with 'My Dream Glenmore', zoom=16",
+      "sidebar_selection_sync": "PASS - map-list-my-dream-glenmore has bg-coal + border-l-ember (selected styling)",
+      "close_button_refits": "PASS - zoom returned to 14.35 (matches initial), card removed, all 19 markers still present",
+      "pageerrors": 0
+    }
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Both targeted fixes confirmed working on mobile (390x844) and desktop (1920x1080). Marker testids follow map-marker-<slug>; chips are map-chip-<slug>; close button is map-info-close; window.__map exposes leaflet map for zoom introspection. Use wait_until='domcontentloaded' + 8-9s sleep for tiles."
+}

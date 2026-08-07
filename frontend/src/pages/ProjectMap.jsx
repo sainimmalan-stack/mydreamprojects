@@ -230,6 +230,10 @@ export default function ProjectMap() {
   const focusProject = (slug, fly = true) => {
     setSelected(slug);
     const p = projects.find((x) => x.slug === slug);
+    // on phones, bring the map (and its bottom card) into the viewport
+    if (typeof window !== "undefined" && window.innerWidth < 1024 && containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     if (mapRef.current && p && fly) {
       // on phones the info card sits at the bottom of the map — nudge the
       // target up so the pin stays visible above the card
@@ -469,7 +473,13 @@ export default function ProjectMap() {
               </button>
             )}
             {selectedProject && (
-              <InfoCard project={selectedProject} onClose={() => setSelected(null)} />
+              <InfoCard
+                project={selectedProject}
+                onClose={() => {
+                  setSelected(null);
+                  fitVisible(true);
+                }}
+              />
             )}
           </div>
 
