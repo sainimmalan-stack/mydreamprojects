@@ -277,6 +277,10 @@ const MY_DREAM_AURELIA = {
     preview: "/assets/projects/my-dream-aurelia/floor-plan-p1.jpg",
     fileName: "My-Dream-Aurelia-Floor-Plan.pdf",
   },
+  siteLocation: {
+    url: "https://maps.app.goo.gl/VqmwyFVcZNFkjSi76?g_st=ic",
+    embed: "https://www.google.com/maps?q=17.5351890,78.3342360&output=embed",
+  },
 };
 
 const MY_DREAM_ELYSIUM = {

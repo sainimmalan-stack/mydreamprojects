@@ -316,6 +316,53 @@ export default function ProjectDetail() {
       </section>
       )}
 
+      {project.siteLocation && (
+        <section data-testid="visit-site-section" className="border-t border-line">
+          <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-32 grid grid-cols-12 gap-6 md:gap-8 items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, ease: EASE }}
+              className="col-span-12 md:col-span-4"
+            >
+              <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">Visit Project Site</p>
+              <h2 className="font-display font-semibold uppercase tracking-tighter leading-[1.02] text-3xl md:text-4xl text-bone">
+                {project.title}
+              </h2>
+              <p className="text-sm text-concrete leading-relaxed mt-4">{project.location}</p>
+              <a
+                href={project.siteLocation.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="get-directions-button"
+                className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 mt-8 hover:bg-bone transition-colors duration-400"
+              >
+                Get Directions
+                <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
+              </a>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
+              className="col-span-12 md:col-span-8 border border-line overflow-hidden"
+            >
+              <iframe
+                src={project.siteLocation.embed}
+                title={`${project.title} project site location map`}
+                data-testid="site-map-embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="w-full h-[320px] md:h-[440px] block border-0"
+              />
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       <nav className="border-t border-line">
         <div className="max-w-[1600px] mx-auto grid grid-cols-2">
           <Link

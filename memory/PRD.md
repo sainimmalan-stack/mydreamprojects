@@ -235,6 +235,14 @@ Premium, production-quality responsive website for residential construction comp
 - Findings: sitemap serves 200 application/xml with 23 URLs, zero redirects, same hostname; http→https 301 and www→apex 308 both clean; DNS A records correct for apex + www; no broken AAAA; TLS cert valid; robots.txt correct
 - Conclusion: server-side is perfect — error is client-side DNS resolution failure, almost certainly negative DNS caching / incomplete propagation (custom domain was connected the same day); advised airplane-mode toggle / DNS flush / wait; escalate to Emergent Support only if it persists 24-48h across networks
 
+## Iteration 36 (2026-08-07) — Aurelia: VISIT PROJECT SITE section
+- Added conditional "Visit Project Site" section to ProjectDetail.jsx (renders ONLY when `project.siteLocation` exists — currently Aurelia only, single occurrence in projects.js)
+- Exact supplied link on GET DIRECTIONS ↗: https://maps.app.goo.gl/VqmwyFVcZNFkjSi76?g_st=ic (target _blank — opens Google Maps app/browser naturally on mobile); resolved the supplied pin (17.5351890, 78.3342360) for a clean embedded map preview via google.com/maps?q=...&output=embed — no location guessed or substituted
+- Display: VISIT PROJECT SITE overline / MY DREAM AURELIA / Ameenpur, Hyderabad / ember GET DIRECTIONS button + bordered map panel (grid 4/8, matches floor-plan section language)
+- Verified desktop 1920 + mobile 390: exact href, map shows the exact pin, no overflow; floor plan and all other project data untouched; no other project renders the section
+- NOTE: goes live on mydreamprojects.in on next redeploy
+
+
 
 - NOTE: the Googlebot-explicit robots.txt reaches production on the user's next redeploy (current prod robots already allows all + https sitemap line)
 
