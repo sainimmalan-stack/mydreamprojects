@@ -208,6 +208,14 @@ Premium, production-quality responsive website for residential construction comp
 - Uploaded photo saved UNMODIFIED at `/app/frontend/public/assets/founders/kotapati-akhil.jpg` (960×1280, 3:4)
 - Akhil's card now uses the same photo-card branch as Sai (identical crop style/spacing/typography: KOTAPATI AKHIL / CO-FOUNDER); mobile 4:5 object-cover crop (348×435 — identical to Sai's), desktop natural h-[440px] (330×440); both cards exactly 442px tall and balanced
 - Portrait img testid made dynamic (`{testid}-portrait`) to avoid duplicates; no bio added; Sai's card and rest of site untouched
+
+## Iteration 31 (2026-08-07) — Founder section upgraded with real story & bios
+- Founders section now structured per user spec: header → OUR STORY ("From engineering friends to building dreams together." + 3 supplied paragraphs, Chennai 2013 origin, complementary strengths) → founder photo cards (photographs and card design untouched) each paired below with a profile block → closing statement
+- Profile blocks: ember focus line ("CO-FOUNDER · CREATIVE & BRAND DIRECTION" / "CO-FOUNDER · PROJECT EXECUTION & OPERATIONS") + 4 short supplied bio paragraphs each (first two in bone, personal notes in concrete); family details (Amulya/Aadhyant, Yamuna/Ayaansh) included exactly as provided — no invented claims
+- Closing: "TWO FRIENDS. TWO COMPLEMENTARY STRENGTHS. ONE SHARED DREAM." (ember accent) + "Since 2013, a friendship built on trust — now building homes together."
+- Monogram fallback branch removed (both founders have photos — dead code); mobile pairing = Sai card → Sai bio → Akhil card → Akhil bio
+- Verified desktop + mobile 390: all story/bio/closing copy present, photos unchanged, no overflow, no walls of text
+
 - Verified desktop + mobile 390: both portraits load, face fully visible, subject in frame, no distortion, no overflow
 
 

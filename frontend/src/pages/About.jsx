@@ -8,8 +8,32 @@ import useSeo from "../hooks/useSeo";
 const EASE = [0.16, 1, 0.3, 1];
 
 const FOUNDERS = [
-  { name: "Nimmala Sai", role: "Co-Founder", testid: "founder-sai", photo: "/assets/founders/nimmala-sai.webp" },
-  { name: "Kotapati Akhil", role: "Co-Founder", testid: "founder-akhil", photo: "/assets/founders/kotapati-akhil.jpg" },
+  {
+    name: "Nimmala Sai",
+    role: "Co-Founder",
+    focus: "Co-Founder · Creative & Brand Direction",
+    testid: "founder-sai",
+    photo: "/assets/founders/nimmala-sai.webp",
+    bio: [
+      "Sai is the creative mind behind much of the identity of My Dream Projects. From project names, colour palettes, brochures and creative concepts to office design and landscaping, he takes an active role in shaping how every project is presented and experienced.",
+      "Rather than being heavily involved in day-to-day site operations, his focus is primarily on creative direction, design thinking and the overall character of the brand and its developments.",
+      "Away from work, Sai enjoys travelling, photography, music and off-roading.",
+      "He is married to Amulya, and they have a son, Aadhyant.",
+    ],
+  },
+  {
+    name: "Kotapati Akhil",
+    role: "Co-Founder",
+    focus: "Co-Founder · Project Execution & Operations",
+    testid: "founder-akhil",
+    photo: "/assets/founders/kotapati-akhil.jpg",
+    bio: [
+      "Akhil is the operational force behind My Dream Projects. He takes the lead on site execution, construction activities, customer coordination, workforce management and the day-to-day responsibilities required to take a project from plan to completion.",
+      "His calm and composed nature, combined with his hands-on involvement at the project level, complements Sai\u2019s creative approach and creates a clear balance between vision and execution within the company.",
+      "Outside work, Akhil is a fitness enthusiast and a strongly family-oriented person, known for his calm-going personality.",
+      "He is married to Yamuna, and they have a son, Ayaansh.",
+    ],
+  },
 ];
 
 const Reveal = ({ children, delay = 0, className = "" }) => (
@@ -135,50 +159,96 @@ const Founders = () => (
         </h2>
       </Reveal>
     </div>
-    <div className="grid sm:grid-cols-2 gap-6 md:gap-10">
+
+    <div data-testid="founders-story" className="grid grid-cols-12 gap-6 mb-14 md:mb-24">
+      <Reveal className="col-span-12 md:col-span-3">
+        <p className="text-[10px] uppercase tracking-[0.4em] text-concrete">Our Story</p>
+      </Reveal>
+      <div className="col-span-12 md:col-span-9 max-w-2xl">
+        <Reveal delay={0.1}>
+          <h3 className="font-display font-semibold tracking-tighter leading-[1.08] text-2xl md:text-4xl text-bone">
+            From engineering friends to{" "}
+            <span className="text-ember">building dreams together.</span>
+          </h3>
+        </Reveal>
+        <Reveal delay={0.2} className="mt-7 md:mt-8 space-y-5">
+          <p className="text-sm md:text-base text-bone/85 leading-relaxed">
+            Sai and Akhil first met in Chennai in 2013 as engineering students. What began as a
+            college friendship gradually grew into a partnership built on trust, shared ambition
+            and complementary strengths.
+          </p>
+          <p className="text-sm md:text-base text-bone/85 leading-relaxed">
+            Years later, that friendship became the foundation of My Dream Projects. From choosing
+            project names and shaping designs to managing construction and delivering homes, they
+            built the company together from the ground up — largely through their own effort,
+            learning and experience, without major backing from their families.
+          </p>
+          <p className="text-sm md:text-base text-concrete leading-relaxed">
+            Today, their different strengths define the way My Dream Projects operates: Sai shapes
+            the creative identity and vision, while Akhil drives execution and operations on the
+            ground.
+          </p>
+        </Reveal>
+      </div>
+    </div>
+
+    <div className="grid sm:grid-cols-2 gap-6 md:gap-10 items-start">
       {FOUNDERS.map((f, i) => (
-        <Reveal key={f.name} delay={0.1 + i * 0.1} className="h-full">
-          {f.photo ? (
-            <div
-              data-testid={f.testid}
-              className="group h-full border border-line hover:border-ember/40 transition-colors duration-500 overflow-hidden flex flex-col md:flex-row bg-coal"
-            >
-              <div className="md:shrink-0 overflow-hidden">
-                <img
-                  src={f.photo}
-                  alt={`${f.name}, Co-Founder of My Dream Projects`}
-                  data-testid={`${f.testid}-portrait`}
-                  loading="lazy"
-                  className="w-full aspect-[4/5] object-cover object-[50%_45%] md:aspect-auto md:h-[440px] md:w-auto block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
-                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-                />
-              </div>
-              <div className="flex flex-col justify-end p-10 md:p-12">
-                <h3 className="font-display font-medium uppercase tracking-tight text-2xl md:text-3xl text-bone">
-                  {f.name}
-                </h3>
-                <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">{f.role}</p>
-              </div>
+        <Reveal key={f.name} delay={0.1 + i * 0.1}>
+          <div
+            data-testid={f.testid}
+            className="group border border-line hover:border-ember/40 transition-colors duration-500 overflow-hidden flex flex-col md:flex-row bg-coal"
+          >
+            <div className="md:shrink-0 overflow-hidden">
+              <img
+                src={f.photo}
+                alt={`${f.name}, Co-Founder of My Dream Projects`}
+                data-testid={`${f.testid}-portrait`}
+                loading="lazy"
+                className="w-full aspect-[4/5] object-cover object-[50%_45%] md:aspect-auto md:h-[440px] md:w-auto block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
+                style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+              />
             </div>
-          ) : (
-            <div
-              data-testid={f.testid}
-              className="group h-full border border-line hover:border-ember/40 transition-colors duration-500 p-10 md:p-16 flex flex-col justify-between min-h-[280px] md:min-h-[340px]"
-            >
-              <span className="font-display font-bold uppercase tracking-tighter text-6xl md:text-8xl text-outline group-hover:text-ember transition-colors duration-700 select-none leading-none">
-                {f.name.split(" ").map((w) => w[0]).join("")}
-              </span>
-              <div>
-                <h3 className="font-display font-medium uppercase tracking-tight text-2xl md:text-3xl text-bone">
-                  {f.name}
-                </h3>
-                <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">{f.role}</p>
-              </div>
+            <div className="flex flex-col justify-end p-10 md:p-12">
+              <h3 className="font-display font-medium uppercase tracking-tight text-2xl md:text-3xl text-bone">
+                {f.name}
+              </h3>
+              <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">{f.role}</p>
             </div>
-          )}
+          </div>
+          <div
+            data-testid={`${f.testid}-profile`}
+            className="border border-t-0 border-line p-8 md:p-12"
+          >
+            <p className="text-[10px] uppercase tracking-[0.35em] text-ember">{f.focus}</p>
+            <div className="mt-6 space-y-4">
+              {f.bio.map((para, j) => (
+                <p
+                  key={j}
+                  className={`text-sm leading-relaxed ${
+                    j < 2 ? "text-bone/80" : "text-concrete"
+                  }`}
+                >
+                  {para}
+                </p>
+              ))}
+            </div>
+          </div>
         </Reveal>
       ))}
     </div>
+
+    <Reveal className="mt-20 md:mt-32 border-t border-line pt-14 md:pt-20">
+      <div data-testid="founders-closing" className="max-w-3xl">
+        <p className="font-display font-semibold uppercase tracking-tighter leading-[1.05] text-2xl md:text-4xl lg:text-5xl text-bone">
+          Two friends. Two complementary strengths.{" "}
+          <span className="text-ember">One shared dream.</span>
+        </p>
+        <p className="text-sm md:text-base text-concrete leading-relaxed mt-6">
+          Since 2013, a friendship built on trust — now building homes together.
+        </p>
+      </div>
+    </Reveal>
   </section>
 );
 
