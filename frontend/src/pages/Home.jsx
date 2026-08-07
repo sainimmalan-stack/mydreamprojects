@@ -47,7 +47,7 @@ const Hero = () => {
 
       <motion.div style={{ y }} className="max-w-[1600px] w-full mx-auto px-5 md:px-10 pb-10 md:pb-16">
         <MaskedLine delay={0.1}>
-          <span className="inline-block bg-ink/45 backdrop-blur px-3 py-1.5 font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.45em] text-ember mb-6 md:mb-8">
+          <span className="inline-block bg-ink/60 backdrop-blur px-3 py-1.5 font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.45em] text-ember mb-6 md:mb-8">
             My Dream Projects
           </span>
         </MaskedLine>
@@ -83,9 +83,10 @@ const Hero = () => {
           <Link
             to="/projects?filter=ongoing"
             data-testid="hero-view-ongoing-button"
-            className="inline-flex items-center gap-3 border border-bone/30 bg-ink/35 backdrop-blur text-bone font-display font-semibold text-[11px] md:text-xs uppercase tracking-[0.2em] px-7 py-4 md:px-8 md:py-5 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
+            className="group inline-flex items-center gap-3 border border-bone/30 bg-ink/35 backdrop-blur text-bone font-display font-semibold text-[11px] md:text-xs uppercase tracking-[0.2em] px-7 py-4 md:px-8 md:py-5 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
           >
             View Ongoing Projects
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-400" strokeWidth={2} />
           </Link>
         </motion.div>
         <motion.div

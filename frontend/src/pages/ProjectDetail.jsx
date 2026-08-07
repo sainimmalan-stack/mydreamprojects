@@ -47,7 +47,7 @@ export default function ProjectDetail() {
             sizes="100vw"
             alt={`${project.title} residential apartment elevation in Ameenpur`}
             data-testid="project-hero-image"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
           />
         ) : (
           <span
@@ -62,7 +62,7 @@ export default function ProjectDetail() {
           <Link
             to="/projects"
             data-testid="back-to-projects-link"
-            className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-concrete hover:text-ember transition-colors duration-300 mb-8"
+            className="flex w-fit items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-concrete hover:text-ember transition-colors duration-300 mb-8"
           >
             <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.5} />
             All Projects

@@ -35,7 +35,7 @@ export default function Projects() {
           transition={{ duration: 0.8, ease: EASE }}
           className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6"
         >
-          The Index — {projectStats.total} Residences
+          The Index — {projectStats.total} Projects
         </motion.p>
         <h1 className="font-display font-bold uppercase tracking-tighter leading-[0.95] text-[13vw] md:text-[8vw] text-bone">
           <span className="block overflow-hidden">
