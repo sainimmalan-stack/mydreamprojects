@@ -8,7 +8,7 @@ import useSeo from "../hooks/useSeo";
 const EASE = [0.16, 1, 0.3, 1];
 
 const FOUNDERS = [
-  { name: "Nimmala Sai", role: "Co-Founder", testid: "founder-sai", photo: "/assets/founders/nimmala-sai.png" },
+  { name: "Nimmala Sai", role: "Co-Founder", testid: "founder-sai", photo: "/assets/founders/nimmala-sai.webp" },
   { name: "Kotapati Akhil", role: "Co-Founder", testid: "founder-akhil" },
 ];
 

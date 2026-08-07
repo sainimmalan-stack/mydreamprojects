@@ -193,6 +193,12 @@ Premium, production-quality responsive website for residential construction comp
 - Founders section: Sai's card is now an editorial split card — portrait at natural aspect (zero cropping: full-width h-auto on mobile, h-[440px] w-auto on desktop) + "NIMMALA SAI / CO-FOUNDER"; Kotapati Akhil's monogram card untouched (portrait NOT added yet, per user)
 - No biography added (awaiting approved bio); no other part of the site changed
 - Verified desktop 1920 + mobile 390: image loads, display ratio exactly 0.563 both viewports, no overflow, Akhil card intact
+
+## Iteration 28 (2026-08-07) — Founder 1 portrait replaced
+- Nimmala Sai portrait swapped per user: old PNG deleted completely, new uploaded image saved unmodified as `/app/frontend/public/assets/founders/nimmala-sai.webp` (1125×2000, 0.562 ratio)
+- Only change in code: file extension in FOUNDERS data (.png → .webp); section design, typography, spacing, layout untouched; Akhil card untouched
+- Verified desktop (248×440 @ 0.562) + mobile 390 (348×619 @ natural ratio, no overflow): new mountain portrait renders, old image gone
+
 - STOPPED per user instruction — waiting for biography + second founder
 
 - P0: **Architectural elevation image for hero** — upload it; code auto-picks it from `/assets/hero-elevation.jpg`
