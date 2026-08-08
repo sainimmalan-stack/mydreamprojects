@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 85 (2026-08-08) — Home hero now Skylark NIGHT elevation
+- HERO_IMAGE swapped elevation-day.webp → elevation-night.webp (existing approved file, unaltered, 4:3 framing identical to day pair so hero composition/proportions unchanged; -800 srcSet variant serves mobile)
+- Verified: testing-agent iteration_13 = 100% PASS — hero serves night webp on desktop (1448w) and night-800 on mobile via srcSet, no day image anywhere in hero, all hero text/buttons intact, Skylark project page Day|Night toggle untouched and working, zero pageerrors/console errors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 84 (2026-08-08) — MEET THE FOUNDERS homepage section
 - New home-founders section between office teaser and CTA: ember eyebrow, "The people behind My Dream Projects." H2, supporting line "Built by two engineering friends. Driven by a shared vision.", two founder cards with existing portraits (nimmala-sai.webp, kotapati-akhil.jpg — separate 4:5 crops, same treatment, hover scale + ember border), names + CO-FOUNDER + focus lines (Sai: Creative Direction · Design · Branding · Vision; Akhil: Operations · Site Execution · Customer Experience), no bios
 - OUR STORY outlined button → /about#founders; About page gained only id="about-founders" + a 120ms-deferred hash-scroll effect (zero visual change, plain /about still lands at top)
