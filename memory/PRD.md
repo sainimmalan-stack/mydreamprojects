@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 92 (2026-08-08) — Founder WhatsApp cards
+- One-tap founder messaging: About founder profile cards ("MESSAGE SAI/AKHIL ON WHATSAPP", after bios) + Home founders teaser cards ("MESSAGE SAI/AKHIL", under focus line) link to each founder's own number — Sai wa.me/917780429845, Akhil wa.me/919566067922 — with a personalized pre-filled message via new contact.js helpers (WHATSAPP_NUMBER_AKHIL, waLinkTo, founderIntroMessage)
+- Review polish applied: Home mobile tap target 15px → 31px (py-2), named group/link hover scoping on both pages
+- Verified: testing-agent iteration_20 = 100% PASS desktop + mobile (all 4 links correct numbers/messages/new-tab) + existing WhatsApp flows (contact greeting, form submit, availability enquiry) regression-clean; post-polish self-check: tap heights 31px, links intact, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 91 (2026-08-08) — About page order: Intro → Founders → Our Story
 - About flow is now: intro headline (Dreams, drawn into reality.) → MEET THE FOUNDERS (photos + full bios, unchanged) → OUR STORY (single section: "From engineering friends to building dreams together." + friendship narrative + the 2020 founding text, all existing copy preserved) → Journey → Philosophy
 - The founders-internal "Our Story" sub-block was moved out of the founders section and merged with the top founding narrative — eliminating what would have become two "Our Story" eyebrows; exactly one remains. No text rewritten or removed

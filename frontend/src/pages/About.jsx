@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
 import { projectStats } from "../data/projects";
-import { waLinkTo, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL } from "../data/contact";
+import { waLinkTo, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -217,18 +217,15 @@ const Founders = () => (
               ))}
             </div>
             <a
-              href={waLinkTo(
-                f.wa,
-                `Hello ${f.firstName}, I came across My Dream Projects and would like to talk to you about your projects.`
-              )}
+              href={waLinkTo(f.wa, founderIntroMessage(f.firstName))}
               target="_blank"
               rel="noopener noreferrer"
               data-testid={`${f.testid}-whatsapp`}
-              className="group inline-flex items-center gap-2.5 mt-8 pt-6 border-t border-line text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+              className="group/link inline-flex items-center gap-2.5 mt-8 pt-6 border-t border-line text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
             >
               <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
               Message {f.firstName} on WhatsApp
-              <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
+              <ArrowUpRight className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
             </a>
           </div>
         </Reveal>

@@ -20,4 +20,7 @@ export const OFFICE = {
 export const waLinkTo = (number, message) =>
   `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 
+export const founderIntroMessage = (firstName) =>
+  `Hello ${firstName}, I came across My Dream Projects and would like to talk to you about your projects.`;
+
 export const waLink = (message) => waLinkTo(WHATSAPP_NUMBER, message);
