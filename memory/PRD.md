@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 86 (2026-08-08) — Global ongoing status colour: red → brand ember orange
+- Ongoing indicators now use the ember design token (#E85D22 / bg-ember, glow rgba(232,93,34)) everywhere: ProjectCard dots, Home "Now Shaping" dots, ProjectMap STATUS_DOT (markers, legend, sidebar, info cards). Completed stays emerald-400 green. Status data/numbers/coordinates/office marker untouched. Only remaining red-* in src: shadcn toast destructive variant (unrelated)
+- Verified: testing-agent iteration_14 = 100% PASS desktop + mobile — 6 ongoing dots orange and 13 completed green on /projects; 40 status dots on /project-map (13 ember + 27 emerald, 0 red); detail pages clean; zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 85 (2026-08-08) — Home hero now Skylark NIGHT elevation
 - HERO_IMAGE swapped elevation-day.webp → elevation-night.webp (existing approved file, unaltered, 4:3 framing identical to day pair so hero composition/proportions unchanged; -800 srcSet variant serves mobile)
 - Verified: testing-agent iteration_13 = 100% PASS — hero serves night webp on desktop (1448w) and night-800 on mobile via srcSet, no day image anywhere in hero, all hero text/buttons intact, Skylark project page Day|Night toggle untouched and working, zero pageerrors/console errors
