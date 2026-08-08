@@ -255,7 +255,7 @@ const SelectedWork = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {featured.map((p, i) => (
             <div key={p.slug} className={i % 3 === 1 ? "lg:mt-14" : ""}>
-              <ProjectCard project={p} homeMeta note={false} />
+              <ProjectCard project={p} homeMeta />
             </div>
           ))}
         </div>

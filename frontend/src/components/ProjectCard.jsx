@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sun, Moon } from "lucide-react";
+import ComingSoonElevation from "./ComingSoonElevation";
 
 const TONES = [
   { surface: "bg-coal", index: "text-outline", title: "text-bone", meta: "text-concrete" },
@@ -9,7 +10,7 @@ const TONES = [
   { surface: "bg-[#17170f]", index: "text-outline", title: "text-bone", meta: "text-concrete" },
 ];
 
-export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note = true, homeMeta = false }) => {
+export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMeta = false }) => {
   const t = TONES[tone % TONES.length];
   const [mode, setMode] = useState("day");
   const [nightTouched, setNightTouched] = useState(false);
@@ -116,11 +117,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
               className="texture-img absolute inset-0 w-full h-full object-cover"
             />
           ) : (
-            <span
-              className={`absolute -bottom-6 -left-2 font-display font-bold leading-none tracking-tighter text-[9rem] md:text-[11rem] select-none ${t.index} group-hover:-translate-y-2 transition-transform duration-700`}
-            >
-              {project.index}
-            </span>
+            <ComingSoonElevation project={project} compact />
           )}
           <span
             className={`absolute top-4 right-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] ${
@@ -136,11 +133,6 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
             />
             {project.status}
           </span>
-          {note && !project.cover && (
-            <span className={`absolute bottom-4 right-4 text-[9px] uppercase tracking-[0.3em] ${t.meta} opacity-70`}>
-              Photography coming soon
-            </span>
-          )}
         </div>
         <div className="flex items-start justify-between pt-5">
           <div>

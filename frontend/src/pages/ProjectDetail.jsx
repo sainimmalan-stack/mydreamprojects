@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import FloorPlanViewer from "../components/FloorPlanViewer";
 import DayNightImage from "../components/DayNightImage";
 import ElevationViewer from "../components/ElevationViewer";
+import ComingSoonElevation from "../components/ComingSoonElevation";
 import { getProject, getAdjacent } from "../data/projects";
 import { waLink } from "../data/contact";
 import useSeo from "../hooks/useSeo";
@@ -298,18 +299,7 @@ export default function ProjectDetail() {
             transition={{ duration: 0.9, ease: EASE }}
           >
             <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-6">Elevation</p>
-            <div className="relative border border-line overflow-hidden elevation-fallback aspect-[16/10] md:aspect-[16/7] flex flex-col items-center justify-center gap-4">
-              <span className="w-2 h-2 bg-ember animate-pulse" />
-              <p className="text-[10px] md:text-xs uppercase tracking-[0.45em] text-concrete">
-                Architectural Elevation
-              </p>
-              <p
-                data-testid="elevation-coming-soon"
-                className="font-display font-bold uppercase tracking-tighter leading-none text-4xl md:text-6xl text-outline select-none"
-              >
-                Coming Soon
-              </p>
-            </div>
+            <ComingSoonElevation project={project} />
           </motion.div>
         </section>
       )}

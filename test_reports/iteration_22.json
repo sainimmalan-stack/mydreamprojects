@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend-only verification of ComingSoonElevation placeholder for 6 ongoing MyDream projects. All acceptance criteria verified: detail pages, listing (Ongoing filter), completed spot-checks, mobile, distinct silhouettes, and zero pageerrors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Home page 'On Site, Right Now' ongoing section is a text list layout, NOT ProjectCard, so blueprint treatment is not visible there. The review-request mention of 'Home Now Shaping ongoing cards show blueprint' does not apply to current Home implementation. If a card-style ongoing section is desired on Home, main agent should wire ProjectCard for those 6 slugs; otherwise this is by design."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified via public REACT_APP_BACKEND_URL. Tests performed: (1) 6 detail pages my-dream-{aurelia,elysium,aura,echelon,vale,ivy} — data-testid=elevation-coming-soon present, correct Project index 14-19, 'Coming Soon' outline text, 'Ongoing' label with ember pulse dot, NO day/night toggle in elevation section, VIEW FULL PLAN + DOWNLOAD PDF + TOTAL FLATS intact. (2) /projects with Ongoing filter — 6 card-blueprint-my-dream-* testids rendered, no 'Photography coming soon' text anywhere. (3) Completed detail pages my-dream-nest & my-dream-zenith — Day/Night buttons present, no blueprint container, hero images present. (4) Distinct silhouettes: extracted longest SVG path 'd' per blueprint — 6/6 unique. (5) Mobile 390x844 — ivy detail renders cleanly, no horizontal overflow on detail or listing. (6) Zero pageerrors captured across all navigations. Screenshot of ongoing filter view confirms premium technical-drawing look (dark ink bg, subtle grid, stepped wireframe, ember accent on tallest step) — not a real building rendering.",
+  "test_credentials": "n/a"
+}
