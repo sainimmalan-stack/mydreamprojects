@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 87 (2026-08-08) — Nav cleanup + PROJECT MAP → OUR MAP rename
+- Mobile menu numeric labels (01–05) removed — menu now reads HOME / PROJECTS / OUR MAP / ABOUT / CONTACT; desktop nav unchanged in structure
+- Every visible "Project Map" renamed "Our Map": Navbar LINKS, Footer footer-map-link, ProjectDetail VIEW ON OUR MAP button, ProjectMap SEO/browser title "Our Map — My Dream Projects". Route /project-map, sitemap URL, all map functionality/coordinates/markers/filters unchanged
+- Verified: testing-agent iteration_15 = 100% PASS — mobile menu (no numerics, Let's Talk + Est. 2020 footer intact), desktop nav + active state, footer link, detail-page button + deep link, ZERO remaining visible "PROJECT MAP" instances across all pages, full map regression clean, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 86 (2026-08-08) — Global ongoing status colour: red → brand ember orange
 - Ongoing indicators now use the ember design token (#E85D22 / bg-ember, glow rgba(232,93,34)) everywhere: ProjectCard dots, Home "Now Shaping" dots, ProjectMap STATUS_DOT (markers, legend, sidebar, info cards). Completed stays emerald-400 green. Status data/numbers/coordinates/office marker untouched. Only remaining red-* in src: shadcn toast destructive variant (unrelated)
 - Verified: testing-agent iteration_14 = 100% PASS desktop + mobile — 6 ongoing dots orange and 13 completed green on /projects; 40 status dots on /project-map (13 ember + 27 emerald, 0 red); detail pages clean; zero pageerrors
