@@ -184,6 +184,14 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 94 (2026-08-08) — Ongoing project blueprint placeholders
+- New shared component components/ComingSoonElevation.jsx: premium architectural "Elevation Coming Soon" treatment — dark ink background, faint technical grid, per-project seeded stepped wireframe silhouette (6 unique profiles via index-seeded rng), floor lines driven by G+5/G+4 data, dimension ticks, sparing ember accent on tallest step. Hierarchy: PROJECT NN → name (detail version) → ELEVATION / COMING SOON outline → ONGOING ember pulse
+- REPLACEABLE ASSET design: renders only while project has no cover/elevationModes — uploading a real elevation later auto-replaces the placeholder everywhere with zero layout changes
+- Wired into ProjectDetail elevation section (full) + ProjectCard (compact, cards on listing/home). Old placeholder (blank box, ghost index number, "Photography coming soon" note) fully removed; stale `note` prop cleaned from ProjectCard + Home caller
+- Home "On Site, Right Now" ongoing section is a text-list (no imagery) — untouched by design
+- Verified: testing-agent iteration_22 = 100% PASS — all 6 detail pages (correct numbers 14-19, names, no day/night toggle, floor plans + TOTAL FLATS intact), 6 unique card silhouettes, completed projects untouched, mobile clean, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 93 (2026-08-08) — Founder tap-to-call links
 - CALL SAI / CALL AKHIL links beside each founder's WhatsApp link on About profile cards + Home teaser cards; tel:+917780429845 (Sai) / tel:+919566067922 (Akhil) from PHONE_SAI/PHONE_AKHIL constants; Phone lucide icon, matching subtle styling, tap targets ~39px after padding bump
 - Two hot-reload race bugs caught and fixed mid-task (About import line, Akhil tel field) — verified fixed
