@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 90 (2026-08-08) — Contact page order: Details → Office → Form
+- Contact page restructured: (1) contact details + phones + WhatsApp, (2) VISIT OUR OFFICE photo section, (3) enquiry form as the FINAL section before the footer. The old mini "Visit Our Office" block inside the details column was removed to avoid a duplicate heading/directions button (office-section-directions covers it with the same MAPS_URL). Form fields/functionality untouched; MapPin import cleaned up
+- About page already clean from iteration 89 (no office section); re-verified
+- Verified: testing-agent iteration_18 = 100% PASS desktop + mobile — section order confirmed (details 951 → office 1082 → form 2333 desktop; same on mobile), single Visit Our Office heading, office photos + ftid directions intact, form submits correct wa.me URL, empty-field error works, no overflow, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 89 (2026-08-08) — Office section moved About → Contact
 - Contact page gained contact-office section after the contact grid: VISIT OUR OFFICE eyebrow, user-specified copy, exterior photo primary (62%) + interior secondary (38%), "MY DREAM PROJECTS — OFFICE / STUDIO / Ameenpur, Hyderabad" caption + ember GET DIRECTIONS (exact office MAPS_URL). New OfficePhoto/OfficeSection components in Contact.jsx replicate the About gallery treatment
 - About page: entire about-office section + now-unused OfficeImage helper + stale useState import removed; founders/bios/story/journey/philosophy untouched; /about#founders deep link still works. Home office teaser is separate and remains
