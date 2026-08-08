@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 95 (2026-08-08) — Blueprint treatment on Our Map popup tile
+- Blueprint SVG exported from ComingSoonElevation and reused in the map InfoCard fallback tile (map-thumb-blueprint-<slug>) for the 6 ongoing projects — silhouette linework behind the COMING SOON label; completed projects keep photo thumbnails; office card photo unchanged
+- Verified: testing-agent iteration_23 = 100% PASS mobile + desktop (unique silhouettes per project in tiles, photos intact for completed, office photo intact, zero pageerrors)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 94 (2026-08-08) — Ongoing project blueprint placeholders
 - New shared component components/ComingSoonElevation.jsx: premium architectural "Elevation Coming Soon" treatment — dark ink background, faint technical grid, per-project seeded stepped wireframe silhouette (6 unique profiles via index-seeded rng), floor lines driven by G+5/G+4 data, dimension ticks, sparing ember accent on tallest step. Hierarchy: PROJECT NN → name (detail version) → ELEVATION / COMING SOON outline → ONGOING ember pulse
 - REPLACEABLE ASSET design: renders only while project has no cover/elevationModes — uploading a real elevation later auto-replaces the placeholder everywhere with zero layout changes
