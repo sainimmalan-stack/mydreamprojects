@@ -4,7 +4,7 @@ import { motion, animate, useScroll, useTransform, useReducedMotion } from "fram
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { getProject, projectStats } from "../data/projects";
-import { waLink, WHATSAPP_GREETING, PHONE_SAI, MAPS_URL } from "../data/contact";
+import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -428,12 +428,16 @@ const FoundersTeaser = () => (
             focus: "Creative Direction · Design · Branding · Vision",
             photo: "/assets/founders/nimmala-sai.webp",
             testid: "home-founder-sai",
+            firstName: "Sai",
+            wa: WHATSAPP_NUMBER,
           },
           {
             name: "Kotapati Akhil",
             focus: "Operations · Site Execution · Customer Experience",
             photo: "/assets/founders/kotapati-akhil.jpg",
             testid: "home-founder-akhil",
+            firstName: "Akhil",
+            wa: WHATSAPP_NUMBER_AKHIL,
           },
         ].map((f, i) => (
           <Reveal key={f.name} delay={0.1 + i * 0.1}>
@@ -457,6 +461,20 @@ const FoundersTeaser = () => (
                 </h3>
                 <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">Co-Founder</p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-concrete mt-4">{f.focus}</p>
+                <a
+                  href={waLinkTo(
+                    f.wa,
+                    `Hello ${f.firstName}, I came across My Dream Projects and would like to talk to you about your projects.`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid={`${f.testid}-whatsapp`}
+                  className="group/link inline-flex items-center gap-2 mt-6 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
+                  Message {f.firstName}
+                  <ArrowUpRight className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
+                </a>
               </div>
             </div>
           </Reveal>

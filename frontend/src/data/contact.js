@@ -1,6 +1,7 @@
 export const PHONE_SAI = { name: "Nimmala Sai", display: "+91 77804 29845", tel: "tel:+917780429845" };
 export const PHONE_AKHIL = { name: "Kotapati Akhil", display: "+91 95660 67922", tel: "tel:+919566067922" };
 export const WHATSAPP_NUMBER = "917780429845";
+export const WHATSAPP_NUMBER_AKHIL = "919566067922";
 export const WHATSAPP_GREETING =
   "Hello My Dream Projects, I’m interested in knowing more about your residential projects in Ameenpur.";
 export const MAPS_URL =
@@ -16,5 +17,7 @@ export const OFFICE = {
   lng: 78.3262031,
 };
 
-export const waLink = (message) =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+export const waLinkTo = (number, message) =>
+  `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+export const waLink = (message) => waLinkTo(WHATSAPP_NUMBER, message);
