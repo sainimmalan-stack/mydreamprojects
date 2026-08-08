@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 93 (2026-08-08) — Founder tap-to-call links
+- CALL SAI / CALL AKHIL links beside each founder's WhatsApp link on About profile cards + Home teaser cards; tel:+917780429845 (Sai) / tel:+919566067922 (Akhil) from PHONE_SAI/PHONE_AKHIL constants; Phone lucide icon, matching subtle styling, tap targets ~39px after padding bump
+- Two hot-reload race bugs caught and fixed mid-task (About import line, Akhil tel field) — verified fixed
+- Verified: testing-agent iteration_21 = 100% PASS desktop + mobile (all 8 tel: hrefs exact, WhatsApp links preserved, About section order intact, zero pageerrors)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 92 (2026-08-08) — Founder WhatsApp cards
 - One-tap founder messaging: About founder profile cards ("MESSAGE SAI/AKHIL ON WHATSAPP", after bios) + Home founders teaser cards ("MESSAGE SAI/AKHIL", under focus line) link to each founder's own number — Sai wa.me/917780429845, Akhil wa.me/919566067922 — with a personalized pre-filled message via new contact.js helpers (WHATSAPP_NUMBER_AKHIL, waLinkTo, founderIntroMessage)
 - Review polish applied: Home mobile tap target 15px → 31px (py-2), named group/link hover scoping on both pages

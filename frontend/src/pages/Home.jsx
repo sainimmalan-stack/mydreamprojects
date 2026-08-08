@@ -469,7 +469,7 @@ const FoundersTeaser = () => (
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid={`${f.testid}-whatsapp`}
-                    className="group/link inline-flex items-center gap-2 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+                    className="group/link inline-flex items-center gap-2 py-3 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
                     Message {f.firstName}
@@ -478,7 +478,7 @@ const FoundersTeaser = () => (
                   <a
                     href={f.tel}
                     data-testid={`${f.testid}-call`}
-                    className="inline-flex items-center gap-2 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+                    className="inline-flex items-center gap-2 py-3 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
                   >
                     <Phone className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
                     Call {f.firstName}
