@@ -1,0 +1,19 @@
+{
+  "summary": "Frontend-only verification of ProjectMap InfoCard thumbnail consistency: ongoing projects (6) now show Blueprint linework tile with 'Coming Soon' label via data-testid=map-thumb-blueprint-<slug>; completed projects retain photo thumbnails; office card still shows office photo. Tested on mobile 390x844 and desktop 1920x1080.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified via public REACT_APP_BACKEND_URL /project-map. (1) MOBILE 390x844: tapped map-marker-my-dream-ivy — map-info-card renders with map-thumb-blueprint-my-dream-ivy tile (SVG Blueprint + 'Coming Soon' outline text; no <img> in card left tile), tile box ~95x166 px, legible and not distorted; card layout intact (title/index/status/actions). Tapping ongoing my-dream-aura also shows its own blueprint; ivy vs aura longest SVG path 'd' differ (unique silhouettes per project). (2) DESKTOP 1920x1080: same verified via list items — my-dream-ivy shows blueprint tile (no img, src=null); my-dream-skylark completed shows photo img /assets/projects/my-dream-skylark/elevation-day-800.webp; my-dream-nest completed shows /assets/projects/my-dream-nest/elevation-day-800.webp. Office marker/card renders with map-office-thumb src=/assets/office/office-exterior-800.webp on both viewports. (3) Zero pageerrors captured across navigations. Note: initial marker-based test showed a stale/off-screen click issue on mobile for markers after aura fly-to; re-tested via desktop sidebar list (deterministic) to confirm nest/skylark photos — pass.",
+  "test_credentials": "n/a"
+}

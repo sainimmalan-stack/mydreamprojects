@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
 import { projects } from "../data/projects";
 import { OFFICE, MAPS_URL } from "../data/contact";
+import { Blueprint } from "../components/ComingSoonElevation";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -84,8 +85,12 @@ const InfoCard = ({ project, onClose }) => (
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full elevation-fallback flex items-center justify-center min-h-[96px]">
-            <span className="font-display font-bold uppercase tracking-tighter text-[9px] text-outline select-none text-center leading-tight px-1">
+          <div
+            data-testid={`map-thumb-blueprint-${project.slug}`}
+            className="relative w-full h-full min-h-[96px] bg-ink overflow-hidden flex items-center justify-center"
+          >
+            <Blueprint project={project} />
+            <span className="relative z-10 font-display font-bold uppercase tracking-tighter text-[9px] text-outline select-none text-center leading-tight px-1 bg-ink/55">
               Coming Soon
             </span>
           </div>

@@ -59,7 +59,7 @@ const useBlueprint = (project) =>
     return { d, floorLines, mullions, accent, base, x0, x1, gridX };
   }, [project]);
 
-const Blueprint = ({ project }) => {
+export const Blueprint = ({ project }) => {
   const { d, floorLines, mullions, accent, base, x0, x1, gridX } = useBlueprint(project);
   return (
     <svg
