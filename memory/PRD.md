@@ -723,3 +723,10 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Still Pending
 - P2: Site Progress Updates (dated construction photos per ongoing project) — awaiting user assets/answers
+
+## 2026-08-08 — Landowner Auto-Reply (Meta WhatsApp Cloud API) — BACKEND READY, AWAITING META CREDENTIALS
+- New endpoint `POST /api/enquiries/landowner` in `backend/server.py`: validates (opt-in required, Indian E.164 phone via phonenumbers), stores enquiry in `landowner_enquiries` collection, then sends WhatsApp confirmation via Meta Cloud API Utility template `landowner_enquiry_confirmation` (params: {{1}} name, {{2}} location).
+- Reads `META_ACCESS_TOKEN` + `META_PHONE_NUMBER_ID` from backend/.env; returns whatsapp: accepted | not_configured | 502 failed. Graph API pinned to v26.0.
+- Frontend landowner form: added mandatory opt-in checkbox, submits to backend BEFORE wa.me handoff, success copy varies on whether auto-reply was accepted.
+- Approved template text (user-approved draft): "Hi {{1}}, thank you for reaching out to My Dream Projects about your land at {{2}}. Sai or Akhil will personally call you within 24 hours to discuss the partnership. — My Dream Projects, Ameenpur"
+- PENDING USER: Meta for Developers app + Coexistence onboarding for +91 77804 29845 (keeps Business app working), System User token, Phone Number ID, template creation+approval. Tested: valid/invalid curl cases, full browser flow, DB persistence.

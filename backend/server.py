@@ -1,13 +1,16 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import re
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from typing import List, Optional
 import uuid
+import httpx
+import phonenumbers
 from datetime import datetime, timezone
 
 
@@ -65,6 +68,122 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+# ---------------- Landowner enquiries + WhatsApp auto-reply (Meta Cloud API) ----------------
+
+META_GRAPH_VERSION = "v26.0"
+META_TEMPLATE_NAME = "landowner_enquiry_confirmation"
+META_ACCESS_TOKEN = os.environ.get("META_ACCESS_TOKEN")
+META_PHONE_NUMBER_ID = os.environ.get("META_PHONE_NUMBER_ID")
+
+
+class LandownerEnquiryIn(BaseModel):
+    name: str = Field(min_length=2, max_length=100)
+    phone: str = Field(min_length=8, max_length=20)
+    email: Optional[str] = Field(default=None, max_length=200)
+    location: str = Field(min_length=2, max_length=200)
+    area: Optional[str] = Field(default=None, max_length=100)
+    message: Optional[str] = Field(default=None, max_length=3000)
+    whatsapp_opt_in: bool = False
+
+
+def indian_e164(value: str) -> str:
+    # Accept 10-digit Indian mobile numbers or an already international number.
+    raw = re.sub(r"[^0-9+]", "", value)
+    if raw.startswith("0") and len(raw) == 11:
+        raw = "+91" + raw[1:]
+    elif raw.isdigit() and len(raw) == 10:
+        raw = "+91" + raw
+    elif raw.startswith("91") and len(raw) == 12:
+        raw = "+" + raw
+    if not raw.startswith("+"):
+        raise ValueError("Use an Indian mobile number such as +919876543210")
+    try:
+        n = phonenumbers.parse(raw, None)
+        if not phonenumbers.is_valid_number(n):
+            raise ValueError
+        return phonenumbers.format_number(n, phonenumbers.PhoneNumberFormat.E164)
+    except Exception:
+        raise ValueError("Invalid phone number")
+
+
+async def send_landowner_confirmation(to: str, name: str, location: str) -> dict:
+    # A website form submit does not open WhatsApp's 24h customer-service window,
+    # so the confirmation is always sent as the approved Utility template.
+    url = (
+        f"https://graph.facebook.com/{META_GRAPH_VERSION}/"
+        f"{META_PHONE_NUMBER_ID}/messages"
+    )
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": to,
+        "type": "template",
+        "template": {
+            "name": META_TEMPLATE_NAME,
+            "language": {"code": "en"},
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {"type": "text", "text": name},
+                        {"type": "text", "text": location},
+                    ],
+                }
+            ],
+        },
+    }
+    headers = {"Authorization": f"Bearer {META_ACCESS_TOKEN}"}
+    async with httpx.AsyncClient(timeout=15) as http:
+        response = await http.post(url, json=payload, headers=headers)
+    if response.status_code >= 400:
+        logger.error("WhatsApp API error %s: %s", response.status_code, response.text[:1000])
+        raise HTTPException(502, "Enquiry saved, but WhatsApp confirmation could not be sent")
+    return response.json()  # acceptance, not proof of delivery
+
+
+@api_router.post("/enquiries/landowner")
+async def create_landowner_enquiry(data: LandownerEnquiryIn):
+    if not data.whatsapp_opt_in:
+        raise HTTPException(400, "WhatsApp confirmation opt-in is required")
+    try:
+        phone = indian_e164(data.phone)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
+
+    doc = data.model_dump()
+    doc.update(
+        {
+            "phone_e164": phone,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "whatsapp_status": "pending",
+        }
+    )
+    result = await db.landowner_enquiries.insert_one(doc)
+    enquiry_id = str(result.inserted_id)
+
+    if not (META_ACCESS_TOKEN and META_PHONE_NUMBER_ID):
+        await db.landowner_enquiries.update_one(
+            {"_id": result.inserted_id},
+            {"$set": {"whatsapp_status": "not_configured"}},
+        )
+        return {"id": enquiry_id, "whatsapp": "not_configured"}
+
+    try:
+        sent = await send_landowner_confirmation(phone, data.name.strip(), data.location.strip())
+        message_id = sent.get("messages", [{}])[0].get("id")
+        await db.landowner_enquiries.update_one(
+            {"_id": result.inserted_id},
+            {"$set": {"whatsapp_status": "accepted", "whatsapp_message_id": message_id}},
+        )
+    except HTTPException:
+        await db.landowner_enquiries.update_one(
+            {"_id": result.inserted_id},
+            {"$set": {"whatsapp_status": "failed"}},
+        )
+        raise
+
+    return {"id": enquiry_id, "whatsapp": "accepted"}
+
 
 # Include the router in the main app
 app.include_router(api_router)

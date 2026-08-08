@@ -562,23 +562,30 @@ const FoundersTeaser = () => (
   </section>
 );
 
-const LANDOWNER_INITIAL = { name: "", phone: "", email: "", location: "", area: "", message: "" };
+const LANDOWNER_INITIAL = { name: "", phone: "", email: "", location: "", area: "", message: "", optIn: false };
 
 const Landowner = () => {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [waUrl, setWaUrl] = useState("");
+  const [autoReply, setAutoReply] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState(LANDOWNER_INITIAL);
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim() || !form.location.trim()) {
       setError("Please fill in your name, phone number and land location.");
       return;
     }
+    if (!form.optIn) {
+      setError("Please agree to receive a WhatsApp confirmation about your enquiry.");
+      return;
+    }
     setError("");
+    setSubmitting(true);
     const message = [
       "Hello My Dream Projects,",
       "I own a plot of land and would like to discuss a development partnership.",
@@ -591,9 +598,31 @@ const Landowner = () => {
     ]
       .filter(Boolean)
       .join("\n");
+    let confirmed = false;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/enquiries/landowner`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim() || null,
+          location: form.location.trim(),
+          area: form.area.trim() || null,
+          message: form.message.trim() || null,
+          whatsapp_opt_in: form.optIn,
+        }),
+      });
+      const body = await res.json().catch(() => ({}));
+      confirmed = res.ok && body.whatsapp === "accepted";
+    } catch {
+      confirmed = false;
+    }
     const url = waLink(message);
     window.open(url, "_blank", "noopener,noreferrer");
     setWaUrl(url);
+    setAutoReply(confirmed);
+    setSubmitting(false);
     setSent(true);
   };
 
@@ -602,6 +631,7 @@ const Landowner = () => {
     if (!v) {
       setSent(false);
       setError("");
+      setAutoReply(false);
     }
   };
 
@@ -670,8 +700,9 @@ const Landowner = () => {
                         Your enquiry is ready.
                       </DialogTitle>
                       <DialogDescription className="text-sm text-concrete leading-relaxed mt-4 max-w-sm mx-auto">
-                        We've opened WhatsApp with your land details pre-filled — just press send
-                        and our founders will get back to you.
+                        {autoReply
+                          ? "We've received your details and a WhatsApp confirmation is on its way to your number. We've also opened WhatsApp with your land details pre-filled — just press send."
+                          : "We've opened WhatsApp with your land details pre-filled — just press send and our founders will get back to you."}
                       </DialogDescription>
                       <a
                         href={waUrl}
@@ -726,16 +757,30 @@ const Landowner = () => {
                           <label htmlFor="landowner-message" className={fieldLabel}>Message</label>
                           <textarea id="landowner-message" data-testid="landowner-message-input" rows={3} value={form.message} onChange={set("message")} placeholder="Anything else we should know about the land?" className="field-input resize-none" />
                         </div>
+                        <label className="flex items-start gap-3 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            data-testid="landowner-optin-checkbox"
+                            checked={form.optIn}
+                            onChange={(e) => setForm({ ...form, optIn: e.target.checked })}
+                            className="mt-0.5 w-4 h-4 shrink-0 accent-[#E85D22] cursor-pointer"
+                          />
+                          <span className="text-xs text-concrete leading-relaxed tracking-wide">
+                            I agree to receive a WhatsApp confirmation from My Dream Projects
+                            regarding my enquiry.
+                          </span>
+                        </label>
                         {error && (
                           <p data-testid="landowner-form-error" className="text-ember text-xs tracking-wide">{error}</p>
                         )}
                         <button
                           type="submit"
                           data-testid="landowner-submit-button"
-                          className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-7 py-4 hover:bg-bone transition-colors duration-400"
+                          disabled={submitting}
+                          className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-7 py-4 hover:bg-bone transition-colors duration-400 disabled:opacity-60 disabled:pointer-events-none"
                         >
                           <MessageCircle className="w-4 h-4" strokeWidth={2} />
-                          Continue on WhatsApp
+                          {submitting ? "Sending…" : "Continue on WhatsApp"}
                         </button>
                       </form>
                     </>
