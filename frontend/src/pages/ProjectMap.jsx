@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Map as MapLibreMap, Marker as MapLibreMarker, LngLatBounds, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, X, LocateFixed, Building2 } from "lucide-react";
+import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
 import { projects } from "../data/projects";
 import { OFFICE, MAPS_URL } from "../data/contact";
 import useSeo from "../hooks/useSeo";
@@ -152,8 +152,13 @@ const OfficeCard = ({ onClose }) => (
     className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
   >
     <div className="flex">
-      <div className="w-[92px] md:w-[104px] shrink-0 bg-ember/10 border-r border-line flex items-center justify-center">
-        <Building2 className="w-6 h-6 text-ember" strokeWidth={1.5} />
+      <div className="w-[92px] md:w-[104px] shrink-0 relative overflow-hidden border-r border-line">
+        <img
+          src="/assets/office/office-exterior-800.webp"
+          alt="My Dream Projects — Office"
+          data-testid="map-office-thumb"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
       <div className="flex-1 p-4 md:p-5">
         <div className="flex items-start justify-between gap-3">

@@ -1,0 +1,14 @@
+{
+  "summary": "Verified office popup photo swap on /project-map. Real /assets/office/office-exterior-800.webp loads (HTTP 200 image/webp 131KB, naturalWidth=800, object-fit=cover) in both mobile (390x844) and desktop (1920) card thumbnail area (91x191 and 103x164 rendered). Orange office marker unchanged (28x28 pill, rgb(232,93,34)). map-office-directions still resolves to google.com/maps URL containing ftid=0x3bcb8d6d4959d47b. Card text (OFFICE, STUDIO, MY DREAM PROJECTS, AMEENPUR, HYDERABAD, GET DIRECTIONS, CONTACT) intact. Zero pageerrors. No horizontal overflow.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Office photo swap verified on iteration 11. OfficeCard uses map-office-thumb <img> with object-cover on /assets/office/office-exterior-800.webp. Marker testid=map-marker-office. MAPS_URL from /app/frontend/src/data/contact.js contains ftid=0x3bcb8d6d4959d47b."
+}
