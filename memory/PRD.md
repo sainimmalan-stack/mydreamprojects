@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 84 (2026-08-08) — MEET THE FOUNDERS homepage section
+- New home-founders section between office teaser and CTA: ember eyebrow, "The people behind My Dream Projects." H2, supporting line "Built by two engineering friends. Driven by a shared vision.", two founder cards with existing portraits (nimmala-sai.webp, kotapati-akhil.jpg — separate 4:5 crops, same treatment, hover scale + ember border), names + CO-FOUNDER + focus lines (Sai: Creative Direction · Design · Branding · Vision; Akhil: Operations · Site Execution · Customer Experience), no bios
+- OUR STORY outlined button → /about#founders; About page gained only id="about-founders" + a 120ms-deferred hash-scroll effect (zero visual change, plain /about still lands at top)
+- Verified: testing-agent iteration_12 = 100% PASS desktop + mobile — section placement, portraits load undistorted, hover interactions, deep-link lands on founders with bios, all home sections + About content intact, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 83 (2026-08-08) — Office map card uses real office photo
 - OfficeCard left cell now shows the real office photo (/assets/office/office-exterior-800.webp, map-office-thumb, object-cover crop into the existing 92/104px area — no distortion); unused Building2 import removed; orange icon map marker, card text, buttons, coordinates, project data all unchanged
 - Verified: testing-agent iteration_11 = 100% PASS mobile + desktop (photo HTTP 200, 800×600 natural, clean crop, directions href still exact office place URL, zero pageerrors)
