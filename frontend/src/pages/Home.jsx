@@ -352,7 +352,7 @@ const BuildingNext = () => {
                   </span>
                 </span>
                 <span className="hidden md:flex md:col-span-3 items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-ember">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_7px_2px_rgba(239,68,68,0.45)] animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-ember shadow-[0_0_7px_2px_rgba(232,93,34,0.45)] animate-pulse" />
                   Ongoing
                 </span>
                 <span className="col-span-2 justify-self-end">

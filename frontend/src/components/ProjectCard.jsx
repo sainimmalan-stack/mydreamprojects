@@ -130,7 +130,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, note =
             <span
               className={`w-1.5 h-1.5 rounded-full ${
                 project.status === "ongoing"
-                  ? "bg-red-500 shadow-[0_0_7px_2px_rgba(239,68,68,0.45)] animate-pulse"
+                  ? "bg-ember shadow-[0_0_7px_2px_rgba(232,93,34,0.45)] animate-pulse"
                   : "bg-emerald-400 shadow-[0_0_7px_2px_rgba(52,211,153,0.45)]"
               }`}
             />

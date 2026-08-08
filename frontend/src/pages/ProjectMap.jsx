@@ -48,7 +48,7 @@ const MAP_STYLE = {
 
 const STATUS_DOT = {
   completed: "bg-emerald-400 shadow-[0_0_6px_1.5px_rgba(52,211,153,0.5)]",
-  ongoing: "bg-red-500 shadow-[0_0_6px_1.5px_rgba(239,68,68,0.5)]",
+  ongoing: "bg-ember shadow-[0_0_6px_1.5px_rgba(232,93,34,0.55)]",
 };
 
 const thumbOf = (p) =>
