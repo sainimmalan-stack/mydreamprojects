@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 88 (2026-08-08) — Office photos replaced with 2 new uploads
+- New night-exterior (lit signage, 1448×1086) now at office-exterior.webp + -800/-1600 variants; new interior (1672×941) at office-interior.webp + -800 — re-encoded webp q90-92, same file paths so every surface updated at once (Home office teaser, About office gallery ×2, Our Map office popup thumb = night exterior as primary). srcSet descriptors corrected to real widths (1448w/1672w). No AI edits, no layout/design/link/coordinate changes; orange office marker unchanged
+- Verified: testing-agent iteration_16 = 100% PASS desktop + mobile — all 3 surfaces show the new photos sharp/undistorted, zero old imagery anywhere, office GET DIRECTIONS intact, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 87 (2026-08-08) — Nav cleanup + PROJECT MAP → OUR MAP rename
 - Mobile menu numeric labels (01–05) removed — menu now reads HOME / PROJECTS / OUR MAP / ABOUT / CONTACT; desktop nav unchanged in structure
 - Every visible "Project Map" renamed "Our Map": Navbar LINKS, Footer footer-map-link, ProjectDetail VIEW ON OUR MAP button, ProjectMap SEO/browser title "Our Map — My Dream Projects". Route /project-map, sitemap URL, all map functionality/coordinates/markers/filters unchanged
