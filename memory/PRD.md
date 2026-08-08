@@ -184,6 +184,14 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 79 (2026-08-08) — Google Maps "Unsupported link" fix (all 19 project links)
+- CAUSE: the supplied maps.app.goo.gl short links carried an iOS share parameter (?g_st=ic) that triggers Google's "Unsupported link" error in several browsers/contexts
+- FIX: resolved every short link to its final google.com/maps HTTPS destination (curl -L with mobile UA) and stored the cleaned canonical URL (kept only q + ftid params, tracking params stripped) as siteLocation.url in projects.js. Completed projects now point to their exact registered Google Places (place name + ftid place ID); ongoing projects point to exact coordinate URLs (q=lat,lng — asserted identical to stored coordinates, no name searches used)
+- Coordinates, embeds, markers, pages: UNCHANGED. Map info-card GET DIRECTIONS and detail-page GET DIRECTIONS both read siteLocation.url so both fixed at once
+- Verified: all 19 URLs return HTTP 200 with correct destination (13 place+ftid, 6 coords); production build (craco build, 16s) served statically and smoke-tested — Nest detail GD link + Ivy map-card GD link use resolved URLs, 19 markers, zero pageerrors
+- KNOWN SAME-CLASS ISSUE (out of scope, not changed): the OFFICE Get Directions link (footer + Contact page, MAPS_URL in contact.js) still uses a goo.gl short link — same fix available on request
+- LIVE NOTE: fix is in preview; reaches mydreamprojects.in on the user's next Deploy
+
 ## Iteration 78 (2026-08-08) — Deployment failure fixed (Node engine incompatibility)
 - CAUSE: production deploy failed at frontend-build-push during yarn install — transitive dep @mapbox/jsonlint-lines-primitives@2.0.3 (chain: maplibre-gl → @maplibre/maplibre-gl-style-spec@26.2.1 → ^2.0.3) declares engines node>=22; the build image runs Node 20.18.1 → hard install error. Preview was unaffected (modules pre-installed)
 - FIX: pinned "@mapbox/jsonlint-lines-primitives": "2.0.2" (engines node>=0.6, API-compatible) via the existing resolutions field in frontend/package.json; yarn.lock regenerated (resolves 2.0.2 for the ^2.0.3 specifier). Zero code/asset/map changes
