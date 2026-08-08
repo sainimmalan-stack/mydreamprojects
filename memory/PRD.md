@@ -714,3 +714,12 @@ Premium, production-quality responsive website for residential construction comp
 1. Receive real content/assets and populate projects data file
 2. Replace logo wordmark with final logo asset
 3. Backend enquiry endpoint + email notification
+
+## 2026-08-08 — Homepage Pricing + Landowner Partnership (DONE, tested iteration_26)
+- Pricing section on Home (after Selected Work): ₹5,994 Per Sq.Ft. · 2 BHK from ₹55.6 L · 3 BHK from ₹85 L, disclaimer + "Get Exact Pricing" WhatsApp CTA. Static values via `PRICING` export in `src/data/projects.js` (user confirmed: public-only, no backend/admin).
+- ₹5,994 / Sq.Ft. label on all 6 ongoing projects: `pricePerSft` field → ProjectCard price line, Home "Building Next" rows, ProjectDetail hero chip. Completed projects show no price.
+- Landowner Partnership section on Home (before final CTA): "YOUR LAND. OUR EXPERTISE. LET'S BUILD TOGETHER." + 3 value cells + "Discuss Your Land With Us" dialog form (Name/Phone/Email/Land Location/Land Area/Message) → validates, opens WhatsApp pre-fill to founders, success state with reopen link.
+- Verified: desktop + mobile 390px, no overflow, dialog clean; testing agent 7/7 pass, no console errors.
+
+## Still Pending
+- P2: Site Progress Updates (dated construction photos per ongoing project) — awaiting user assets/answers
