@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { MAPS_URL } from "../../data/contact";
 
 export const Footer = () => (
   <footer data-testid="site-footer" className="relative border-t border-line bg-ink">
@@ -59,7 +60,7 @@ export const Footer = () => (
             </a>
           </div>
           <a
-            href="https://maps.app.goo.gl/oPvjJJn6EHedKRz89?g_st=ic"
+            href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="footer-directions-link"

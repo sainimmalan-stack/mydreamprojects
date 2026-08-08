@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 80 (2026-08-08) — Office Get Directions link fixed
+- MAPS_URL in contact.js: resolved the office goo.gl short link to its canonical HTTPS destination — the registered Google Place "MY DREAM PROJECTS, Ameenpur Coco Cola Road, Narendra Nagar Colony, Ameenpur, Miyapur, Hyderabad 502033" (ftid 0x3bcb8d6d4959d47b:0xe454901ec9e2e003), tracking params stripped. Address unchanged
+- Footer.jsx was hardcoding the old short link — now imports MAPS_URL from contact.js (single source of truth). All office-directions touchpoints verified on a production build: Contact page (quick-directions-link + get-directions-link), Footer on every page (footer-directions-link), Home final CTA (cta-directions-button) — all identical resolved URL, HTTP 200, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy to mydreamprojects.in
+
 ## Iteration 79 (2026-08-08) — Google Maps "Unsupported link" fix (all 19 project links)
 - CAUSE: the supplied maps.app.goo.gl short links carried an iOS share parameter (?g_st=ic) that triggers Google's "Unsupported link" error in several browsers/contexts
 - FIX: resolved every short link to its final google.com/maps HTTPS destination (curl -L with mobile UA) and stored the cleaned canonical URL (kept only q + ftid params, tracking params stripped) as siteLocation.url in projects.js. Completed projects now point to their exact registered Google Places (place name + ftid place ID); ongoing projects point to exact coordinate URLs (q=lat,lng — asserted identical to stored coordinates, no name searches used)
