@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 83 (2026-08-08) — Office map card uses real office photo
+- OfficeCard left cell now shows the real office photo (/assets/office/office-exterior-800.webp, map-office-thumb, object-cover crop into the existing 92/104px area — no distortion); unused Building2 import removed; orange icon map marker, card text, buttons, coordinates, project data all unchanged
+- Verified: testing-agent iteration_11 = 100% PASS mobile + desktop (photo HTTP 200, 800×600 natural, clean crop, directions href still exact office place URL, zero pageerrors)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 82 (2026-08-08) — Office marker compact polish
 - Office marker reduced to a 28×28 icon-only ember pill (building icon, text label removed) — same visual weight as numbered pins, distinct via orange; selected state keeps the ember glow; card/location/links/filters unchanged
 - Verified: testing-agent iteration_10 = 100% PASS — mobile 390px (marker visible at initial fit, tap → bottom card auto-scrolls into view, directions/contact links correct, persists under all filters, no overflow) + desktop sanity, zero pageerrors
