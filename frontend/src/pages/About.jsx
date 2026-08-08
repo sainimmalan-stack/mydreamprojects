@@ -49,10 +49,7 @@ const Reveal = ({ children, delay = 0, className = "" }) => (
 );
 
 const Story = () => (
-  <section data-testid="about-story" className="max-w-[1600px] mx-auto px-5 md:px-10 pt-28 md:pt-44 pb-24 md:pb-40">
-    <Reveal className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">
-      <p>Our Story</p>
-    </Reveal>
+  <section data-testid="about-story" className="max-w-[1600px] mx-auto px-5 md:px-10 pt-28 md:pt-44 pb-16 md:pb-24">
     <h1 className="font-display font-bold uppercase tracking-tighter leading-[0.95] text-[10.5vw] md:text-[7vw] text-bone">
       <span className="block overflow-hidden">
         <motion.span className="block" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1, delay: 0.1, ease: EASE }}>
@@ -65,19 +62,55 @@ const Story = () => (
         </motion.span>
       </span>
     </h1>
-    <div className="grid grid-cols-12 gap-6 mt-14 md:mt-24">
-      <Reveal delay={0.2} className="col-span-12 md:col-span-6 md:col-start-7">
-        <p className="text-base md:text-lg text-bone/85 leading-relaxed">
-          My Dream Projects was founded in 2020 by Nimmala Sai and Kotapati Akhil with a shared
-          vision—to create thoughtfully designed homes that bring together contemporary
-          architecture, efficient planning and dependable construction.
-        </p>
-        <p className="text-sm md:text-base text-concrete leading-relaxed mt-6">
-          What began with one residential project has grown into a portfolio of{" "}
-          {projectStats.total} developments across Ameenpur, with {projectStats.completed}{" "}
-          completed projects and six more taking shape.
-        </p>
-      </Reveal>
+  </section>
+);
+
+const StoryText = () => (
+  <section data-testid="about-story-text" className="border-t border-line">
+    <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-20 md:py-28">
+      <div className="grid grid-cols-12 gap-6">
+        <Reveal className="col-span-12 md:col-span-3">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-ember">Our Story</p>
+        </Reveal>
+        <div className="col-span-12 md:col-span-9 max-w-2xl">
+          <Reveal delay={0.1}>
+            <h3 className="font-display font-semibold tracking-tighter leading-[1.08] text-2xl md:text-4xl text-bone">
+              From engineering friends to{" "}
+              <span className="text-ember">building dreams together.</span>
+            </h3>
+          </Reveal>
+          <Reveal delay={0.2} className="mt-7 md:mt-8 space-y-5">
+            <p className="text-sm md:text-base text-bone/85 leading-relaxed">
+              Sai and Akhil first met in Chennai in 2013 as engineering students. What began as a
+              college friendship gradually grew into a partnership built on trust, shared ambition
+              and complementary strengths.
+            </p>
+            <p className="text-sm md:text-base text-bone/85 leading-relaxed">
+              Years later, that friendship became the foundation of My Dream Projects. From choosing
+              project names and shaping designs to managing construction and delivering homes, they
+              built the company together from the ground up — largely through their own effort,
+              learning and experience, without major backing from their families.
+            </p>
+            <p className="text-sm md:text-base text-concrete leading-relaxed">
+              Today, their different strengths define the way My Dream Projects operates: Sai shapes
+              the creative identity and vision, while Akhil drives execution and operations on the
+              ground.
+            </p>
+          </Reveal>
+          <Reveal delay={0.25} className="mt-12 md:mt-16 border-t border-line pt-10 md:pt-12 space-y-5">
+            <p className="text-base md:text-lg text-bone/85 leading-relaxed">
+              My Dream Projects was founded in 2020 by Nimmala Sai and Kotapati Akhil with a shared
+              vision—to create thoughtfully designed homes that bring together contemporary
+              architecture, efficient planning and dependable construction.
+            </p>
+            <p className="text-sm md:text-base text-concrete leading-relaxed">
+              What began with one residential project has grown into a portfolio of{" "}
+              {projectStats.total} developments across Ameenpur, with {projectStats.completed}{" "}
+              completed projects and six more taking shape.
+            </p>
+          </Reveal>
+        </div>
+      </div>
     </div>
   </section>
 );
@@ -135,38 +168,6 @@ const Founders = () => (
           <span className="text-concrete">the dream.</span>
         </h2>
       </Reveal>
-    </div>
-
-    <div data-testid="founders-story" className="grid grid-cols-12 gap-6 mb-14 md:mb-24">
-      <Reveal className="col-span-12 md:col-span-3">
-        <p className="text-[10px] uppercase tracking-[0.4em] text-concrete">Our Story</p>
-      </Reveal>
-      <div className="col-span-12 md:col-span-9 max-w-2xl">
-        <Reveal delay={0.1}>
-          <h3 className="font-display font-semibold tracking-tighter leading-[1.08] text-2xl md:text-4xl text-bone">
-            From engineering friends to{" "}
-            <span className="text-ember">building dreams together.</span>
-          </h3>
-        </Reveal>
-        <Reveal delay={0.2} className="mt-7 md:mt-8 space-y-5">
-          <p className="text-sm md:text-base text-bone/85 leading-relaxed">
-            Sai and Akhil first met in Chennai in 2013 as engineering students. What began as a
-            college friendship gradually grew into a partnership built on trust, shared ambition
-            and complementary strengths.
-          </p>
-          <p className="text-sm md:text-base text-bone/85 leading-relaxed">
-            Years later, that friendship became the foundation of My Dream Projects. From choosing
-            project names and shaping designs to managing construction and delivering homes, they
-            built the company together from the ground up — largely through their own effort,
-            learning and experience, without major backing from their families.
-          </p>
-          <p className="text-sm md:text-base text-concrete leading-relaxed">
-            Today, their different strengths define the way My Dream Projects operates: Sai shapes
-            the creative identity and vision, while Akhil drives execution and operations on the
-            ground.
-          </p>
-        </Reveal>
-      </div>
     </div>
 
     <div className="grid sm:grid-cols-2 gap-6 md:gap-10 items-start">
@@ -279,8 +280,9 @@ export default function About() {
   return (
     <div data-testid="about-page">
       <Story />
-      <Journey />
       <Founders />
+      <StoryText />
+      <Journey />
       <Philosophy />
     </div>
   );
