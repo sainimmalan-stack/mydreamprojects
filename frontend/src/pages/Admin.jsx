@@ -351,8 +351,8 @@ const Dashboard = ({ token, onLogout }) => {
             <table className="w-full min-w-[640px] text-left">
               <thead>
                 <tr className="border-b border-line">
-                  {["Project", "Avg View → Plan", "Median", "Avg Plan → DL", "Median", "Avg View → DL", "Median"].map((h) => (
-                    <th key={h} className="px-4 md:px-6 py-4 text-[9px] uppercase tracking-[0.25em] text-concrete">
+                  {["Project", "Avg View → Plan", "Median", "Avg Plan → DL", "Median", "Avg View → DL", "Median"].map((h, i) => (
+                    <th key={`${h}-${i}`} className="px-4 md:px-6 py-4 text-[9px] uppercase tracking-[0.25em] text-concrete">
                       {h}
                     </th>
                   ))}

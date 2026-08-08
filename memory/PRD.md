@@ -184,6 +184,15 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 96 (2026-08-08) — Internal analytics system + admin dashboard
+- Anonymous tracking (no PII): visitor UUID (localStorage mdp_vid) + session UUID (sessionStorage mdp_sid). Events: PROJECT_VIEW (once/session/project — StrictMode-safe dedupe), FLOOR_PLAN_VIEW (once/session/project, carries sinceProjectViewMs + related view ts), FLOOR_PLAN_DOWNLOAD_START (every click, beacon, carries sincePlanViewMs/sinceProjectViewMs), DOWNLOAD_SUCCESS / DOWNLOAD_FAILURE recorded SERVER-SIDE by the new streaming download endpoint GET /api/download/floor-plan/{slug} (success only after the full PDF is transferred; failure on client disconnect). Instrumentation in ProjectDetail (view effect, openPlan, startDownload)
+- Backend routes/analytics.py: POST /api/analytics/track (validated, anonymous), GET /api/analytics/summary (admin-only, Bearer JWT), download streamer with outcome recording. JWT admin auth per playbook: bcrypt hash in users collection, seeded from env (ADMIN_EMAIL/ADMIN_PASSWORD/JWT_SECRET in backend/.env), 12h tokens, 5-fail 15-min lockout with auto-reset after window
+- Admin dashboard at /admin (not in nav): login gate, overall stat cards, animated funnel (view → plan → start → confirmed with counts + %), sortable project performance table, time-to-download table (avg + median per stage), recent activity feed (anonymous). Dark/ember premium styling matching the site
+- Verified: testing-agent iteration_24 = 100% PASS (real browsing generated the funnel — zenith + perch view/plan/download on desktop + mobile, reload dedupe confirmed, download confirmed only on full transfer, auth 401/lockout/logout, sorting both directions, no PII leaked, zero pageerrors). Review fixes applied: duplicate 'Median' React keys, lockout count auto-reset. Production build passes (19s)
+- TEST DATA WIPED — dashboard starts empty for the owner; only real visitor events will appear
+- Admin credentials: admin@mydreamprojects.in / Mdp@Admin#2026 (also in test_credentials.md)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 95 (2026-08-08) — Blueprint treatment on Our Map popup tile
 - Blueprint SVG exported from ComingSoonElevation and reused in the map InfoCard fallback tile (map-thumb-blueprint-<slug>) for the 6 ongoing projects — silhouette linework behind the COMING SOON label; completed projects keep photo thumbnails; office card photo unchanged
 - Verified: testing-agent iteration_23 = 100% PASS mobile + desktop (unique silhouettes per project in tiles, photos intact for completed, office photo intact, zero pageerrors)

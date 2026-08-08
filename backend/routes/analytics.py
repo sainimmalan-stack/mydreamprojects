@@ -104,10 +104,15 @@ async def analytics_login(body: LoginIn, request: Request):
     email = body.email.lower().strip()
     identifier = f"{request.client.host}:{email}"
     attempts = await _db.login_attempts.find_one({"identifier": identifier})
-    if attempts and attempts.get("count", 0) >= 5:
+    if attempts:
         locked_until = attempts.get("locked_until")
         if locked_until and datetime.fromisoformat(locked_until) > datetime.now(timezone.utc):
-            raise HTTPException(status_code=429, detail="Too many attempts. Try again later.")
+            if attempts.get("count", 0) >= 5:
+                raise HTTPException(status_code=429, detail="Too many attempts. Try again later.")
+        else:
+            # lockout window passed — reset so returning users are not trapped
+            await _db.login_attempts.delete_one({"identifier": identifier})
+            attempts = None
 
     user = await _db.users.find_one({"email": email, "role": "admin"})
     if not user or not verify_password(body.password, user["password_hash"]):
