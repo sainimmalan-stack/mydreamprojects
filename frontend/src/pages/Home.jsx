@@ -8,7 +8,7 @@ import { waLink, WHATSAPP_GREETING, PHONE_SAI, MAPS_URL } from "../data/contact"
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
-const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation-day.webp";
+const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation-night.webp";
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
