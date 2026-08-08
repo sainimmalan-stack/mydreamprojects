@@ -419,10 +419,9 @@ export default function ProjectMap() {
     oel.dataset.testid = "map-marker-office";
     oel.setAttribute("aria-label", "My Dream Projects — Office");
     oel.className =
-      "absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 bg-ember/90 border-ember/70 hover:bg-ember";
+      "absolute top-0 left-0 touch-manipulation flex items-center justify-center p-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 bg-ember/90 border-ember/70 hover:bg-ember";
     oel.innerHTML = `
-      <svg class="w-3 h-3 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M2 22h20"/><path d="M9 6h1"/><path d="M9 10h1"/><path d="M9 14h1"/><path d="M14 6h1"/><path d="M14 10h1"/><path d="M14 14h1"/><path d="M10 22v-3h4v3"/></svg>
-      <span class="font-display font-semibold text-[8px] tracking-[0.2em] text-ink">OFFICE</span>
+      <svg class="w-3.5 h-3.5 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M2 22h20"/><path d="M9 6h1"/><path d="M9 10h1"/><path d="M9 14h1"/><path d="M14 6h1"/><path d="M14 10h1"/><path d="M14 14h1"/><path d="M10 22v-3h4v3"/></svg>
     `;
     oel.addEventListener("mouseenter", () => {
       oel.style.zIndex = 5;
@@ -448,7 +447,7 @@ export default function ProjectMap() {
       if (office) {
         const isOfficeSel = selected === "office";
         el.style.zIndex = isOfficeSel ? 6 : "";
-        el.className = `absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
+        el.className = `absolute top-0 left-0 touch-manipulation flex items-center justify-center p-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
           isOfficeSel
             ? "bg-ember border-ember shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]"
             : "bg-ember/90 border-ember/70 hover:bg-ember"
