@@ -1,0 +1,19 @@
+{
+  "summary": "Verified OFFICE marker feature on /project-map at desktop 1920 and mobile 390. All 20 markers render (19 numbered projects + 1 orange non-numbered OFFICE pill). Office card content, directions URL (google.com/maps + MY+DREAM+PROJECTS + ftid=0x3bcb8d6d4959d47b, new tab, not a short link), CONTACT US navigation to /contact, and close button all work. Filter buttons show correct counts (All 19 / Completed 13 / Ongoing 06); office persists under every filter without being counted; office card stays open when switching filters; VIEW ALL PROJECTS appears while office is selected and refits/deselects. Project/office swap works. Mobile chip selector contains 19 project chips (no office). No horizontal overflow, zero page errors on either viewport.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Filter buttons use data-testid: map-filter-all/completed/ongoing; rendered text is 'All 19' etc (CSS uppercases visually). Office marker testid: map-marker-office. Project markers use map-marker-my-dream-<slug>. Office card testids: map-office-card, map-office-directions, map-office-contact, map-office-close. Office directions href is the resolved google.com/maps URL containing ftid=0x3bcb8d6d4959d47b (verified not a maps.app.goo.gl short link). Mobile chip selector shows 19 project chips only.",
+  "rca of the issue": "N/A – no issues found."
+}

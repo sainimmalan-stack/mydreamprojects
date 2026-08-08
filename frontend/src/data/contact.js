@@ -5,6 +5,16 @@ export const WHATSAPP_GREETING =
   "Hello My Dream Projects, I’m interested in knowing more about your residential projects in Ameenpur.";
 export const MAPS_URL =
   "https://www.google.com/maps?q=G8MG+VFG+MY+DREAM+PROJECTS%2C+Ameenpur+Coco+Cola+Road%2C+Narendra+Nagar+Colony%2C+Ameenpur%2C+Miyapur%2C+Hyderabad%2C+Telangana+502033&ftid=0x3bcb8d6d4959d47b%3A0xe454901ec9e2e003";
+// Office coordinates decoded from the plus code (G8MG+VFG → 7J9WG8MG+VFG)
+// embedded in the office's own Google Maps place link above — the exact
+// configured office destination, not a guessed location.
+export const OFFICE = {
+  name: "My Dream Projects",
+  kind: "Office / Studio",
+  address: "Ameenpur, Hyderabad",
+  lat: 17.5346875,
+  lng: 78.3262031,
+};
 
 export const waLink = (message) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;

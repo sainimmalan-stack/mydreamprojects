@@ -3,8 +3,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Map as MapLibreMap, Marker as MapLibreMarker, LngLatBounds, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
+import { ArrowUpRight, ArrowRight, X, LocateFixed, Building2 } from "lucide-react";
 import { projects } from "../data/projects";
+import { OFFICE, MAPS_URL } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -139,6 +140,68 @@ const InfoCard = ({ project, onClose }) => (
   </motion.div>
 );
 
+/* ------------------------------ office card ------------------------------ */
+
+const OfficeCard = ({ onClose }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 10 }}
+    transition={{ duration: 0.5, ease: EASE }}
+    data-testid="map-office-card"
+    className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
+  >
+    <div className="flex">
+      <div className="w-[92px] md:w-[104px] shrink-0 bg-ember/10 border-r border-line flex items-center justify-center">
+        <Building2 className="w-6 h-6 text-ember" strokeWidth={1.5} />
+      </div>
+      <div className="flex-1 p-4 md:p-5">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[9px] uppercase tracking-[0.3em] text-ember mb-1">{OFFICE.kind}</p>
+            <h3 className="font-display font-semibold uppercase tracking-tight text-base text-bone leading-tight">
+              {OFFICE.name}
+            </h3>
+            <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-bone/70 mt-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-ember" />
+              {OFFICE.address}
+            </p>
+          </div>
+          <button
+            type="button"
+            data-testid="map-office-close"
+            onClick={onClose}
+            aria-label="Close office card"
+            className="p-1 text-concrete hover:text-bone transition-colors duration-300"
+          >
+            <X className="w-4 h-4" strokeWidth={1.5} />
+          </button>
+        </div>
+        <div className="flex items-center gap-4 mt-4 pt-4 border-t border-line">
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="map-office-directions"
+            className="group inline-flex items-center gap-1.5 font-display font-semibold text-[10px] uppercase tracking-[0.2em] text-ember hover:text-bone transition-colors duration-300"
+          >
+            Get Directions
+            <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
+          </a>
+          <Link
+            to="/contact"
+            data-testid="map-office-contact"
+            className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-concrete hover:text-bone transition-colors duration-300"
+          >
+            Contact Us
+            <ArrowRight className="w-3 h-3" strokeWidth={2} />
+          </Link>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 export default function ProjectMap() {
   useSeo({
     title: "Project Map — My Dream Projects",
@@ -163,11 +226,13 @@ export default function ProjectMap() {
   // fit the map to every currently-visible project (all 19 by default).
   // Overview is flat (pitch 0) so pins render exactly where projected —
   // the 3D tilt is reserved for the single-project fly-to.
+  // The office marker is included so it stays in frame under every filter.
   const fitVisible = (animate = true) => {
     const map = mapRef.current;
     if (!map) return;
     const bounds = new LngLatBounds();
     visible.forEach((p) => bounds.extend([p.siteLocation.lng, p.siteLocation.lat]));
+    bounds.extend([OFFICE.lng, OFFICE.lat]);
     const cam = map.cameraForBounds(bounds, { padding: fitPadding(), maxZoom: 15.5 });
     map.flyTo({
       center: cam.center,
@@ -175,6 +240,25 @@ export default function ProjectMap() {
       pitch: 0,
       bearing: 0,
       duration: animate ? 1000 : 0,
+    });
+  };
+
+  const focusOffice = () => {
+    setSelected("office");
+    const mobileLift =
+      typeof window !== "undefined" && window.innerWidth < 1024
+        ? [0, -Math.round(window.innerHeight * 0.13)]
+        : [0, 0];
+    if (typeof window !== "undefined" && window.innerWidth < 1024 && containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    mapRef.current?.flyTo({
+      center: [OFFICE.lng, OFFICE.lat],
+      zoom: 16,
+      pitch: 0,
+      bearing: 0,
+      duration: 1200,
+      offset: mobileLift,
     });
   };
 
@@ -328,13 +412,49 @@ export default function ProjectMap() {
         .addTo(map);
       markersRef.current.push({ slug: p.slug, marker, el });
     });
+    // office marker — distinctive ember building icon, never numbered,
+    // always visible regardless of the project filter
+    const oel = document.createElement("button");
+    oel.type = "button";
+    oel.dataset.testid = "map-marker-office";
+    oel.setAttribute("aria-label", "My Dream Projects — Office");
+    oel.className =
+      "absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 bg-ember/90 border-ember/70 hover:bg-ember";
+    oel.innerHTML = `
+      <svg class="w-3 h-3 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M2 22h20"/><path d="M9 6h1"/><path d="M9 10h1"/><path d="M9 14h1"/><path d="M14 6h1"/><path d="M14 10h1"/><path d="M14 14h1"/><path d="M10 22v-3h4v3"/></svg>
+      <span class="font-display font-semibold text-[8px] tracking-[0.2em] text-ink">OFFICE</span>
+    `;
+    oel.addEventListener("mouseenter", () => {
+      oel.style.zIndex = 5;
+    });
+    oel.addEventListener("mouseleave", () => {
+      oel.style.zIndex = selectedRef.current === "office" ? 6 : "";
+    });
+    oel.addEventListener("click", (e) => {
+      e.stopPropagation();
+      focusOffice();
+    });
+    const officeMarker = new MapLibreMarker({ element: oel })
+      .setLngLat([OFFICE.lng, OFFICE.lat])
+      .addTo(map);
+    markersRef.current.push({ slug: "office", marker: officeMarker, el: oel, office: true });
     fitVisible(true);
     resolveCollisions();
   }, [filter]);
 
   // highlight selected marker without full rebuild
   useEffect(() => {
-    markersRef.current.forEach(({ slug, el }) => {
+    markersRef.current.forEach(({ slug, el, office }) => {
+      if (office) {
+        const isOfficeSel = selected === "office";
+        el.style.zIndex = isOfficeSel ? 6 : "";
+        el.className = `absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
+          isOfficeSel
+            ? "bg-ember border-ember shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]"
+            : "bg-ember/90 border-ember/70 hover:bg-ember"
+        }`;
+        return;
+      }
       const isSel = slug === selected;
       const p = projects.find((x) => x.slug === slug);
       el.style.zIndex = isSel ? 6 : "";
@@ -353,9 +473,10 @@ export default function ProjectMap() {
     }
   }, [selected]);
 
-  // deselect when the filtered-out project is hidden
+  // deselect when the filtered-out project is hidden (office always stays)
   useEffect(() => {
-    if (selected && !visible.some((p) => p.slug === selected)) setSelected(null);
+    if (selected && selected !== "office" && !visible.some((p) => p.slug === selected))
+      setSelected(null);
   }, [filter, selected, visible]);
 
   // deep link: /project-map?project=<slug> selects and flies to that pin,
@@ -469,7 +590,7 @@ export default function ProjectMap() {
           {/* map */}
           <div className="relative border border-line" data-testid="map-container">
             <div ref={containerRef} className="w-full h-[68svh] lg:h-[640px]" />
-            {selectedProject && (
+            {selected && (
               <button
                 type="button"
                 data-testid="map-view-all"
@@ -486,6 +607,14 @@ export default function ProjectMap() {
             {selectedProject && (
               <InfoCard
                 project={selectedProject}
+                onClose={() => {
+                  setSelected(null);
+                  fitVisible(true);
+                }}
+              />
+            )}
+            {selected === "office" && (
+              <OfficeCard
                 onClose={() => {
                   setSelected(null);
                   fitVisible(true);
