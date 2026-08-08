@@ -184,6 +184,13 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 81 (2026-08-08) — Office marker added to Project Map (20 markers total)
+- OFFICE {lat 17.5346875, lng 78.3262031} added to contact.js — coordinates decoded offline from the plus code (G8MG+VFG → 7J9WG8MG+VFG) embedded in the office's own configured Google Maps place link (no guessed location)
+- ProjectMap: distinctive ember pill marker with building icon + OFFICE label (map-marker-office), never numbered, always rendered regardless of filter, included in auto-fit bounds + collision spiderfying; tapping opens a premium office card (OFFICE / STUDIO, My Dream Projects, Ameenpur Hyderabad, GET DIRECTIONS → resolved office place URL, CONTACT US → /contact); office selection survives filter switches; VIEW ALL PROJECTS works from office selection
+- Counters/filters/projects untouched: ALL 19 / COMPLETED 13 / ONGOING 06; office excluded from counts, sidebar and mobile chips
+- Verified: testing-agent iteration_9 = 100% PASS desktop + mobile (390px): 20 markers render, card contents/links correct, office visible under all 3 filters, project regression clean, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy to mydreamprojects.in
+
 ## Iteration 80 (2026-08-08) — Office Get Directions link fixed
 - MAPS_URL in contact.js: resolved the office goo.gl short link to its canonical HTTPS destination — the registered Google Place "MY DREAM PROJECTS, Ameenpur Coco Cola Road, Narendra Nagar Colony, Ameenpur, Miyapur, Hyderabad 502033" (ftid 0x3bcb8d6d4959d47b:0xe454901ec9e2e003), tracking params stripped. Address unchanged
 - Footer.jsx was hardcoding the old short link — now imports MAPS_URL from contact.js (single source of truth). All office-directions touchpoints verified on a production build: Contact page (quick-directions-link + get-directions-link), Footer on every page (footer-directions-link), Home final CTA (cta-directions-button) — all identical resolved URL, HTTP 200, zero pageerrors
