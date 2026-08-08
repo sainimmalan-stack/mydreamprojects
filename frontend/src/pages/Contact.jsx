@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, MapPin, Phone, MessageCircle, Navigation } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Phone, MessageCircle, Navigation } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -226,29 +226,14 @@ export default function Contact() {
                 <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
               </a>
             </Reveal>
-
-            <Reveal delay={0.1}>
-              <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-6">Visit Our Office</p>
-              <p className="flex items-start gap-2.5 text-sm text-bone/80 leading-relaxed max-w-sm">
-                <MapPin className="w-4 h-4 text-ember mt-0.5 shrink-0" strokeWidth={1.5} />
-                Come meet us at our two-level container office in Ameenpur and talk to us about
-                our projects.
-              </p>
-              <a
-                href={MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="get-directions-link"
-                className="group inline-flex items-center gap-3 mt-8 border border-bone/25 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.25em] px-7 py-4 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
-              >
-                Get Directions
-                <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
-              </a>
-            </Reveal>
           </div>
+        </div>
 
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
-            <Reveal delay={0.15}>
+        <OfficeSection />
+
+        <div className="border-t border-line pt-14 md:pt-20 mt-14 md:mt-20">
+          <div className="max-w-3xl">
+            <Reveal delay={0.1}>
               <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-8">Enquiry Form</p>
               <form data-testid="contact-form" onSubmit={onSubmit} className="space-y-10">
                 <div className="grid sm:grid-cols-2 gap-10">
@@ -317,8 +302,6 @@ export default function Contact() {
             </Reveal>
           </div>
         </div>
-
-        <OfficeSection />
       </div>
     </div>
   );
