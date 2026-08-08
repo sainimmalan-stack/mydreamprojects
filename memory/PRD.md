@@ -184,6 +184,13 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 91 (2026-08-08) — About page order: Intro → Founders → Our Story
+- About flow is now: intro headline (Dreams, drawn into reality.) → MEET THE FOUNDERS (photos + full bios, unchanged) → OUR STORY (single section: "From engineering friends to building dreams together." + friendship narrative + the 2020 founding text, all existing copy preserved) → Journey → Philosophy
+- The founders-internal "Our Story" sub-block was moved out of the founders section and merged with the top founding narrative — eliminating what would have become two "Our Story" eyebrows; exactly one remains. No text rewritten or removed
+- /about#founders deep link + Home OUR STORY button still land precisely on founders
+- Verified: testing-agent iteration_19 = 100% PASS desktop + mobile (order, single Our Story label, bios/photos intact, merged content complete, deep-link scroll exact, Contact order regression clean, zero pageerrors)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 90 (2026-08-08) — Contact page order: Details → Office → Form
 - Contact page restructured: (1) contact details + phones + WhatsApp, (2) VISIT OUR OFFICE photo section, (3) enquiry form as the FINAL section before the footer. The old mini "Visit Our Office" block inside the details column was removed to avoid a duplicate heading/directions button (office-section-directions covers it with the same MAPS_URL). Form fields/functionality untouched; MapPin import cleaned up
 - About page already clean from iteration 89 (no office section); re-verified
