@@ -69,17 +69,6 @@ async def get_status_checks():
 # Include the router in the main app
 app.include_router(api_router)
 
-from routes.analytics import router as analytics_router, init_db, seed_admin, ensure_indexes
-
-init_db(db)
-app.include_router(analytics_router)
-
-
-@app.on_event("startup")
-async def startup_analytics():
-    await ensure_indexes()
-    await seed_admin()
-
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,

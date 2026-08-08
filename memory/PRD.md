@@ -184,6 +184,13 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 97 (2026-08-08) — Analytics system FULLY ROLLED BACK (owner request)
+- Owner reversed the analytics feature entirely. Removed: analytics/tracker.js, pages/Admin.jsx, /admin route, backend routes/analytics.py (whole routes dir), server.py mount + startup hook, JWT_SECRET/ADMIN_EMAIL/ADMIN_PASSWORD env vars, and dropped Mongo collections analytics_events/users/login_attempts
+- Restored: ProjectDetail downloads are plain static asset links again (no backend), VIEW FULL PLAN is a plain viewer open, /admin renders the site's 404 page, /api back to scaffold-only
+- Verified: download link plain asset + viewer works, /admin → 404, zero analytics references in src, backend 404 on old endpoints, Our Map (20 markers + office) and all pages regression-clean, production build passes (15.7s), zero pageerrors
+- test_credentials.md updated: site has NO authentication anywhere
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 96 (2026-08-08) — Internal analytics system + admin dashboard
 - Anonymous tracking (no PII): visitor UUID (localStorage mdp_vid) + session UUID (sessionStorage mdp_sid). Events: PROJECT_VIEW (once/session/project — StrictMode-safe dedupe), FLOOR_PLAN_VIEW (once/session/project, carries sinceProjectViewMs + related view ts), FLOOR_PLAN_DOWNLOAD_START (every click, beacon, carries sincePlanViewMs/sinceProjectViewMs), DOWNLOAD_SUCCESS / DOWNLOAD_FAILURE recorded SERVER-SIDE by the new streaming download endpoint GET /api/download/floor-plan/{slug} (success only after the full PDF is transferred; failure on client disconnect). Instrumentation in ProjectDetail (view effect, openPlan, startDownload)
 - Backend routes/analytics.py: POST /api/analytics/track (validated, anonymous), GET /api/analytics/summary (admin-only, Bearer JWT), download streamer with outcome recording. JWT admin auth per playbook: bcrypt hash in users collection, seeded from env (ADMIN_EMAIL/ADMIN_PASSWORD/JWT_SECRET in backend/.env), 12h tokens, 5-fail 15-min lockout with auto-reset after window
