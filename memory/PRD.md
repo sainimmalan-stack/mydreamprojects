@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 98 (2026-08-08) — Homepage hero swapped to night office photo
+- HERO_IMAGE now /assets/office/office-exterior.webp (the new night office photo with lit signage — owner-chosen, overrides the earlier Skylark-night hero pin); alt text updated; -800 srcSet variant serves mobile automatically
+- Verified: testing-agent iteration_25 = 100% PASS desktop + mobile (correct file per viewport, headline/buttons legible, no overflow, Skylark day/night toggle intact, zero pageerrors)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 97 (2026-08-08) — Analytics system FULLY ROLLED BACK (owner request)
 - Owner reversed the analytics feature entirely. Removed: analytics/tracker.js, pages/Admin.jsx, /admin route, backend routes/analytics.py (whole routes dir), server.py mount + startup hook, JWT_SECRET/ADMIN_EMAIL/ADMIN_PASSWORD env vars, and dropped Mongo collections analytics_events/users/login_attempts
 - Restored: ProjectDetail downloads are plain static asset links again (no backend), VIEW FULL PLAN is a plain viewer open, /admin renders the site's 404 page, /api back to scaffold-only
