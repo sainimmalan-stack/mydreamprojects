@@ -8,7 +8,7 @@ import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, 
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
-const HERO_IMAGE = "/assets/office/office-exterior.webp";
+const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation-night.webp";
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -38,7 +38,7 @@ const Hero = () => {
           srcSet={`${HERO_IMAGE.replace(".webp", "-800.webp")} 800w, ${HERO_IMAGE} 1448w`}
           sizes="100vw"
           fetchPriority="high"
-          alt="My Dream Projects office studio at night in Ameenpur"
+          alt="My Dream Skylark residential apartment elevation in Ameenpur"
           data-testid="hero-elevation-image"
           className="absolute inset-0 w-full h-[112%] object-cover object-center"
         />

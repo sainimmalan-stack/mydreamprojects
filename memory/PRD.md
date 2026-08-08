@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 99 (2026-08-08) — Hero swap REVERTED (owner request)
+- Owner asked to remove the previous change; homepage hero restored to the Skylark night elevation (elevation-night.webp) with original alt text — exact state before iteration 98. The office night photo remains in use at: Home office teaser, Contact office section, Our Map office popup
+- Verified: hero serves my-dream-skylark/elevation-night.webp, loaded, correct alt, zero pageerrors (same configuration fully covered by iteration_13 tests)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 98 (2026-08-08) — Homepage hero swapped to night office photo
 - HERO_IMAGE now /assets/office/office-exterior.webp (the new night office photo with lit signage — owner-chosen, overrides the earlier Skylark-night hero pin); alt text updated; -800 srcSet variant serves mobile automatically
 - Verified: testing-agent iteration_25 = 100% PASS desktop + mobile (correct file per viewport, headline/buttons legible, no overflow, Skylark day/night toggle intact, zero pageerrors)
