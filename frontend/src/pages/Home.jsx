@@ -4,7 +4,7 @@ import { motion, animate, useScroll, useTransform, useReducedMotion } from "fram
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { getProject, projectStats } from "../data/projects";
-import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
+import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -430,6 +430,7 @@ const FoundersTeaser = () => (
             testid: "home-founder-sai",
             firstName: "Sai",
             wa: WHATSAPP_NUMBER,
+            tel: PHONE_SAI.tel,
           },
           {
             name: "Kotapati Akhil",
@@ -438,6 +439,7 @@ const FoundersTeaser = () => (
             testid: "home-founder-akhil",
             firstName: "Akhil",
             wa: WHATSAPP_NUMBER_AKHIL,
+            tel: PHONE_AKHIL.tel,
           },
         ].map((f, i) => (
           <Reveal key={f.name} delay={0.1 + i * 0.1}>
@@ -461,17 +463,27 @@ const FoundersTeaser = () => (
                 </h3>
                 <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">Co-Founder</p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-concrete mt-4">{f.focus}</p>
-                <a
-                  href={waLinkTo(f.wa, founderIntroMessage(f.firstName))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-testid={`${f.testid}-whatsapp`}
-                  className="group/link inline-flex items-center gap-2 mt-6 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
-                  Message {f.firstName}
-                  <ArrowUpRight className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
-                </a>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-1 mt-4">
+                  <a
+                    href={waLinkTo(f.wa, founderIntroMessage(f.firstName))}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid={`${f.testid}-whatsapp`}
+                    className="group/link inline-flex items-center gap-2 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
+                    Message {f.firstName}
+                    <ArrowUpRight className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
+                  </a>
+                  <a
+                    href={f.tel}
+                    data-testid={`${f.testid}-call`}
+                    className="inline-flex items-center gap-2 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
+                    Call {f.firstName}
+                  </a>
+                </div>
               </div>
             </div>
           </Reveal>

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MessageCircle, Phone } from "lucide-react";
 import { projectStats } from "../data/projects";
-import { waLinkTo, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
+import { waLinkTo, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage, PHONE_SAI, PHONE_AKHIL } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -17,6 +17,7 @@ const FOUNDERS = [
     photo: "/assets/founders/nimmala-sai.webp",
     firstName: "Sai",
     wa: WHATSAPP_NUMBER,
+    tel: PHONE_SAI.tel,
     bio: [
       "Sai is the creative mind behind much of the identity of My Dream Projects. From project names, colour palettes, brochures and creative concepts to office design and landscaping, he takes an active role in shaping how every project is presented and experienced.",
       "Rather than being heavily involved in day-to-day site operations, his focus is primarily on creative direction, design thinking and the overall character of the brand and its developments.",
@@ -32,6 +33,7 @@ const FOUNDERS = [
     photo: "/assets/founders/kotapati-akhil.jpg",
     firstName: "Akhil",
     wa: WHATSAPP_NUMBER_AKHIL,
+    tel: PHONE_AKHIL.tel,
     bio: [
       "Akhil is the operational force behind My Dream Projects. He takes the lead on site execution, construction activities, customer coordination, workforce management and the day-to-day responsibilities required to take a project from plan to completion.",
       "His calm and composed nature, combined with his hands-on involvement at the project level, complements Sai\u2019s creative approach and creates a clear balance between vision and execution within the company.",
@@ -216,17 +218,27 @@ const Founders = () => (
                 </p>
               ))}
             </div>
-            <a
-              href={waLinkTo(f.wa, founderIntroMessage(f.firstName))}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid={`${f.testid}-whatsapp`}
-              className="group/link inline-flex items-center gap-2.5 mt-8 pt-6 border-t border-line text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
-            >
-              <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
-              Message {f.firstName} on WhatsApp
-              <ArrowUpRight className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
-            </a>
+            <div className="flex flex-wrap items-center gap-x-7 gap-y-3 mt-8 pt-6 border-t border-line">
+              <a
+                href={waLinkTo(f.wa, founderIntroMessage(f.firstName))}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid={`${f.testid}-whatsapp`}
+                className="group/link inline-flex items-center gap-2.5 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
+                Message {f.firstName}
+                <ArrowUpRight className="w-3 h-3 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
+              </a>
+              <a
+                href={f.tel}
+                data-testid={`${f.testid}-call`}
+                className="inline-flex items-center gap-2.5 py-2 text-[10px] uppercase tracking-[0.25em] text-bone/70 hover:text-ember transition-colors duration-300"
+              >
+                <Phone className="w-3.5 h-3.5 text-ember" strokeWidth={1.5} />
+                Call {f.firstName}
+              </a>
+            </div>
           </div>
         </Reveal>
       ))}
