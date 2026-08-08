@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only validation of the new Pricing section, ongoing-project price labels (cards, home 'Building Next' rows, project detail chip), and Landowner Development Partnership section + enquiry dialog on My Dream Projects site. All 7 requested feature checks pass. No console errors on Home or /projects.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Landowner form's email field has no format validation beyond browser-native — acceptable for WhatsApp handoff.",
+    "The mobile viewport re-set inside a single Playwright session after navigation appeared not to shrink the layout in the harness (scrollW=1920 despite setting 390 width). This is likely a harness quirk (viewport re-application after page.goto); visual/manual mobile testing recommended. No horizontal overflow was detected regardless.",
+    "Home.jsx is now ~820 lines with many inline components (Hero, Stats, Pricing, Landowner, etc.). Consider extracting sections into /components/home/* for maintainability (soft nudge, not blocking)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "New public-website-only feature covered here: home-pricing (after selected-work, before home-journey), ongoing price rows (data-testid ongoing-price-<slug>), ProjectCard card-price-<slug> for ongoing only (13 completed correctly omit), project-price-chip on ongoing detail (not shown on completed), and full landowner enquiry flow (dialog->error on empty->fill->window.open intercepted->success state with wa.me href containing URL-encoded name/location). No backend involvement.",
+  "verified_flows": [
+    "Home section order: selected-work (2038px) -> home-pricing (4156px) -> home-journey (5063px) -> building-next (5659px) -> home-founders (7625px) -> home-landowner (9110px) -> home-cta (10028px)",
+    "Pricing values render: ₹5,994 (Per Sq.Ft.), ₹55.6 L (2 BHK), ₹85 L (3 BHK); pricing-whatsapp-button href starts with https://wa.me/",
+    "6 ongoing rows on Home each show '₹5,994 / Sq.Ft.'",
+    "6 ongoing project cards on /projects show card-price-<slug>; 13 completed cards do NOT",
+    "/projects/my-dream-aurelia shows project-price-chip with '₹5,994 / Sq.Ft.'; /projects/my-dream-nest does not",
+    "Landowner section heading, 3 value cells, CTA button all present",
+    "Empty submit triggers landowner-form-error; filled submit shows landowner-enquiry-success with landowner-whatsapp-reopen wa.me href containing 'TEST%20User' and 'Ameenpur%20Plot%20A'",
+    "No console errors on Home or /projects"
+  ]
+}

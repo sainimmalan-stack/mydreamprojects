@@ -1,5 +1,12 @@
 const pad = (n) => String(n).padStart(2, "0");
 
+// Public pricing — static, site-wide source of truth.
+export const PRICING = {
+  ratePerSft: "₹5,994",
+  twoBhk: "₹55.6 L",
+  threeBhk: "₹85 L",
+};
+
 const MY_DREAM_NEST = {
   id: 1,
   slug: "my-dream-nest",
@@ -441,6 +448,7 @@ const MY_DREAM_AURELIA = {
   index: "14",
   title: "My Dream Aurelia",
   status: "ongoing",
+  pricePerSft: PRICING.ratePerSft,
   location: "Ameenpur, Hyderabad",
   type: "Residential Apartment",
   year: "—",
@@ -468,6 +476,7 @@ const MY_DREAM_ELYSIUM = {
   index: "15",
   title: "My Dream Elysium",
   status: "ongoing",
+  pricePerSft: PRICING.ratePerSft,
   location: "Ameenpur, Hyderabad",
   type: "Residential Apartment",
   year: "—",
@@ -495,6 +504,7 @@ const MY_DREAM_AURA = {
   index: "16",
   title: "My Dream Aura",
   status: "ongoing",
+  pricePerSft: PRICING.ratePerSft,
   location: "Ameenpur, Hyderabad",
   type: "Residential Apartment",
   year: "—",
@@ -522,6 +532,7 @@ const MY_DREAM_ECHELON = {
   index: "17",
   title: "My Dream Echelon",
   status: "ongoing",
+  pricePerSft: PRICING.ratePerSft,
   location: "Ameenpur, Hyderabad",
   type: "Residential Apartment",
   year: "—",
@@ -549,6 +560,7 @@ const MY_DREAM_VALE = {
   index: "18",
   title: "My Dream Vale",
   status: "ongoing",
+  pricePerSft: PRICING.ratePerSft,
   location: "Ameenpur, Hyderabad",
   type: "Residential Apartment",
   year: "—",
@@ -576,6 +588,7 @@ const MY_DREAM_IVY = {
   index: "19",
   title: "My Dream Ivy",
   status: "ongoing",
+  pricePerSft: PRICING.ratePerSft,
   location: "Ameenpur, Hyderabad",
   type: "Residential Apartment",
   year: "—",

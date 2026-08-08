@@ -144,6 +144,14 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
                 ? `Ameenpur · Completed ${project.year}`
                 : project.location}
             </p>
+            {project.pricePerSft && (
+              <p
+                data-testid={`card-price-${project.slug}`}
+                className="font-display text-[11px] font-semibold uppercase tracking-[0.25em] text-ember mt-2"
+              >
+                {project.pricePerSft} / Sq.Ft.
+              </p>
+            )}
           </div>
           <ArrowUpRight
             className="w-5 h-5 text-concrete group-hover:text-ember group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-[transform,color] duration-500"

@@ -132,6 +132,14 @@ export default function ProjectDetail() {
                 {[project.floors, project.configuration, project.type].filter(Boolean).join(" · ")}
               </span>
             )}
+            {project.pricePerSft && (
+              <span
+                data-testid="project-price-chip"
+                className="border border-ember/50 bg-ink/40 backdrop-blur text-ember text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2"
+              >
+                {project.pricePerSft} / Sq.Ft.
+              </span>
+            )}
           </motion.div>
         </div>
       </section>
