@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Map as MapLibreMap, Marker as MapLibreMarker, LngLatBounds, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { motion } from "framer-motion";
@@ -149,6 +149,7 @@ export default function ProjectMap() {
 
   const [filter, setFilter] = useState("all");
   const [selected, setSelected] = useState(null);
+  const [searchParams] = useSearchParams();
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef([]);
@@ -356,6 +357,16 @@ export default function ProjectMap() {
   useEffect(() => {
     if (selected && !visible.some((p) => p.slug === selected)) setSelected(null);
   }, [filter, selected, visible]);
+
+  // deep link: /project-map?project=<slug> selects and flies to that pin,
+  // so any project page (or a texted link) opens straight onto its location
+  useEffect(() => {
+    const slug = searchParams.get("project");
+    if (slug && projects.some((p) => p.slug === slug)) {
+      focusProject(slug, true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const FILTERS = [
     { key: "all", label: "All", count: projects.length },

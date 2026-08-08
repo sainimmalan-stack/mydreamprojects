@@ -1,0 +1,21 @@
+{
+  "summary": "Iteration 8 verified the two new features (availability enquiry WhatsApp link + shareable project-map deep link) across all 19 My Dream project detail pages and the /project-map page. Desktop (1920x1080): 19/19 pages have availability-enquiry-link with correct href starting 'https://wa.me/917780429845?text=' and target=_blank, decoded message contains the exact project title (e.g. 'My Dream Zenith'), and 'Check Availability' microcopy visible. All 19 pages also have view-on-map-link inside visit-site-section pointing to /project-map?project=my-dream-<slug>, and get-directions-button remains intact with its Google Maps URL. Deep link tests: /project-map?project=my-dream-zenith and my-dream-ivy both auto-open info card with correct title, pin highlighted ember (bg-ember class), map zoom=16, and View All Projects reset visible+working (clicking hides card). Invalid deep link ?project=nonexistent loads normally with 19 markers and no card. /project-map without params: 19 markers, filters visible, no auto-selection. Mobile (390x844) /project-map?project=my-dream-casa: card shows MY DREAM CASA with thumbnail image, no horizontal overflow (scrollWidth==clientWidth==390). Mobile casa detail page: availability link visible, no overflow. Zero pageerrors across all navigations.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ProjectMap deep-link effect uses eslint-disable for [] deps intentionally (mount-only). Fine, but if the user navigates between /project-map?project=A -> ?project=B via <Link> without unmount, focusProject won't refire. Not part of current scope but worth noting.",
+    "data-testid='project-stat-total flats' still contains a space (label lowercased without slug conversion). Selectors work but a hyphen would be cleaner."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Availability enquiry cell (availability-enquiry-link) wraps the Total Flats stat cell with WhatsApp link, target=_blank. view-on-map-link is a react-router Link inside visit-site-section next to get-directions-button. ProjectMap deep-link handling: last useEffect reads 'project' searchParam once on mount and calls focusProject which sets selected, flies to zoom 16, and (on mobile) scrolls container into view. Marker highlight uses 'bg-ember' class. window.__map exposes the maplibre instance in non-prod for zoom assertions."
+}

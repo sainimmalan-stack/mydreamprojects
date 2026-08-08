@@ -6,6 +6,7 @@ import FloorPlanViewer from "../components/FloorPlanViewer";
 import DayNightImage from "../components/DayNightImage";
 import ElevationViewer from "../components/ElevationViewer";
 import { getProject, getAdjacent } from "../data/projects";
+import { waLink } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -42,7 +43,16 @@ export default function ProjectDetail() {
     { label: "Type", value: project.type },
     ...(project.floors ? [{ label: "Floors", value: project.floors }] : []),
     ...(project.totalFlats
-      ? [{ label: "Total Flats", value: `${project.totalFlats} Flats`, sub: project.flatMix }]
+      ? [
+          {
+            label: "Total Flats",
+            value: `${project.totalFlats} Flats`,
+            sub: project.flatMix,
+            enquire: waLink(
+              `Hello My Dream Projects, I'm interested in ${project.title} (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?`
+            ),
+          },
+        ]
       : []),
     { label: "Year", value: project.year },
   ];
@@ -140,13 +150,47 @@ export default function ProjectDetail() {
               data-testid={`project-stat-${s.label.toLowerCase()}`}
               className={`px-5 md:px-10 py-8 md:py-12 ${i > 0 ? "md:border-l border-line" : ""} ${i > 1 ? "border-t md:border-t-0 border-line" : ""} ${i % 2 === 1 ? "border-l md:border-l" : ""}`}
             >
-              <p className="text-[10px] uppercase tracking-[0.35em] text-concrete mb-2.5">{s.label}</p>
-              <p className={`font-display uppercase tracking-tight text-base md:text-xl ${s.label === "Status" && project.status === "ongoing" ? "text-ember" : "text-bone"}`}>
-                {s.value}
-              </p>
-              {s.sub && (
-                <p className="text-[10px] uppercase tracking-[0.25em] text-concrete mt-2">{s.sub}</p>
-              )}
+              {(() => {
+                const body = (
+                  <>
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-concrete mb-2.5">{s.label}</p>
+                    <p
+                      className={`font-display uppercase tracking-tight text-base md:text-xl ${
+                        s.label === "Status" && project.status === "ongoing"
+                          ? "text-ember"
+                          : s.enquire
+                            ? "text-bone group-hover:text-ember transition-colors duration-300"
+                            : "text-bone"
+                      }`}
+                    >
+                      {s.value}
+                    </p>
+                    {s.sub && (
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-concrete mt-2">{s.sub}</p>
+                    )}
+                    {s.enquire && (
+                      <p className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-[0.25em] text-ember/80 mt-3 group-hover:text-ember transition-colors duration-300">
+                        Check Availability
+                        <ArrowUpRight className="w-3 h-3" strokeWidth={2} />
+                      </p>
+                    )}
+                  </>
+                );
+                return s.enquire ? (
+                  <a
+                    href={s.enquire}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid="availability-enquiry-link"
+                    aria-label={`Check availability of units in ${project.title} on WhatsApp`}
+                    className="group block"
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  body
+                );
+              })()}
             </motion.div>
           ))}
         </div>
@@ -359,16 +403,26 @@ export default function ProjectDetail() {
                 {project.title}
               </h2>
               <p className="text-sm text-concrete leading-relaxed mt-4">{project.location}</p>
-              <a
-                href={project.siteLocation.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="get-directions-button"
-                className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 mt-8 hover:bg-bone transition-colors duration-400"
-              >
-                Get Directions
-                <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
-              </a>
+              <div className="flex flex-wrap items-center gap-3 mt-8">
+                <a
+                  href={project.siteLocation.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="get-directions-button"
+                  className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:bg-bone transition-colors duration-400"
+                >
+                  Get Directions
+                  <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
+                </a>
+                <Link
+                  to={`/project-map?project=${project.slug}`}
+                  data-testid="view-on-map-link"
+                  className="group inline-flex items-center gap-3 border border-bone/20 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:border-ember hover:text-ember transition-colors duration-400"
+                >
+                  View On Project Map
+                  <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
+                </Link>
+              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 32 }}
