@@ -184,6 +184,13 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 78 (2026-08-08) — Deployment failure fixed (Node engine incompatibility)
+- CAUSE: production deploy failed at frontend-build-push during yarn install — transitive dep @mapbox/jsonlint-lines-primitives@2.0.3 (chain: maplibre-gl → @maplibre/maplibre-gl-style-spec@26.2.1 → ^2.0.3) declares engines node>=22; the build image runs Node 20.18.1 → hard install error. Preview was unaffected (modules pre-installed)
+- FIX: pinned "@mapbox/jsonlint-lines-primitives": "2.0.2" (engines node>=0.6, API-compatible) via the existing resolutions field in frontend/package.json; yarn.lock regenerated (resolves 2.0.2 for the ^2.0.3 specifier). Zero code/asset/map changes
+- VERIFIED: full production build (craco build) succeeded in 16.5s, warnings only (pre-existing tailwind class ambiguity + intentional exhaustive-deps); production bundle served statically and smoke-tested — /project-map renders all 19 markers, Vale detail page shows TOTAL FLATS + mix + CHECK AVAILABILITY + view-on-map link, zero pageerrors. Mobile parity guaranteed (same source as mobile-tested preview)
+- Deployment readiness re-scan: PASS (one non-blocking WARN — unused scaffold /api/status endpoint query limit, unchanged by choice)
+- READY TO PUBLISH: user presses Deploy
+
 ## Iteration 77 (2026-08-08) — Availability Enquiry + Shareable Map Links
 - Availability Enquiry: Total Flats stat cell on all 19 detail pages is now a WhatsApp link (wa.me/917780429845 via shared waLink helper) pre-filled with "Hello My Dream Projects, I'm interested in <Project> (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?" — subtle CHECK AVAILABILITY ↗ microcopy under the flat mix, ember on hover, opens new tab (data-testid availability-enquiry-link)
 - Shareable Map Links: every detail page's Visit Project Site section gained a bordered secondary VIEW ON PROJECT MAP button → /project-map?project=<slug> (data-testid view-on-map-link); ProjectMap reads the ?project= param (useSearchParams, re-fires on param change, ignores invalid slugs) → selects the pin (ember glow), flies to zoom 16, opens the info card, auto-scrolls on mobile
