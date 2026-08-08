@@ -373,7 +373,7 @@ const OfficeTeaser = () => (
       <Reveal className="col-span-12 md:col-span-7 relative overflow-hidden min-h-[280px] md:min-h-[480px]">
         <img
           src="/assets/office/office-exterior.webp"
-          srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1600w"
+          srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
           sizes="(max-width: 768px) 100vw, 58vw"
           alt="My Dream Projects container office in Ameenpur"
           data-testid="office-teaser-image"

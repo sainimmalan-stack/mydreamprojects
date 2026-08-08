@@ -291,7 +291,7 @@ const Office = () => (
         <Reveal className="w-full md:w-[62%]">
           <OfficeImage
             src="/assets/office/office-exterior.webp"
-            srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1600w"
+            srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
             sizes="(max-width: 768px) 100vw, 62vw"
             alt="My Dream Projects two-storey container office at night with illuminated signage and car parked in front"
             testid="office-photo-primary"
@@ -300,7 +300,7 @@ const Office = () => (
         <Reveal delay={0.1} className="w-full md:w-[38%]">
           <OfficeImage
             src="/assets/office/office-interior.webp"
-            srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1500w"
+            srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1672w"
             sizes="(max-width: 768px) 100vw, 38vw"
             alt="My Dream Projects office interior with desk, chairs and My Dream Projects logo on the wall"
             testid="office-photo-interior"
