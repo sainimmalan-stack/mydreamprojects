@@ -184,6 +184,11 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 82 (2026-08-08) — Office marker compact polish
+- Office marker reduced to a 28×28 icon-only ember pill (building icon, text label removed) — same visual weight as numbered pins, distinct via orange; selected state keeps the ember glow; card/location/links/filters unchanged
+- Verified: testing-agent iteration_10 = 100% PASS — mobile 390px (marker visible at initial fit, tap → bottom card auto-scrolls into view, directions/contact links correct, persists under all filters, no overflow) + desktop sanity, zero pageerrors
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 81 (2026-08-08) — Office marker added to Project Map (20 markers total)
 - OFFICE {lat 17.5346875, lng 78.3262031} added to contact.js — coordinates decoded offline from the plus code (G8MG+VFG → 7J9WG8MG+VFG) embedded in the office's own configured Google Maps place link (no guessed location)
 - ProjectMap: distinctive ember pill marker with building icon + OFFICE label (map-marker-office), never numbered, always rendered regardless of filter, included in auto-fit bounds + collision spiderfying; tapping opens a premium office card (OFFICE / STUDIO, My Dream Projects, Ameenpur Hyderabad, GET DIRECTIONS → resolved office place URL, CONTACT US → /contact); office selection survives filter switches; VIEW ALL PROJECTS works from office selection
