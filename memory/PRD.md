@@ -184,6 +184,12 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 89 (2026-08-08) — Office section moved About → Contact
+- Contact page gained contact-office section after the contact grid: VISIT OUR OFFICE eyebrow, user-specified copy, exterior photo primary (62%) + interior secondary (38%), "MY DREAM PROJECTS — OFFICE / STUDIO / Ameenpur, Hyderabad" caption + ember GET DIRECTIONS (exact office MAPS_URL). New OfficePhoto/OfficeSection components in Contact.jsx replicate the About gallery treatment
+- About page: entire about-office section + now-unused OfficeImage helper + stale useState import removed; founders/bios/story/journey/philosophy untouched; /about#founders deep link still works. Home office teaser is separate and remains
+- Verified: testing-agent iteration_17 = 100% PASS desktop + mobile (exact copy, image sizes/order, directions href with ftid, About clean with founders intact, zero pageerrors)
+- LIVE NOTE: preview-only until user's next Deploy
+
 ## Iteration 88 (2026-08-08) — Office photos replaced with 2 new uploads
 - New night-exterior (lit signage, 1448×1086) now at office-exterior.webp + -800/-1600 variants; new interior (1672×941) at office-interior.webp + -800 — re-encoded webp q90-92, same file paths so every surface updated at once (Home office teaser, About office gallery ×2, Our Map office popup thumb = night exterior as primary). srcSet descriptors corrected to real widths (1448w/1672w). No AI edits, no layout/design/link/coordinate changes; orange office marker unchanged
 - Verified: testing-agent iteration_16 = 100% PASS desktop + mobile — all 3 surfaces show the new photos sharp/undistorted, zero old imagery anywhere, office GET DIRECTIONS intact, zero pageerrors
