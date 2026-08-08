@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 const LINKS = [
   { to: "/", label: "Home", testid: "nav-home-link" },
   { to: "/projects", label: "Projects", testid: "nav-projects-link" },
-  { to: "/project-map", label: "Project Map", testid: "nav-map-link" },
+  { to: "/project-map", label: "Our Map", testid: "nav-map-link" },
   { to: "/about", label: "About", testid: "nav-about-link" },
   { to: "/contact", label: "Contact", testid: "nav-contact-link" },
 ];
@@ -142,14 +142,11 @@ export const Navbar = () => {
                     to={l.to}
                     data-testid={`mobile-${l.testid}`}
                     className={({ isActive }) =>
-                      `flex items-baseline gap-4 py-3 font-display font-semibold uppercase tracking-tight text-4xl ${
+                      `block py-3 font-display font-semibold uppercase tracking-tight text-4xl ${
                         isActive ? "text-ember" : "text-bone"
                       }`
                     }
                   >
-                    <span className="text-xs text-concrete font-body tracking-[0.3em]">
-                      0{i + 1}
-                    </span>
                     {l.label}
                   </NavLink>
                 </motion.div>

@@ -209,7 +209,7 @@ const OfficeCard = ({ onClose }) => (
 
 export default function ProjectMap() {
   useSeo({
-    title: "Project Map — My Dream Projects",
+    title: "Our Map — My Dream Projects",
     description:
       "19 developments. One growing neighbourhood. Explore every My Dream Projects location around Ameenpur, Hyderabad from a single map.",
     path: "/project-map",

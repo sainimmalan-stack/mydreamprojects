@@ -20,7 +20,7 @@ export const Footer = () => (
             {[
               { to: "/", label: "Home", id: "footer-home-link" },
               { to: "/projects", label: "Projects", id: "footer-projects-link" },
-              { to: "/project-map", label: "Project Map", id: "footer-map-link" },
+              { to: "/project-map", label: "Our Map", id: "footer-map-link" },
               { to: "/about", label: "About", id: "footer-about-link" },
               { to: "/contact", label: "Contact", id: "footer-contact-link" },
             ].map((l) => (

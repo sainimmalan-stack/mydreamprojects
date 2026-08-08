@@ -1,0 +1,19 @@
+{
+  "summary": "Frontend-only regression for 'Our Map' rename + mobile menu numeric-label removal. All acceptance criteria pass. Mobile menu (390x844) shows exactly HOME/PROJECTS/OUR MAP/ABOUT/CONTACT with no 01-05 numerics; LET'S TALK CTA and 'AMEENPUR, HYDERABAD — EST. 2020' footer line intact. Desktop nav (1920) shows OUR MAP with active state on /project-map. Browser title on /project-map = 'Our Map — My Dream Projects'. Footer footer-map-link reads 'OUR MAP' and points to /project-map. Project detail (/projects/my-dream-nest) view-on-map-link reads 'VIEW ON OUR MAP' and href='/project-map?project=my-dream-nest'. Full sweep of /, /projects, /project-map, /about, /contact, /projects/my-dream-nest returned ZERO occurrences of visible 'PROJECT MAP' text. Map page renders 19 numbered markers + orange office pin, filters (ALL 19 / COMPLETED 13 / ONGOING 06) and side cards — fully functional. Zero pageerrors captured.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Note: /project-map uses Leaflet DivIcon markers (not default .leaflet-marker-icon class). Wait with wait_until='load' or 'domcontentloaded' — 'networkidle' will timeout because map tiles keep streaming. Visual screenshot is the reliable verification for marker rendering.",
+  "rca of the issue": "N/A - rename-only change verified successfully."
+}

@@ -419,7 +419,7 @@ export default function ProjectDetail() {
                   data-testid="view-on-map-link"
                   className="group inline-flex items-center gap-3 border border-bone/20 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:border-ember hover:text-ember transition-colors duration-400"
                 >
-                  View On Project Map
+                  View On Our Map
                   <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
                 </Link>
               </div>
