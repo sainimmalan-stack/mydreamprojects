@@ -1,0 +1,45 @@
+{
+  "summary": "Frontend-only verification of new MEET THE FOUNDERS home section + About #founders hash-scroll. Tested desktop (1920x1080) and mobile (390x844). All acceptance criteria pass with zero page errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verifications": {
+    "desktop": {
+      "section_order_office_founders_cta": true,
+      "heading_text": "THE PEOPLE BEHIND / MY DREAM PROJECTS.",
+      "supporting_line": "Built by two engineering friends. Driven by a shared vision.",
+      "sai_portrait": {"src": "/assets/founders/nimmala-sai.webp", "naturalWidth": 1125, "naturalHeight": 2000, "rendered_ratio": 0.8},
+      "akhil_portrait": {"src": "/assets/founders/kotapati-akhil.jpg", "naturalWidth": 960, "naturalHeight": 1280, "rendered_ratio": 0.8},
+      "cards_contain_name_cofounder_focus": true,
+      "hover_scale": "matrix(1.02,0,0,1.02,0,0)",
+      "hover_border_ember": "rgba(232, 93, 34, 0.4)",
+      "our_story_navigates_to_about_hash_founders": true,
+      "about_founders_scrolled_into_view_top_px": 19.3,
+      "direct_load_about_hash_founders_top_px": 0.3,
+      "plain_about_scrollY": 0
+    },
+    "mobile": {
+      "cards_stack_vertical": true,
+      "card_widths_px": [350, 350],
+      "no_horizontal_overflow": true,
+      "our_story_lands_on_about_founders": true
+    },
+    "regression_sections_present": ["home-hero", "selected-work", "home-journey", "building-next", "home-office-teaser", "home-founders", "home-cta"],
+    "page_errors": 0
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Home founder card uses `hover:border-ember/40` (40% opacity) — subtle; consider full ember for stronger 'ember border' emphasis if intended. Currently matches the same treatment used in About founders cards, so consistent.",
+    "Both name and focus text render as uppercase via Tailwind utilities, matching design; verified visually."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "FoundersTeaser lives in /app/frontend/src/pages/Home.jsx (component before Cta). About hash scroll uses 120ms setTimeout in /app/frontend/src/pages/About.jsx. Portraits: /assets/founders/nimmala-sai.webp (1125x2000) and /assets/founders/kotapati-akhil.jpg (960x1280), both 4:5. Hover scale 1.02, border tint rgba(232,93,34,0.4). No issues found."
+}

@@ -407,6 +407,75 @@ const OfficeTeaser = () => (
   </section>
 );
 
+const FoundersTeaser = () => (
+  <section data-testid="home-founders" className="border-t border-line">
+    <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
+      <Reveal>
+        <p className="text-[10px] uppercase tracking-[0.4em] text-ember">Meet the Founders</p>
+        <h2 className="font-display font-semibold uppercase tracking-tighter leading-[1.02] text-3xl md:text-4xl lg:text-5xl text-bone mt-6 max-w-3xl">
+          The people behind
+          <br />
+          <span className="text-concrete">My Dream Projects.</span>
+        </h2>
+        <p className="text-sm md:text-base text-bone/75 leading-relaxed mt-7 max-w-xl">
+          Built by two engineering friends. Driven by a shared vision.
+        </p>
+      </Reveal>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-14 md:mt-20 max-w-4xl">
+        {[
+          {
+            name: "Nimmala Sai",
+            focus: "Creative Direction · Design · Branding · Vision",
+            photo: "/assets/founders/nimmala-sai.webp",
+            testid: "home-founder-sai",
+          },
+          {
+            name: "Kotapati Akhil",
+            focus: "Operations · Site Execution · Customer Experience",
+            photo: "/assets/founders/kotapati-akhil.jpg",
+            testid: "home-founder-akhil",
+          },
+        ].map((f, i) => (
+          <Reveal key={f.name} delay={0.1 + i * 0.1}>
+            <div
+              data-testid={f.testid}
+              className="group border border-line bg-coal hover:border-ember/40 transition-colors duration-500 overflow-hidden"
+            >
+              <div className="overflow-hidden">
+                <img
+                  src={f.photo}
+                  alt={`${f.name}, Co-Founder of My Dream Projects`}
+                  data-testid={`${f.testid}-portrait`}
+                  loading="lazy"
+                  className="w-full aspect-[4/5] object-cover object-[50%_45%] block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                />
+              </div>
+              <div className="p-8 md:p-10">
+                <h3 className="font-display font-medium uppercase tracking-tight text-xl md:text-2xl text-bone">
+                  {f.name}
+                </h3>
+                <p className="text-[10px] uppercase tracking-[0.35em] text-ember mt-2.5">Co-Founder</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-concrete mt-4">{f.focus}</p>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal delay={0.15}>
+        <Link
+          to="/about#founders"
+          data-testid="our-story-button"
+          className="group inline-flex items-center gap-3 mt-12 md:mt-16 border border-bone/25 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.25em] px-7 py-4 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
+        >
+          Our Story
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-400" strokeWidth={2} />
+        </Link>
+      </Reveal>
+    </div>
+  </section>
+);
+
 const Cta = () => (
   <section data-testid="home-cta" className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
     <Reveal>
@@ -469,6 +538,7 @@ export default function Home() {
       <Journey />
       <BuildingNext />
       <OfficeTeaser />
+      <FoundersTeaser />
       <Cta />
     </>
   );

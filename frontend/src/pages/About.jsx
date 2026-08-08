@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { projectStats } from "../data/projects";
@@ -146,7 +146,7 @@ const Journey = () => (
 );
 
 const Founders = () => (
-  <section data-testid="about-founders" className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
+  <section data-testid="about-founders" id="about-founders" className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
     <div className="grid grid-cols-12 gap-6 mb-14 md:mb-24">
       <Reveal className="col-span-12 md:col-span-3">
         <p className="text-[10px] uppercase tracking-[0.4em] text-ember">Founders</p>
@@ -342,12 +342,22 @@ const Philosophy = () => (
 );
 
 export default function About() {
+  const { hash } = useLocation();
   useSeo({
     title: "About My Dream Projects | Ameenpur, Hyderabad",
     description:
       "Founded in 2020 by Nimmala Sai and Kotapati Akhil, My Dream Projects creates thoughtfully designed residential developments in Ameenpur, Hyderabad.",
     image: "/assets/og-image.jpg",
   });
+  // deep links (/about#founders) land directly on the founders section
+  useEffect(() => {
+    if (hash === "#founders") {
+      const t = setTimeout(() => {
+        document.getElementById("about-founders")?.scrollIntoView({ behavior: "smooth" });
+      }, 120);
+      return () => clearTimeout(t);
+    }
+  }, [hash]);
   return (
     <div data-testid="about-page">
       <Story />
