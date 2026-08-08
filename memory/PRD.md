@@ -184,6 +184,13 @@ Premium, production-quality responsive website for residential construction comp
 
 ## Backlog
 
+## Iteration 77 (2026-08-08) — Availability Enquiry + Shareable Map Links
+- Availability Enquiry: Total Flats stat cell on all 19 detail pages is now a WhatsApp link (wa.me/917780429845 via shared waLink helper) pre-filled with "Hello My Dream Projects, I'm interested in <Project> (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?" — subtle CHECK AVAILABILITY ↗ microcopy under the flat mix, ember on hover, opens new tab (data-testid availability-enquiry-link)
+- Shareable Map Links: every detail page's Visit Project Site section gained a bordered secondary VIEW ON PROJECT MAP button → /project-map?project=<slug> (data-testid view-on-map-link); ProjectMap reads the ?project= param (useSearchParams, re-fires on param change, ignores invalid slugs) → selects the pin (ember glow), flies to zoom 16, opens the info card, auto-scrolls on mobile
+- Bug caught in verification: waLink import initially lost (hot-reload race) causing 'waLink is not defined' crashes on detail pages — re-added and re-verified
+- Verified: testing-agent iteration_8 = 100% PASS — all 19 pages have correct per-project WhatsApp hrefs + view-on-map links, deep links (zenith/ivy/solace desktop, casa mobile) auto-open correct cards, invalid param degrades gracefully, plain /project-map unchanged, zero pageerrors
+- NOTE: goes live on mydreamprojects.in on next redeploy (Deploy button)
+
 ## Iteration 76 (2026-08-07) — Flat mix sub-line + deployment readiness
 - flatMix added to all 19 projects in projects.js, rendered as a small uppercase sub-line under the TOTAL FLATS value in the stats grid (e.g. "2 BHK + 3 BHK"): 2+3 BHK — Nest, Casa, Skylark, Summit, Griffin, Zenith, Aura; 2 BHK only — Avasa, Glenmore, Hillock, Atlantis, Perch, Aurelia, Elysium, Echelon; 3 BHK only — Selene, Solace, Ivy; Vale special: "2½ BHK + 3 BHK" (plan explicitly labels unit 02 as 2½-BHK 1,440 sft — verified visually after text extraction garbled it)
 - Vale's plan read visually to resolve the garbled label — no invented data

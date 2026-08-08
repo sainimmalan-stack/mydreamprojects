@@ -362,11 +362,11 @@ export default function ProjectMap() {
   // so any project page (or a texted link) opens straight onto its location
   useEffect(() => {
     const slug = searchParams.get("project");
-    if (slug && projects.some((p) => p.slug === slug)) {
+    if (slug && projects.some((p) => p.slug === slug) && slug !== selectedRef.current) {
       focusProject(slug, true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchParams]);
 
   const FILTERS = [
     { key: "all", label: "All", count: projects.length },
