@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
@@ -8,6 +8,7 @@ import ElevationViewer from "../components/ElevationViewer";
 import ComingSoonElevation from "../components/ComingSoonElevation";
 import { getProject, getAdjacent } from "../data/projects";
 import { waLink } from "../data/contact";
+import { trackProjectView, trackPlanView, trackDownloadStart, downloadUrl } from "../analytics/tracker";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -28,8 +29,25 @@ export default function ProjectDetail() {
       : "Residential project by My Dream Projects in Ameenpur, Hyderabad.",
     image: project?.cover || "/assets/og-image.jpg",
   });
+  // internal analytics — project page opened (hook must run before early return)
+  useEffect(() => {
+    if (project) trackProjectView(project);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project?.slug]);
+
   if (!project) return <Navigate to="/projects" replace />;
   const { prev, next } = getAdjacent(slug);
+
+  const openPlan = () => {
+    trackPlanView(project);
+    setPlanOpen(true);
+  };
+
+  const startDownload = (e) => {
+    e.preventDefault();
+    const startId = trackDownloadStart(project);
+    window.location.assign(downloadUrl(project, startId));
+  };
 
   const heroSrc = project.elevationModes?.day || project.cover;
   const heroSrcSet = !project.cover
@@ -318,7 +336,7 @@ export default function ProjectDetail() {
               <div className="flex flex-wrap gap-4 mt-8">
                 <button
                   type="button"
-                  onClick={() => setPlanOpen(true)}
+                  onClick={openPlan}
                   data-testid="view-full-plan-button"
                   data-pdf={project.floorPlan.pdf}
                   className="group inline-flex items-center gap-3 border border-bone/25 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
@@ -329,6 +347,7 @@ export default function ProjectDetail() {
                 <a
                   href={project.floorPlan.pdf}
                   download={project.floorPlan.fileName}
+                  onClick={startDownload}
                   data-testid="download-plan-button"
                   className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:bg-bone transition-colors duration-400"
                 >
@@ -340,8 +359,8 @@ export default function ProjectDetail() {
             <motion.div
               role="button"
               tabIndex={0}
-              onClick={() => setPlanOpen(true)}
-              onKeyDown={(e) => e.key === "Enter" && setPlanOpen(true)}
+              onClick={openPlan}
+              onKeyDown={(e) => e.key === "Enter" && openPlan()}
               data-testid="floor-plan-preview"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}

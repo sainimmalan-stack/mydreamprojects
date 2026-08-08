@@ -1,0 +1,28 @@
+{
+  "summary": "End-to-end verification of internal analytics system (tracking + backend-confirmed downloads + /admin dashboard) on desktop 1920x1080 and mobile 390x844 against the public REACT_APP_BACKEND_URL. All 6 test areas pass. One minor React console warning found (non-blocking).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/admin — Time To Download table", "issues": ["React key collision warning spams the console: three header cells use the literal 'Median' as their React key (headers array in Admin.jsx line ~354). Repro: open /admin after any events exist -> DevTools console shows 'Encountered two children with the same key, Median' warnings on every render. Fix: give each header a unique key (e.g., index or 'median-viewplan'/'median-plandl'/'median-viewdl'). No functional impact — table renders correctly."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Low priority: In /app/frontend/src/pages/Admin.jsx (Time To Download <thead> map), replace key={h} with a unique key (e.g., key={`${h}-${idx}`}) to eliminate the duplicate-key React warning for the three 'Median' columns."
+  ],
+  "critical_code_review_comments": [
+    "analytics.py:105 — login lockout identifier is client.host+email; behind ingress client.host may be shared (proxy). Consider X-Forwarded-For. Not a blocker for internal admin, but 5-fail lockout can trap legitimate users on shared egress IPs.",
+    "analytics.py:117 — on every failed attempt, locked_until is overwritten (rolling 15 min from latest failure) which is correct, but the count is never reset by TTL, so once >=5 the account is locked from THIS IP forever unless the doc is deleted or 15 min passes AND another failed attempt refreshes locked_until. Current test cleared it manually. Consider TTL index or reset count when locked_until passes.",
+    "tracker.js:64 — trackProjectView dedupes per session using sessionStorage. Verified: reload in the same tab does NOT double-count (funnel showed exactly 1 PROJECT_VIEW per project after reload). Good.",
+    "analytics.py:186 — slug regex 'my-dream-[a-z]+' rejects digits/hyphens; fine for current project names but brittle if a future slug like 'my-dream-2' or 'my-dream-north-star' is added."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "admin@mydreamprojects.in / Mdp@Admin#2026 (per review_request; NOT in /app/memory/test_credentials.md which incorrectly claims no auth exists — main agent should update that file).",
+  "seed_data_creation": "Generated real events during testing (zenith + perch views/plans/downloads on both desktop and mobile). Wiped clean at end: db.analytics_events.delete_many({}) and db.login_attempts.delete_many({}) on mongodb://localhost:27017/test_database. Dashboard now starts empty for the owner.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "VERIFIED FLOWS: (1) /projects/my-dream-zenith desktop — trackProjectView fires once, reload does NOT double-count (session dedupe via sessionStorage mdp_pvm confirmed; funnel showed views=1 per project after reload). Clicking data-testid=view-full-plan-button sent FLOOR_PLAN_VIEW with meta.sinceProjectViewMs=4783ms. ESC to close viewer. Clicking data-testid=download-plan-button triggered Playwright download event with suggested_filename='My Dream Zenith - Floor Plan.pdf' streamed from GET /api/download/floor-plan/my-dream-zenith?vid=..&sid=..&start=..; backend recorded DOWNLOAD_SUCCESS (confirmed=1 in dashboard). (2) Same on my-dream-perch: filename 'My Dream Perch - Floor Plan.pdf'. (3) /admin login: wrong pw -> data-testid=admin-login-error 'Invalid email or password'; correct creds -> data-testid=admin-dashboard renders. GET /api/analytics/summary without Authorization -> 401. Refresh button works. Logout returns to login form. (4) Dashboard content correctness: overall cards -> Project Views 2, Plan Views 2, Starts 2, Confirmed 2, Failed 0, Conversion 100%. Funnel bars 100/100/100/100 (all users converted in this synthetic test set). Project rows: my-dream-zenith 1/1/1/1 100%/100%/100%; my-dream-perch 1/1/1/1 100%/100%/100%. Timing labels correctly formatted as 's' (e.g. Zenith Avg View->Plan=5s, Avg View->DL=7s; Perch 2s/3s). Recent activity shows events newest-first with time (e.g. '2:57 PM — 8 Aug'); NO PII — inspected inner HTML of data-testid=admin-recent and confirmed no visitorId/sessionId/mdp_vid strings leak. Sort buttons for views/downloadConfirmed/overallPct all clickable, sortDir toggles (default -1 desc). (5) Mobile 390x844: hero, plan viewer opens, download triggers, admin login works; project table container scrollWidth=778 vs clientWidth=348 -> horizontal scroll enabled. (6) Regression: zero pageerrors; only console warnings were (a) 401 on unauth summary fetch (expected/harmless) and (b) React duplicate-key warning for 'Median' in timing headers (see design_issues). MINOR ISSUE ONLY — dashboard renders correctly. DB was WIPED at end of testing (12 analytics_events + 1 login_attempts removed) so owner starts with an empty dashboard as requested."
+}

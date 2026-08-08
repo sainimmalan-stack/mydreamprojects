@@ -11,6 +11,7 @@ const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ProjectDetail = lazy(() => import("@/pages/ProjectDetail"));
 const ProjectMap = lazy(() => import("@/pages/ProjectMap"));
+const Admin = lazy(() => import("@/pages/Admin"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const ScrollToTop = () => {
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/project-map" element={<ProjectMap />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
