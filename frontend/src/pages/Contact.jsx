@@ -62,6 +62,80 @@ const QuickActions = () => (
   </div>
 );
 
+const OfficePhoto = ({ src, srcSet, sizes, alt, testid }) => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div data-testid={testid} className="relative overflow-hidden border border-line group bg-ink">
+      <img
+        src={src}
+        srcSet={srcSet}
+        sizes={sizes}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-auto block group-hover:scale-[1.03] transition-[transform,opacity] duration-[1.2s] ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+      />
+    </div>
+  );
+};
+
+const OfficeSection = () => (
+  <section data-testid="contact-office" className="border-t border-line pt-14 md:pt-20 mt-14 md:mt-20">
+    <Reveal>
+      <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">Visit Our Office</p>
+      <p className="text-sm md:text-base text-bone/75 leading-relaxed max-w-xl">
+        More than a workplace, our office is where ideas become spaces. Come meet us, talk about
+        your project, and experience My Dream Projects in person.
+      </p>
+    </Reveal>
+    <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 mt-10 md:mt-14">
+      <Reveal className="w-full md:w-[62%]">
+        <OfficePhoto
+          src="/assets/office/office-exterior.webp"
+          srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
+          sizes="(max-width: 768px) 100vw, 62vw"
+          alt="My Dream Projects two-storey container office at night with illuminated signage"
+          testid="office-photo-primary"
+        />
+      </Reveal>
+      <Reveal delay={0.1} className="w-full md:w-[38%]">
+        <OfficePhoto
+          src="/assets/office/office-interior.webp"
+          srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1672w"
+          sizes="(max-width: 768px) 100vw, 38vw"
+          alt="My Dream Projects office interior with desk and My Dream Projects logo on the wall"
+          testid="office-photo-interior"
+        />
+      </Reveal>
+    </div>
+    <Reveal delay={0.15}>
+      <div className="flex flex-wrap items-center justify-between gap-6 mt-8 md:mt-10">
+        <div>
+          <p className="font-display font-semibold uppercase tracking-tight text-lg text-bone">
+            My Dream Projects — Office / Studio
+          </p>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mt-2">
+            Ameenpur, Hyderabad
+          </p>
+        </div>
+        <a
+          href={MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="office-section-directions"
+          className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.25em] px-7 py-4 hover:bg-bone transition-colors duration-400"
+        >
+          Get Directions
+          <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-400" strokeWidth={2} />
+        </a>
+      </div>
+    </Reveal>
+  </section>
+);
+
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", project: "General Enquiry", message: "" });
   const [error, setError] = useState("");
@@ -243,6 +317,8 @@ export default function Contact() {
             </Reveal>
           </div>
         </div>
+
+        <OfficeSection />
       </div>
     </div>
   );

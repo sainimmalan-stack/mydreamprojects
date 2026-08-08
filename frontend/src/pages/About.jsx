@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -47,29 +47,6 @@ const Reveal = ({ children, delay = 0, className = "" }) => (
     {children}
   </motion.div>
 );
-
-const OfficeImage = ({ src, srcSet, sizes, alt, testid, className = "" }) => {
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <div
-      data-testid={testid}
-      className={`relative overflow-hidden border border-line group bg-ink ${className}`}
-    >
-      <img
-        src={src}
-        srcSet={srcSet}
-        sizes={sizes}
-        alt={alt}
-        loading="lazy"
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-auto block group-hover:scale-[1.03] transition-[transform,opacity] duration-[1.2s] ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-      />
-    </div>
-  );
-};
 
 const Story = () => (
   <section data-testid="about-story" className="max-w-[1600px] mx-auto px-5 md:px-10 pt-28 md:pt-44 pb-24 md:pb-40">
@@ -252,65 +229,6 @@ const Founders = () => (
   </section>
 );
 
-const Office = () => (
-  <section data-testid="about-office" className="border-t border-line bg-coal">
-    <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
-      <div className="grid grid-cols-12 gap-6 mb-12 md:mb-20">
-        <Reveal className="col-span-12 md:col-span-3">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-ember">Our Office</p>
-        </Reveal>
-        <div className="col-span-12 md:col-span-9">
-          <Reveal delay={0.1}>
-            <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-5">
-              The space we built for ourselves
-            </p>
-            <h2 className="font-display font-bold uppercase tracking-tighter leading-[0.98] text-4xl md:text-6xl text-bone">
-              Designed by us.
-              <br />
-              Built by us.
-              <br />
-              <span className="text-ember">Home to us.</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2} className="mt-8 md:mt-10 max-w-2xl">
-            <p className="text-base md:text-lg text-bone/85 leading-relaxed">
-              Our office reflects the same philosophy we bring to every My Dream project. Designed
-              and built by us, the two-level container office combines a European-inspired
-              architectural approach with efficient planning, landscaped outdoor spaces and a
-              contemporary workspace.
-            </p>
-            <p className="text-sm md:text-base text-concrete leading-relaxed mt-6">
-              More than a workplace, it is a small expression of how we think about design, space
-              and construction.
-            </p>
-          </Reveal>
-        </div>
-      </div>
-
-      <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
-        <Reveal className="w-full md:w-[62%]">
-          <OfficeImage
-            src="/assets/office/office-exterior.webp"
-            srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
-            sizes="(max-width: 768px) 100vw, 62vw"
-            alt="My Dream Projects two-storey container office at night with illuminated signage and car parked in front"
-            testid="office-photo-primary"
-          />
-        </Reveal>
-        <Reveal delay={0.1} className="w-full md:w-[38%]">
-          <OfficeImage
-            src="/assets/office/office-interior.webp"
-            srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1672w"
-            sizes="(max-width: 768px) 100vw, 38vw"
-            alt="My Dream Projects office interior with desk, chairs and My Dream Projects logo on the wall"
-            testid="office-photo-interior"
-          />
-        </Reveal>
-      </div>
-    </div>
-  </section>
-);
-
 const Philosophy = () => (
   <section data-testid="about-philosophy" className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
     <Reveal className="grid grid-cols-12 gap-6">
@@ -363,7 +281,6 @@ export default function About() {
       <Story />
       <Journey />
       <Founders />
-      <Office />
       <Philosophy />
     </div>
   );
