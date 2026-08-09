@@ -607,6 +607,11 @@ const MY_DREAM_IVY = {
     { value: "One Home per Floor", label: "Private Residential Concept" },
   ],
   planTagline: "One thoughtfully planned residence. An entire floor to call your own.",
+  plan3d: {
+    src: "/assets/projects/my-dream-ivy/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-ivy/plan-3d-800.webp 800w, /assets/projects/my-dream-ivy/plan-3d.webp 864w",
+  },
   floorPlan: {
     pdf: "/assets/projects/my-dream-ivy/floor-plan.pdf",
     preview: "/assets/projects/my-dream-ivy/floor-plan-p1.jpg",

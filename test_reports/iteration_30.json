@@ -1,0 +1,34 @@
+{
+  "summary": "Verified the Ivy 3D Floor Plan pilot: 2D/3D toggle on PlanSheet, disclaimer, 3D render load, full-screen viewer behavior in both modes, absence of toggle on other projects, and mobile 390px behavior. All 6 review criteria pass. No console errors on Ivy, Skylark, or Home.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "ivy_default_2d": "PASS — plan-2d-button aria-pressed=true, plan-2d-image visible, no disclaimer, mode label '2D Architectural Plan'",
+    "ivy_toggle_to_3d": "PASS — plan-3d-image loads (natural 1200x1697, currentSrc plan-3d.webp via srcSet), disclaimer text exact match, mode label 'Premium 3D View'. No labels/text/numbers visible in the render.",
+    "ivy_toggle_back_to_2d": "PASS — plan-2d-image returns, disclaimer removed, aria-pressed states swap correctly",
+    "viewer_3d_mode": "PASS — title 'My Dream Ivy — 3D Floor Plan', image src=/assets/projects/my-dream-ivy/plan-3d.jpg, viewer-open-pdf NOT present, zoom in→130%, reset→100%",
+    "viewer_2d_mode": "PASS — PDF link (viewer-open-pdf) present in 2D mode",
+    "other_projects_no_toggle": "PASS — /projects/my-dream-skylark and /projects/my-dream-aurelia show plan-sheet with plan-2d-image and NO plan-mode-toggle",
+    "unit_details_ivy": "PASS — Type: 3 BHK, Floors: G+4, Total Residences: 4",
+    "mobile_390px": "PASS — no horizontal overflow in 2D or 3D mode; 3D image width 316px within 390px viewport; viewer opens; zoom-in works (130%)",
+    "no_console_errors": "PASS — 0 console errors across Ivy (both modes), Skylark, Aurelia, Home",
+    "3d_render_visual_layout": "PASS — dollhouse-style top-down 3D render, no in-image text/dimensions; layout broadly matches 2D plan (3 bedrooms right, kitchen upper-left, living/family lower area, dining center with round table, balcony left with plants, lift/staircase lower-right)"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Nit: In ProjectDetail.jsx line 498 the viewer title uses '3D Floor Plan' vs 'Floor Plan' — logic is correct but could be extracted into a small helper for clarity.",
+    "Nit: FloorPlanViewer pdf-link is conditionally rendered from pdf prop — good. Consider adding aria-hidden or a subtle indicator that PDF is not available in 3D mode (currently link simply disappears — acceptable UX).",
+    "The plan3d srcSet is a comma-separated string used as-is in srcSet attribute — works fine, but ensure future projects follow same shape."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only test)", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Ivy 3D pilot fully working. Toggle only appears when project.plan3d exists (currently only my-dream-ivy). Note: after closing FloorPlanViewer, allow ~800ms before asserting subsequent state changes — the exit animation briefly blocks state updates (observed as a false negative once with 300ms wait)."
+}

@@ -162,16 +162,18 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
             >
               {title}
             </p>
-            <a
-              href={pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="viewer-open-pdf"
-              className="inline-flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-concrete hover:text-ember transition-colors duration-300"
-            >
-              <FileText className="w-4 h-4" strokeWidth={1.5} />
-              Open Original PDF
-            </a>
+            {pdf && (
+              <a
+                href={pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="viewer-open-pdf"
+                className="inline-flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-concrete hover:text-ember transition-colors duration-300"
+              >
+                <FileText className="w-4 h-4" strokeWidth={1.5} />
+                Open Original PDF
+              </a>
+            )}
           </div>
 
           <div

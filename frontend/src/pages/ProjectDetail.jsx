@@ -16,6 +16,7 @@ const EASE = [0.16, 1, 0.3, 1];
 export default function ProjectDetail() {
   const { slug } = useParams();
   const [planOpen, setPlanOpen] = useState(false);
+  const [planMode, setPlanMode] = useState("2d");
   const [elevOpen, setElevOpen] = useState(false);
   const project = getProject(slug);
   useSeo({
@@ -376,7 +377,7 @@ export default function ProjectDetail() {
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
               className="col-span-12 md:col-span-8"
             >
-              <PlanSheet project={project} onOpen={() => setPlanOpen(true)} />
+              <PlanSheet project={project} onOpen={() => setPlanOpen(true)} mode={planMode} onModeChange={setPlanMode} />
             </motion.div>
           </div>
         </section>
@@ -492,9 +493,9 @@ export default function ProjectDetail() {
         <FloorPlanViewer
           open={planOpen}
           onClose={() => setPlanOpen(false)}
-          image={project.floorPlan.preview}
-          pdf={project.floorPlan.pdf}
-          title={`${project.title} — Floor Plan`}
+          image={planMode === "3d" && project.plan3d ? project.plan3d.src : project.floorPlan.preview}
+          pdf={planMode === "3d" ? null : project.floorPlan.pdf}
+          title={`${project.title} — ${planMode === "3d" && project.plan3d ? "3D Floor Plan" : "Floor Plan"}`}
         />
       )}
       {project.elevationModes && (
