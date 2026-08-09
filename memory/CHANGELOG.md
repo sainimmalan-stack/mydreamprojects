@@ -887,3 +887,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 4. About founders: removed md:aspect-auto from founder portrait — Sai & Akhil render in IDENTICAL 352x440 boxes on desktop/tablet, equal 4:5 on mobile; faces safe via object-position 50% 45%.
 5. Footer logo: root-caused flexbox align-stretch squashing logo-full-dark.png (rendered 0.893 vs natural 1.413) — added self-start; now pixel-perfect 1.413.
 - Testing: iteration_39 full responsive sweep (1920/834/390) — 100% pass, zero console errors, no overflow/overlaps. Mobile founder 7px delta was confirmed a mid-animation artifact (settled: both exactly 348x435).
+
+## 2026-08-09 — Expected 2027 Label + Availability/Brochure Button Logic (DONE, all 19 pages verified)
+- Ongoing project pages now read "Expected 2027": hero meta chip ("ONGOING · EXPECTED 2027") and Year stat ("EXPECTED 2027"). Completed pages unchanged (plain year).
+- Check Availability (WhatsApp enquiry on the Total Flats stat) is now status-based: ONLY ongoing projects render it (enquire link + "Check Availability →" line); completed projects show Total Flats as a plain stat — stats grid column logic unaffected (count unchanged), no empty space.
+- Download Brochure button removed from ALL project pages (the only place it existed). Brochure PDFs remain on disk but are no longer linked anywhere. View Full Plan + Download PDF buttons remain.
+- Verified via automation loop over all 19 project pages: completed → 0 availability links / 0 brochure buttons; ongoing → 1 availability link / 0 brochure buttons; Download PDF intact everywhere; zero console errors.

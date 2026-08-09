@@ -51,13 +51,17 @@ export default function ProjectDetail() {
             label: "Total Flats",
             value: `${project.totalFlats} Flats`,
             sub: project.flatMix,
-            enquire: waLink(
-              `Hello My Dream Projects, I'm interested in ${project.title} (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?`
-            ),
+            ...(project.status === "ongoing"
+              ? {
+                  enquire: waLink(
+                    `Hello My Dream Projects, I'm interested in ${project.title} (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?`
+                  ),
+                }
+              : {}),
           },
         ]
       : []),
-    { label: "Year", value: project.year },
+    { label: "Year", value: project.status === "ongoing" ? `Expected ${project.year}` : project.year },
   ];
 
   return (
@@ -124,7 +128,7 @@ export default function ProjectDetail() {
                   : "border-bone/25 bg-ink/40 backdrop-blur text-bone/90"
               }`}
             >
-              {project.year !== "—" ? `${project.status} · ${project.year}` : project.status}
+              {project.status === "ongoing" ? `${project.status} · Expected ${project.year}` : project.year !== "—" ? `${project.status} · ${project.year}` : project.status}
             </span>
             {project.floors && (
               <span
@@ -366,15 +370,6 @@ export default function ProjectDetail() {
                   className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:bg-bone transition-colors duration-400"
                 >
                   Download PDF
-                  <ArrowRight className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-400" strokeWidth={2} />
-                </a>
-                <a
-                  href={`/assets/projects/${project.slug}/brochure.pdf`}
-                  download={`My-Dream-${project.title.replace(/^My Dream\s+/i, "").replace(/\s+/g, "-")}-Brochure.pdf`}
-                  data-testid="download-brochure-button"
-                  className="group inline-flex items-center gap-3 border border-bone/25 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
-                >
-                  Download Brochure
                   <ArrowRight className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-400" strokeWidth={2} />
                 </a>
               </div>
