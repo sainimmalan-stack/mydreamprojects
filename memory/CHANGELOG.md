@@ -879,3 +879,11 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Removed the homepage hero 3D slide (owner request) — hero is back to 8 night-elevation slides only, Skylark leading. Slide objects keep the explicit link/srcSet fields.
 - Smoothed the hero crossfade: dwell 3s→4s per slide; fade 2.4s→1.6s with ASYMMETRIC easing (incoming ease-out / outgoing ease-in) eliminating the mid-fade dark dip; caption fades match; Ken Burns drift retimed to SLIDE_MS+FADE_MS.
 - Verified: mid-fade frame shows no dark dip (incoming ≈ fully opaque by mid-fade), slides advance skylark→nest→casa cleanly, no console errors.
+
+## 2026-08-09 — Owner's 5 Surgical Fixes (DONE, tested iteration_39, 100% pass)
+1. Ongoing projects: year "—" → "2027" for all 6 ongoing (projects.js replace-all). Flows everywhere automatically: detail Year stat, "ongoing · 2027" meta, Our Map popups/sidebar.
+2. Home page: removed my-dream-casa + my-dream-griffin from HERO_SLIDE_ORDER (now 6 slides) and SELECTED_SLUGS (now Nest, Hillock, Solace — clean 3-card row). Both projects remain on Projects page and elsewhere.
+3. Projects page: completed (Sold Out & Occupied) cards now square aspect-[1/1], ongoing stay portrait aspect-[4/5] — completed visibly more compact, all card info intact (Projects.jsx conditional aspect prop).
+4. About founders: removed md:aspect-auto from founder portrait — Sai & Akhil render in IDENTICAL 352x440 boxes on desktop/tablet, equal 4:5 on mobile; faces safe via object-position 50% 45%.
+5. Footer logo: root-caused flexbox align-stretch squashing logo-full-dark.png (rendered 0.893 vs natural 1.413) — added self-start; now pixel-perfect 1.413.
+- Testing: iteration_39 full responsive sweep (1920/834/390) — 100% pass, zero console errors, no overflow/overlaps. Mobile founder 7px delta was confirmed a mid-animation artifact (settled: both exactly 348x435).

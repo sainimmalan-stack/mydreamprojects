@@ -12,7 +12,8 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
-- 2026-08-09: Homepage hero 3D teaser slide with Ken Burns drift (self-tested)
+- 2026-08-09: Owner's 5 surgical fixes — ongoing year 2027, Casa/Griffin off home, compact sold-out cards, equal founder photos, footer logo distortion fix (iteration_39, 100% pass)
+- 2026-08-09: Hero 3D slide removed + smoother asymmetric crossfade (owner request)
 - 2026-08-09: Cinematic Ken Burns drift intro on 3D full-screen viewer (self-tested)
 - 2026-08-09: Edge-to-edge 3D full-screen viewer + all 19 brochures regenerated clean/label-free (self-tested)
 - 2026-08-09: 3D label overlays REMOVED site-wide per owner request — 3D plans are now purely visual (self-tested, desktop + mobile)
