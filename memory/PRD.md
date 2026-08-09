@@ -823,3 +823,16 @@ Premium, production-quality responsive website for residential construction comp
 ## Still Pending
 - P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — Visual Quality + Ordering + Stats + Teasers + Brochures (DONE, tested iteration_35)
+- Hero slideshow: crossfade now 2.4s ease-in-out (slides + captions), same 8 projects/3s cadence/loop; verified no blank frames (opacities overlap to ~1.0).
+- Ongoing projects display descending (ivy 19 → aurelia 14) in /projects?filter=ongoing AND Home BuildingNext.
+- Stats band: 6 cells; new TOTAL FLATS SOLD + TOTAL SFT DELIVERED read from centralized BUSINESS_STATS in projects.js — currently null → renders "—" (user-authorized placeholders, no invented numbers). USER ACTION: provide real figures to replace placeholders.
+- All 26 day/night elevations upscaled 2x (PIL Lanczos + unsharp; pixel-faithful, no AI regen) + elevationModes.width synced in projects.js → heroes/cards serve full res; 800w mobile variants unchanged.
+- ProjectCard: "3D PLAN" chip (bottom-left) + hover crossfade to plan3d render (loads on first pointerenter).
+- Brochures: /assets/projects/<slug>/brochure.pdf for all 19 (fpdf2; cover night elevation — or 3D render for ongoing — + 3D page + framed original 2D sheet). "Download Brochure" button in every project's plan section. Generator: /app/backend/make_brochures.py (rerun for future projects).
+
+## Still Pending
+- P0 (user action): Provide real totalFlatsSold + totalSftDelivered values to replace "—" placeholders
+- P0 (user action): Meta WhatsApp credentials for landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
