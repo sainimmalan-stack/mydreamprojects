@@ -11,8 +11,7 @@ import useSeo from "../hooks/useSeo";
 const EASE = [0.16, 1, 0.3, 1];
 
 // Hero slideshow — night elevations of the 8 selected completed projects only.
-// Skylark always leads; the sequence loops continuously. A single 3D floor-plan
-// slide (Nest) sits second with a gentle Ken Burns drift to catch the eye.
+// Skylark always leads; the sequence loops continuously.
 const HERO_SLIDE_ORDER = [
   "my-dream-skylark",
   "my-dream-nest",
@@ -23,27 +22,17 @@ const HERO_SLIDE_ORDER = [
   "my-dream-perch",
   "my-dream-solace",
 ];
-const HERO_3D_SOURCE = getProject("my-dream-nest");
-const HERO_SLIDES = [
-  ...HERO_SLIDE_ORDER.map(getProject)
-    .filter((p) => p?.elevationModes?.night)
-    .map((p) => ({
-      slug: p.slug,
-      title: p.title,
-      src: p.elevationModes.night,
-      srcSet: `${p.elevationModes.night.replace(".webp", "-800.webp")} 800w, ${p.elevationModes.night} ${p.elevationModes.width || 1402}w`,
-      link: `/projects/${p.slug}`,
-    })),
-];
-HERO_SLIDES.splice(1, 0, {
-  slug: "my-dream-nest-3d",
-  title: "My Dream Nest · 3D Plan",
-  src: HERO_3D_SOURCE.plan3d.src,
-  srcSet: HERO_3D_SOURCE.plan3d.srcSet,
-  link: "/projects/my-dream-nest",
-  is3d: true,
-});
-const SLIDE_MS = 3000;
+const HERO_SLIDES = HERO_SLIDE_ORDER.map(getProject)
+  .filter((p) => p?.elevationModes?.night)
+  .map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    src: p.elevationModes.night,
+    srcSet: `${p.elevationModes.night.replace(".webp", "-800.webp")} 800w, ${p.elevationModes.night} ${p.elevationModes.width || 1402}w`,
+    link: `/projects/${p.slug}`,
+  }));
+const SLIDE_MS = 4000;
+const FADE_MS = 1600;
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -92,13 +81,7 @@ const Hero = () => {
                 src={s.src}
                 srcSet={s.srcSet}
                 sizes="100vw"
-                alt={
-                  i === slide
-                    ? s.is3d
-                      ? `${s.title} — premium 3D floor plan visualization`
-                      : `${s.title} residential apartment elevation in Ameenpur — night view`
-                    : ""
-                }
+                alt={i === slide ? `${s.title} residential apartment elevation in Ameenpur — night view` : ""}
                 aria-hidden={i !== slide}
                 data-testid={i === 0 ? "hero-elevation-image" : `hero-slide-${s.slug}`}
                 fetchPriority={i === 0 ? "high" : undefined}
@@ -108,13 +91,11 @@ const Hero = () => {
                 animate={
                   reduce || i !== slide
                     ? { scale: 1, x: 0, y: 0 }
-                    : s.is3d
-                      ? { scale: 1.06, x: -14, y: 8 }
-                      : { scale: 1.02, x: 0, y: 0 }
+                    : { scale: 1.02, x: 0, y: 0 }
                 }
-                transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
-                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity duration-[2400ms] ease-in-out ${
-                  i === slide ? "opacity-100" : "opacity-0"
+                transition={{ duration: (SLIDE_MS + FADE_MS) / 1000, ease: "linear" }}
+                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity ${
+                  i === slide ? "opacity-100 duration-[1600ms] ease-out" : "opacity-0 duration-[1600ms] ease-in"
                 }`}
               />
             </div>

@@ -874,3 +874,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - The 3D slide plays a subtle Ken Burns drift while active (scale 1→1.06 with a gentle diagonal translate, linear over ~5s) — more pronounced than the elevation slides' 1.02 drift to catch the eye; skipped for reduced-motion users.
 - Slide caption "MY DREAM NEST · 3D PLAN" deep-links to /projects/my-dream-nest. Slide objects now carry explicit link/srcSet fields.
 - Verified: slide activates at ~3s (opacity 1), transform samples confirm drift progression, caption/link correct, cycle continues normally. data-testids: hero-slide-my-dream-nest-3d, hero-caption-my-dream-nest-3d.
+
+## 2026-08-09 — Hero 3D Slide REMOVED + Crossfade Smoothness (owner request, self-tested)
+- Removed the homepage hero 3D slide (owner request) — hero is back to 8 night-elevation slides only, Skylark leading. Slide objects keep the explicit link/srcSet fields.
+- Smoothed the hero crossfade: dwell 3s→4s per slide; fade 2.4s→1.6s with ASYMMETRIC easing (incoming ease-out / outgoing ease-in) eliminating the mid-fade dark dip; caption fades match; Ken Burns drift retimed to SLIDE_MS+FADE_MS.
+- Verified: mid-fade frame shows no dark dip (incoming ≈ fully opaque by mid-fade), slides advance skylark→nest→casa cleanly, no console errors.
