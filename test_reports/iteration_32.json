@@ -1,0 +1,15 @@
+{
+  "summary": "2D floor-plan display derivatives (floor-plan-display.jpg, content-cropped with 1% safety pad, originals untouched) + framed-document dark treatment in PlanSheet + viewer uses display derivative. All critical criteria passed (testing agent) + mobile 390px self-check passed (no overflow, Aurelia).",
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "verified": [
+    "5 projects file+UI verified (ivy, skylark, glenmore, atlantis, aurelia): display derivatives load, no 404s, only marginally smaller than originals",
+    "Atlantis full-bleed scan correctly uncropped",
+    "Frame treatment: champagne keyline rgba(201,168,118,0.25) + dark mat #0d0c0a on both 2D and 3D",
+    "Viewer 2D uses display derivative; PDF link serves untouched original floor-plan.pdf; zoom/reset/close work",
+    "Ivy viewer screenshot confirmed full content preserved (title block, areas table, north arrow, dimensions)",
+    "Mobile 390px Aurelia: no horizontal overflow, plan fills sheet",
+    "0 console errors across tested pages"
+  ],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "retest_needed": false
+}

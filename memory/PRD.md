@@ -790,3 +790,14 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user decision): Ivy 3D pilot verdict → approve/adjust/discard; then remaining 18 renders or studio route
 - P0 (user action): Meta WhatsApp credentials to activate landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — 2D Plan Viewer Redesign: Content-Cropped Display Derivatives (DONE, tested iteration_32)
+- All 19 projects: generated floor-plan-display.jpg (+ -800.webp) — auto-cropped to drawing content bbox (noise-filtered, 1% safety pad). Originals floor-plan-p1.jpg + floor-plan.pdf byte-identical/untouched; PDF download still serves full original sheet.
+- PlanSheet 2D uses display derivative (path derived from preview via .replace). Framed-document treatment shared by 2D+3D: graphite border, slim dark mat #0d0c0a, champagne #C9A876/25 keyline. Sheet drawing padding reduced (p-3 md:p-6) → plans display larger.
+- FloorPlanViewer 2D mode uses display derivative too. 2D/3D now share identical frame/controls/typography.
+- Verified: 5 projects deep-checked (incl. atlantis full-bleed uncropped edge case), no content cut, mobile 390px clean, 0 console errors.
+
+## Still Pending
+- P0 (user decision): Ivy 3D pilot verdict → remaining 18 renders or studio route
+- P0 (user action): Meta WhatsApp credentials for landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
