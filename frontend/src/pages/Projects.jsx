@@ -18,7 +18,14 @@ export default function Projects() {
   const [filter, setFilter] = useState(() =>
     searchParams.get("filter") === "ongoing" ? "ongoing" : "all"
   );
-  const visible = filter === "all" ? projects : projects.filter((p) => p.status === filter);
+  const visible =
+    filter === "all"
+      ? projects
+      : filter === "ongoing"
+        ? projects
+            .filter((p) => p.status === "ongoing")
+            .sort((a, b) => parseInt(b.index, 10) - parseInt(a.index, 10))
+        : projects.filter((p) => p.status === filter);
 
   useSeo({
     title: "Projects | My Dream Projects — Ameenpur, Hyderabad",

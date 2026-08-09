@@ -1,5 +1,13 @@
 const pad = (n) => String(n).padStart(2, "0");
 
+// Business achievement statistics — CENTRALIZED, editable here only.
+// Replace the null placeholders with the verified figures when ready;
+// the homepage statistics band reads from this single source.
+export const BUSINESS_STATS = {
+  totalFlatsSold: null, // TODO: set verified number, e.g. 128
+  totalSftDelivered: null, // TODO: set verified number, e.g. 185000
+};
+
 // Public pricing — static, site-wide source of truth.
 export const PRICING = {
   ratePerSft: "₹5,994",
@@ -25,6 +33,7 @@ const MY_DREAM_NEST = {
   elevationModes: {
     day: "/assets/projects/my-dream-nest/elevation-day.webp",
     night: "/assets/projects/my-dream-nest/elevation-night.webp",
+    width: 2804,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=My+Dream+Nest%2C+Janachithanya+layout%2C+Aminpur+Rd%2C+Ameenpur%2C+Miyapur%2C+Telangana+502032&ftid=0x3bcb8d8279a3504d%3A0x913bb9b448c58929",
@@ -62,7 +71,7 @@ const MY_DREAM_CASA = {
   elevationModes: {
     day: "/assets/projects/my-dream-casa/elevation-day.webp",
     night: "/assets/projects/my-dream-casa/elevation-night.webp",
-    width: 768,
+    width: 1536,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=G8MF+CJC+My+Dream+-+Casa%2C+6%2C+Sai+Ambica+Colony+Rd%2C+Narendra+Nagar+Colony%2C+Ameenpur%2C+Miyapur%2C+Hyderabad%2C+Telangana+502032&ftid=0x3bcb8d36fc1e6821%3A0xe70e438ce3ffabf3",
@@ -100,7 +109,7 @@ const MY_DREAM_AVASA = {
   elevationModes: {
     day: "/assets/projects/my-dream-avasa/elevation-day.webp",
     night: "/assets/projects/my-dream-avasa/elevation-night.webp",
-    width: 1125,
+    width: 2250,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=G8MF+PXG+MY+Dream+Avasa%2C+Sai+Ambica+Colony%2C+Ameenpur%2C+Miyapur%2C+Hyderabad%2C+Telangana+502032&ftid=0x3bcb8d007573cfe7%3A0x35268543df407da9",
@@ -138,7 +147,7 @@ const MY_DREAM_SKYLARK = {
   elevationModes: {
     day: "/assets/projects/my-dream-skylark/elevation-day.webp",
     night: "/assets/projects/my-dream-skylark/elevation-night.webp",
-    width: 1448,
+    width: 2896,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=My+Dream+Skylark%2C+Ameenpur%2C+Hyderabad%2C+Telangana+502033&ftid=0x3bcb8d7c5806af6d%3A0xa98af901111f741c",
@@ -176,7 +185,7 @@ const MY_DREAM_GLENMORE = {
   elevationModes: {
     day: "/assets/projects/my-dream-glenmore/elevation-day.webp",
     night: "/assets/projects/my-dream-glenmore/elevation-night.webp",
-    width: 1178,
+    width: 2356,
     aspect: "aspect-[16/9]",
   },
   siteLocation: {
@@ -215,7 +224,7 @@ const MY_DREAM_HILLOCK = {
   elevationModes: {
     day: "/assets/projects/my-dream-hillock/elevation-day.webp",
     night: "/assets/projects/my-dream-hillock/elevation-night.webp",
-    width: 1327,
+    width: 2654,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=Phase+2%2C+My+Dream+Hillock%2C+Ameenpur%2C+Ramachandrapuram+%28BHEL+Township%29%2C+Miyapur%2C+Telangana+502033&ftid=0x3bcb8d001cc9ab45%3A0x6baddd4ce0c55bac",
@@ -253,7 +262,7 @@ const MY_DREAM_SUMMIT = {
   elevationModes: {
     day: "/assets/projects/my-dream-summit/elevation-day.webp",
     night: "/assets/projects/my-dream-summit/elevation-night.webp",
-    width: 1254,
+    width: 2508,
     aspect: "aspect-[2/1]",
   },
   siteLocation: {
@@ -292,7 +301,7 @@ const MY_DREAM_GRIFFIN = {
   elevationModes: {
     day: "/assets/projects/my-dream-griffin/elevation-day.webp",
     night: "/assets/projects/my-dream-griffin/elevation-night.webp",
-    width: 1254,
+    width: 2508,
     aspect: "aspect-[2/1]",
   },
   siteLocation: {
@@ -331,7 +340,7 @@ const MY_DREAM_SELENE = {
   elevationModes: {
     day: "/assets/projects/my-dream-selene/elevation-day.webp",
     night: "/assets/projects/my-dream-selene/elevation-night.webp",
-    width: 1254,
+    width: 2508,
     aspect: "aspect-[2.2/1]",
   },
   siteLocation: {
@@ -370,7 +379,7 @@ const MY_DREAM_ATLANTIS = {
   elevationModes: {
     day: "/assets/projects/my-dream-atlantis/elevation-day.webp",
     night: "/assets/projects/my-dream-atlantis/elevation-night.webp",
-    width: 1345,
+    width: 2690,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=G8MJ+J5R+My+Dream+Atlantis%2C+Shanthi+Sree+Nagar+Colony%2C+Ameenpur%2C+Miyapur%2C+Hyderabad%2C+Telangana+502033&ftid=0x3bcb8d003b5bbaf7%3A0xda2a75fbf62b8b9a",
@@ -408,7 +417,7 @@ const MY_DREAM_PERCH = {
   elevationModes: {
     day: "/assets/projects/my-dream-perch/elevation-day.webp",
     night: "/assets/projects/my-dream-perch/elevation-night.webp",
-    width: 1254,
+    width: 2508,
     aspect: "aspect-[2/1]",
   },
   siteLocation: {
@@ -447,7 +456,7 @@ const MY_DREAM_SOLACE = {
   elevationModes: {
     day: "/assets/projects/my-dream-solace/elevation-day.webp",
     night: "/assets/projects/my-dream-solace/elevation-night.webp",
-    width: 1182,
+    width: 2364,
     aspect: "aspect-[9/5]",
   },
   siteLocation: {
@@ -486,7 +495,7 @@ const MY_DREAM_ZENITH = {
   elevationModes: {
     day: "/assets/projects/my-dream-zenith/elevation-day.webp",
     night: "/assets/projects/my-dream-zenith/elevation-night.webp",
-    width: 1287,
+    width: 2574,
     aspect: "aspect-[2.15/1]",
   },
   siteLocation: {

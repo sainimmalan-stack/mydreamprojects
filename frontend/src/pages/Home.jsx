@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, animate, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
-import { getProject, projectStats, PRICING } from "../data/projects";
+import { getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import useSeo from "../hooks/useSeo";
@@ -88,7 +88,7 @@ const Hero = () => {
                 initial={false}
                 animate={{ scale: !reduce && i === slide ? 1.02 : 1 }}
                 transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
-                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity duration-[1600ms] ease-out ${
+                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity duration-[2400ms] ease-in-out ${
                   i === slide ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -107,7 +107,7 @@ const Hero = () => {
             data-testid={`hero-caption-${s.slug}`}
             aria-hidden={i !== slide}
             tabIndex={i === slide ? 0 : -1}
-            className={`group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right transition-opacity duration-[1600ms] ease-out ${
+            className={`group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right transition-opacity duration-[2400ms] ease-in-out ${
               i === slide ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
@@ -223,18 +223,25 @@ const Stats = () => {
     { value: projectStats.completed, pad: 0, label: "Completed" },
     { value: projectStats.ongoing, pad: 0, label: "Ongoing" },
     { value: 2020, pad: 0, label: "Founded" },
+    { value: BUSINESS_STATS.totalFlatsSold, pad: 0, label: "Total Flats Sold", testid: "stat-flats-sold" },
+    { value: BUSINESS_STATS.totalSftDelivered, pad: 0, label: "Total SFT Delivered", testid: "stat-sft-delivered", suffix: "+" },
   ];
   return (
     <section data-testid="stats-band" className="border-b border-line bg-coal">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {items.map((s, i) => (
           <div
             key={s.label}
-            data-testid={`stat-${s.label.toLowerCase()}`}
-            className={`px-6 md:px-10 py-12 md:py-20 ${i > 0 ? "border-l border-line" : ""} ${i > 1 ? "border-t md:border-t-0 border-line" : ""}`}
+            data-testid={s.testid || `stat-${s.label.toLowerCase()}`}
+            className={`px-6 md:px-10 py-12 md:py-20 ${i > 0 ? "border-l border-line" : ""} ${i > 1 ? "border-t lg:border-t-0 border-line" : ""} ${i === 3 ? "md:border-l-0 lg:border-l" : ""}`}
           >
-            <p className="font-display font-bold tracking-tighter text-5xl md:text-7xl text-bone tabular-nums">
-              <CountUp value={s.value} pad={s.pad} />
+            <p className="font-display font-bold tracking-tighter text-5xl md:text-6xl lg:text-7xl text-bone tabular-nums">
+              {typeof s.value === "number" ? (
+                <CountUp value={s.value} pad={s.pad} />
+              ) : (
+                <span className="text-concrete">—</span>
+              )}
+              {typeof s.value === "number" && s.suffix && <span className="text-ember">{s.suffix}</span>}
             </p>
             <p className="text-[10px] uppercase tracking-[0.35em] text-concrete mt-3">{s.label}</p>
           </div>
@@ -440,7 +447,7 @@ const Journey = () => (
 );
 
 const BuildingNext = () => {
-  const ongoing = ["my-dream-aurelia", "my-dream-elysium", "my-dream-aura", "my-dream-echelon", "my-dream-vale", "my-dream-ivy"].map(getProject);
+  const ongoing = ["my-dream-ivy", "my-dream-vale", "my-dream-echelon", "my-dream-aura", "my-dream-elysium", "my-dream-aurelia"].map(getProject);
   return (
     <section data-testid="building-next" className="border-t border-line">
       <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">

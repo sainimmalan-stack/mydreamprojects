@@ -368,6 +368,15 @@ export default function ProjectDetail() {
                   Download PDF
                   <ArrowRight className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-400" strokeWidth={2} />
                 </a>
+                <a
+                  href={`/assets/projects/${project.slug}/brochure.pdf`}
+                  download={`My-Dream-${project.title.replace(/^My Dream\s+/i, "").replace(/\s+/g, "-")}-Brochure.pdf`}
+                  data-testid="download-brochure-button"
+                  className="group inline-flex items-center gap-3 border border-bone/25 text-bone font-display font-semibold text-[11px] uppercase tracking-[0.2em] px-6 py-4 hover:border-ember hover:text-ember transition-[color,border-color] duration-400"
+                >
+                  Download Brochure
+                  <ArrowRight className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-400" strokeWidth={2} />
+                </a>
               </div>
             </div>
             <motion.div

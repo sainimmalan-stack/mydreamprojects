@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 35 — validated the 6-change batch: (1) hero slideshow 2.4s crossfade + captions (transition observed, total opacity stays ~1, no blank frames), (2) ongoing descending order on /projects?filter=ongoing AND Home 'Building Next' rows both = [ivy, vale, echelon, aura, elysium, aurelia], (3) Stats band has 6 cells including stat-flats-sold and stat-sft-delivered showing '—' placeholders while existing 4 count up to 19/13/6/2020, (4) hero srcSet includes 2896w (skylark night) and card img srcSet uses 800w small variant, (5) 3D chip present on all cards; hovering my-dream-nest card raises card-3d-image opacity to 1.0 and returns to 0 on mouse leave, (6) Download Brochure button present on skylark/ivy/nest with correct hrefs; HEAD /assets/projects/<slug>/brochure.pdf returns 200 + application/pdf (0.83–1.53MB). Mobile 390px: no overflow, chip visible, ongoing order preserved. Zero console errors across Home and Projects.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "verified": [
+    "Home hero data-testid=hero-elevation-image srcset contains '2896w' (skylark night full-res)",
+    "Hero opacity poll (35 samples @300ms): min total=0.0/max=1.0; during transition frame outgoing+incoming sum to 1.0 (e.g. avasa 0.16 + hillock 0.84) — no blank frames",
+    "Home 'Building Next' ongoing-row order: ivy, vale, echelon, aura, elysium, aurelia",
+    "/projects?filter=ongoing project-card order (desktop AND mobile 390px): ivy, vale, echelon, aura, elysium, aurelia",
+    "Stats band data-testids present: stat-projects(19), stat-completed(13), stat-ongoing(6), stat-founded(2020), stat-flats-sold(—), stat-sft-delivered(—) — count-up animates after scroll-into-view",
+    "3D chip data-testid=card-3d-chip-<slug> present on all 6 ongoing cards (and other cards on /projects)",
+    "Hover my-dream-nest card: card-3d-image-my-dream-nest opacity → 1.0; mouse leave → 0.0",
+    "ProjectCard srcSet uses 800w small variant (e.g. elevation-night-800.webp 800w, elevation-night.webp 2804w for nest)",
+    "Brochure buttons present on /projects/my-dream-skylark, /my-dream-ivy, /my-dream-nest with href=/assets/projects/<slug>/brochure.pdf",
+    "HEAD brochure.pdf: skylark 200 application/pdf 1528558B; ivy 200 application/pdf 851943B; nest 200 application/pdf 1403930B",
+    "Mobile 390px: Home hero visible, no horizontal overflow (sw=cw=390); /projects?filter=ongoing no overflow; chip visible on mobile (no-hover)",
+    "0 console errors across Home, /projects, /projects?filter=ongoing, and 3 project detail pages"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All 6 changes in the batch verified passing. BUSINESS_STATS null placeholders render as '—' (intentional per user). 3D hover layer mounts on first pointerenter and crossfades smoothly. Brochure PDFs are served correctly with application/pdf MIME. Hero slideshow crossfade is visible and overlap-safe (no blank frame). urllib.HEAD from outside the browser returns 403 (WAF), but in-browser fetch HEAD returns 200 — use page.evaluate fetch for future PDF checks."
+}
