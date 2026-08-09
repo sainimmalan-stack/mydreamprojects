@@ -321,9 +321,7 @@ const Purpose = () => (
 
 const SELECTED_SLUGS = [
   "my-dream-nest",
-  "my-dream-casa",
   "my-dream-hillock",
-  "my-dream-griffin",
   "my-dream-solace",
 ];
 

@@ -1,0 +1,35 @@
+{
+  "summary": "Frontend regression test of 5 surgical changes (ongoing year 2027, hero/SelectedWork Casa+Griffin removal, Projects square-vs-portrait cards, About founder equal sizing, Footer logo aspect fix) + responsive sweep. All 5 changes verified passing on desktop, tablet and mobile. Zero console errors across all pages.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_changes": [
+    "Ongoing year 2027: /projects/my-dream-aurelia and /projects/my-dream-ivy both display 2027 with 'ongoing' meta; /projects/my-dream-nest still shows 2020 + 'Sold Out & Occupied' — no regression.",
+    "Our Map sidebar rows for all 6 ongoing (Aurelia, Elysium, Aura, Echelon, Vale, Ivy) show 'ONGOING · 2027'; completed rows still show correct years (2020..2026). Map data source verified.",
+    "Home hero slideshow: hero-slide-my-dream-casa and hero-slide-my-dream-griffin selectors do NOT exist in DOM (both null). Carousel currently mounts 2 active slides at a time from the 6-slide order, so only 2 testids visible at any moment which is expected behavior for a rolling carousel; no Casa/Griffin ever mounted.",
+    "Selected Work section: data-testid='selected-work' present with exactly 3 cards in order: project-card-my-dream-nest, project-card-my-dream-hillock, project-card-my-dream-solace. No Casa, no Griffin, no empty slots.",
+    "Casa/Griffin regression: /projects grid still contains project-card-my-dream-casa and project-card-my-dream-griffin; /projects/my-dream-casa detail page loads with 'Casa' content.",
+    "Projects card aspect ratios (measured at desktop 1920):\n  - All 10 completed cards visible (Nest, Casa, Avasa, Skylark, Glenmore, Hillock, Summit, Griffin, Zenith, Solace): 480x480 ratio 1.00 (square).\n  - All 6 ongoing cards (Aurelia, Ivy, Elysium, Aura, Echelon, Vale): 480x600 ratio 0.80 (4:5 portrait).",
+    "About founder portraits desktop (1920): founder-sai-portrait 352x440, founder-akhil-portrait 352x440 — EXACTLY EQUAL. object-position on both = '50% 45%' (face not cropped). Tablet 834: both 352x440 EQUAL.",
+    "Footer logo: rendered 192.0 x 135.9 ratio 1.413 = natural 2229x1578 ratio 1.413 exact match. No flex-stretch distortion."
+  ],
+  "responsive": {
+    "tablet_834": "No horizontal overflow on /about; founders both 352x440 identical.",
+    "mobile_390": "No horizontal overflow on /projects or /about; founders 355x444 and 348x435 (both maintain ~4:5 ratio; 7px width difference between stacked cards is likely a container/padding artifact — cosmetic only, not functional). No layout breakage."
+  },
+  "console_errors": "Zero errors across /, /projects, /about, /contact, /projects/my-dream-nest (also verified on /project-map load).",
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor mobile observation: on /about at 390px, founder-sai-portrait renders 355x444 while founder-akhil-portrait renders 348x435 (7px width delta). Since both maintain aspect-[4/5] correctly, this is likely due to different parent flex-basis or a stray margin/padding on the Sai column at the sm breakpoint. Not blocking, but if visual symmetry is desired on mobile, worth investigating parent width."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "n/a", "frontend": "100%" },
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All 5 surgical changes for iteration 39 verified via preview URL https://premium-residential-2.preview.emergentagent.com. Only cosmetic note: mobile founder cards differ by 7px width (both retain 4:5 ratio). Hero slideshow uses rolling mount (2 slides in DOM at a time from 6-slide order) — do not expect 6 testids simultaneously; instead assert casa/griffin are never present."
+}

@@ -11,7 +11,7 @@ export const Footer = () => (
             src="/assets/logo-full-dark.png"
             alt="My Dream Projects — You Dream, We Build"
             data-testid="footer-logo"
-            className="w-40 md:w-48 h-auto"
+            className="w-40 md:w-48 h-auto self-start"
           />
         </div>
         <div className="col-span-1 md:col-span-3">

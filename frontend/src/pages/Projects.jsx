@@ -95,7 +95,7 @@ export default function Projects() {
                 transition={{ duration: 0.6, delay: Math.min(i * 0.04, 0.3), ease: EASE }}
                 className={i % 3 === 1 ? "lg:mt-14" : ""}
               >
-                <ProjectCard project={p} aspect="aspect-[4/5]" />
+                <ProjectCard project={p} aspect={p.status === "completed" ? "aspect-[1/1]" : "aspect-[4/5]"} />
               </motion.div>
             ))}
           </AnimatePresence>
