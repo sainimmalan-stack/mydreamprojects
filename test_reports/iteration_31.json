@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend-only visual restyle verification for PlanSheet dark luxury theme + new Ivy 3D render. All 7 requested checks passed. No issues found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified": [
+    "Ivy plan sheet dark theme: bg linear-gradient(#1b1a17 → #121110), text-bone ivory (rgb(244,244,240)), champagne config line '3 BHK Residence' at rgba(201,168,118,0.9), hairline white/10 dividers. No white sheet bg remains around the frame (2D drawing itself keeps its white paper — intended).",
+    "2D/3D toggle dark styling: selected button = bg #0c0b0a + inset champagne underline (rgba(201,168,118,0.85) 0 -2px 0 inset); unselected = transparent bg, text-bone/45. aria-pressed toggles correctly in both directions.",
+    "3D mode on Ivy: /assets/projects/my-dream-ivy/plan-3d.jpg loads (natural 955x2091), disclaimer renders, full-screen viewer bg is ink/95 dark so the dark render blends with no white bands.",
+    "2D mode on Ivy: original 2D plan still fully readable in viewer, PDF link present.",
+    "Skylark: same dark PlanSheet theme, no 2D/3D toggle (hasToggle=false), original 2D drawing intact.",
+    "Mobile 390px on Ivy: no horizontal overflow (sheet scrollW=clientW=348; doc 390/390). 3D toggle usable, 3D image fills width.",
+    "Regression: zero console errors on Home, /projects, /projects/my-dream-ivy (2D + 3D modes), /projects/my-dream-skylark."
+  ],
+  "champagne_accent_audit": "Champagne #C9A876 appears only on (a) config line and (b) selected toggle underline inset shadow, as required. Not observed excessively elsewhere.",
+  "test_report_links": [
+    "/app/test_reports/ivy_2d.png",
+    "/app/test_reports/ivy_3d.png",
+    "/app/test_reports/ivy_3d_viewer.png",
+    "/app/test_reports/skylark.png",
+    "/app/test_reports/ivy_mobile_3d.png"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PlanSheet.jsx is clean, small, well-scoped and reusable across all projects. No issues.",
+    "FloorPlanViewer.jsx bg-bone removal on viewer image confirmed — image now has no white backdrop, allowing dark render to blend."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 31 verified the PlanSheet dark luxury restyle + new dark Ivy 3D render. All visual + behavioral acceptance criteria met on desktop + mobile 390px. No console errors."
+}

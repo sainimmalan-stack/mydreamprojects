@@ -1,10 +1,11 @@
 /**
  * PlanSheet — the unified premium presentation system for every project plan.
- * One reusable sheet: consistent header (brand / project / configuration),
- * generous ivory canvas, hairline charcoal framing and a consistent footer.
- * The architectural drawing itself is always the original, untouched file.
- * When a project has a premium 3D visualization (project.plan3d), a 2D/3D
- * switcher appears automatically — every future project inherits the same system.
+ * Dark architectural studio edition: deep charcoal canvas, subtle graphite
+ * gradient, hairline off-white framing, ivory typography and a sparing muted
+ * champagne accent. The 2D drawing is always the original, untouched file;
+ * 3D visualizations float on the same dark environment. When a project has
+ * project.plan3d, the 2D/3D switcher appears automatically — every future
+ * project inherits the exact same system.
  */
 export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
   const config = project.configuration || project.flatMix;
@@ -12,26 +13,29 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
   const has3d = Boolean(project.plan3d);
   const is3d = has3d && mode === "3d";
   return (
-    <div data-testid="plan-sheet" className="bg-bone text-ink border border-ink/10">
-      <div className="px-5 md:px-8 pt-6 md:pt-8 pb-5 md:pb-6 border-b border-ink/10">
-        <div className="flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.25em] md:tracking-[0.4em] text-ink/45 whitespace-nowrap">
+    <div
+      data-testid="plan-sheet"
+      className="border border-white/10 bg-gradient-to-b from-[#1b1a17] to-[#121110] text-bone shadow-[0_40px_90px_-30px_rgba(0,0,0,0.75)]"
+    >
+      <div className="px-5 md:px-8 pt-6 md:pt-8 pb-5 md:pb-6 border-b border-white/10">
+        <div className="flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.25em] md:tracking-[0.4em] text-bone/40 whitespace-nowrap">
           <span>My Dream Projects</span>
           <span>Typical Floor Plan</span>
         </div>
-        <h3 className="font-display font-semibold uppercase tracking-tighter text-2xl md:text-4xl text-ink mt-4 md:mt-5">
+        <h3 className="font-display font-semibold uppercase tracking-tighter text-2xl md:text-4xl text-bone mt-4 md:mt-5">
           {project.title}
         </h3>
         {config && (
-          <p className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-ink/50 mt-2">
+          <p className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-[#C9A876]/90 mt-2">
             {config} {configSuffix}
           </p>
         )}
       </div>
       {has3d && (
-        <div className="px-5 md:px-8 py-3 border-b border-ink/10 flex items-center justify-between gap-4">
+        <div className="px-5 md:px-8 py-3 border-b border-white/10 flex items-center justify-between gap-4">
           <span
             data-testid="plan-mode-label"
-            className="text-[8px] md:text-[9px] uppercase tracking-[0.25em] text-ink/45"
+            className="text-[8px] md:text-[9px] uppercase tracking-[0.25em] text-bone/40"
           >
             {is3d ? "Premium 3D View" : "2D Architectural Plan"}
           </span>
@@ -39,7 +43,7 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
             data-testid="plan-mode-toggle"
             role="group"
             aria-label="Floor plan 2D 3D switcher"
-            className="inline-flex border border-ink/15"
+            className="inline-flex border border-white/15"
           >
             <button
               type="button"
@@ -47,7 +51,9 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
               aria-pressed={!is3d}
               onClick={() => onModeChange?.("2d")}
               className={`px-4 py-2 font-display font-semibold text-[9px] uppercase tracking-[0.25em] transition-colors duration-300 ${
-                !is3d ? "bg-ink text-bone" : "text-ink/50 hover:text-ink"
+                !is3d
+                  ? "bg-[#0c0b0a] text-bone shadow-[inset_0_-2px_0_0_rgba(201,168,118,0.85)]"
+                  : "text-bone/45 hover:text-bone/75"
               }`}
             >
               2D Plan
@@ -58,7 +64,9 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
               aria-pressed={is3d}
               onClick={() => onModeChange?.("3d")}
               className={`px-4 py-2 font-display font-semibold text-[9px] uppercase tracking-[0.25em] transition-colors duration-300 ${
-                is3d ? "bg-ink text-bone" : "text-ink/50 hover:text-ink"
+                is3d
+                  ? "bg-[#0c0b0a] text-bone shadow-[inset_0_-2px_0_0_rgba(201,168,118,0.85)]"
+                  : "text-bone/45 hover:text-bone/75"
               }`}
             >
               3D Plan
@@ -81,18 +89,18 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
           alt={is3d ? `${project.title} premium 3D floor plan visualization` : `${project.title} residential floor plan`}
           data-testid={is3d ? "plan-3d-image" : "plan-2d-image"}
           loading="lazy"
-          className="w-full h-auto block border border-ink/10 group-hover:border-ink/30 transition-colors duration-500"
+          className="w-full h-auto block border border-white/10 shadow-[0_24px_70px_-24px_rgba(0,0,0,0.7)] group-hover:border-white/25 transition-colors duration-500"
         />
         {is3d && (
           <p
             data-testid="plan-3d-disclaimer"
-            className="text-[8px] md:text-[9px] uppercase tracking-[0.25em] text-ink/40 mt-4 text-center"
+            className="text-[8px] md:text-[9px] uppercase tracking-[0.25em] text-bone/40 mt-4 text-center"
           >
             Artistic 3D visualization — the 2D plan remains the technical reference
           </p>
         )}
       </div>
-      <div className="px-5 md:px-8 py-4 border-t border-ink/10 flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.35em] text-ink/45 whitespace-nowrap">
+      <div className="px-5 md:px-8 py-4 border-t border-white/10 flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.35em] text-bone/40 whitespace-nowrap">
         <span>My Dream Projects · Ameenpur, Hyderabad</span>
         <span>Sheet {project.index}</span>
       </div>

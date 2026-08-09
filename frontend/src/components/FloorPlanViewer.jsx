@@ -191,7 +191,7 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
               alt={title}
               data-testid="viewer-image"
               draggable={false}
-              className="max-w-[92%] max-h-[88%] object-contain bg-bone pointer-events-none"
+              className="max-w-[92%] max-h-[88%] object-contain pointer-events-none"
               style={{
                 transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
                 transition: pointers.current.size ? "none" : "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
