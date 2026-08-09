@@ -81,16 +81,23 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
         onKeyDown={(e) => e.key === "Enter" && onOpen()}
         data-testid="floor-plan-preview"
         aria-label={`Open the full ${project.title} floor plan`}
-        className="group p-4 md:p-8 cursor-zoom-in"
+        className="group p-3 md:p-6 cursor-zoom-in"
       >
-        <img
-          src={is3d ? project.plan3d.src : project.floorPlan.preview}
-          {...(is3d ? { srcSet: project.plan3d.srcSet, sizes: "(max-width: 1600px) 100vw, 1200px" } : {})}
-          alt={is3d ? `${project.title} premium 3D floor plan visualization` : `${project.title} residential floor plan`}
-          data-testid={is3d ? "plan-3d-image" : "plan-2d-image"}
-          loading="lazy"
-          className="w-full h-auto block border border-white/10 shadow-[0_24px_70px_-24px_rgba(0,0,0,0.7)] group-hover:border-white/25 transition-colors duration-500"
-        />
+        <div className="border border-white/10 bg-[#0d0c0a] p-2 md:p-2.5 shadow-[0_24px_70px_-24px_rgba(0,0,0,0.7)] group-hover:border-white/25 transition-colors duration-500">
+          <img
+            src={is3d ? project.plan3d.src : project.floorPlan.preview.replace("floor-plan-p1.jpg", "floor-plan-display.jpg")}
+            {...(is3d
+              ? { srcSet: project.plan3d.srcSet, sizes: "(max-width: 1600px) 100vw, 1200px" }
+              : {
+                  srcSet: `${project.floorPlan.preview.replace("floor-plan-p1.jpg", "floor-plan-display-800.webp")} 800w, ${project.floorPlan.preview.replace("floor-plan-p1.jpg", "floor-plan-display.jpg")} 1600w`,
+                  sizes: "(max-width: 1600px) 100vw, 1200px",
+                })}
+            alt={is3d ? `${project.title} premium 3D floor plan visualization` : `${project.title} residential floor plan`}
+            data-testid={is3d ? "plan-3d-image" : "plan-2d-image"}
+            loading="lazy"
+            className="w-full h-auto block border border-[#C9A876]/25"
+          />
+        </div>
         {is3d && (
           <p
             data-testid="plan-3d-disclaimer"
