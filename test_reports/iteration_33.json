@@ -1,0 +1,30 @@
+{
+  "summary": "Iteration 33 — validated 8 new 3D floor-plan renders (casa, avasa, skylark, glenmore, hillock, griffin, solace, elysium) plus pre-existing ivy = 9 projects with 2D/3D toggle. Verified all 10 non-3D projects show NO toggle. Full viewer, mobile, projects grid, and regression checks all pass. Zero console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "verified": [
+    "/projects grid renders all 19 projects (unique links)",
+    "9 WITH-3D projects (ivy, skylark, casa, avasa, glenmore, hillock, griffin, solace, elysium): plan-mode-toggle visible, 3D image loads (naturalWidth 955-1200px, no 404s), disclaimer shown, toggle back to 2D works",
+    "10 WITHOUT-3D projects (nest, summit, selene, atlantis, perch, zenith, aurelia, aura, echelon, vale): NO toggle rendered, 2D framed drawing shown as in iteration_32",
+    "Full-screen viewer skylark 3D: title 'My Dream Skylark — 3D Floor Plan', 0 PDF links in modal, zoom controls (−/+/RESET) present",
+    "Full-screen viewer skylark 2D: title 'My Dream Skylark — Floor Plan', PDF link present in modal (floor-plan.pdf)",
+    "Full-screen viewer hillock 3D: title 'My Dream Hillock — 3D Floor Plan', no PDF link, dark studio bg, single model, no text/labels",
+    "Visual QC of skylark/casa/glenmore/hillock 3D renders: single model, dark charcoal background, premium look, no duplicated/floating models, no text in render (screenshots inspected)",
+    "Mobile 390px skylark 3D: scrollWidth == clientWidth (390) — no horizontal overflow",
+    "Home page loads without errors",
+    "0 console errors captured across all tested pages"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "projects.js script-edit is syntactically clean; all 19 exports intact; getProject/getAdjacent unaffected",
+    "PlanSheet.jsx correctly gates toggle on Boolean(project.plan3d) — automatic future-proof behavior",
+    "ProjectDetail viewer correctly nulls pdf prop when planMode==='3d' (line 497) — verified no PDF link leaks in modal"
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "9 projects have plan3d entries (casa, avasa, skylark, glenmore, hillock, griffin, solace, elysium, ivy). 10 pending 3D renders (nest excluded intentionally due to failed QC; others pending budget top-up). Do NOT flag missing 3D on non-3D projects as bugs. All plan-3d assets present under /app/frontend/public/assets/projects/<slug>/ as plan-3d.jpg + plan-3d.webp + plan-3d-800.webp."
+}

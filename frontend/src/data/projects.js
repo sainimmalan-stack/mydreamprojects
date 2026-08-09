@@ -70,6 +70,11 @@ const MY_DREAM_CASA = {
     preview: "/assets/projects/my-dream-casa/floor-plan-p1.jpg",
     fileName: "My-Dream-Casa-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-casa/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-casa/plan-3d-800.webp 800w, /assets/projects/my-dream-casa/plan-3d.webp 784w",
+  },
 };
 
 const MY_DREAM_AVASA = {
@@ -103,6 +108,11 @@ const MY_DREAM_AVASA = {
     preview: "/assets/projects/my-dream-avasa/floor-plan-p1.jpg",
     fileName: "My-Dream-Avasa-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-avasa/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-avasa/plan-3d-800.webp 800w, /assets/projects/my-dream-avasa/plan-3d.webp 634w",
+  },
 };
 
 const MY_DREAM_SKYLARK = {
@@ -135,6 +145,11 @@ const MY_DREAM_SKYLARK = {
     pdf: "/assets/projects/my-dream-skylark/floor-plan.pdf",
     preview: "/assets/projects/my-dream-skylark/floor-plan-p1.jpg",
     fileName: "My-Dream-Skylark-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-skylark/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-skylark/plan-3d-800.webp 800w, /assets/projects/my-dream-skylark/plan-3d.webp 1376w",
   },
 };
 
@@ -170,6 +185,11 @@ const MY_DREAM_GLENMORE = {
     preview: "/assets/projects/my-dream-glenmore/floor-plan-p1.jpg",
     fileName: "My-Dream-Glenmore-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-glenmore/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-glenmore/plan-3d-800.webp 800w, /assets/projects/my-dream-glenmore/plan-3d.webp 593w",
+  },
 };
 
 const MY_DREAM_HILLOCK = {
@@ -202,6 +222,11 @@ const MY_DREAM_HILLOCK = {
     pdf: "/assets/projects/my-dream-hillock/floor-plan.pdf",
     preview: "/assets/projects/my-dream-hillock/floor-plan-p1.jpg",
     fileName: "My-Dream-Hillock-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-hillock/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-hillock/plan-3d-800.webp 800w, /assets/projects/my-dream-hillock/plan-3d.webp 1191w",
   },
 };
 
@@ -270,6 +295,11 @@ const MY_DREAM_GRIFFIN = {
     pdf: "/assets/projects/my-dream-griffin/floor-plan.pdf",
     preview: "/assets/projects/my-dream-griffin/floor-plan-p1.jpg",
     fileName: "My-Dream-Griffin-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-griffin/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-griffin/plan-3d-800.webp 800w, /assets/projects/my-dream-griffin/plan-3d.webp 1184w",
   },
 };
 
@@ -406,6 +436,11 @@ const MY_DREAM_SOLACE = {
     preview: "/assets/projects/my-dream-solace/floor-plan-p1.jpg",
     fileName: "My-Dream-Solace-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-solace/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-solace/plan-3d-800.webp 800w, /assets/projects/my-dream-solace/plan-3d.webp 896w",
+  },
 };
 
 const MY_DREAM_ZENITH = {
@@ -489,6 +524,11 @@ const MY_DREAM_ELYSIUM = {
     pdf: "/assets/projects/my-dream-elysium/floor-plan.pdf",
     preview: "/assets/projects/my-dream-elysium/floor-plan-p1.jpg",
     fileName: "My-Dream-Elysium-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-elysium/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-elysium/plan-3d-800.webp 800w, /assets/projects/my-dream-elysium/plan-3d.webp 1170w",
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=17.5324900%2C78.3343810",
