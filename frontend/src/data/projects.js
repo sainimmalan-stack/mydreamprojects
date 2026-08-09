@@ -4,7 +4,7 @@ const pad = (n) => String(n).padStart(2, "0");
 // Replace the null placeholders with the verified figures when ready;
 // the homepage statistics band reads from this single source.
 export const BUSINESS_STATS = {
-  totalFlatsSold: null, // TODO: set verified number, e.g. 128
+  totalFlatsSold: 145, // all 13 completed projects sold out & occupied (verified against audited flat counts)
   totalSftDelivered: null, // TODO: set verified number, e.g. 185000
 };
 

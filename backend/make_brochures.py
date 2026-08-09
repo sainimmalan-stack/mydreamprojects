@@ -136,6 +136,73 @@ def image_page(pdf, title, img_path, note=None, frame=False):
         pdf.cell(0, 5, spaced(note.upper()), align="C")
 
 
+
+WA_URL = "https://wa.me/917780429845?text=Hello%20My%20Dream%20Projects%2C%20I%27m%20interested%20in%20your%20residential%20projects%20in%20Ameenpur."
+MAPS_URL = "https://www.google.com/maps?q=G8MG+VFG+MY+DREAM+PROJECTS%2C+Ameenpur+Coco+Cola+Road%2C+Narendra+Nagar+Colony%2C+Ameenpur%2C+Miyapur%2C+Hyderabad%2C+Telangana+502033&ftid=0x3bcb8d6d4959d47b%3A0xe454901ec9e2e003"
+
+
+def contact_page(pdf):
+    pdf.dark_page()
+    pdf.header_row("Get In Touch")
+    pdf.set_y(66)
+    pdf.set_font("helvetica", "B", 20)
+    pdf.set_text_color(*IVORY)
+    pdf.cell(0, 9, "TALK TO THE FOUNDERS", align="C")
+    pdf.set_y(80)
+    pdf.set_font("helvetica", "", 8)
+    pdf.set_text_color(*GREY)
+    pdf.cell(0, 5, spaced("EVERY ENQUIRY REACHES US DIRECTLY"), align="C")
+
+    rows = [
+        ("NIMMALA SAI", "Co-Founder", "+91 77804 29845", "tel:+917780429845"),
+        ("KOTAPATI AKHIL", "Co-Founder", "+91 95660 67922", "tel:+919566067922"),
+    ]
+    y = 100
+    for name, role, phone, link in rows:
+        pdf.set_xy(35, y)
+        pdf.set_font("helvetica", "B", 11)
+        pdf.set_text_color(*IVORY)
+        pdf.cell(70, 7, name)
+        pdf.set_font("helvetica", "", 7.5)
+        pdf.set_text_color(*GREY)
+        pdf.cell(0, 7, role.upper())
+        pdf.set_xy(35, y + 8)
+        pdf.set_font("helvetica", "", 10)
+        pdf.set_text_color(*CHAMPAGNE)
+        pdf.cell(0, 6, phone, link=link)
+        pdf.set_draw_color(60, 58, 54)
+        pdf.set_line_width(0.15)
+        pdf.line(35, y + 19, 175, y + 19)
+        y += 27
+
+    pdf.set_xy(35, y + 4)
+    pdf.set_font("helvetica", "", 7)
+    pdf.set_text_color(*GREY)
+    pdf.cell(45, 6, spaced("WHATSAPP"))
+    pdf.set_font("helvetica", "", 10)
+    pdf.set_text_color(*CHAMPAGNE)
+    pdf.cell(0, 6, "wa.me/917780429845", link=WA_URL)
+
+    pdf.set_xy(35, y + 14)
+    pdf.set_font("helvetica", "", 7)
+    pdf.set_text_color(*GREY)
+    pdf.cell(45, 6, spaced("OFFICE"))
+    pdf.set_font("helvetica", "", 9)
+    pdf.set_text_color(*IVORY)
+    pdf.cell(0, 6, "Ameenpur, Hyderabad", link=MAPS_URL)
+    pdf.set_xy(35, y + 21)
+    pdf.set_font("helvetica", "", 7.5)
+    pdf.set_text_color(*CHAMPAGNE)
+    pdf.cell(45, 6, "VIEW ON GOOGLE MAPS", link=MAPS_URL)
+
+    pdf.set_xy(35, y + 31)
+    pdf.set_font("helvetica", "", 7)
+    pdf.set_text_color(*GREY)
+    pdf.cell(45, 6, spaced("WEBSITE"))
+    pdf.set_font("helvetica", "", 10)
+    pdf.set_text_color(*IVORY)
+    pdf.cell(0, 6, "mydreamprojects.in", link="https://mydreamprojects.in")
+
 def build(p):
     slug = p["slug"]
     folder = f"{ROOT}/{slug}"
@@ -160,6 +227,7 @@ def build(p):
         image_page(pdf, "Premium 3D Floor Plan", plan3d,
                    note="Artistic 3D visualization - the 2D plan remains the technical reference")
     image_page(pdf, "Typical Floor Plan - Technical Reference", plan2d, frame=True)
+    contact_page(pdf)
     out = f"{folder}/brochure.pdf"
     pdf.output(out)
     if night_jpg:

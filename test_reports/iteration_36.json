@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend regression + focused verification for the 3 changes (mobile 3D fix, stats=145, brochure contact page). All acceptance criteria met.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verification_results": {
+    "mobile_no_3d_overlay_in_dom": "PASS - 0 card-3d-image elements on /projects at 390px",
+    "mobile_scroll_does_not_open_viewer": "PASS",
+    "mobile_chip_opens_viewer_without_navigating": "PASS - viewer opens with title 'MY DREAM NEST — 3D FLOOR PLAN'; URL unchanged",
+    "mobile_card_tap_navigates_to_project": "PASS - tap on card body navigates to /projects/my-dream-nest",
+    "mobile_daynight_toggle_works": "PASS - card-day-button click sets aria-pressed=true, no navigation",
+    "desktop_hover_no_swap": "PASS - hovering card at 1920px shows 0 card-3d-image overlays",
+    "desktop_chip_opens_viewer": "PASS",
+    "chip_is_button_element": "PASS - tagName=BUTTON",
+    "stats_flats_sold": "PASS - stat-flats-sold counts to 145 after scroll-into-view",
+    "stats_sft_delivered": "PASS - still shows placeholder '—'",
+    "stats_others_unchanged": "PASS - projects=19, completed=13, ongoing=6, founded=2020",
+    "brochure_skylark": "PASS - 200 application/pdf 1,530,865 bytes (~1.5MB, matches ~1.4MB target)",
+    "brochure_aurelia": "PASS - 200 application/pdf 530,588 bytes",
+    "regression_console_clean": "PASS - no console errors on /, /projects, /projects?filter=ongoing, /projects/my-dream-nest"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ProjectCard.jsx cleanly removed the hover-based 3D layer; all interactive controls (day/night buttons, 3D chip) correctly call e.preventDefault()+stopPropagation() to keep the outer <Link> from firing.",
+    "3D chip is properly implemented as a <button type='button'> — matches accessibility expectations."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (frontend-only run)", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration_36 verified: mobile 3D-touch bug fixed (no hover overlay in DOM, chip button is only entry to FloorPlanViewer), BUSINESS_STATS.totalFlatsSold=145 renders correctly (counter is IntersectionObserver-based, must scroll into view before asserting), stat-sft-delivered still '—', brochures for skylark & aurelia return valid PDF 200 with expected size. Regression on 4 key routes clean. Note: card-day-button-<slug> and card-night-button-<slug> are the actual BUTTON testids; card-day-image-<slug>/card-night-image-<slug> are the IMG elements — do not click IMG in tests as they fall through to the Link."
+}

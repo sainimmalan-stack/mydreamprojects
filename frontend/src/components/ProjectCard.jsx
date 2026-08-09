@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sun, Moon, Box } from "lucide-react";
 import ComingSoonElevation from "./ComingSoonElevation";
+import FloorPlanViewer from "./FloorPlanViewer";
 
 const TONES = [
   { surface: "bg-coal", index: "text-outline", title: "text-bone", meta: "text-concrete" },
@@ -14,7 +15,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
   const t = TONES[tone % TONES.length];
   const [mode, setMode] = useState("night");
   const [dayTouched, setDayTouched] = useState(false);
-  const [plan3dTouched, setPlan3dTouched] = useState(false);
+  const [plan3dOpen, setPlan3dOpen] = useState(false);
   const modes = project.cover && project.elevationModes ? project.elevationModes : null;
   const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
   return (
@@ -29,7 +30,6 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
         to={`/projects/${project.slug}`}
         data-testid={`project-card-${project.slug}`}
         className="group block"
-        onPointerEnter={() => setPlan3dTouched(true)}
       >
         <div
           className={`relative overflow-hidden ${project.cover ? "bg-coal" : t.surface} ${aspect} border border-line group-hover:border-ember/40 transition-colors duration-500`}
@@ -121,25 +121,21 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
           ) : (
             <ComingSoonElevation project={project} compact />
           )}
-          {project.plan3d && plan3dTouched && (
-            <img
-              src={project.plan3d.src}
-              srcSet={project.plan3d.srcSet}
-              sizes={cardSizes}
-              alt={`${project.title} premium 3D floor plan preview`}
-              data-testid={`card-3d-image-${project.slug}`}
-              loading="lazy"
-              className="absolute inset-0 z-[5] w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
-            />
-          )}
           {project.plan3d && (
-            <span
+            <button
+              type="button"
               data-testid={`card-3d-chip-${project.slug}`}
-              className="absolute bottom-3.5 left-3.5 z-20 flex items-center gap-1.5 bg-ink/60 backdrop-blur px-2.5 py-1.5 border border-white/15 font-display font-semibold text-[9px] uppercase tracking-[0.22em] text-bone/80"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setPlan3dOpen(true);
+              }}
+              aria-label={`Open the 3D floor plan for ${project.title}`}
+              className="absolute bottom-3.5 left-3.5 z-20 flex items-center gap-1.5 bg-ink/60 backdrop-blur px-2.5 py-1.5 border border-white/15 font-display font-semibold text-[9px] uppercase tracking-[0.22em] text-bone/80 hover:border-ember/60 hover:text-ember transition-colors duration-300 cursor-pointer"
             >
               <Box className="w-3 h-3" strokeWidth={1.8} />
               3D Plan
-            </span>
+            </button>
           )}
           <span
             className={`absolute top-4 right-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] ${
@@ -181,6 +177,15 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
           />
         </div>
       </Link>
+      {project.plan3d && (
+        <FloorPlanViewer
+          open={plan3dOpen}
+          onClose={() => setPlan3dOpen(false)}
+          image={project.plan3d.src}
+          pdf={null}
+          title={`${project.title} — 3D Floor Plan`}
+        />
+      )}
     </motion.div>
   );
 };
