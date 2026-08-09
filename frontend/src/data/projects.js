@@ -37,6 +37,11 @@ const MY_DREAM_NEST = {
     preview: "/assets/projects/my-dream-nest/floor-plan-p1.jpg",
     fileName: "My-Dream-Nest-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-nest/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-nest/plan-3d-800.webp 800w, /assets/projects/my-dream-nest/plan-3d.webp 1200w",
+  },
 };
 
 const MY_DREAM_CASA = {
@@ -262,6 +267,11 @@ const MY_DREAM_SUMMIT = {
     preview: "/assets/projects/my-dream-summit/floor-plan-p1.jpg",
     fileName: "My-Dream-Summit-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-summit/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-summit/plan-3d-800.webp 800w, /assets/projects/my-dream-summit/plan-3d.webp 864w",
+  },
 };
 
 const MY_DREAM_GRIFFIN = {
@@ -335,6 +345,11 @@ const MY_DREAM_SELENE = {
     preview: "/assets/projects/my-dream-selene/floor-plan-p1.jpg",
     fileName: "My-Dream-Selene-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-selene/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-selene/plan-3d-800.webp 800w, /assets/projects/my-dream-selene/plan-3d.webp 976w",
+  },
 };
 
 const MY_DREAM_ATLANTIS = {
@@ -367,6 +382,11 @@ const MY_DREAM_ATLANTIS = {
     pdf: "/assets/projects/my-dream-atlantis/floor-plan.pdf",
     preview: "/assets/projects/my-dream-atlantis/floor-plan-p1.jpg",
     fileName: "My-Dream-Atlantis-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-atlantis/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-atlantis/plan-3d-800.webp 800w, /assets/projects/my-dream-atlantis/plan-3d.webp 1199w",
   },
 };
 
@@ -401,6 +421,11 @@ const MY_DREAM_PERCH = {
     pdf: "/assets/projects/my-dream-perch/floor-plan.pdf",
     preview: "/assets/projects/my-dream-perch/floor-plan-p1.jpg",
     fileName: "My-Dream-Perch-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-perch/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-perch/plan-3d-800.webp 800w, /assets/projects/my-dream-perch/plan-3d.webp 896w",
   },
 };
 
@@ -475,6 +500,11 @@ const MY_DREAM_ZENITH = {
     preview: "/assets/projects/my-dream-zenith/floor-plan-p1.jpg",
     fileName: "My-Dream-Zenith-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-zenith/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-zenith/plan-3d-800.webp 800w, /assets/projects/my-dream-zenith/plan-3d.webp 848w",
+  },
 };
 
 const MY_DREAM_AURELIA = {
@@ -496,6 +526,11 @@ const MY_DREAM_AURELIA = {
     pdf: "/assets/projects/my-dream-aurelia/floor-plan.pdf",
     preview: "/assets/projects/my-dream-aurelia/floor-plan-p1.jpg",
     fileName: "My-Dream-Aurelia-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-aurelia/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-aurelia/plan-3d-800.webp 800w, /assets/projects/my-dream-aurelia/plan-3d.webp 816w",
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=17.5351890%2C78.3342360",
@@ -558,6 +593,11 @@ const MY_DREAM_AURA = {
     preview: "/assets/projects/my-dream-aura/floor-plan-p1.jpg",
     fileName: "My-Dream-Aura-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-aura/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-aura/plan-3d-800.webp 800w, /assets/projects/my-dream-aura/plan-3d.webp 1200w",
+  },
   siteLocation: {
     url: "https://www.google.com/maps?q=17.5361670%2C78.3327710",
     lat: 17.536167,
@@ -586,6 +626,11 @@ const MY_DREAM_ECHELON = {
     preview: "/assets/projects/my-dream-echelon/floor-plan-p1.jpg",
     fileName: "My-Dream-Echelon-Floor-Plan.pdf",
   },
+  plan3d: {
+    src: "/assets/projects/my-dream-echelon/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-echelon/plan-3d-800.webp 800w, /assets/projects/my-dream-echelon/plan-3d.webp 1200w",
+  },
   siteLocation: {
     url: "https://www.google.com/maps?q=17.5334550%2C78.3300480",
     lat: 17.533455,
@@ -613,6 +658,11 @@ const MY_DREAM_VALE = {
     pdf: "/assets/projects/my-dream-vale/floor-plan.pdf",
     preview: "/assets/projects/my-dream-vale/floor-plan-p1.jpg",
     fileName: "My-Dream-Vale-Floor-Plan.pdf",
+  },
+  plan3d: {
+    src: "/assets/projects/my-dream-vale/plan-3d.jpg",
+    srcSet:
+      "/assets/projects/my-dream-vale/plan-3d-800.webp 800w, /assets/projects/my-dream-vale/plan-3d.webp 1148w",
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=17.5353830%2C78.3208010",

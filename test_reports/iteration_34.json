@@ -1,0 +1,31 @@
+{
+  "summary": "Iteration 34 — Final 3D rollout validation. All 19 projects now have 3D floor plan renders. Tested toggle behavior, 3D image loading (naturalWidth), disclaimer presence, 2D/3D switch-back, full-screen viewer for the 2 regenerated projects (nest, vale), mobile 390px spot-check (summit, perch), projects grid integrity, home page, and console errors. All checks passed 19/19. Zero console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "verified": [
+    "projects.js data integrity: exactly 19 projects, 19 slugs unique, 19 plan3d entries — no duplicate/corrupted keys (validated via Node require)",
+    "All 19 plan-3d.jpg assets present on disk (135KB–257KB range)",
+    "All 19 project pages: 2D PLAN | 3D PLAN toggle rendered, clicking 3D loads /assets/projects/<slug>/plan-3d.jpg with naturalWidth 955–1200 (no 404s), disclaimer visible in 3D mode, switching back to 2D removes 3D image from DOM",
+    "10 NEW renders visual QC (nest, summit, selene, atlantis, perch, zenith, aurelia, aura, echelon, vale): single building model per render, dark charcoal background, no text/numbers/labels inside render, premium look — no duplicated/floating extra models observed",
+    "Full-screen viewer nest 3D: modal opens, title contains '3D Floor Plan', 0 PDF links inside modal, Reset zoom button present",
+    "Full-screen viewer vale 3D: modal opens, title contains '3D Floor Plan', 0 PDF links inside modal, Reset zoom button present",
+    "2D full-screen viewer behavior unchanged from iteration_33 validation (same PlanSheet component)",
+    "Mobile 390px summit + perch: scrollWidth == clientWidth (390) — no horizontal overflow, 3D image renders (naturalWidth=390)",
+    "/projects grid renders 19 unique project links",
+    "Home page loads without errors",
+    "0 console errors captured across all 19 project pages, both viewers, mobile tests, and home"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "projects.js remains syntactically clean after second script-edit; all 19 plan3d entries validated via runtime require — no duplicate keys or corruption",
+    "PlanSheet.jsx toggle correctly gated on Boolean(project.plan3d); no code changes needed",
+    "ProjectDetail viewer correctly nulls pdf prop when planMode==='3d' — confirmed 0 PDF links inside modal for both nest and vale"
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "3D rollout is COMPLETE — all 19 projects have plan-3d.jpg assets and plan3d entries in projects.js. Toggle, viewer, mobile, and grid all pass. All 10 new renders (nest, summit, selene, atlantis, perch, zenith, aurelia, aura, echelon, vale) passed visual QC — no duplicate models, no text-in-render, dark studio bg. Iteration_33 validated the first 9; iteration_34 validated the remaining 10 and re-confirmed the full set."
+}
