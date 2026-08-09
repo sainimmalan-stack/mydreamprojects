@@ -17,6 +17,8 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
   const posRef = useRef({ x: 0, y: 0 });
   const closeRef = useRef(null);
   const lastFocus = useRef(null);
+  const introRaf = useRef(null);
+  const [introActive, setIntroActive] = useState(false);
 
   const apply = (s, p) => {
     scaleRef.current = s;
@@ -25,12 +27,43 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
     setPos(p);
   };
 
+  const cancelIntro = () => {
+    if (introRaf.current) {
+      cancelAnimationFrame(introRaf.current);
+      introRaf.current = null;
+    }
+    setIntroActive(false);
+  };
+
   const reset = () => apply(1, { x: 0, y: 0 });
 
   const lenis = useLenis();
 
+  // Cinematic Ken Burns reveal for 3D renders: a slow ~12s ease-out drift
+  // (100% → 112% with a gentle diagonal move). Any interaction cancels it
+  // instantly; skipped entirely for users preferring reduced motion.
   useEffect(() => {
-    if (open) reset();
+    if (!open) return;
+    reset();
+    if (!edgeToEdge || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const DURATION = 12000;
+    const TARGET = { s: 1.12, x: -22, y: 14 };
+    let start = null;
+    setIntroActive(true);
+    const step = (t) => {
+      if (start === null) start = t;
+      const k = Math.min(1, (t - start) / DURATION);
+      const e = 1 - Math.pow(1 - k, 3);
+      apply(1 + (TARGET.s - 1) * e, { x: TARGET.x * e, y: TARGET.y * e });
+      if (k < 1) {
+        introRaf.current = requestAnimationFrame(step);
+      } else {
+        introRaf.current = null;
+        setIntroActive(false);
+      }
+    };
+    introRaf.current = requestAnimationFrame(step);
+    return cancelIntro;
   }, [open]);
 
   useEffect(() => {
@@ -70,6 +103,7 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
   const clampScale = (s) => Math.min(MAX, Math.max(MIN, s));
 
   const zoomAt = (factor, cx = 0, cy = 0) => {
+    cancelIntro();
     const prev = scaleRef.current;
     const next = clampScale(prev * factor);
     if (next === prev) return;
@@ -86,6 +120,7 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
     if (!el || !open) return;
     const onWheel = (e) => {
       e.preventDefault();
+      cancelIntro();
       const r = el.getBoundingClientRect();
       zoomAt(
         e.deltaY < 0 ? 1.15 : 1 / 1.15,
@@ -98,6 +133,7 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
   }, [open]);
 
   const onPointerDown = (e) => {
+    cancelIntro();
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pointers.current.size === 2) {
       const [a, b] = [...pointers.current.values()];
@@ -196,7 +232,7 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
               }`}
               style={{
                 transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
-                transition: pointers.current.size ? "none" : "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                transition: pointers.current.size || introActive ? "none" : "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
               }}
             />
           </div>
@@ -230,7 +266,10 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge =
               <button
                 type="button"
                 data-testid="viewer-reset"
-                onClick={reset}
+                onClick={() => {
+                  cancelIntro();
+                  reset();
+                }}
                 className="h-11 md:h-12 px-4 md:px-5 flex items-center gap-2 border border-line text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-bone hover:border-ember hover:text-ember transition-[color,border-color] duration-300"
               >
                 <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.5} />

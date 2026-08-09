@@ -863,3 +863,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 ## 2026-08-09 — Edge-to-Edge 3D Viewer + Brochure Refresh (DONE, self-tested)
 - FloorPlanViewer: new `edgeToEdge` prop — 3D renders now fill the viewer edge-to-edge (w-full h-full object-contain between header and toolbar) instead of the inset 92%/88% frame. Applied from ProjectDetail (3D mode only) and ProjectCard 3D teaser. 2D plans keep the classic framed fit with the Open Original PDF link. Zoom/pan/reset unchanged (verified 130% zoom, desktop + mobile).
 - Brochures: regenerated all 19 PDFs via /app/backend/make_brochures.py. Verified pages render clean and label-free (3D page on completed projects, 3D-led cover on ongoing projects) and all download links return 200.
+
+## 2026-08-09 — Cinematic Ken Burns 3D Intro (DONE, self-tested)
+- FloorPlanViewer: when a 3D render opens (edgeToEdge mode — project detail 3D + card teaser), a slow 12s ease-out Ken Burns drift plays (100% → 112% with a gentle diagonal move, driven by requestAnimationFrame so zoom state stays truthful).
+- Any interaction cancels it instantly and cleanly: pointer down, wheel, zoom buttons, reset. Skipped for prefers-reduced-motion users. 2D plans never drift.
+- Verified via browser automation: drift progresses 103%→110% without input; manual zoom-in mid-intro takes over at 143% and holds; reset returns 100%; 2D viewer stays 100%.
