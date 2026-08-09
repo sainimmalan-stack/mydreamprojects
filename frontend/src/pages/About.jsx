@@ -184,13 +184,13 @@ const Founders = () => (
             data-testid={f.testid}
             className="group border border-line hover:border-ember/40 transition-colors duration-500 overflow-hidden flex flex-col md:flex-row bg-coal"
           >
-            <div className="md:shrink-0 overflow-hidden">
+            <div className="overflow-hidden w-full aspect-[4/5] md:aspect-auto md:w-[352px] md:h-[440px] md:shrink-0 md:self-start">
               <img
                 src={f.photo}
                 alt={`${f.name}, Co-Founder of My Dream Projects`}
                 data-testid={`${f.testid}-portrait`}
                 loading="lazy"
-                className="w-full aspect-[4/5] object-cover object-[50%_45%] md:h-[440px] md:w-auto block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
+                className="w-full h-full object-cover object-[50%_45%] block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
                 style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
               />
             </div>

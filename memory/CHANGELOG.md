@@ -893,3 +893,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Check Availability (WhatsApp enquiry on the Total Flats stat) is now status-based: ONLY ongoing projects render it (enquire link + "Check Availability →" line); completed projects show Total Flats as a plain stat — stats grid column logic unaffected (count unchanged), no empty space.
 - Download Brochure button removed from ALL project pages (the only place it existed). Brochure PDFs remain on disk but are no longer linked anywhere. View Full Plan + Download PDF buttons remain.
 - Verified via automation loop over all 19 project pages: completed → 0 availability links / 0 brochure buttons; ongoing → 1 availability link / 0 brochure buttons; Download PDF intact everywhere; zero console errors.
+
+## 2026-08-09 — Founder Photo Containers HARD-LOCKED (DONE, self-tested 3 breakpoints)
+- Owner saw unequal founder photos on the LIVE site (stale deploy — preview already had the fix) and asked for bulletproof symmetry.
+- About.jsx founders: the image CONTAINER now carries fixed identical dimensions (mobile: w-full aspect-[4/5]; md+: exactly 352x440px, shrink-0, self-start) and the img simply fills it (w-full h-full object-cover, object-position 50% 45%). No computed aspect inference — containers can never drift apart or stretch with card content.
+- Measured: desktop 1920 both 352x440 same top; tablet 834 both 352x440; mobile 390 both 348x435. Faces natural on both.
+- NOTE: live site (mydreamprojects.in) needs a REDEPLOY to pick up this and the previous founder fix.
