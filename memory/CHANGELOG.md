@@ -868,3 +868,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - FloorPlanViewer: when a 3D render opens (edgeToEdge mode — project detail 3D + card teaser), a slow 12s ease-out Ken Burns drift plays (100% → 112% with a gentle diagonal move, driven by requestAnimationFrame so zoom state stays truthful).
 - Any interaction cancels it instantly and cleanly: pointer down, wheel, zoom buttons, reset. Skipped for prefers-reduced-motion users. 2D plans never drift.
 - Verified via browser automation: drift progresses 103%→110% without input; manual zoom-in mid-intro takes over at 143% and holds; reset returns 100%; 2D viewer stays 100%.
+
+## 2026-08-09 — Homepage Hero 3D Teaser Slide (DONE, self-tested)
+- Added a single 3D floor-plan slide (My Dream Nest render) to the homepage hero slideshow, second in the rotation right after Skylark's night elevation.
+- The 3D slide plays a subtle Ken Burns drift while active (scale 1→1.06 with a gentle diagonal translate, linear over ~5s) — more pronounced than the elevation slides' 1.02 drift to catch the eye; skipped for reduced-motion users.
+- Slide caption "MY DREAM NEST · 3D PLAN" deep-links to /projects/my-dream-nest. Slide objects now carry explicit link/srcSet fields.
+- Verified: slide activates at ~3s (opacity 1), transform samples confirm drift progression, caption/link correct, cycle continues normally. data-testids: hero-slide-my-dream-nest-3d, hero-caption-my-dream-nest-3d.
