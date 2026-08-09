@@ -779,3 +779,14 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user action): Meta WhatsApp credentials to activate landowner auto-reply
 - P1 (user action): Re-drafted 2D plan drawings from architect (optional)
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — Dark Luxury Plan Presentation (DONE, tested iteration_31)
+- PlanSheet restyled light→dark: charcoal gradient (#1b1a17→#121110), white/10 hairlines, ivory text, champagne #C9A876 accent ONLY on config line + selected toggle underline. 2D/3D toggle restyled dark (selected #0c0b0a + champagne underline). 2D drawings unchanged (white paper by design, dark frame around).
+- Ivy 3D render replaced with dark-background version (AI relight of the cropped render; geometry QC'd against light version — faithful). Model occupancy ~79% of frame. plan-3d.jpg 688x1506 (+webp variants).
+- FloorPlanViewer: removed white bg-bone backdrop so dark render blends (2D plans have white baked in — unaffected).
+- Verified: dark theme on Ivy+Skylark, toggle both directions, viewer both modes no white bands, mobile 390px, 0 console errors, champagne accent audit clean.
+
+## Still Pending
+- P0 (user decision): Ivy 3D pilot verdict → approve/adjust/discard; then remaining 18 renders or studio route
+- P0 (user action): Meta WhatsApp credentials to activate landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
