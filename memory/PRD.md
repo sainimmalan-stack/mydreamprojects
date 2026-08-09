@@ -765,3 +765,17 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
 - P1 (user action): Re-drafted plan drawings from architect → drop into PlanSheet
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — 3D Floor Plan Pilot (My Dream Ivy) + Unified 2D/3D System (DONE, tested iteration_30)
+- User-approved pilot: AI-generated (Gemini gemini-3-pro-image-preview via Emergent universal key) premium 3D dollhouse render for My Dream Ivy from its real 2D plan. No text/labels/dimensions inside render per user decision. Two passes; perspective version chosen.
+- Render installed: /assets/projects/my-dream-ivy/plan-3d.jpg (+ .webp, -800.webp). NOTE: AI output is 864x1222 — NOT true 4K (model limitation).
+- plan3d field added to ivy in projects.js. PlanSheet auto-shows 2D PLAN | 3D PLAN toggle only when plan3d exists (future projects inherit by adding data + asset). 3D mode shows disclaimer "Artistic 3D visualization — the 2D plan remains the technical reference".
+- FloorPlanViewer opens current mode's image; title suffix "3D Floor Plan"; PDF link hidden in 3D mode. Zoom/pan/pinch unchanged.
+- Verified: toggle states, viewer both modes, no toggle on other 18 projects, mobile 390px, 0 console errors.
+- AWAITING USER VERDICT on pilot quality/accuracy before any decision on the other 18 projects.
+
+## Still Pending
+- P0 (user decision): Approve/reject Ivy 3D pilot → then decide AI renders for remaining 18 (accuracy caveats) or studio-commissioned renders
+- P0 (user action): Meta WhatsApp credentials to activate landowner auto-reply
+- P1 (user action): Re-drafted 2D plan drawings from architect (optional)
+- P2: Site Progress Updates — awaiting user photos
