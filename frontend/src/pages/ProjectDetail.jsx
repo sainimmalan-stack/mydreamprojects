@@ -41,7 +41,7 @@ export default function ProjectDetail() {
       : `${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`;
 
   const stats = [
-    { label: "Status", value: project.status },
+    { label: "Status", value: project.status === "completed" ? "Sold Out & Occupied" : project.status },
     { label: "Location", value: project.location },
     { label: "Type", value: project.type },
     ...(project.floors ? [{ label: "Floors", value: project.floors }] : []),

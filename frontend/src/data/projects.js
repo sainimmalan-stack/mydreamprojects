@@ -1,11 +1,30 @@
 const pad = (n) => String(n).padStart(2, "0");
 
+// Verified TOTAL SALEABLE AREA (SFT) per completed project — from each project's
+// approved saleable area statement, cross-checked as per-unit areas x floors.
+export const COMPLETED_PROJECT_SFT = {
+  "my-dream-nest": 14150,
+  "my-dream-casa": 15000,
+  "my-dream-avasa": 12000,
+  "my-dream-skylark": 21125,
+  "my-dream-glenmore": 12000,
+  "my-dream-hillock": 10750,
+  "my-dream-summit": 20375,
+  "my-dream-griffin": 14100,
+  "my-dream-selene": 16750,
+  "my-dream-atlantis": 15255,
+  "my-dream-perch": 12200,
+  "my-dream-solace": 14750,
+  "my-dream-zenith": 12450,
+};
+export const completedProjectsSftTotal = Object.values(COMPLETED_PROJECT_SFT).reduce((a, b) => a + b, 0);
+
 // Business achievement statistics — CENTRALIZED, editable here only.
 // Replace the null placeholders with the verified figures when ready;
 // the homepage statistics band reads from this single source.
 export const BUSINESS_STATS = {
   totalFlatsSold: 145, // all 13 completed projects sold out & occupied (verified against audited flat counts)
-  totalSftDelivered: null, // TODO: set verified number, e.g. 185000
+  totalSftDelivered: completedProjectsSftTotal, // 190,905 SFT — sum of the 13 completed projects' verified saleable areas
 };
 
 // Public pricing — static, site-wide source of truth.
@@ -46,6 +65,44 @@ const MY_DREAM_NEST = {
     preview: "/assets/projects/my-dream-nest/floor-plan-p1.jpg",
     fileName: "My-Dream-Nest-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1580 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "24'-0\"\u00d713'-0\"" },
+        { name: "M. BED ROOM", dims: "13'-6\"\u00d713'-6\"" },
+        { name: "C. BED ROOM", dims: "13'-0\"\u00d711'-0\"" },
+        { name: "G. BED ROOM", dims: "10'-0\"\u00d710'-6\"" },
+        { name: "KITCHEN", dims: "9'-0\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "6'-6\"\u00d74'-0\"" },
+        { name: "DRESS", dims: "4'-6\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d79'-6\"" },
+        { name: "C. TOILET", dims: "4'-0\"\u00d77'-6\"" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK",
+      saleableArea: "1250 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "11'-0\"\u00d714'-6\"" },
+        { name: "DINING", dims: "10'-6\"\u00d710'-6\"" },
+        { name: "M. BED ROOM", dims: "11'-0\"\u00d715'-6\"" },
+        { name: "C. BED ROOM", dims: "13'-0\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "10'-0\"\u00d78'-6\"" },
+        { name: "PUJA", dims: "6'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d711'-0\"" },
+        { name: "A. TOILET", dims: "5'-6\"\u00d77'-0\"" },
+        { name: "UTILITY", dims: "5'-0\"\u00d77'-6\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 14150,
   plan3d: {
     src: "/assets/projects/my-dream-nest/plan-3d.jpg",
     srcSet:
@@ -84,6 +141,43 @@ const MY_DREAM_CASA = {
     preview: "/assets/projects/my-dream-casa/floor-plan-p1.jpg",
     fileName: "My-Dream-Casa-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1675 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "13'-0\"\u00d720'-9\"" },
+        { name: "M. BED ROOM", dims: "15'-6\"\u00d711'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d712'-0\"" },
+        { name: "STUDY ROOM", dims: "8'-0\"\u00d78'-6\"" },
+        { name: "KITCHEN", dims: "8'-6\"\u00d79'-6\"" },
+        { name: "UTILITY", dims: "7'-6\"\u00d75'-3\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d78'-0\"" },
+        { name: "BALCONY", dims: "4'-9\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK",
+      saleableArea: "1325 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "14'-0\"\u00d722'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-6\"\u00d711'-6\"" },
+        { name: "G. BED ROOM", dims: "12'-6\"\u00d710'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "11'-0\"\u00d79'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d76'-0\"" },
+        { name: "C. TOILET", dims: "6'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d78'-0\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-6\"" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 15000,
   plan3d: {
     src: "/assets/projects/my-dream-casa/plan-3d.jpg",
     srcSet:
@@ -122,6 +216,38 @@ const MY_DREAM_AVASA = {
     preview: "/assets/projects/my-dream-avasa/floor-plan-p1.jpg",
     fileName: "My-Dream-Avasa-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "12'-6\"\u00d723'-3\"" },
+        { name: "M. BED ROOM", dims: "13'-0\"\u00d711'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-6\"\u00d713'-0\"" },
+        { name: "KITCHEN", dims: "10'-0\"\u00d77'-6\"" },
+        { name: "SIT-OUT", dims: "7'-0\"\u00d76'-6\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d75'-6\"" },
+        { name: "A. TOILET", dims: "10'-6\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "8'-6\"\u00d74'-6\"" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "15'-0\"\u00d711'-0\"" },
+        { name: "DINING", dims: "10'-0\"\u00d711'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-0\"\u00d713'-6\"" },
+        { name: "C. BED ROOM", dims: "11'-0\"\u00d712'-0\"" },
+        { name: "KITCHEN", dims: "9'-3\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d75'-0\"" },
+        { name: "DRESS", dims: "4'-3\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "4'-3\"\u00d77'-6\"" },
+      ],
+    },
+  ],
+  sftDelivered: 12000,
   plan3d: {
     src: "/assets/projects/my-dream-avasa/plan-3d.jpg",
     srcSet:
@@ -160,6 +286,55 @@ const MY_DREAM_SKYLARK = {
     preview: "/assets/projects/my-dream-skylark/floor-plan-p1.jpg",
     fileName: "My-Dream-Skylark-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK (EAST)",
+      saleableArea: "1500 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "15'-0\"\u00d711'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-6\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "14'-0\"\u00d711'-0\"" },
+        { name: "G. BED ROOM", dims: "11'-6\"\u00d710'-6\"" },
+        { name: "KITCHEN", dims: "9'-0\"\u00d711'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d74'-0\"" },
+        { name: "C. TOILET", dims: "8'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d75'-0\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d75'-0\"" },
+        { name: "BALCONY", dims: "4'-6\" wide" },
+      ],
+    },
+    {
+      label: "3 BHK (WEST)",
+      saleableArea: "1500 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "12'-0\"\u00d714'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-6\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d710'-0\"" },
+        { name: "G. BED ROOM", dims: "11'-6\"\u00d710'-0\"" },
+        { name: "KITCHEN", dims: "10'-3\"\u00d78'-6\"" },
+        { name: "PUJA", dims: "4'-6\"\u00d73'-6\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d79'-0\"" },
+        { name: "A. TOILET", dims: "5'-6\"\u00d76'-6\"" },
+        { name: "C. TOILET", dims: "8'-0\"\u00d74'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK",
+      saleableArea: "1225 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "15'-3\"\u00d711'-0\"" },
+        { name: "DINING", dims: "12'-6\"\u00d710'-0\"" },
+        { name: "M. BED ROOM", dims: "12'-0\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "11'-0\"\u00d713'-0\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d711'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d78'-0\"" },
+        { name: "A. TOILET", dims: "5'-6\"\u00d76'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 21125,
   plan3d: {
     src: "/assets/projects/my-dream-skylark/plan-3d.jpg",
     srcSet:
@@ -199,6 +374,39 @@ const MY_DREAM_GLENMORE = {
     preview: "/assets/projects/my-dream-glenmore/floor-plan-p1.jpg",
     fileName: "My-Dream-Glenmore-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "11'-0\"\u00d715'-0\"" },
+        { name: "KITCHEN / DINING", dims: "15'-0\"\u00d714'-6\"" },
+        { name: "M. BED ROOM", dims: "11'-0\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "5'-3\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "9'-6\"\u00d74'-3\"" },
+        { name: "A. TOILET", dims: "9'-6\"\u00d75'-3\"" },
+        { name: "UTILITY / BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "11'-6\"\u00d713'-0\"" },
+        { name: "DINING", dims: "15'-6\"\u00d77'-6\"" },
+        { name: "KITCHEN", dims: "9'-6\"\u00d77'-0\"" },
+        { name: "M. BED ROOM", dims: "13'-0\"\u00d710'-6\"" },
+        { name: "C. BED ROOM", dims: "11'-0\"\u00d79'-6\"" },
+        { name: "PUJA", dims: "3'-3\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d74'-0\"" },
+        { name: "BALCONY", dims: "3'-6\" wide" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 12000,
   plan3d: {
     src: "/assets/projects/my-dream-glenmore/plan-3d.jpg",
     srcSet:
@@ -237,6 +445,37 @@ const MY_DREAM_HILLOCK = {
     preview: "/assets/projects/my-dream-hillock/floor-plan-p1.jpg",
     fileName: "My-Dream-Hillock-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1100 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "19'-3\"\u00d712'-0\"" },
+        { name: "M. BED ROOM", dims: "12'-0\"\u00d712'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-9\"\u00d79'-0\"" },
+        { name: "KITCHEN", dims: "7'-6\"\u00d712'-6\"" },
+        { name: "PUJA", dims: "7'-0\"\u00d73'-6\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-0\"" },
+        { name: "UTILITY", dims: "5'-0\" wide" },
+        { name: "BALCONY", dims: "5'-6\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1050 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "19'-3\"\u00d712'-6\"" },
+        { name: "M. BED ROOM", dims: "10'-0\"\u00d714'-9\"" },
+        { name: "C. BED ROOM", dims: "11'-6\"\u00d710'-0\"" },
+        { name: "KITCHEN", dims: "9'-0\"\u00d78'-0\"" },
+        { name: "PUJA", dims: "3'-6\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-0\"\u00d77'-0\"" },
+        { name: "UTILITY", dims: "6'-3\"\u00d78'-3\"" },
+        { name: "SIT-OUT", dims: "5'-0\"\u00d76'-6\"" },
+      ],
+    },
+  ],
+  sftDelivered: 10750,
   plan3d: {
     src: "/assets/projects/my-dream-hillock/plan-3d.jpg",
     srcSet:
@@ -276,6 +515,56 @@ const MY_DREAM_SUMMIT = {
     preview: "/assets/projects/my-dream-summit/floor-plan-p1.jpg",
     fileName: "My-Dream-Summit-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1675 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "12'-0\"\u00d721'-6\"" },
+        { name: "DINING", dims: "10'-0\"\u00d713'-6\"" },
+        { name: "M. BED ROOM", dims: "14'-0\"\u00d712'-0\"" },
+        { name: "G. BED ROOM", dims: "12'-0\"\u00d711'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d713'-6\"" },
+        { name: "KITCHEN", dims: "11'-0\"\u00d79'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d75'-6\"" },
+        { name: "A. TOILET", dims: "4'-9\"\u00d78'-6\"" },
+        { name: "C. TOILET", dims: "4'-6\"\u00d78'-6\"" },
+        { name: "UTILITY", dims: "4'-0\"\u00d77'-6\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (MIDDLE)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "11'-0\"\u00d716'-0\"" },
+        { name: "DINING", dims: "11'-0\"\u00d711'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-0\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d713'-0\"" },
+        { name: "KITCHEN", dims: "9'-6\"\u00d79'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d73'-0\"" },
+        { name: "A. TOILET", dims: "9'-6\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-0\"\u00d78'-6\"" },
+        { name: "UTILITY", dims: "4'-0\"\u00d77'-6\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (RIGHT)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "11'-0\"\u00d715'-0\"" },
+        { name: "KITCHEN / DINING", dims: "10'-0\"\u00d718'-6\"" },
+        { name: "M. BED ROOM", dims: "13'-0\"\u00d711'-0\"" },
+        { name: "C. BED ROOM", dims: "13'-0\"\u00d710'-6\"" },
+        { name: "SIT-OUT", dims: "6'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-0\"\u00d78'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 20375,
   plan3d: {
     src: "/assets/projects/my-dream-summit/plan-3d.jpg",
     srcSet:
@@ -315,6 +604,37 @@ const MY_DREAM_GRIFFIN = {
     preview: "/assets/projects/my-dream-griffin/floor-plan-p1.jpg",
     fileName: "My-Dream-Griffin-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1600 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "12'-0\"\u00d718'-0\"" },
+        { name: "M. BED ROOM", dims: "15'-0\"\u00d710'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d713'-0\"" },
+        { name: "STUDY ROOM", dims: "10'-0\"\u00d77'-0\"" },
+        { name: "KITCHEN", dims: "8'-6\"\u00d710'-6\"" },
+        { name: "UTILITY", dims: "7'-6\"\u00d74'-3\"" },
+        { name: "PUJA", dims: null },
+        { name: "A. TOILET", dims: "7'-0\"\u00d75'-6\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK",
+      saleableArea: "1220 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "12'-0\"\u00d723'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-0\"\u00d712'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-6\"\u00d712'-0\"" },
+        { name: "KITCHEN", dims: "11'-0\"\u00d79'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d76'-0\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-6\"" },
+        { name: "BALCONY", dims: "4'-6\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 14100,
   plan3d: {
     src: "/assets/projects/my-dream-griffin/plan-3d.jpg",
     srcSet:
@@ -354,6 +674,39 @@ const MY_DREAM_SELENE = {
     preview: "/assets/projects/my-dream-selene/floor-plan-p1.jpg",
     fileName: "My-Dream-Selene-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK (FLAT 1)",
+      saleableArea: "1700 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "22'-6\"\u00d714'-0\"" },
+        { name: "M. BED ROOM", dims: "15'-0\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "13'-6\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "11'-6\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "10'-3\"\u00d712'-6\"" },
+        { name: "PUJA", dims: "6'-3\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "9'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-9\"\u00d74'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "3 BHK (FLAT 2)",
+      saleableArea: "1650 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "23'-0\"\u00d714'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-6\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "13'-0\"\u00d711'-0\"" },
+        { name: "C. BED ROOM", dims: "11'-6\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d712'-6\"" },
+        { name: "PUJA", dims: "7'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d74'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 16750,
   plan3d: {
     src: "/assets/projects/my-dream-selene/plan-3d.jpg",
     srcSet:
@@ -392,6 +745,55 @@ const MY_DREAM_ATLANTIS = {
     preview: "/assets/projects/my-dream-atlantis/floor-plan-p1.jpg",
     fileName: "My-Dream-Atlantis-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1010 SFT",
+      rooms: [
+        { name: "LIVING", dims: "17'-4\"\u00d710'-0\"" },
+        { name: "DINING", dims: "11'-6\"\u00d75'-9\"" },
+        { name: "KITCHEN", dims: "10'-3\"\u00d76'-9\"" },
+        { name: "M. BED ROOM", dims: "13'-7\"\u00d710'-1\"" },
+        { name: "C. BED ROOM", dims: "12'-0\"\u00d710'-0\"" },
+        { name: "UTILITY", dims: "10'-3\"\u00d73'-0\"" },
+        { name: "TOILET", dims: "6'-0\"\u00d74'-2\"" },
+        { name: "TOILET", dims: "6'-0\"\u00d76'-2\"" },
+        { name: "BALCONY", dims: "7'-4\"\u00d75'-3\"" },
+        { name: "BALCONY", dims: "7'-4\"\u00d73'-6\"" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1010 SFT",
+      rooms: [
+        { name: "LIVING", dims: "17'-4\"\u00d710'-0\"" },
+        { name: "DINING", dims: "9'-0\"\u00d77'-4\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d78'-0\"" },
+        { name: "M. BED ROOM", dims: "13'-7\"\u00d710'-1\"" },
+        { name: "C. BED ROOM", dims: "12'-0\"\u00d710'-0\"" },
+        { name: "UTILITY", dims: "8'-4\"\u00d73'-6\"" },
+        { name: "TOILET", dims: "4'-0\"\u00d76'-4\"" },
+        { name: "BALCONY", dims: "9'-0\"\u00d74'-6\"" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 3)",
+      saleableArea: "1031 SFT",
+      rooms: [
+        { name: "LIVING", dims: "12'-0\"\u00d711'-1\"" },
+        { name: "DINING", dims: "8'-0\"\u00d711'-1\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d79'-1\"" },
+        { name: "M. BED ROOM", dims: "11'-7\"\u00d713'-6\"" },
+        { name: "C. BED ROOM", dims: "13'-0\"\u00d712'-0\"" },
+        { name: "W.I.C", dims: "6'-3\"\u00d74'-0\"" },
+        { name: "UTILITY", dims: "6'-9\"\u00d75'-4\"" },
+        { name: "PUJA", dims: "2'-7\"\u00d74'-0\"" },
+        { name: "TOILET", dims: "8'-0\"\u00d74'-0\"" },
+        { name: "BALCONY", dims: "12'-9\"\u00d74'-0\"" },
+      ],
+    },
+  ],
+  sftDelivered: 15255,
   plan3d: {
     src: "/assets/projects/my-dream-atlantis/plan-3d.jpg",
     srcSet:
@@ -431,6 +833,35 @@ const MY_DREAM_PERCH = {
     preview: "/assets/projects/my-dream-perch/floor-plan-p1.jpg",
     fileName: "My-Dream-Perch-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "13'-0\"\u00d720'-0\"" },
+        { name: "PUJA / KITCHEN", dims: "14'-6\"\u00d78'-0\"" },
+        { name: "M. BED ROOM", dims: "13'-0\"\u00d711'-9\"" },
+        { name: "C. BED ROOM", dims: "10'-6\"\u00d712'-0\"" },
+        { name: "A. TOILET", dims: "9'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d77'-0\"" },
+        { name: "BALCONY", dims: "5'-6\"\u00d76'-6\"" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1240 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "13'-0\"\u00d720'-0\"" },
+        { name: "PUJA / KITCHEN", dims: "14'-6\"\u00d78'-6\"" },
+        { name: "M. BED ROOM", dims: "13'-0\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "10'-6\"\u00d712'-0\"" },
+        { name: "A. TOILET", dims: "9'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d77'-6\"" },
+        { name: "BALCONY", dims: "4'-6\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 12200,
   plan3d: {
     src: "/assets/projects/my-dream-perch/plan-3d.jpg",
     srcSet:
@@ -470,6 +901,44 @@ const MY_DREAM_SOLACE = {
     preview: "/assets/projects/my-dream-solace/floor-plan-p1.jpg",
     fileName: "My-Dream-Solace-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK (FLAT 1)",
+      saleableArea: "1675 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "15'-6\"\u00d711'-0\"" },
+        { name: "DINING", dims: "11'-0\"\u00d712'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-0\"\u00d712'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "10'-6\"\u00d78'-0\"" },
+        { name: "PUJA", dims: null },
+        { name: "A. TOILET", dims: "7'-0\"\u00d75'-0\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d75'-6\"" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+        { name: "BALCONY", dims: "4'-9\" wide" },
+      ],
+    },
+    {
+      label: "3 BHK (FLAT 2)",
+      saleableArea: "1275 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "11'-0\"\u00d716'-6\"" },
+        { name: "DINING", dims: "10'-0\"\u00d715'-0\"" },
+        { name: "M. BED ROOM", dims: "13'-6\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "13'-0\"\u00d712'-6\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d713'-0\"" },
+        { name: "KITCHEN", dims: "11'-0\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d74'-3\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "5'-0\"\u00d78'-0\"" },
+        { name: "C. TOILET", dims: "4'-0\"\u00d77'-0\"" },
+        { name: "UTILITY", dims: "4'-3\" wide" },
+        { name: "BALCONY", dims: "4'-9\" wide" },
+        { name: "BALCONY", dims: "4'-6\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 14750,
   plan3d: {
     src: "/assets/projects/my-dream-solace/plan-3d.jpg",
     srcSet:
@@ -509,6 +978,40 @@ const MY_DREAM_ZENITH = {
     preview: "/assets/projects/my-dream-zenith/floor-plan-p1.jpg",
     fileName: "My-Dream-Zenith-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1265 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "16'-0\"\u00d710'-0\"" },
+        { name: "KITCHEN / DINING", dims: "17'-0\"\u00d710'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-0\"\u00d710'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d710'-0\"" },
+        { name: "STUDY ROOM", dims: "5'-6\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "3'-6\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d75'-6\"" },
+        { name: "BALCONY", dims: "4'-6\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK",
+      saleableArea: "1225 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "16'-6\"\u00d710'-0\"" },
+        { name: "KITCHEN / DINING", dims: "18'-6\"\u00d710'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-6\"\u00d710'-0\"" },
+        { name: "C. BED ROOM", dims: "13'-3\"\u00d710'-0\"" },
+        { name: "PUJA / STUDY", dims: "8'-0\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "3'-0\"\u00d73'-0\"" },
+        { name: "SIT-OUT", dims: "9'-6\"\u00d76'-0\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d75'-0\"" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
+  sftDelivered: 12450,
   plan3d: {
     src: "/assets/projects/my-dream-zenith/plan-3d.jpg",
     srcSet:
@@ -536,6 +1039,54 @@ const MY_DREAM_AURELIA = {
     preview: "/assets/projects/my-dream-aurelia/floor-plan-p1.jpg",
     fileName: "My-Dream-Aurelia-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1250 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "16'-0\"\u00d710'-0\"" },
+        { name: "KITCHEN / DINING", dims: "15'-6\"\u00d710'-0\"" },
+        { name: "M. BED ROOM", dims: "13'-0\"\u00d710'-0\"" },
+        { name: "C. BED ROOM", dims: "12'-6\"\u00d710'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "6'-6\"\u00d75'-0\"" },
+        { name: "A. TOILET", dims: "6'-6\"\u00d75'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1040 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "10'-0\"\u00d714'-0\"" },
+        { name: "DINING", dims: "11'-0\"\u00d79'-0\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d79'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-6\"\u00d712'-0\"" },
+        { name: "C. BED ROOM", dims: "9'-6\"\u00d711'-6\"" },
+        { name: "C. TOILET", dims: "5'-9\"\u00d75'-3\"" },
+        { name: "A. TOILET", dims: "5'-9\"\u00d76'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 3)",
+      saleableArea: "1040 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "10'-0\"\u00d714'-0\"" },
+        { name: "DINING", dims: "11'-0\"\u00d79'-0\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d79'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-6\"\u00d712'-0\"" },
+        { name: "C. BED ROOM", dims: "9'-6\"\u00d711'-6\"" },
+        { name: "PUJA", dims: null },
+        { name: "C. TOILET", dims: "5'-9\"\u00d75'-3\"" },
+        { name: "A. TOILET", dims: "5'-9\"\u00d76'-0\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+        { name: "UTILITY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
   plan3d: {
     src: "/assets/projects/my-dream-aurelia/plan-3d.jpg",
     srcSet:
@@ -569,6 +1120,54 @@ const MY_DREAM_ELYSIUM = {
     preview: "/assets/projects/my-dream-elysium/floor-plan-p1.jpg",
     fileName: "My-Dream-Elysium-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1250 SFT",
+      rooms: [
+        { name: "LIVING", dims: "10'-0\"\u00d715'-7\u00bd\"" },
+        { name: "KITCHEN / DINING", dims: "10'-0\"\u00d715'-9\"" },
+        { name: "M. BED ROOM", dims: "10'-0\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d712'-1\u00bd\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d74'-1\u00bd\"" },
+        { name: "A. TOILET", dims: "5'-0\"\u00d76'-6\"" },
+        { name: "A. TOILET", dims: "5'-0\"\u00d76'-6\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1040 SFT",
+      rooms: [
+        { name: "LIVING", dims: "13'-0\"\u00d710'-0\"" },
+        { name: "DINING", dims: "9'-1\u00bd\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "8'-3\"\u00d78'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-3\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "11'-0\"\u00d79'-6\"" },
+        { name: "PUJA", dims: "3'-0\"\u00d72'-0\"" },
+        { name: "UTILITY", dims: "3'-10\u00bd\"\u00d79'-1\u00bd\"" },
+        { name: "A. TOILET", dims: "6'-0\"\u00d75'-9\"" },
+        { name: "C. TOILET", dims: "5'-0\"\u00d75'-9\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 3)",
+      saleableArea: "1040 SFT",
+      rooms: [
+        { name: "LIVING", dims: "13'-0\"\u00d710'-0\"" },
+        { name: "DINING", dims: "9'-1\u00bd\"\u00d711'-0\"" },
+        { name: "KITCHEN", dims: "8'-3\"\u00d78'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-3\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "11'-0\"\u00d79'-6\"" },
+        { name: "PUJA", dims: "3'-0\"\u00d72'-0\"" },
+        { name: "UTILITY", dims: "3'-10\u00bd\"\u00d79'-1\u00bd\"" },
+        { name: "A. TOILET", dims: "6'-0\"\u00d75'-9\"" },
+        { name: "C. TOILET", dims: "5'-0\"\u00d75'-9\"" },
+        { name: "BALCONY", dims: "4'-0\" wide" },
+      ],
+    },
+  ],
   plan3d: {
     src: "/assets/projects/my-dream-elysium/plan-3d.jpg",
     srcSet:
@@ -602,6 +1201,37 @@ const MY_DREAM_AURA = {
     preview: "/assets/projects/my-dream-aura/floor-plan-p1.jpg",
     fileName: "My-Dream-Aura-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1680 SFT",
+      rooms: [
+        { name: "LIVING", dims: "16'-3\"\u00d710'-0\"" },
+        { name: "M. BED ROOM", dims: "10'-6\"\u00d713'-6\"" },
+        { name: "G. BED ROOM", dims: "10'-3\"\u00d710'-0\"" },
+        { name: "KITCHEN", dims: "8'-6\"\u00d710'-9\"" },
+        { name: "PUJA", dims: "4'-9\"\u00d74'-7\u00bd\"" },
+        { name: "UTILITY", dims: "4'-7\u00bd\"\u00d710'-4\u00bd\"" },
+        { name: "A. TOILET", dims: "4'-3\"\u00d77'-0\"" },
+        { name: "A. TOILET", dims: "4'-3\"\u00d76'-6\"" },
+        { name: "BALCONY", dims: "3'-0\"\u00d710'-0\"" },
+      ],
+    },
+    {
+      label: "2 BHK",
+      saleableArea: "1200 SFT",
+      rooms: [
+        { name: "LIVING", dims: "10'-0\"\u00d714'-3\"" },
+        { name: "DINING", dims: "12'-0\"\u00d710'-0\"" },
+        { name: "M. BED ROOM", dims: "11'-0\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-4\u00bd\"\u00d712'-9\"" },
+        { name: "KITCHEN", dims: "7'-4\u00bd\"\u00d710'-6\"" },
+        { name: "A. TOILET", dims: "6'-6\"\u00d75'-3\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d75'-0\"" },
+        { name: "BALCONY", dims: "4'-0\"\u00d710'-0\"" },
+      ],
+    },
+  ],
   plan3d: {
     src: "/assets/projects/my-dream-aura/plan-3d.jpg",
     srcSet:
@@ -635,6 +1265,36 @@ const MY_DREAM_ECHELON = {
     preview: "/assets/projects/my-dream-echelon/floor-plan-p1.jpg",
     fileName: "My-Dream-Echelon-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "2 BHK (FLAT 1)",
+      saleableArea: "1180 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "19'-3\"\u00d713'-0\"" },
+        { name: "MASTER BEDROOM", dims: "11'-3\"\u00d713'-1\u00bd\"" },
+        { name: "BEDROOM", dims: "12'-0\"\u00d710'-6\"" },
+        { name: "KITCHEN", dims: "7'-1\u00bd\"\u00d710'-1\u00bd\"" },
+        { name: "PUJA LOBBY", dims: "10'-10\u00bd\"\u00d74'-9\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d74'-9\"" },
+        { name: "BALCONY", dims: "4'-0\"\u00d710'-6\"" },
+      ],
+    },
+    {
+      label: "2 BHK (FLAT 2)",
+      saleableArea: "1220 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "19'-3\"\u00d713'-0\"" },
+        { name: "MASTER BEDROOM", dims: "11'-3\"\u00d713'-1\u00bd\"" },
+        { name: "BEDROOM", dims: "12'-0\"\u00d710'-6\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d710'-1\u00bd\"" },
+        { name: "PUJA LOBBY", dims: "11'-9\"\u00d74'-9\"" },
+        { name: "WASH AREA", dims: "7'-9\"\u00d74'-0\"" },
+        { name: "SIT-OUT", dims: "4'-6\"\u00d710'-10\u00bd\"" },
+        { name: "A. TOILET", dims: "7'-6\"\u00d74'-9\"" },
+        { name: "A. TOILET", dims: "4'-0\"\u00d710'-6\"" },
+      ],
+    },
+  ],
   plan3d: {
     src: "/assets/projects/my-dream-echelon/plan-3d.jpg",
     srcSet:
@@ -668,6 +1328,40 @@ const MY_DREAM_VALE = {
     preview: "/assets/projects/my-dream-vale/floor-plan-p1.jpg",
     fileName: "My-Dream-Vale-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1665 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "23'-11\u00bd\"\u00d713'-0\"" },
+        { name: "M. BED ROOM", dims: "12'-0\"\u00d713'-6\"" },
+        { name: "C. BED ROOM", dims: "14'-0\"\u00d710'-9\"" },
+        { name: "G. BED ROOM", dims: "11'-1\u00bd\"\u00d710'-10\u00bc\"" },
+        { name: "KITCHEN", dims: "8'-0\"\u00d710'-7\u00bd\"" },
+        { name: "PUJA", dims: "6'-0\"\u00d74'-0\"" },
+        { name: "UTILITY", dims: "8'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "4'-9\"\u00d79'-0\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d74'-6\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d74'-6\"" },
+        { name: "BALCONY", dims: "5'-0\"\u00d713'-0\"" },
+      ],
+    },
+    {
+      label: "2.5 BHK",
+      saleableArea: "1440 SFT",
+      rooms: [
+        { name: "LIVING / DINING", dims: "20'-0\"\u00d713'-0\"" },
+        { name: "M. BED ROOM", dims: "14'-0\"\u00d711'-6\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d712'-3\"" },
+        { name: "STUDY ROOM", dims: "7'-9\"\u00d78'-9\"" },
+        { name: "UTILITY", dims: "9'-0\"\u00d75'-3\"" },
+        { name: "A. TOILET", dims: "8'-0\"\u00d75'-0\"" },
+        { name: "A. TOILET", dims: "4'-6\"\u00d78'-0\"" },
+        { name: "BALCONY", dims: "7'-9\"\u00d74'-0\"" },
+        { name: "BALCONY", dims: "4'-0\"\u00d713'-0\"" },
+      ],
+    },
+  ],
   plan3d: {
     src: "/assets/projects/my-dream-vale/plan-3d.jpg",
     srcSet:
@@ -716,6 +1410,26 @@ const MY_DREAM_IVY = {
     preview: "/assets/projects/my-dream-ivy/floor-plan-p1.jpg",
     fileName: "My-Dream-Ivy-Floor-Plan.pdf",
   },
+  unitDetails: [
+    {
+      label: "3 BHK",
+      saleableArea: "1600 SFT",
+      rooms: [
+        { name: "FAMILY LIVING", dims: "10'-6\"\u00d715'-3\"" },
+        { name: "DINING", dims: "10'-0\"\u00d714'-6\u00bd\"" },
+        { name: "M. BED ROOM", dims: "10'-0\"\u00d713'-0\"" },
+        { name: "C. BED ROOM", dims: "10'-0\"\u00d710'-0\"" },
+        { name: "G. BED ROOM", dims: "11'-7\u00bd\"\u00d710'-0\"" },
+        { name: "KITCHEN", dims: "7'-9\"\u00d710'-1\u00bd\"" },
+        { name: "UTILITY", dims: "8'-1\u00bd\"\u00d74'-0\"" },
+        { name: "PUJA", dims: "4'-0\"\u00d72'-0\"" },
+        { name: "A. TOILET", dims: "4'-0\"\u00d79'-0\"" },
+        { name: "A. TOILET", dims: "7'-0\"\u00d74'-0\"" },
+        { name: "A. TOILET", dims: "5'-10\u00bd\"\u00d75'-3\"" },
+        { name: "BALCONY", dims: "4'-0\"\u00d710'-0\"" },
+      ],
+    },
+  ],
   siteLocation: {
     url: "https://www.google.com/maps?q=17.5324690%2C78.3203350",
     lat: 17.532469,

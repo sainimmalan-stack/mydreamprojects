@@ -122,6 +122,10 @@ html.lenis body {
 .field-input::placeholder {
   color: rgba(122, 122, 122, 0.7);
 }
+.field-input--refined::placeholder {
+  color: rgba(232, 226, 216, 0.55);
+  letter-spacing: 0.04em;
+}
 .field-input:focus {
   border-bottom-color: #E85D22;
 }

@@ -276,8 +276,8 @@ export default function Contact() {
                     rows={4}
                     value={form.message}
                     onChange={set("message")}
-                    placeholder="Tell us about the home you imagine…"
-                    className="field-input resize-none"
+                    placeholder="Imagine it. We’ll help you build it."
+                    className="field-input field-input--refined resize-none"
                   />
                 </div>
                 <div className="flex flex-wrap items-center gap-6">

@@ -184,6 +184,11 @@ const CountUp = ({ value, pad = 0 }) => {
   const [inView, setInView] = useState(false);
   const [display, setDisplay] = useState(String(0).padStart(pad, "0"));
 
+  const fmt = (n) => {
+    const s = String(Math.round(n)).padStart(pad, "0");
+    return value >= 10000 ? Number(Math.round(n)).toLocaleString("en-IN") : s;
+  };
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -203,13 +208,13 @@ const CountUp = ({ value, pad = 0 }) => {
   useEffect(() => {
     if (!inView) return;
     if (reduce) {
-      setDisplay(String(value).padStart(pad, "0"));
+      setDisplay(fmt(value));
       return;
     }
     const controls = animate(0, value, {
       duration: 1.8,
       ease: EASE,
-      onUpdate: (v) => setDisplay(String(Math.round(v)).padStart(pad, "0")),
+      onUpdate: (v) => setDisplay(fmt(v)),
     });
     return () => controls.stop();
   }, [inView, value, pad, reduce]);
@@ -224,7 +229,7 @@ const Stats = () => {
     { value: projectStats.ongoing, pad: 0, label: "Ongoing" },
     { value: 2020, pad: 0, label: "Founded" },
     { value: BUSINESS_STATS.totalFlatsSold, pad: 0, label: "Total Flats Sold", testid: "stat-flats-sold" },
-    { value: BUSINESS_STATS.totalSftDelivered, pad: 0, label: "Total SFT Delivered", testid: "stat-sft-delivered", suffix: "+" },
+    { value: BUSINESS_STATS.totalSftDelivered, pad: 0, label: "Total SFT Delivered", testid: "stat-sft-delivered" },
   ];
   return (
     <section data-testid="stats-band" className="border-b border-line bg-coal">

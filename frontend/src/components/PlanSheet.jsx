@@ -5,13 +5,19 @@
  * champagne accent. The 2D drawing is always the original, untouched file;
  * 3D visualizations float on the same dark environment. When a project has
  * project.plan3d, the 2D/3D switcher appears automatically — every future
- * project inherits the exact same system.
+ * project inherits the exact same system. In 3D mode, verified per-unit
+ * room details (names + dimensions from the approved plan) appear below.
  */
+import { useState } from "react";
+
 export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
   const config = project.configuration || project.flatMix;
   const configSuffix = project.configuration ? "Residence" : "Residences";
   const has3d = Boolean(project.plan3d);
   const is3d = has3d && mode === "3d";
+  const [unitIdx, setUnitIdx] = useState(0);
+  const units = project.unitDetails || [];
+  const activeUnit = units[Math.min(unitIdx, units.length - 1)];
   return (
     <div
       data-testid="plan-sheet"
@@ -107,6 +113,56 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
           </p>
         )}
       </div>
+      {is3d && activeUnit && (
+        <div data-testid="room-details" className="border-t border-white/10 px-5 md:px-8 py-6 md:py-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <p className="text-[9px] uppercase tracking-[0.35em] text-[#C9A876]">Room Details</p>
+            {units.length > 1 && (
+              <div data-testid="room-unit-tabs" role="group" aria-label="Select flat type" className="inline-flex flex-wrap border border-white/15">
+                {units.map((u, i) => (
+                  <button
+                    key={u.label}
+                    type="button"
+                    data-testid={`room-unit-tab-${i}`}
+                    aria-pressed={i === unitIdx}
+                    onClick={() => setUnitIdx(i)}
+                    className={`px-3.5 py-2 font-display font-semibold text-[9px] uppercase tracking-[0.2em] transition-colors duration-300 ${
+                      i === unitIdx
+                        ? "bg-[#0c0b0a] text-bone shadow-[inset_0_-2px_0_0_rgba(201,168,118,0.85)]"
+                        : "text-bone/45 hover:text-bone/75"
+                    }`}
+                  >
+                    {u.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="flex items-baseline justify-between gap-6 border-b border-white/10 pb-4 mb-2">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-bone/85">{activeUnit.label}</span>
+            <span className="text-[10px] uppercase tracking-[0.25em] text-bone/50">
+              Saleable Area <span className="text-[#C9A876] ml-2">{activeUnit.saleableArea}</span>
+            </span>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-x-10">
+            {activeUnit.rooms.map((r, i) => (
+              <div
+                key={`${r.name}-${i}`}
+                data-testid={`room-row-${i}`}
+                className="flex items-baseline gap-4 border-b border-white/5 py-2.5"
+              >
+                <span className="text-[9px] text-[#C9A876]/70 tabular-nums w-5 shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-bone/85">{r.name}</span>
+                {r.dims && (
+                  <span className="ml-auto text-[10px] text-bone/50 tabular-nums whitespace-nowrap">{r.dims}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="px-5 md:px-8 py-4 border-t border-white/10 flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.35em] text-bone/40 whitespace-nowrap">
         <span>My Dream Projects · Ameenpur, Hyderabad</span>
         <span>Sheet {project.index}</span>

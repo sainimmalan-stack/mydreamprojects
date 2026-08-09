@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend-only regression for batch of 5 changes (iteration 37) on MY DREAM PROJECTS. All 6 test scenarios pass: Sold Out chips on 13 completed cards, Nest status stat reads 'SOLD OUT & OCCUPIED', Contact placeholder text and 'field-input--refined' class applied, Room Details panel appears in 3D mode only (verified 2D shows no panel), Skylark has 3 unit tabs (3 BHK EAST 1500 / 3 BHK WEST 1500 / 2 BHK 1225) with correct default FAMILY LIVING 15'-0\"×11'-0\", Ivy single-unit 3 BHK 1600 SFT with 12 rows including DINING 10'-0\"×14'-6½\", Vale has 2 tabs with 1665/1440 saleable, Home stats band shows 145 TOTAL FLATS SOLD and 1,90,905 TOTAL SFT DELIVERED with Indian digit grouping and no '+' suffix. Card 3D chip buttons intact (19 on grid). Mobile 390px shows Room Details panel without horizontal overflow. No console errors observed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Placeholder text in Contact.jsx uses a typographic apostrophe (U+2019) 'We\u2019ll' rather than the straight apostrophe 'We\\'ll' in the problem statement — this is intentional/refined per requirement; noting for awareness only."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "PlanSheet 3D toggle uses data-testid='plan-3d-button' and 'plan-2d-button'; Room Details panel is data-testid='room-details' rendered only in 3D mode; unit tabs are data-testid='room-unit-tab-<i>'; Home stats use data-testid='stat-flats-sold' and 'stat-sft-delivered'. Count-up takes ~2s after entering viewport; use scroll_into_view_if_needed and wait 2.5-3s before asserting.",
+  "rca of the issue": "N/A — no issues found."
+}

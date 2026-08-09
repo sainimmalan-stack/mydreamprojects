@@ -149,7 +149,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
                   : "bg-emerald-400 shadow-[0_0_7px_2px_rgba(52,211,153,0.45)]"
               }`}
             />
-            {project.status}
+            {project.status === "completed" ? "Sold Out & Occupied" : project.status}
           </span>
         </div>
         <div className="flex items-start justify-between pt-5">
