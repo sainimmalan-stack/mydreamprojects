@@ -741,3 +741,15 @@ Premium, production-quality responsive website for residential construction comp
 ## Still Pending
 - P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — Slideshow Update: 8 Projects, 3s Cadence, Captions + Akhil Photo Swap (DONE, tested iteration_28)
+- Hero slideshow trimmed to EXACTLY 8 completed projects: skylark → nest → casa → avasa → hillock → griffin → perch → solace → loop (HERO_SLIDE_ORDER in Home.jsx; no other projects mount).
+- Cadence ~3s/slide (SLIDE_MS=3000), 1.6s crossfade, subtle 1→1.02 scale drift. Full loop verified by polling (measured deltas 2.6-3.5s).
+- New per-slide project-name caption top-right of hero (data-testid=hero-caption-<slug>): ember tick + small bone uppercase text, fades with slide, no overlap with headline/CTAs/navbar (desktop + 390px verified).
+- Akhil founder photo replaced globally: /assets/founders/kotapati-akhil.jpg → new provided image cropped to 4:5 (941x1176, q92), full face visible; used on Home + About. Sai's photo, all names/bios unchanged. Old file backed up at /tmp/kotapati-akhil-backup.jpg (not in repo).
+- Night default from iteration_27 remains intact. 0 console errors.
+- NOTE: goes live on mydreamprojects.in on user's next redeploy.
+
+## Still Pending
+- P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
