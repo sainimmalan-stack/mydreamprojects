@@ -730,3 +730,14 @@ Premium, production-quality responsive website for residential construction comp
 - Frontend landowner form: added mandatory opt-in checkbox, submits to backend BEFORE wa.me handoff, success copy varies on whether auto-reply was accepted.
 - Approved template text (user-approved draft): "Hi {{1}}, thank you for reaching out to My Dream Projects about your land at {{2}}. Sai or Akhil will personally call you within 24 hours to discuss the partnership. — My Dream Projects, Ameenpur"
 - PENDING USER: Meta for Developers app + Coexistence onboarding for +91 77804 29845 (keeps Business app working), System User token, Phone Number ID, template creation+approval. Tested: valid/invalid curl cases, full browser flow, DB persistence.
+
+## 2026-08-09 — Homepage Refinement: Hyderabad copy, Night-default, Hero Night Slideshow (DONE, tested iteration_27)
+- A) Landowner paragraph only: "around Ameenpur" → "around Hyderabad". All other Ameenpur references untouched (verified 8 remain on Home).
+- B) Night mode is now the DEFAULT everywhere: ProjectCard, DayNightImage, ElevationViewer start in night; ProjectDetail hero uses elevation-night.webp. Day images lazy-load only after the first Day toggle click (dayTouched gating). Toggles unchanged and fully reversible.
+- C) Home hero is now an automatic crossfade slideshow of all 13 completed projects' NIGHT images. Order: skylark → nest → casa → avasa → griffin → selene → glenmore → zenith → summit → perch → solace → hillock → atlantis (HERO_SLIDE_ORDER in Home.jsx). 5.5s/slide, 2s crossfade, subtle 1→1.04 scale drift (disabled for reduced-motion), loops. Renders only prev/active/next slides; next slide preloads in-viewport; advancing is gated on image load (no blank frames). Skylark night keeps fetchPriority="high". Hero content/overlay unchanged.
+- Verified: exact slide order (Skylark→Nest→Casa), ZERO elevation-day requests on initial loads, toggles work, ongoing Coming Soon placeholders unaffected, no console errors, desktop+mobile 390px.
+- NOTE: goes live on mydreamprojects.in on user's next redeploy.
+
+## Still Pending
+- P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
