@@ -813,3 +813,13 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user action): Top up universal key → then resume remaining 10 renders (nest, summit, selene, atlantis, perch, zenith, aurelia, aura, echelon, vale)
 - P0 (user action): Meta WhatsApp credentials for landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — 3D Rollout COMPLETE: All 19 Projects (DONE, tested iteration_34)
+- After user topped up the universal key, rendered the remaining 10 (nest + vale regenerated with "exactly one model" prompt after first-pass QC failures). ALL 19 projects now have dark-studio 3D dollhouse renders + 2D/3D toggle.
+- Consistency note for future renders: same prompt family (dark charcoal studio bg, ~45° three-quarter or near-top-down with wall height, no text), crop to ~80-90% occupancy, install as plan-3d.jpg/.webp/-800.webp, add plan3d entry to projects.js.
+- Verified iteration_34: 19/19 toggles + assets load, all 10 new renders single-model/no-text/dark-bg, viewers correct, mobile clean, 0 console errors.
+- Batch tooling (gen3d_batch.py) removed after use; masters deleted (installed copies are canonical).
+
+## Still Pending
+- P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
