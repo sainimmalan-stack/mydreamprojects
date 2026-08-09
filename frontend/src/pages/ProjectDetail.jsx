@@ -17,7 +17,6 @@ export default function ProjectDetail() {
   const { slug } = useParams();
   const [planOpen, setPlanOpen] = useState(false);
   const [planMode, setPlanMode] = useState("2d");
-  const [planUnitIdx, setPlanUnitIdx] = useState(0);
   const [elevOpen, setElevOpen] = useState(false);
   const project = getProject(slug);
   useSeo({
@@ -387,7 +386,7 @@ export default function ProjectDetail() {
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
               className="col-span-12 md:col-span-8"
             >
-              <PlanSheet project={project} onOpen={() => setPlanOpen(true)} mode={planMode} onModeChange={setPlanMode} unitIdx={planUnitIdx} onUnitChange={setPlanUnitIdx} />
+              <PlanSheet project={project} onOpen={() => setPlanOpen(true)} mode={planMode} onModeChange={setPlanMode} />
             </motion.div>
           </div>
         </section>
@@ -506,9 +505,6 @@ export default function ProjectDetail() {
           image={planMode === "3d" && project.plan3d ? project.plan3d.src : project.floorPlan.preview.replace("floor-plan-p1.jpg", "floor-plan-display.jpg")}
           pdf={planMode === "3d" ? null : project.floorPlan.pdf}
           title={`${project.title} — ${planMode === "3d" && project.plan3d ? "3D Floor Plan" : "Floor Plan"}`}
-          units={planMode === "3d" && project.plan3d ? project.unitDetails : null}
-          unitIdx={planUnitIdx}
-          onUnitChange={setPlanUnitIdx}
         />
       )}
       {project.elevationModes && (

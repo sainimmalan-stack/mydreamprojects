@@ -850,3 +850,12 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - FloorPlanViewer.jsx: accepts units/unitIdx/onUnitChange; renders a labels layer sized to the measured image box (onLoad + resize) with the same translate/scale transform as the image → labels pan/zoom in perfect sync; viewer-unit-bar with tabs + saleable area added under the header.
 - ProjectDetail.jsx: lifted planUnitIdx state shared between PlanSheet and FloorPlanViewer (unit selection stays in sync when opening the viewer). ProjectCard.jsx: 3D teaser viewer also gets units (uncontrolled internal state).
 - Testing: iteration_38 — 10/10 scenarios PASS (nest/ivy/skylark sheets, tab swaps, viewer zoom sync, state sync, 2D regression, card teaser, mobile 390px, zero console errors).
+
+## 2026-08-09 — 3D Label Overlays FULLY REMOVED (owner request, self-tested)
+- Owner stopped the label-refinement task mid-way and ordered: 3D plans must be purely visual — no room names, dimensions, labels, annotations or boxes over any 3D image, site-wide.
+- Removed: PlanLabels overlay from PlanSheet 3D mode, labels layer + unit tab bar from FloorPlanViewer, unit bar (tabs + saleable chip) from PlanSheet, lifted planUnitIdx state from ProjectDetail, units prop from ProjectCard teaser.
+- Deleted: /app/frontend/src/components/PlanLabels.jsx, /app/backend/inject_labels.py, and all 42 `labels` arrays (324 positioned labels) from projects.js.
+- Kept unchanged: 2D PLAN / 3D PLAN switch, full-screen viewer (zoom/pan/reset/Escape), 2D original-PDF link, disclaimer line under 3D render.
+- unitDetails in projects.js now holds only {label, saleableArea} per unit (verified factual data, currently unused by UI).
+- NOTE for future: a partially-completed refined coordinate set exists only in this session's scratch (/tmp/refined.json — nest/ivy/casa done; skylark units were found SCRAMBLED: u0/u1/u2 labels were each mapped one physical unit to the right; skylark middle unit is the 2BHK and has no G.BED). If labels ever return, remap from scratch against the 2D plans.
+- Verified via browser automation: 0 overlays in sheet + viewer (desktop & mobile 390px), zoom works, 2D intact, no console errors, no horizontal overflow.

@@ -3,20 +3,13 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { X, Plus, Minus, RotateCcw, FileText } from "lucide-react";
-import PlanLabels from "./PlanLabels";
 
 const MIN = 1;
 const MAX = 5;
 
-export const FloorPlanViewer = ({ open, onClose, image, pdf, title, units = null, unitIdx, onUnitChange }) => {
+export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
   const [scale, setScale] = useState(1);
   const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [internalIdx, setInternalIdx] = useState(0);
-  const [imgBox, setImgBox] = useState(null);
-  const imgRef = useRef(null);
-  const activeIdx = unitIdx ?? internalIdx;
-  const setActiveIdx = onUnitChange ?? setInternalIdx;
-  const activeUnit = units?.length ? units[Math.min(activeIdx, units.length - 1)] : null;
   const areaRef = useRef(null);
   const pointers = useRef(new Map());
   const lastPinch = useRef(null);
@@ -35,20 +28,6 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, units = null
   const reset = () => apply(1, { x: 0, y: 0 });
 
   const lenis = useLenis();
-
-  const measureImg = () => {
-    const img = imgRef.current;
-    if (img && img.offsetWidth) setImgBox({ w: img.offsetWidth, h: img.offsetHeight });
-  };
-
-  useEffect(() => {
-    if (!open) return;
-    setImgBox(null);
-    setInternalIdx(0);
-    measureImg();
-    window.addEventListener("resize", measureImg);
-    return () => window.removeEventListener("resize", measureImg);
-  }, [open, image]);
 
   useEffect(() => {
     if (open) reset();
@@ -161,11 +140,6 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, units = null
 
   const pct = Math.round(scale * 100);
 
-  const transformStyle = {
-    transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
-    transition: pointers.current.size ? "none" : "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-  };
-
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -202,37 +176,6 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, units = null
             )}
           </div>
 
-          {activeUnit && (
-            <div
-              data-testid="viewer-unit-bar"
-              className="shrink-0 border-b border-line px-5 md:px-10 py-2.5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
-            >
-              {units.length > 1 && (
-                <div data-testid="viewer-unit-tabs" role="group" aria-label="Select flat type" className="inline-flex border border-line">
-                  {units.map((u, i) => (
-                    <button
-                      key={u.label}
-                      type="button"
-                      data-testid={`viewer-unit-tab-${i}`}
-                      aria-pressed={i === activeIdx}
-                      onClick={() => setActiveIdx(i)}
-                      className={`px-3.5 py-1.5 font-display font-semibold text-[9px] uppercase tracking-[0.2em] transition-colors duration-300 ${
-                        i === activeIdx
-                          ? "bg-black/50 text-bone shadow-[inset_0_-2px_0_0_rgba(201,168,118,0.85)]"
-                          : "text-bone/45 hover:text-bone/75"
-                      }`}
-                    >
-                      {u.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-              <span data-testid="viewer-unit-area" className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-bone/50">
-                {activeUnit.label} · Saleable Area <span className="text-[#C9A876] ml-1.5">{activeUnit.saleableArea}</span>
-              </span>
-            </div>
-          )}
-
           <div
             ref={areaRef}
             data-testid="viewer-area"
@@ -244,29 +187,16 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title, units = null
             onPointerLeave={onPointerEnd}
           >
             <img
-              ref={imgRef}
-              onLoad={measureImg}
               src={image}
               alt={title}
               data-testid="viewer-image"
               draggable={false}
               className="max-w-[92%] max-h-[88%] object-contain pointer-events-none"
-              style={transformStyle}
+              style={{
+                transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
+                transition: pointers.current.size ? "none" : "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
             />
-            {activeUnit?.labels && imgBox && (
-              <div
-                data-testid="viewer-3d-labels-layer"
-                className="absolute left-1/2 top-1/2 pointer-events-none"
-                style={{
-                  width: imgBox.w,
-                  height: imgBox.h,
-                  transform: `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) scale(${scale})`,
-                  transition: transformStyle.transition,
-                }}
-              >
-                <PlanLabels labels={activeUnit.labels} testIdPrefix="viewer-3d-label" />
-              </div>
-            )}
           </div>
 
           <div className="shrink-0 border-t border-line px-5 md:px-10 py-3 md:py-4 flex items-center justify-center">

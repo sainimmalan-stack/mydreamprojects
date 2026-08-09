@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
-- 2026-08-09: 3D glass-label room overlays on all 19 projects (plan sheet + full-screen viewer, zoom-synced) — iteration_38, 10/10 PASS
+- 2026-08-09: 3D label overlays REMOVED site-wide per owner request — 3D plans are now purely visual (self-tested, desktop + mobile)
+- 2026-08-09: 3D glass-label room overlays (later removed same day per owner request) — iteration_38
 - 2026-08-09: Sold-out tags, real stats (145 flats sold, 1,90,905 SFT delivered), room data extraction — iteration_37
 - 2026-08-09: Mobile 3D interaction fix, brochure contact pages — iteration_36
