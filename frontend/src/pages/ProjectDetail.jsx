@@ -6,6 +6,7 @@ import FloorPlanViewer from "../components/FloorPlanViewer";
 import DayNightImage from "../components/DayNightImage";
 import ElevationViewer from "../components/ElevationViewer";
 import ComingSoonElevation from "../components/ComingSoonElevation";
+import PlanSheet from "../components/PlanSheet";
 import { getProject, getAdjacent } from "../data/projects";
 import { waLink } from "../data/contact";
 import useSeo from "../hooks/useSeo";
@@ -323,6 +324,29 @@ export default function ProjectDetail() {
               <p className="text-sm text-concrete leading-relaxed mt-5 max-w-sm">
                 {project.planTagline || "Typical floor layout. Open the full-resolution plan for dimensions and details."}
               </p>
+              <div data-testid="unit-details" className="mt-10 max-w-sm">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-1">Unit Details</p>
+                {[
+                  { label: "Type", value: project.configuration || project.flatMix },
+                  ...(project.configuration && project.flatMix && project.configuration !== project.flatMix
+                    ? [{ label: "Flat Mix", value: project.flatMix }]
+                    : []),
+                  { label: "Floors", value: project.floors },
+                  { label: "Total Residences", value: project.totalFlats ? `${project.totalFlats}` : null },
+                ]
+                  .filter((r) => r.value)
+                  .map((r) => (
+                    <div key={r.label} className="flex items-baseline justify-between gap-6 border-b border-line py-3.5">
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-concrete">{r.label}</span>
+                      <span
+                        data-testid={`unit-detail-${r.label.toLowerCase().replace(/\s+/g, "-")}`}
+                        className="font-display text-sm md:text-base font-medium uppercase tracking-tight text-bone text-right"
+                      >
+                        {r.value}
+                      </span>
+                    </div>
+                  ))}
+              </div>
               <div className="flex flex-wrap gap-4 mt-8">
                 <button
                   type="button"
@@ -346,23 +370,13 @@ export default function ProjectDetail() {
               </div>
             </div>
             <motion.div
-              role="button"
-              tabIndex={0}
-              onClick={() => setPlanOpen(true)}
-              onKeyDown={(e) => e.key === "Enter" && setPlanOpen(true)}
-              data-testid="floor-plan-preview"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-              className="col-span-12 md:col-span-8 block border border-line bg-bone p-2 md:p-3 hover:border-ember/50 transition-colors duration-500 cursor-zoom-in"
+              className="col-span-12 md:col-span-8"
             >
-              <img
-                src={project.floorPlan.preview}
-                alt={`${project.title} residential floor plan`}
-                className="w-full h-auto block"
-                loading="lazy"
-              />
+              <PlanSheet project={project} onOpen={() => setPlanOpen(true)} />
             </motion.div>
           </div>
         </section>

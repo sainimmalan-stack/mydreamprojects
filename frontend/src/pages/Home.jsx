@@ -92,25 +92,32 @@ const Hero = () => {
                   i === slide ? "opacity-100" : "opacity-0"
                 }`}
               />
-              <Link
-                to={`/projects/${s.slug}`}
-                data-testid={`hero-caption-${s.slug}`}
-                aria-hidden={i !== slide}
-                tabIndex={i === slide ? 0 : -1}
-                className={`group absolute top-24 md:top-28 right-5 md:right-10 text-right transition-opacity duration-[1600ms] ease-out ${
-                  i === slide ? "opacity-100" : "opacity-0 pointer-events-none"
-                }`}
-              >
-                <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
-                <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90 group-hover:text-ember transition-colors duration-300">
-                  {s.title}
-                </p>
-              </Link>
             </div>
           );
         })}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/30 pointer-events-none" />
       </motion.div>
+
+      {windowIdx.map((i) => {
+        const s = HERO_SLIDES[i];
+        return (
+          <Link
+            key={`caption-${s.slug}`}
+            to={`/projects/${s.slug}`}
+            data-testid={`hero-caption-${s.slug}`}
+            aria-hidden={i !== slide}
+            tabIndex={i === slide ? 0 : -1}
+            className={`group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right transition-opacity duration-[1600ms] ease-out ${
+              i === slide ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
+            <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90 group-hover:text-ember transition-colors duration-300">
+              {s.title}
+            </p>
+          </Link>
+        );
+      })}
 
       <motion.div style={{ y }} className="max-w-[1600px] w-full mx-auto px-5 md:px-10 pb-10 md:pb-16">
         <MaskedLine delay={0.1}>

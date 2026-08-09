@@ -1,0 +1,23 @@
+{
+  "summary": "Frontend-only regression of caption deep-link + PlanSheet presentation system + FloorPlanViewer. All requested flows pass with zero console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PlanSheet.jsx onOpen prop is called on Enter key but has no fallback if onOpen is undefined — currently always passed from ProjectDetail, low risk.",
+    "Home.jsx hero captions render 3 at a time (prev/active/next). Inactive ones correctly get pointer-events-none + aria-hidden — clickability isolation verified.",
+    "ProjectDetail unit-details filters null values — Ivy correctly hides Flat Mix row when configuration === flatMix ('3 BHK'). Confirmed."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified on iteration 29: (1) hero-caption-my-dream-skylark clickable without force → /projects/my-dream-skylark. (2) After ~7s slide advanced to Nest; hero-caption-my-dream-nest clickable → /projects/my-dream-nest (inactive captions have opacity 0 + pointer-events-none confirmed). (3) PlanSheet on Skylark: MY DREAM PROJECTS / TYPICAL FLOOR PLAN header, MY DREAM SKYLARK title, '2 BHK + 3 BHK Residences', footer 'My Dream Projects · Ameenpur, Hyderabad' + 'Sheet 04'. Unit Details: Type=2 BHK + 3 BHK, Floors=G+5, Total Residences=15. (4) Ivy shows singular '3 BHK Residence', Type=3 BHK, Total=4 (Flat Mix row correctly hidden). (5) Aurelia Type=2 BHK, Total=15. (6) Nest PlanSheet Sheet 01, same structure. (7) View Full Plan opens floor-plan-viewer; zoom-in/zoom-out buttons work; ESC closes. Clicking floor-plan-preview opens viewer. (8) Download PDF href = /assets/projects/my-dream-skylark/floor-plan.pdf. (9) Mobile 390px: no horizontal overflow, PlanSheet width 350px fits. (10) No console errors across Home, Skylark, Ivy, Aurelia, Nest.",
+  "rca of the issue": "n/a — no bugs found"
+}
