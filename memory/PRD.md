@@ -801,3 +801,15 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user decision): Ivy 3D pilot verdict → remaining 18 renders or studio route
 - P0 (user action): Meta WhatsApp credentials for landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — 3D Renders Batch 1: 9/19 Projects Live (DONE, tested iteration_33)
+- User approved Ivy pilot. Batch-generated dark-studio 3D dollhouse renders (single call per project, dark bg direct) from floor-plan-display.jpg inputs.
+- LIVE WITH 3D (9): ivy, skylark, casa, avasa, glenmore, hillock, griffin, solace, elysium. plan3d entries in projects.js; toggle appears automatically.
+- PENDING (10) — universal key budget exhausted ("Budget exceeded, max ~$1.00"): nest (failed QC — duplicate floating models; needs regen with "exactly one model" prompt), summit, selene, atlantis, perch, zenith, aurelia, aura, echelon, vale.
+- RESUME: cd /app/backend && python3 gen3d_batch.py (skips existing gen3d/*.jpg) after user tops up at Profile → Manage plan → Universal Key → Add Balance. Then run crop/install + projects.js injection (same script pattern as this batch), QC each render.
+- Verified iteration_33: all 9 toggles work, renders single-model/no-text/dark-bg, 10 non-3D projects show no toggle, viewers correct per mode, mobile clean, 0 console errors.
+
+## Still Pending
+- P0 (user action): Top up universal key → then resume remaining 10 renders (nest, summit, selene, atlantis, perch, zenith, aurelia, aura, echelon, vale)
+- P0 (user action): Meta WhatsApp credentials for landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
