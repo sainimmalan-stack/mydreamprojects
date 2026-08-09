@@ -184,6 +184,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
           image={project.plan3d.src}
           pdf={null}
           title={`${project.title} — 3D Floor Plan`}
+          edgeToEdge
         />
       )}
     </motion.div>

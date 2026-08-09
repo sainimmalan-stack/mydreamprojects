@@ -859,3 +859,7 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - unitDetails in projects.js now holds only {label, saleableArea} per unit (verified factual data, currently unused by UI).
 - NOTE for future: a partially-completed refined coordinate set exists only in this session's scratch (/tmp/refined.json — nest/ivy/casa done; skylark units were found SCRAMBLED: u0/u1/u2 labels were each mapped one physical unit to the right; skylark middle unit is the 2BHK and has no G.BED). If labels ever return, remap from scratch against the 2D plans.
 - Verified via browser automation: 0 overlays in sheet + viewer (desktop & mobile 390px), zoom works, 2D intact, no console errors, no horizontal overflow.
+
+## 2026-08-09 — Edge-to-Edge 3D Viewer + Brochure Refresh (DONE, self-tested)
+- FloorPlanViewer: new `edgeToEdge` prop — 3D renders now fill the viewer edge-to-edge (w-full h-full object-contain between header and toolbar) instead of the inset 92%/88% frame. Applied from ProjectDetail (3D mode only) and ProjectCard 3D teaser. 2D plans keep the classic framed fit with the Open Original PDF link. Zoom/pan/reset unchanged (verified 130% zoom, desktop + mobile).
+- Brochures: regenerated all 19 PDFs via /app/backend/make_brochures.py. Verified pages render clean and label-free (3D page on completed projects, 3D-led cover on ongoing projects) and all download links return 200.

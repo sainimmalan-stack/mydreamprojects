@@ -505,6 +505,7 @@ export default function ProjectDetail() {
           image={planMode === "3d" && project.plan3d ? project.plan3d.src : project.floorPlan.preview.replace("floor-plan-p1.jpg", "floor-plan-display.jpg")}
           pdf={planMode === "3d" ? null : project.floorPlan.pdf}
           title={`${project.title} — ${planMode === "3d" && project.plan3d ? "3D Floor Plan" : "Floor Plan"}`}
+          edgeToEdge={planMode === "3d" && Boolean(project.plan3d)}
         />
       )}
       {project.elevationModes && (

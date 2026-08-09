@@ -7,7 +7,7 @@ import { X, Plus, Minus, RotateCcw, FileText } from "lucide-react";
 const MIN = 1;
 const MAX = 5;
 
-export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
+export const FloorPlanViewer = ({ open, onClose, image, pdf, title, edgeToEdge = false }) => {
   const [scale, setScale] = useState(1);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const areaRef = useRef(null);
@@ -191,7 +191,9 @@ export const FloorPlanViewer = ({ open, onClose, image, pdf, title }) => {
               alt={title}
               data-testid="viewer-image"
               draggable={false}
-              className="max-w-[92%] max-h-[88%] object-contain pointer-events-none"
+              className={`pointer-events-none ${
+                edgeToEdge ? "w-full h-full object-contain" : "max-w-[92%] max-h-[88%] object-contain"
+              }`}
               style={{
                 transform: `translate(${pos.x}px, ${pos.y}px) scale(${scale})`,
                 transition: pointers.current.size ? "none" : "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
