@@ -753,3 +753,15 @@ Premium, production-quality responsive website for residential construction comp
 ## Still Pending
 - P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — Caption Deep-Links + Premium Plan Presentation System (DONE, tested iteration_29)
+- Hero captions are now tappable deep-links to each project page (rendered above the background layer, z-10; inactive captions pointer-events-none). Verified real-click navigation for skylark + nest.
+- New reusable component `src/components/PlanSheet.jsx` — unified premium plan presentation for ALL 19 projects: ivory sheet, hairline charcoal frame, header (brand · TYPICAL FLOOR PLAN / project name / config line — singular "Residence" for ivy), original untouched drawing, footer (brand · location + Sheet <index>).
+- ProjectDetail floor-plan section: added UNIT DETAILS panel (real data only: Type, Floors, Total Residences; Flat Mix row only when different from Type). Drawings + PDFs untouched. FloorPlanViewer (zoom/pan/pinch) unchanged.
+- User confirmed scope: presentation layer only; drawing internals to be re-drafted by their architect later (will drop into PlanSheet unchanged). North arrows deferred (no verified orientation data). No carpet/saleable areas (not in data — left out, not invented).
+- Verified: consistency across skylark/nest/aurelia/ivy, viewer open/zoom/ESC, PDF download hrefs, mobile 390px no overflow, 0 console errors.
+
+## Still Pending
+- P0 (user action): Meta WhatsApp credentials (Access Token + Phone Number ID) + template approval to activate landowner auto-reply
+- P1 (user action): Re-drafted plan drawings from architect → drop into PlanSheet
+- P2: Site Progress Updates — awaiting user photos
