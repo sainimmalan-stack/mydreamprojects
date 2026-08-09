@@ -836,3 +836,13 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user action): Provide real totalFlatsSold + totalSftDelivered values to replace "—" placeholders
 - P0 (user action): Meta WhatsApp credentials for landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — Mobile 3D Fix + Real Stats (145 sold) + Brochure Contact Page (DONE, tested iteration_36)
+- FIXED mobile touch bug: removed hover-based 3D overlay from ProjectCard entirely (touch taps triggered sticky hover, hiding elevations). Card is a plain Link again; the "3D PLAN" chip is now a BUTTON — the only trigger — opening FloorPlanViewer with the 3D render directly from any card (mobile + desktop). Day/Night toggles untouched.
+- BUSINESS_STATS.totalFlatsSold = 145 (all 13 completed sold out per user; computed from audited totalFlats). totalSftDelivered still null → "—" placeholder. USER ACTION: provide SFT figure.
+- All 19 brochures regenerated with final GET IN TOUCH page: founder tel: links, wa.me WhatsApp link, Google Maps office link, mydreamprojects.in. Regenerate via /app/backend/make_brochures.py.
+
+## Still Pending
+- P0 (user action): Provide verified TOTAL SFT DELIVERED figure to replace "—"
+- P0 (user action): Meta WhatsApp credentials for landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
