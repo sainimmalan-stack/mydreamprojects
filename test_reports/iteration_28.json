@@ -1,0 +1,22 @@
+{
+  "summary": "Frontend-only verification of all 4 requested changes on Home + About. (1) Hero slideshow: initial slide = my-dream-skylark night (data-testid=hero-elevation-image, src=/assets/projects/my-dream-skylark/elevation-night.webp). Polled active slide every 500ms for 28s and captured full exact order: skylark(t=0) → nest(3.06s) → casa(6.10s) → avasa(9.64s) → hillock(12.68s) → griffin(15.73s) → perch(18.78s) → solace(21.81s) → skylark(24.38s) → nest(27.46s). Loops correctly. Only 3 slides mounted at any time (prev/active/next windowing as expected). NO forbidden slides (selene/glenmore/zenith/summit/atlantis) ever mount. (2) Cadence ~3s per slide (measured deltas: 3.06/3.04/3.54/3.04/3.05/3.05/3.03/2.57s — all within 2.5-4s tolerance). (3) Captions render as hero-caption-<slug> in the top-right corner with active caption at right=40px, top=112px on desktop and correct project name (e.g. 'MY DREAM NEST'); caption fades with slide; does not overlap headline/CTAs/navbar on desktop 1920 or mobile 390 (screenshots taken). (4) Akhil founder photo REPLACED: /assets/founders/kotapati-akhil.jpg, natural dims 941x1176 (4:5) confirmed via naturalWidth/Height on both home-founder-akhil-portrait and founder-akhil-portrait (About). Screenshots visually confirm green background, cream t-shirt, full face visible (not cropped). Nimmala Sai photo unchanged (/assets/founders/nimmala-sai.webp, 1125x2000). Names, roles ('Co-Founder'), focus lines and bios unchanged. Night default intact: /projects renders 13 night imgs with src populated, 13 day imgs with no src (lazy), first toggle aria-pressed=Night; /projects/my-dream-casa hero uses elevation-night.webp. Regression: 0 console errors on /, /projects, /about, /projects/my-dream-casa. Landowner, pricing sections and 'OUR MAP' navbar link all present.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Home.jsx Hero: setInterval depends on `loaded` state — every image onLoad recreates the interval, which can introduce minor cadence jitter right after the first load bursts. Measured deltas showed 3.54s and 2.57s outliers, still inside tolerance but worth stabilising by using a ref-based loaded tracker or moving the gate into a timeout chain.",
+    "Home.jsx Hero: motion.img transition duration is SLIDE_MS/1000 + 2 = 5s for a subtle scale animation but slide changes every 3s — the scale never completes before the next slide begins. Cosmetically fine (subtle) but semantically the animation is truncated. Consider aligning duration with SLIDE_MS.",
+    "Home.jsx: hero-caption-<slug> uses top-24 md:top-28 (96-112px). On very small mobile widths this sits below the nav, but if nav height grows the caption could visually collide — consider anchoring below nav with a spacing token."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "8-slide night slideshow verified end-to-end (full loop observed). Only 3 slides mount at a time due to the windowIdx (prev/active/next) — do not assert on all 8 <img> tags being present in DOM simultaneously. Akhil photo dims 941x1176. All 4 requested changes pass."
+}

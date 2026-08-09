@@ -3,41 +3,34 @@ import { Link } from "react-router-dom";
 import { motion, animate, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
-import { getProject, projectStats, projects, PRICING } from "../data/projects";
+import { getProject, projectStats, PRICING } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-// Hero slideshow — night elevations of completed projects only.
-// Skylark leads; remaining completed projects with approved night images follow.
+// Hero slideshow — night elevations of the 8 selected completed projects only.
+// Skylark always leads; the sequence loops continuously.
 const HERO_SLIDE_ORDER = [
   "my-dream-skylark",
   "my-dream-nest",
   "my-dream-casa",
   "my-dream-avasa",
+  "my-dream-hillock",
   "my-dream-griffin",
-  "my-dream-selene",
-  "my-dream-glenmore",
-  "my-dream-zenith",
-  "my-dream-summit",
   "my-dream-perch",
   "my-dream-solace",
 ];
-const HERO_SLIDES = (() => {
-  const ordered = HERO_SLIDE_ORDER.map(getProject).filter((p) => p?.elevationModes?.night);
-  const rest = projects.filter(
-    (p) => p.status === "completed" && p.elevationModes?.night && !HERO_SLIDE_ORDER.includes(p.slug)
-  );
-  return [...ordered, ...rest].map((p) => ({
+const HERO_SLIDES = HERO_SLIDE_ORDER.map(getProject)
+  .filter((p) => p?.elevationModes?.night)
+  .map((p) => ({
     slug: p.slug,
     title: p.title,
     src: p.elevationModes.night,
     width: p.elevationModes.width || 1402,
   }));
-})();
-const SLIDE_MS = 5500;
+const SLIDE_MS = 3000;
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -81,24 +74,37 @@ const Hero = () => {
         {windowIdx.map((i) => {
           const s = HERO_SLIDES[i];
           return (
-            <motion.img
-              key={s.slug}
-              src={s.src}
-              srcSet={`${s.src.replace(".webp", "-800.webp")} 800w, ${s.src} ${s.width}w`}
-              sizes="100vw"
-              alt={i === slide ? `${s.title} residential apartment elevation in Ameenpur — night view` : ""}
-              aria-hidden={i !== slide}
-              data-testid={i === 0 ? "hero-elevation-image" : `hero-slide-${s.slug}`}
-              fetchPriority={i === 0 ? "high" : undefined}
-              draggable={false}
-              onLoad={() => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))}
-              initial={false}
-              animate={{ scale: !reduce && i === slide ? 1.04 : 1 }}
-              transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
-              className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity duration-[2000ms] ease-out ${
-                i === slide ? "opacity-100" : "opacity-0"
-              }`}
-            />
+            <div key={s.slug} className="absolute inset-0">
+              <motion.img
+                src={s.src}
+                srcSet={`${s.src.replace(".webp", "-800.webp")} 800w, ${s.src} ${s.width}w`}
+                sizes="100vw"
+                alt={i === slide ? `${s.title} residential apartment elevation in Ameenpur — night view` : ""}
+                aria-hidden={i !== slide}
+                data-testid={i === 0 ? "hero-elevation-image" : `hero-slide-${s.slug}`}
+                fetchPriority={i === 0 ? "high" : undefined}
+                draggable={false}
+                onLoad={() => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))}
+                initial={false}
+                animate={{ scale: !reduce && i === slide ? 1.02 : 1 }}
+                transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
+                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity duration-[1600ms] ease-out ${
+                  i === slide ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              <div
+                data-testid={`hero-caption-${s.slug}`}
+                aria-hidden={i !== slide}
+                className={`absolute top-24 md:top-28 right-5 md:right-10 text-right transition-opacity duration-[1600ms] ease-out ${
+                  i === slide ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
+                <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90">
+                  {s.title}
+                </p>
+              </div>
+            </div>
           );
         })}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/30" />
