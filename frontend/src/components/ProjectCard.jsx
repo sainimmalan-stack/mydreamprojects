@@ -12,8 +12,8 @@ const TONES = [
 
 export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMeta = false }) => {
   const t = TONES[tone % TONES.length];
-  const [mode, setMode] = useState("day");
-  const [nightTouched, setNightTouched] = useState(false);
+  const [mode, setMode] = useState("night");
+  const [dayTouched, setDayTouched] = useState(false);
   const modes = project.cover && project.elevationModes ? project.elevationModes : null;
   const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
   return (
@@ -35,29 +35,29 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
           {modes ? (
             <>
               <img
-                {...(nightTouched
+                src={modes.night}
+                srcSet={`${modes.night.replace(".webp", "-800.webp")} 800w, ${modes.night} ${modes.width || 1402}w`}
+                sizes={cardSizes}
+                alt={`${project.title} residential apartment elevation in Ameenpur — night view`}
+                data-testid={`card-night-image-${project.slug}`}
+                loading="lazy"
+                className="texture-img absolute inset-0 w-full h-full object-cover"
+              />
+              <img
+                {...(dayTouched
                   ? {
-                      src: modes.night,
-                      srcSet: `${modes.night.replace(".webp", "-800.webp")} 800w, ${modes.night} ${modes.width || 1402}w`,
+                      src: modes.day,
+                      srcSet: `${modes.day.replace(".webp", "-800.webp")} 800w, ${modes.day} ${modes.width || 1402}w`,
                     }
                   : {})}
                 sizes={cardSizes}
                 alt=""
                 aria-hidden="true"
-                data-testid={`card-night-image-${project.slug}`}
-                loading="lazy"
-                onLoad={() => {
-                  if (nightTouched) setMode("night");
-                }}
-                className="texture-img absolute inset-0 w-full h-full object-cover"
-              />
-              <img
-                src={modes.day}
-                srcSet={`${modes.day.replace(".webp", "-800.webp")} 800w, ${modes.day} ${modes.width || 1402}w`}
-                sizes={cardSizes}
-                alt={`${project.title} residential apartment elevation in Ameenpur — day view`}
                 data-testid={`card-day-image-${project.slug}`}
                 loading="lazy"
+                onLoad={() => {
+                  if (dayTouched) setMode("day");
+                }}
                 className={`texture-img absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
                   mode === "day" ? "opacity-100" : "opacity-0"
                 }`}
@@ -79,7 +79,8 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    setMode("day");
+                    if (dayTouched) setMode("day");
+                    else setDayTouched(true);
                   }}
                   className={`flex items-center gap-1 rounded-full px-2.5 py-1.5 font-display font-semibold text-[9px] uppercase tracking-[0.16em] transition-colors duration-300 ${
                     mode === "day" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
@@ -95,8 +96,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (nightTouched) setMode("night");
-                    else setNightTouched(true);
+                    setMode("night");
                   }}
                   className={`flex items-center gap-1 rounded-full px-2.5 py-1.5 font-display font-semibold text-[9px] uppercase tracking-[0.16em] transition-colors duration-300 ${
                     mode === "night" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"

@@ -8,7 +8,7 @@ const MIN = 1;
 const MAX = 5;
 
 export const ElevationViewer = ({ open, onClose, daySrc, nightSrc, title }) => {
-  const [mode, setMode] = useState("day");
+  const [mode, setMode] = useState("night");
   const [scale, setScale] = useState(1);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const areaRef = useRef(null);

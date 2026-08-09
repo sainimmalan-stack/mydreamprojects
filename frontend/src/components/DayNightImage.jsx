@@ -8,7 +8,8 @@ import { Sun, Moon } from "lucide-react";
  * (0.7s opacity) — no layout shift, no page reload.
  */
 export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", fullWidth = 1402, aspect = null, onImageClick = null }) => {
-  const [mode, setMode] = useState("day");
+  const [mode, setMode] = useState("night");
+  const [dayTouched, setDayTouched] = useState(false);
   const srcSet = (s) => `${s.replace(".webp", "-800.webp")} 800w, ${s} ${fullWidth}w`;
   const sizes = "(max-width: 1600px) 100vw, 1600px";
 
@@ -32,12 +33,15 @@ export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", full
         className={aspect ? "absolute inset-0 w-full h-full object-cover" : "w-full h-auto block"}
       />
       <img
-        src={daySrc}
-        srcSet={srcSet(daySrc)}
+        {...(dayTouched ? { src: daySrc, srcSet: srcSet(daySrc) } : {})}
         sizes={sizes}
-        alt={`${alt} — day view`}
+        alt=""
+        aria-hidden="true"
         data-testid={`${testid}-day-image`}
         loading="lazy"
+        onLoad={() => {
+          if (dayTouched) setMode("day");
+        }}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
           mode === "day" ? "opacity-100" : "opacity-0"
         }`}
@@ -53,7 +57,7 @@ export const DayNightImage = ({ daySrc, nightSrc, alt, testid = "daynight", full
           type="button"
           data-testid="day-mode-button"
           aria-pressed={mode === "day"}
-          onClick={() => setMode("day")}
+          onClick={() => (dayTouched ? setMode("day") : setDayTouched(true))}
           className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 md:px-3.5 font-display font-semibold text-[9px] md:text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 ${
             mode === "day" ? "bg-ember text-ink" : "text-bone/75 hover:text-bone"
           }`}

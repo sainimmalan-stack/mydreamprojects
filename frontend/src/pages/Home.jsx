@@ -3,13 +3,41 @@ import { Link } from "react-router-dom";
 import { motion, animate, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
-import { getProject, projectStats, PRICING } from "../data/projects";
+import { getProject, projectStats, projects, PRICING } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
-const HERO_IMAGE = "/assets/projects/my-dream-skylark/elevation-night.webp";
+
+// Hero slideshow — night elevations of completed projects only.
+// Skylark leads; remaining completed projects with approved night images follow.
+const HERO_SLIDE_ORDER = [
+  "my-dream-skylark",
+  "my-dream-nest",
+  "my-dream-casa",
+  "my-dream-avasa",
+  "my-dream-griffin",
+  "my-dream-selene",
+  "my-dream-glenmore",
+  "my-dream-zenith",
+  "my-dream-summit",
+  "my-dream-perch",
+  "my-dream-solace",
+];
+const HERO_SLIDES = (() => {
+  const ordered = HERO_SLIDE_ORDER.map(getProject).filter((p) => p?.elevationModes?.night);
+  const rest = projects.filter(
+    (p) => p.status === "completed" && p.elevationModes?.night && !HERO_SLIDE_ORDER.includes(p.slug)
+  );
+  return [...ordered, ...rest].map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    src: p.elevationModes.night,
+    width: p.elevationModes.width || 1402,
+  }));
+})();
+const SLIDE_MS = 5500;
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -27,22 +55,52 @@ const MaskedLine = ({ children, delay = 0, className = "" }) => (
 const Hero = () => {
   const ref = useRef(null);
   const reduce = useReducedMotion();
+  const [slide, setSlide] = useState(0);
+  const [loaded, setLoaded] = useState(() => new Set([0]));
+  const count = HERO_SLIDES.length;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
   const imgY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
 
+  useEffect(() => {
+    const t = setInterval(() => {
+      setSlide((s) => {
+        const next = (s + 1) % count;
+        return loaded.has(next) ? next : s;
+      });
+    }, SLIDE_MS);
+    return () => clearInterval(t);
+  }, [count, loaded]);
+
+  // Render only the fading-out, active and preloading-next slides.
+  const windowIdx = [...new Set([(slide - 1 + count) % count, slide, (slide + 1) % count])];
+
   return (
     <section ref={ref} data-testid="home-hero" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
       <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10">
-        <img
-          src={HERO_IMAGE}
-          srcSet={`${HERO_IMAGE.replace(".webp", "-800.webp")} 800w, ${HERO_IMAGE} 1448w`}
-          sizes="100vw"
-          fetchPriority="high"
-          alt="My Dream Skylark residential apartment elevation in Ameenpur"
-          data-testid="hero-elevation-image"
-          className="absolute inset-0 w-full h-[112%] object-cover object-center"
-        />
+        {windowIdx.map((i) => {
+          const s = HERO_SLIDES[i];
+          return (
+            <motion.img
+              key={s.slug}
+              src={s.src}
+              srcSet={`${s.src.replace(".webp", "-800.webp")} 800w, ${s.src} ${s.width}w`}
+              sizes="100vw"
+              alt={i === slide ? `${s.title} residential apartment elevation in Ameenpur — night view` : ""}
+              aria-hidden={i !== slide}
+              data-testid={i === 0 ? "hero-elevation-image" : `hero-slide-${s.slug}`}
+              fetchPriority={i === 0 ? "high" : undefined}
+              draggable={false}
+              onLoad={() => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))}
+              initial={false}
+              animate={{ scale: !reduce && i === slide ? 1.04 : 1 }}
+              transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
+              className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity duration-[2000ms] ease-out ${
+                i === slide ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          );
+        })}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/30" />
       </motion.div>
 
@@ -654,7 +712,7 @@ const Landowner = () => {
             </Reveal>
             <Reveal delay={0.2} className="mt-10 md:mt-14 max-w-2xl">
               <p className="text-base md:text-lg text-bone/85 leading-relaxed">
-                Own a plot in or around Ameenpur? Partner with My Dream Projects on a joint
+                Own a plot in or around Hyderabad? Partner with My Dream Projects on a joint
                 development — we take care of design, approvals, construction and sales while your
                 land works for you.
               </p>

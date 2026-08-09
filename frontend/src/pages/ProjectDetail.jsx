@@ -31,7 +31,7 @@ export default function ProjectDetail() {
   if (!project) return <Navigate to="/projects" replace />;
   const { prev, next } = getAdjacent(slug);
 
-  const heroSrc = project.elevationModes?.day || project.cover;
+  const heroSrc = project.elevationModes?.night || project.cover;
   const heroSrcSet = !project.cover
     ? undefined
     : project.elevationModes
