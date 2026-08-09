@@ -846,3 +846,15 @@ Premium, production-quality responsive website for residential construction comp
 - P0 (user action): Provide verified TOTAL SFT DELIVERED figure to replace "—"
 - P0 (user action): Meta WhatsApp credentials for landowner auto-reply
 - P2: Site Progress Updates — awaiting user photos
+
+## 2026-08-09 — Sold-Out Tags, Contact Placeholder, Room Details, SFT Delivered (DONE, tested iteration_37)
+- Completed projects show "Sold Out & Occupied" (card chips + detail Status stat).
+- Contact Message placeholder → "Imagine it. We'll help you build it." (field-input--refined style, App.css).
+- projects.js: unitDetails for ALL 19 projects (per-unit label, saleableArea, rooms with exact plan dimensions) — extracted via guided multi-pass reading of the actual plans; nest/casa/solace verified by direct visual inspection; all completed totals cross-checked against printed saleable area statements.
+- PlanSheet 3D mode: ROOM DETAILS panel (unit tabs for multi-flat floors, numbered rooms, saleable area). 2D mode intentionally clean.
+- SFT: COMPLETED_PROJECT_SFT map + completedProjectsSftTotal = 190,905 → BUSINESS_STATS.totalSftDelivered (displays 1,90,905 via en-IN CountUp). Atlantis 15,255 computed from verified per-unit areas ×5 floors (no sheet total printed).
+- Known source-data quirks (printed plans vs sold config): solace flat-1 shows 2 bedrooms under a 3BHK label; casa 2BHK shows 3 bedrooms — transcribed as printed, founders may want to review.
+
+## Still Pending
+- P0 (user action): Meta WhatsApp credentials for landowner auto-reply
+- P2: Site Progress Updates — awaiting user photos
