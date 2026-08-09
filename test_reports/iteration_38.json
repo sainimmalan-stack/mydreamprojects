@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend-only verification of the new 3D glass-label overlay feature and immediate regressions on the premium residential website. Verified all 10 scenarios from the review request across Nest (2 units), Ivy (1 unit), Skylark (3 units), the projects card teaser, mobile viewport (390x844), and general regressions. Every assertion passed — no bugs found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PlanLabels.jsx & FloorPlanViewer.jsx are clean, small, use env-based routing correctly. No _id or hardcoded URLs. data-testids well distributed.",
+    "Minor nit (not blocking): viewer-3d-labels-layer uses imgBox measured on onLoad+resize; if the image element changes size due to CSS media queries below common breakpoints, layer may briefly desync until next resize event. Currently works fine in tested viewports (1920 and 390)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "3D glass-label overlay feature fully verified. Key testids in use: plan-3d-button, plan-2d-button, plan-3d-image, plan-3d-label-overlay, plan-3d-label-{i}, plan-unit-bar, room-unit-tab-{i}, plan-unit-area, plan-unit-label (single-unit projects), floor-plan-preview, floor-plan-viewer, viewer-3d-labels-layer, viewer-3d-label-{i}, viewer-unit-bar, viewer-unit-tab-{i}, viewer-unit-area, viewer-zoom-in/out/reset/close, card-3d-chip-{slug}. Old room-details testid confirmed absent. Escape key close works reliably (needed ~800ms wait; 500ms was marginal in one run).",
+  "verified_scenarios": {
+    "nest_3d_labels_and_no_room_details": "PASS — overlay visible with LIVING / DINING 24'-0\"×13'-0\"; room-details testid absent; unit bar shows 3 BHK/2 BHK tabs + Saleable Area 1580 SFT",
+    "nest_unit_tab_swap": "PASS — 2 BHK → 1250 SFT + labels change; back to 3 BHK → 1580 SFT restored",
+    "ivy_single_unit": "PASS — labels visible, unit bar without tabs, plan-unit-label='3 BHK', area='Saleable Area 1600 SFT'",
+    "skylark_three_units": "PASS — 3 unit tabs, first label changes per tab (FAMILY LIVING dims: 15'-0\"×11'-0\", 12'-0\"×14'-0\", 15'-3\"×11'-0\")",
+    "viewer_full_screen": "PASS — labels visible, unit bar with tabs, zoom-in twice → 169%, reset → 100%, tab switch inside viewer changes labels & area (2 BHK · Saleable Area 1250 SFT), Escape and close button both close",
+    "state_sync": "PASS — selecting 2 BHK in plan sheet then opening viewer shows 2 BHK active; changing unit in viewer also reflects in plan sheet after close",
+    "2d_mode_regression": "PASS — no labels overlay, no unit bar in 2D; viewer in 2D shows Open Original PDF link and no unit bar / no labels layer",
+    "card_3d_teaser": "PASS — 19 card-3d-chip elements; clicking card-3d-chip-my-dream-nest opens viewer with labels + unit tabs",
+    "mobile_390x844": "PASS — labels visible/readable, unit bar wraps cleanly, 0px horizontal overflow, viewer labels aligned on rooms",
+    "general_regression": "PASS — home loads (title correct), /projects grid loads with 19 cards, project detail pages: zero console errors captured across all tested pages"
+  }
+}

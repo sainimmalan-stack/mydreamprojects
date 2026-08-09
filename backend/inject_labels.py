@@ -229,7 +229,8 @@ for slug, units in L.items():
         label_lines = ["      labels: ["]
         for name, dims, p in unit_labels:
             d = "null" if dims is None else json.dumps(dims)
-            label_lines.append(f'        {{ name: {json.dumps(name)}, dims: {d}, pos: [{p[0]}, {p[1}]} }},')
+            pos_str = "[" + str(p[0]) + ", " + str(p[1]) + "]"
+            label_lines.append('        { name: ' + json.dumps(name) + ', dims: ' + d + ', pos: ' + pos_str + ' },')
         label_lines.append("      ],")
         src = src[:line_end + 1] + "\n".join(label_lines) + "\n" + src[line_end + 1:]
         pos = line_end + 1
