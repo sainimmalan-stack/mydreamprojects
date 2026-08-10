@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-10: Loan & Finance Options strip on all 19 project pages + dark-native official brand marks (white boxes removed) + Calculate EMI chip now on every project (19/19 verified)
 - 2026-08-10: Selected Work now Nest/Skylark/Perch + AI Concierge fully removed + finance section renamed "Mortgage & Loan Partners" (self-tested)
 - 2026-08-10: AI Property Concierge built then REMOVED same day per owner request (code in git history if ever wanted back)
 - 2026-08-10: EMI loan minimum now ₹1 lakh + office gallery stacks full-width on iPad portrait (4 viewports measured)

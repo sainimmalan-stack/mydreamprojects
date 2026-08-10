@@ -936,3 +936,11 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - AI Property Concierge FULLY removed per owner request: deleted src/pages/Concierge.jsx, /concierge route, FloatingConcierge (App.js), nav + mobile menu + footer sitemap links, Home ConciergeTeaser section, Sparkles import. /concierge now 404s. Zero remaining references (grep-verified).
 - Finance section renamed to "Mortgage & Loan Partners" (owner confirmed genuine association); copy updated to "associated banking and finance partners"; non-endorsement disclaimer removed.
 - Verified: Selected Work trio + links, concierge fully gone (0 refs), partners section renders with new title, compile clean.
+
+## 2026-08-10 — Loan Partners on Every Project + Dark-Native Logos (DONE, 19/19 verified)
+- New shared component src/components/LoanPartners.jsx: official brand MARKS with transparent backgrounds (ICICI orange "i", SBI blue keyhole, LIC blue hands emblem — cropped from the official SVG/PNG assets) paired with bone institution names. NO white boxes — fully dark-native per owner requirement.
+- ProjectDetail: new compact "LOAN & FINANCE OPTIONS" strip (project-finance) between the stats grid and concept section — eyebrow + neutral assistance note + LoanPartners + Calculate EMI link. On ALL 19 pages (completed + ongoing). Wording neutral (no approval/tie-up claims).
+- Calculate EMI hero chip now shows on EVERY project (completed link to plain /emi-calculator; ongoing keep price-prefill ?amount=). Min loan ₹1L unchanged.
+- EMI page "Mortgage & Loan Partners" section restyled from bone chips to the same dark-native LoanPartners strip (white boxes removed site-wide).
+- Assets: /assets/partners/{icici,sbi,lic}-mark.png (+ original full logos kept).
+- Verified: 19/19 pages have strip + 3 marks + CTA; marks load; mobile 390px no overflow; desktop strip layout clean.

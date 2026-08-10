@@ -6,6 +6,7 @@ import FloorPlanViewer from "../components/FloorPlanViewer";
 import DayNightImage from "../components/DayNightImage";
 import ElevationViewer from "../components/ElevationViewer";
 import ComingSoonElevation from "../components/ComingSoonElevation";
+import LoanPartners from "../components/LoanPartners";
 import PlanSheet from "../components/PlanSheet";
 import { getProject, getAdjacent } from "../data/projects";
 import { waLink } from "../data/contact";
@@ -151,16 +152,14 @@ export default function ProjectDetail() {
                 {project.pricePerSft} / Sq.Ft.
               </span>
             )}
-            {emiPrefill && (
-              <Link
-                to={`/emi-calculator?amount=${emiPrefill}`}
-                data-testid="calculate-emi-cta"
-                className="inline-flex items-center gap-2 border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2 hover:border-ember hover:text-ember transition-colors duration-300"
-              >
-                Calculate EMI
-                <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
-              </Link>
-            )}
+            <Link
+              to={emiPrefill ? `/emi-calculator?amount=${emiPrefill}` : "/emi-calculator"}
+              data-testid="calculate-emi-cta"
+              className="inline-flex items-center gap-2 border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2 hover:border-ember hover:text-ember transition-colors duration-300"
+            >
+              Calculate EMI
+              <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -223,6 +222,28 @@ export default function ProjectDetail() {
               })()}
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* Loan & finance strip — compact, dark-native, beside the project stats */}
+      <section data-testid="project-finance" className="border-b border-line">
+        <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-10 md:py-14 flex flex-col lg:flex-row lg:items-center gap-7 lg:gap-14">
+          <div className="shrink-0">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-ember">Loan &amp; Finance Options</p>
+            <p className="text-xs text-concrete mt-2.5 max-w-xs leading-relaxed">
+              Home-loan assistance for this project is available through India's leading
+              institutions.
+            </p>
+          </div>
+          <LoanPartners testidPrefix="project-partner" />
+          <Link
+            to={emiPrefill ? `/emi-calculator?amount=${emiPrefill}` : "/emi-calculator"}
+            data-testid="project-finance-emi-link"
+            className="group lg:ml-auto inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-bone/85 hover:text-ember transition-colors duration-300 shrink-0"
+          >
+            Calculate EMI
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
+          </Link>
         </div>
       </section>
 

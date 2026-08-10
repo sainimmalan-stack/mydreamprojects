@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
+import LoanPartners from "../components/LoanPartners";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -28,13 +29,6 @@ const LIMITS = {
   years: { min: 1, max: 30, step: 1, hintMin: "1 yr", hintMax: "30 yrs" },
   months: { min: 6, max: 360, step: 6, hintMin: "6 mo", hintMax: "360 mo" },
 };
-
-// Official brand marks of our associated finance partners.
-const PARTNERS = [
-  { id: "icici", name: "ICICI Bank", logo: "/assets/partners/icici-bank.svg" },
-  { id: "sbi", name: "State Bank of India (SBI)", logo: "/assets/partners/sbi.svg" },
-  { id: "lic", name: "LIC", logo: "/assets/partners/lic.png" },
-];
 
 const SliderField = ({ label, suffix, value, limits, onChange, testid }) => (
   <div data-testid={testid}>
@@ -336,21 +330,8 @@ export default function EmiCalculator() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl">
-              {PARTNERS.map((p) => (
-                <div
-                  key={p.id}
-                  data-testid={`partner-${p.id}`}
-                  className="bg-bone border border-line px-8 py-6 md:py-7 flex items-center justify-center"
-                >
-                  <img
-                    src={p.logo}
-                    alt={`${p.name} logo`}
-                    loading="lazy"
-                    className="h-9 md:h-11 w-auto object-contain"
-                  />
-                </div>
-              ))}
+            <div className="mt-10">
+              <LoanPartners />
             </div>
           </Reveal>
         </div>
