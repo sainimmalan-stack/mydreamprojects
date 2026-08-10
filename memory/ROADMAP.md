@@ -12,6 +12,9 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-10: Official KCP (annual-report mosaic), KONE (official 4-square) & Vasavi (full Pvt. Ltd. wordmark) logos replaced everywhere + centered mobile spec rows (iteration_43, 100% pass)
+- 2026-08-10: Mobile polish — Loan & Finance 2x2 bank grid + Brands & Specs visual-height balance (iteration_42, 100% pass)
+- 2026-08-10: IDBI Bank 4th partner + Brands & Specifications board on all 19 projects with per-project lift brands (KONE: Summit/Skylark; Vasavi: rest) — owner-assigned
 - 2026-08-10: Loan & Finance Options strip on all 19 project pages + dark-native official brand marks (white boxes removed) + Calculate EMI chip now on every project (19/19 verified)
 - 2026-08-10: Selected Work now Nest/Skylark/Perch + AI Concierge fully removed + finance section renamed "Mortgage & Loan Partners" (self-tested)
 - 2026-08-10: AI Property Concierge built then REMOVED same day per owner request (code in git history if ever wanted back)

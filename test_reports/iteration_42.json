@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only regression for M671: verified mobile 2x2 loan partner grid, mobile single-row brand specs with per-logo height, project-specific lift brand (KONE vs Vasavi), desktop layouts, EMI page regression, and completed vs ongoing project CTA gating. All targeted assertions passed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "mobile_390_skylark_finance_2x2": "PASS - icici/sbi on row1 (y=367), lic/idbi on row2 (y=467); no horizontal overflow; no white boxes (logos rendered on dark bg via transparent PNG).",
+    "mobile_390_skylark_specs_single_row_per_category": "PASS - all 8 base categories (paints, sanitary[3 logos], windows, lighting[2], cement[2], wiring, switches, tiles[text]) and lifts row render logos on a single row per category with labels above.",
+    "mobile_390_skylark_lifts_kone": "PASS - spec-lifts renders /assets/brands/kone.png",
+    "mobile_390_nest_lifts_vasavi": "PASS - spec-lifts renders /assets/brands/vasavi.png",
+    "desktop_1920_skylark_finance_one_row": "PASS - all 4 partners share y=522 (single horizontal row with names).",
+    "desktop_1920_skylark_specs_2col_label_left_logos_right": "PASS - label x=200, logo x=810 within spec row; sm:grid-cols-2 confirmed.",
+    "regression_emi_calculator_page": "PASS - /emi-calculator loads with heading 'Plan your home loan, beautifully.' and 3 range sliders operational.",
+    "regression_completed_no_availability_cta": "PASS - /projects/my-dream-skylark (completed) has 0 availability-enquiry-link and shows project-finance-emi-link (Calculate EMI) visible.",
+    "regression_ongoing_shows_availability_cta": "PASS - /projects/my-dream-aurelia (ongoing) exposes data-testid='availability-enquiry-link' visible."
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "BrandSpecs.jsx uses `${b.h || 'h-6 md:h-7'}` in a className template — since Tailwind is JIT/PurgeCSS-based, the fallback string is safe (present as literal). Fine.",
+    "LoanPartners.jsx grid-cols-2 -> sm:flex breakpoint works for the 390px target; consider adding md tests if a 640-767 tab range matters, but not required for M671."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "M671 mobile layouts (LoanPartners 2x2 + BrandSpecs single-row per category with h-prop-driven visual balance) verified on Skylark (kone) and Nest (vasavi). Availability CTA testid is 'availability-enquiry-link' — completed projects (like skylark) correctly hide it and expose 'project-finance-emi-link' Calculate EMI link instead. Use my-dream-aurelia (or any /^my-dream-(aurelia|elysium|aura|echelon|vale|ivy)$/) as an ongoing sample."
+}

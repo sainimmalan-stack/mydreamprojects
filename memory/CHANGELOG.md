@@ -944,3 +944,21 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - EMI page "Mortgage & Loan Partners" section restyled from bone chips to the same dark-native LoanPartners strip (white boxes removed site-wide).
 - Assets: /assets/partners/{icici,sbi,lic}-mark.png (+ original full logos kept).
 - Verified: 19/19 pages have strip + 3 marks + CTA; marks load; mobile 390px no overflow; desktop strip layout clean.
+
+## 2026-08-10 — IDBI Bank + Brands & Specifications Board (DONE, self-tested all breakpoints)
+- IDBI Bank added as 4th partner: official IDBI_Logo.svg (en.wikipedia), orange circle mark extracted → partners/idbi-mark.png; appears in LoanPartners (all 19 project strips + EMI page section).
+- NEW BrandSpecs component (src/components/BrandSpecs.jsx): premium dark spec board on every project page (before Visit Project Site). Rows: Paints→Asian Paints; Sanitary & Plumbing→Hindware·CERA·Ashirvad; uPVC Windows→VEKA; Lighting→Syska·Crompton; Cement→KCP·UltraTech; Wiring→Polycab; Switches→Legrand; Tiles→"Vitrified Tiles" (typography only, no logo per owner); Automatic Lifts→project-specific.
+- Lifts: per-project `liftBrand` field in projects.js — KONE: my-dream-summit, my-dream-skylark; Vasavi Elevators: other 17. Row renders only when set (owner-assigned mapping).
+- Logo sourcing (all official, no AI/recreations): Wikimedia Commons/Wikipedia (Asian Paints, VEKA, Legrand, KONE 2023, Crompton RGB, UltraTech, Syska-RED, Polycab, IDBI); official sites (CERA cera-india.com, Ashirvad ashirvad.com, Hindware white variant from hindware.com, KCP kcp.co.in, Vasavi vasavielevators.com). Dark-bg treatment: transparent marks, white flood-removal only where official asset had white bg (Vasavi/KCP); Hindware uses their own white variant; Legrand cropped to red wordmark (dark L-mark invisible on black).
+- Verified: 0 broken images, tiles row typography, lifts hidden when null + KONE on skylark + Vasavi on ivy, 4 partners everywhere, mobile 390 no overflow.
+
+## 2026-08-10 — KONE Logo Correction + VEKA/Polycab Rebalance (DONE, self-tested)
+- KONE: replaced the 2023-variant tile logo with the CURRENT official artwork extracted from kone.com's own inline SVG (flush bright-blue tile bar, white letters) → brands/kone.png.
+- BrandSpecs now supports per-brand height overrides (b.h class): VEKA h-10/md:h-12 (was h-6/7 — tall diamond looked small), Polycab h-9/md:h-11 (wide wordmark+tagline), KONE h-7/md:h-8. Others unchanged. Verified: Polycab renders 44px vs 28px default; 0 broken images; board visually balanced, dark-native.
+
+## 2026-08-10 — Official KCP / KONE / Vasavi Logo Replacement + Centered Mobile Specs (DONE, iteration_43 100% pass)
+- KCP: sourced the AUTHENTIC "The KCP Limited" mosaic logo (golden grid + navy "kcp" letters) — verified against kcp.co.in and KCP cement bags; extracted high-res (589x592) from KCP's official Annual Report PDF cover, cover-blue background keyed out → transparent PNG. Old low-res 91x91 file replaced.
+- KONE: official KONE logo (4 blue squares #1450F5, white letters) from official KONE branding SVG (Wikimedia, sourced from kone.com) rendered at 1600px → transparent PNG. Previous recreated version removed.
+- Vasavi: full official Vasavi Elevators Pvt. Ltd. logo (cube icon + wordmark + tagline) downloaded from vasavielevators.in, white background flood-keyed to transparent (930x259). Previous icon-only/generic mark removed.
+- BrandSpecs presentation per owner: category label centered ABOVE logos on mobile with logos centered underneath (desktop keeps label-left / logos-right); KCP bumped to h-11/md:h-14, lifts to h-10/md:h-12 — visually comparable to other brands, aspect ratios preserved (verified <0.0005 rendered-vs-natural diff), no white wrapper boxes.
+- Same filenames (kcp.png/kone.png/vasavi.png) so the fix applies to all 19 project pages automatically; project lift assignments unchanged (KONE: Skylark/Summit; Vasavi: rest).

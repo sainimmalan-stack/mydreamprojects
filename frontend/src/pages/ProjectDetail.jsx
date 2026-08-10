@@ -7,6 +7,7 @@ import DayNightImage from "../components/DayNightImage";
 import ElevationViewer from "../components/ElevationViewer";
 import ComingSoonElevation from "../components/ComingSoonElevation";
 import LoanPartners from "../components/LoanPartners";
+import BrandSpecs from "../components/BrandSpecs";
 import PlanSheet from "../components/PlanSheet";
 import { getProject, getAdjacent } from "../data/projects";
 import { waLink } from "../data/contact";
@@ -440,6 +441,8 @@ export default function ProjectDetail() {
         </div>
       </section>
       )}
+
+      <BrandSpecs liftBrand={project.liftBrand} />
 
       {project.siteLocation && (
         <section data-testid="visit-site-section" className="border-t border-line">
