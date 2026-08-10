@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-10: Map "Expected 2027" labels + EMI WhatsApp share button + compact mobile menu + single-screen mobile EMI calculator (self-tested)
 - 2026-08-10: Company email (adminmydreamprojects@gmail.com) across contact/footer + premium EMI Calculator page with nav + project-page Calculate EMI CTAs (iteration_40, 100% pass)
 - 2026-08-09: Founder photo containers hard-locked identical 352×440 (3 breakpoints verified)
 - 2026-08-09: Owner's 5 surgical fixes — ongoing year 2027, Casa/Griffin off home, compact sold-out cards, equal founder photos, footer logo distortion fix (iteration_39, 100% pass)

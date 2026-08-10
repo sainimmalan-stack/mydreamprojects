@@ -906,3 +906,10 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Navigation: "EMI Calculator" in desktop nav (between Projects and Our Map), mobile menu, footer sitemap. Route lazy-loaded in App.js.
 - Project pages: "Calculate EMI" chip in hero meta row next to the ₹/Sq.Ft. chip — ongoing projects ONLY — deep-links to /emi-calculator?amount=<ratePerSft × first-unit saleable area, rounded to nearest lakh> which pre-fills the calculator. Completed projects show no CTA.
 - Verified: exact EMI math (₹50L/8.5%/20y = ₹43,391), instant recalc, clamps, prefills for all 6 ongoing, CTA absent on all 13 completed, responsive 390/834, zero console errors.
+
+## 2026-08-10 — Map Expected 2027 + EMI WhatsApp Share + Mobile Compaction (DONE, self-tested)
+- Our Map: ongoing entries now read "ONGOING · EXPECTED 2027" in both the sidebar rows and the marker popup card (ProjectMap.jsx 2 spots). Completed keep plain years.
+- EMI Calculator: "Share this EMI on WhatsApp" button (emi-whatsapp-share) in the results panel — opens wa.me share picker with a formatted estimate (amount, rate, tenure, EMI, interest, total + disclaimer + mydreamprojects.in/emi-calculator link).
+- Mobile menu compacted: links text-4xl→text-3xl, py-3→py-2, gap-2→gap-1, CTA pt-8→pt-6 — full menu + CTA ends at 645px on a 390x844 phone.
+- EMI page mobile compaction: page pt-24, header tightened (eyebrow mb-4, H1 8.5vw, description hidden on mobile), field spacing space-y-7, label rows mb-4, value inputs text-lg, results panel p-6 with Monthly EMI text-4xl, tighter bar/rows/note. Result: all 3 inputs + Monthly EMI figure visible within one 390x844 screen (result top at 813px). Desktop layout unchanged.
+- Verified: share text content exact, menu fits, map strings present, desktop EMI unchanged, zero console errors.

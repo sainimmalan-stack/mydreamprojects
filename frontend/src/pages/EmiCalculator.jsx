@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -31,7 +31,7 @@ const LIMITS = {
 
 const SliderField = ({ label, suffix, value, limits, onChange, testid }) => (
   <div data-testid={testid}>
-    <div className="flex items-end justify-between gap-6 mb-6">
+    <div className="flex items-end justify-between gap-4 mb-4 md:mb-6">
       <p className="text-[10px] uppercase tracking-[0.35em] text-concrete">{label}</p>
       <div className="flex items-baseline gap-2.5">
         <input
@@ -46,7 +46,7 @@ const SliderField = ({ label, suffix, value, limits, onChange, testid }) => (
           }}
           data-testid={`${testid}-input`}
           aria-label={label}
-          className="field-input emi-num w-36 md:w-44 !py-1.5 text-right font-display font-semibold text-xl md:text-2xl tracking-tight text-bone"
+          className="field-input emi-num w-32 md:w-44 !py-1 text-right font-display font-semibold text-lg md:text-2xl tracking-tight text-bone"
         />
         <span className="text-[10px] uppercase tracking-[0.2em] text-concrete shrink-0">{suffix}</span>
       </div>
@@ -62,7 +62,7 @@ const SliderField = ({ label, suffix, value, limits, onChange, testid }) => (
       aria-label={`${label} slider`}
       className="emi-slider"
     />
-    <div className="flex justify-between mt-3 text-[9px] uppercase tracking-[0.2em] text-concrete/70">
+    <div className="flex justify-between mt-2 text-[9px] uppercase tracking-[0.2em] text-concrete/70">
       <span>{limits.hintMin}</span>
       <span>{limits.hintMax}</span>
     </div>
@@ -111,6 +111,21 @@ export default function EmiCalculator() {
   const interestShare = total > 0 ? clamp((interest / total) * 100, 0, 100) : 0;
   const tenureLimits = unit === "years" ? LIMITS.years : LIMITS.months;
 
+  const shareUrl = `https://wa.me/?text=${encodeURIComponent(
+    [
+      "Home Loan EMI Estimate — My Dream Projects",
+      `Loan Amount: ${fmtINR(amount)}`,
+      `Interest Rate: ${rate}% p.a.`,
+      `Tenure: ${unit === "years" ? `${tenure} years` : `${tenure} months`} (${months} months)`,
+      `Monthly EMI: ${fmtINR(emi)}`,
+      `Total Interest: ${fmtINR(interest)}`,
+      `Total Amount Payable: ${fmtINR(total)}`,
+      "",
+      "Indicative estimate — actual EMI may vary based on lender terms, interest rate and applicable charges.",
+      "Calculate yours: https://mydreamprojects.in/emi-calculator",
+    ].join("\n")
+  )}`;
+
   const switchUnit = (next) => {
     if (next === unit) return;
     setTenure((t) =>
@@ -122,13 +137,13 @@ export default function EmiCalculator() {
   };
 
   return (
-    <div data-testid="emi-page" className="pt-28 md:pt-40">
+    <div data-testid="emi-page" className="pt-24 md:pt-40">
       <div className="max-w-[1600px] mx-auto px-5 md:px-10 pb-24 md:pb-40">
-        <header className="pb-14 md:pb-24">
-          <Reveal className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">
+        <header className="pb-6 md:pb-24">
+          <Reveal className="text-[10px] uppercase tracking-[0.4em] text-ember mb-4 md:mb-6">
             <p>EMI Calculator</p>
           </Reveal>
-          <h1 className="font-display font-bold uppercase tracking-tighter leading-[0.95] text-[10.5vw] md:text-[6.2vw] text-bone">
+          <h1 className="font-display font-bold uppercase tracking-tighter leading-[0.95] text-[8.5vw] md:text-[6.2vw] text-bone">
             <span className="block overflow-hidden">
               <motion.span className="block" initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 1, delay: 0.1, ease: EASE }}>
                 Plan your home loan,
@@ -140,7 +155,7 @@ export default function EmiCalculator() {
               </motion.span>
             </span>
           </h1>
-          <Reveal delay={0.35} className="mt-8 max-w-xl">
+          <Reveal delay={0.35} className="hidden md:block mt-5 md:mt-8 max-w-xl">
             <p className="text-sm md:text-base text-bone/75 leading-relaxed">
               Estimate the monthly outgo for your My Dream residence — instantly, with no
               sign-up. Adjust the loan amount, interest rate and tenure to see your EMI in
@@ -149,8 +164,8 @@ export default function EmiCalculator() {
           </Reveal>
         </header>
 
-        <div className="grid grid-cols-12 gap-x-6 gap-y-14 border-t border-line pt-14 md:pt-20">
-          <Reveal className="col-span-12 lg:col-span-7 space-y-14 md:space-y-16 lg:pr-14">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-14 border-t border-line pt-6 md:pt-20">
+          <Reveal className="col-span-12 lg:col-span-7 space-y-7 md:space-y-16 lg:pr-14">
             <SliderField
               label="Loan Amount"
               suffix="₹"
@@ -214,19 +229,19 @@ export default function EmiCalculator() {
           </Reveal>
 
           <Reveal delay={0.15} className="col-span-12 lg:col-span-5">
-            <div className="border border-line bg-coal p-8 md:p-12 lg:sticky lg:top-28">
+            <div className="border border-line bg-coal p-6 md:p-12 lg:sticky lg:top-28">
               <p className="text-[10px] uppercase tracking-[0.35em] text-concrete">Monthly EMI</p>
               <p
                 data-testid="emi-result-monthly"
-                className="font-display font-bold tracking-tighter text-5xl md:text-6xl text-ember mt-4 tabular-nums"
+                className="font-display font-bold tracking-tighter text-4xl md:text-6xl text-ember mt-3 tabular-nums"
               >
                 {fmtINR(emi)}
               </p>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-concrete mt-3">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-concrete mt-2">
                 per month · {months} months
               </p>
 
-              <div className="mt-10">
+              <div className="mt-6 md:mt-10">
                 <div className="flex h-1.5 w-full bg-bone/10" data-testid="emi-split-bar">
                   <div className="bg-bone/70 transition-[width] duration-500" style={{ width: `${100 - interestShare}%` }} />
                   <div className="bg-ember transition-[width] duration-500" style={{ width: `${interestShare}%` }} />
@@ -237,13 +252,24 @@ export default function EmiCalculator() {
                 </div>
               </div>
 
-              <div className="mt-8 space-y-5 border-t border-line pt-8">
+              <div className="mt-6 space-y-4 border-t border-line pt-6 md:mt-8 md:pt-8">
                 <ResultRow label="Principal Amount" value={fmtINR(amount)} testid="emi-result-principal" />
                 <ResultRow label="Total Interest Payable" value={fmtINR(interest)} testid="emi-result-interest" />
                 <ResultRow label="Total Amount Payable" value={fmtINR(total)} testid="emi-result-total" strong />
               </div>
 
-              <p data-testid="emi-note" className="mt-10 text-[10px] leading-relaxed tracking-wide text-concrete border-t border-line pt-6">
+              <a
+                href={shareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="emi-whatsapp-share"
+                className="group mt-6 md:mt-8 inline-flex w-full items-center justify-center gap-2.5 border border-ember/60 text-ember font-display font-semibold text-[10px] uppercase tracking-[0.25em] px-6 py-4 hover:bg-ember hover:text-ink transition-[color,background-color] duration-400"
+              >
+                <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
+                Share this EMI on WhatsApp
+              </a>
+
+              <p data-testid="emi-note" className="mt-6 md:mt-10 text-[10px] leading-relaxed tracking-wide text-concrete border-t border-line pt-6">
                 EMI shown is an indicative estimate. Actual EMI may vary based on lender terms,
                 interest rate and applicable charges.
               </p>

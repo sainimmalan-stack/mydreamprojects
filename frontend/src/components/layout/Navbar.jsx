@@ -131,7 +131,7 @@ export const Navbar = () => {
                 <span className="absolute w-6 h-px bg-bone -rotate-45" />
               </button>
             </div>
-            <nav className="flex-1 flex flex-col justify-center px-6 gap-2">
+            <nav className="flex-1 flex flex-col justify-center px-6 gap-1">
               {LINKS.map((l, i) => (
                 <motion.div
                   key={l.to}
@@ -143,7 +143,7 @@ export const Navbar = () => {
                     to={l.to}
                     data-testid={`mobile-${l.testid}`}
                     className={({ isActive }) =>
-                      `block py-3 font-display font-semibold uppercase tracking-tight text-4xl ${
+                      `block py-2 font-display font-semibold uppercase tracking-tight text-3xl ${
                         isActive ? "text-ember" : "text-bone"
                       }`
                     }
@@ -156,7 +156,7 @@ export const Navbar = () => {
                 initial={{ y: 48, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="pt-8"
+                className="pt-6"
               >
                 <Link
                   to="/contact"
