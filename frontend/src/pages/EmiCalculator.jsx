@@ -29,6 +29,14 @@ const LIMITS = {
   months: { min: 6, max: 360, step: 6, hintMin: "6 mo", hintMax: "360 mo" },
 };
 
+// Official brand marks of institutions our buyers commonly finance with.
+// Neutral naming by design — no endorsement is claimed or implied.
+const PARTNERS = [
+  { id: "icici", name: "ICICI Bank", logo: "/assets/partners/icici-bank.svg" },
+  { id: "sbi", name: "State Bank of India (SBI)", logo: "/assets/partners/sbi.svg" },
+  { id: "lic", name: "LIC", logo: "/assets/partners/lic.png" },
+];
+
 const SliderField = ({ label, suffix, value, limits, onChange, testid }) => (
   <div data-testid={testid}>
     <div className="flex items-end justify-between gap-4 mb-4 md:mb-6">
@@ -236,6 +244,28 @@ export default function EmiCalculator() {
                 onChange={setTenure}
                 testid="emi-tenure"
               />
+              <div data-testid="emi-tenure-presets" className="flex flex-wrap items-center gap-2 mt-4">
+                <span className="text-[9px] uppercase tracking-[0.25em] text-concrete/70 mr-1">Quick tenures</span>
+                {[10, 15, 20, 30].map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    data-testid={`emi-tenure-preset-${t}`}
+                    aria-pressed={unit === "years" && tenure === t}
+                    onClick={() => {
+                      if (unit !== "years") setUnit("years");
+                      setTenure(t);
+                    }}
+                    className={`px-3.5 py-1.5 border font-display font-semibold text-[10px] tracking-[0.15em] tabular-nums transition-colors duration-300 ${
+                      unit === "years" && tenure === t
+                        ? "border-ember bg-ember/10 text-ember"
+                        : "border-white/15 text-bone/50 hover:text-bone hover:border-bone/40"
+                    }`}
+                  >
+                    {t} yrs
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="pt-2">
               <Link
@@ -295,6 +325,38 @@ export default function EmiCalculator() {
                 interest rate and applicable charges.
               </p>
             </div>
+          </Reveal>
+        </div>
+
+        <div data-testid="finance-partners" className="mt-20 md:mt-28 border-t border-line pt-12 md:pt-16">
+          <Reveal>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-5">Loan &amp; Finance Options</p>
+            <p className="text-sm md:text-base text-bone/75 leading-relaxed max-w-xl">
+              Home-loan assistance for My Dream Projects buyers is commonly available through
+              India's leading financial institutions.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl">
+              {PARTNERS.map((p) => (
+                <div
+                  key={p.id}
+                  data-testid={`partner-${p.id}`}
+                  className="bg-bone border border-line px-8 py-6 md:py-7 flex items-center justify-center"
+                >
+                  <img
+                    src={p.logo}
+                    alt={`${p.name} logo`}
+                    loading="lazy"
+                    className="h-9 md:h-11 w-auto object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-[10px] leading-relaxed tracking-wide text-concrete/80 max-w-xl">
+              Logos are the property of their respective institutions, shown for buyer reference
+              only. They do not imply any endorsement of My Dream Projects.
+            </p>
           </Reveal>
         </div>
       </div>

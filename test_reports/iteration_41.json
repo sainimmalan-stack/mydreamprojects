@@ -1,0 +1,39 @@
+{
+  "summary": "Frontend-only iteration 41. Verified all four shipped features: AI Property Concierge (5-question flow, custom budget/loan, joint dev branch, villa boutique note, restart, quick actions, entry points), Contact→Map office deep link (contact-office-map-link → /project-map?focus=office auto-opens map-office-card), EMI tenure presets (10/15/20/30 chips + mode switching), and Finance Partners section (ICICI/SBI/LIC logos load, disclaimer present). All acceptance criteria pass.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_changes": [
+    "Concierge happy path (3 BHK → ₹75L–₹1Cr → Ameenpur → Ongoing → ₹40–70L): heading = 'Based on your requirements, these projects may be a good match.', exactly 3 cards (vale, ivy, aura — all ongoing), all images loaded (naturalWidth>0), EMI action href=/emi-calculator?amount=5500000, WhatsApp href contains wa.me, Map action href=/project-map.",
+    "2 BHK + Other/Flexible + Ongoing + Skip loan: top 3 = [vale, aurelia, elysium] (3/3 ongoing 2BHK — 2.5 BHK counts as 2 BHK match as specified).",
+    "Villa/Independent Home: shows honest 'Our current portfolio is boutique apartment residences…' note + 3 spacious cards.",
+    "Joint Development: shows conversation panel with heading 'Joint development starts with a conversation.', NO project cards, NO map action button (only EMI/Contact/WhatsApp/Restart) — matches spec.",
+    "Custom budget: 'Custom amount' chip → input 9500000 → Continue → transcript shows ₹95,00,000 correctly formatted with Indian grouping.",
+    "Custom loan: 6000000 → EMI action href = /emi-calculator?amount=6000000 (exact prefill).",
+    "Restart (concierge-restart) returns to question 1 (concierge-question-intent visible).",
+    "EMI tenure presets: click emi-tenure-preset-15 → tenure input=15, monthly EMI=₹49,237 (matches expected ₹50L/8.5%/15y).",
+    "Mode switch: switching to months (aria-pressed=true) then clicking emi-tenure-preset-20 auto-switches back to years (years aria-pressed=true, tenure=20). Rate preset 9% still works.",
+    "Finance partners section: all 3 chips render, images loaded — icici naturalWidth=304, sbi=106, lic=400. Disclaimer present. Mobile stacks (grid-cols-1 at 390px).",
+    "Map deep link: /project-map?focus=office directly → map-office-card auto-opens after tile load. Same result from Contact page via contact-office-map-link.",
+    "Contact page phones unchanged: Sai +91 77804 29845, Akhil +91 95660 67922.",
+    "Entry points: nav-concierge-link (desktop) works; home-concierge section positioned right before home-cta; home-concierge-cta navigates to /concierge; mobile-nav-concierge-link present in hamburger; floating-concierge-button visible on / (mobile 390px) and hidden on /concierge.",
+    "Responsive: /concierge and /emi-calculator at 390px — no horizontal overflow (scrollWidth == clientWidth == 390).",
+    "Regression: zero JS/React console errors on /, /concierge, /emi-calculator, /contact, /project-map?focus=office. Only MapLibre CDN tile fetch errors on /project-map (network/CDN-intermittent, pre-existing, not related to this iteration)."
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Concierge.jsx line 189 transcript rendering: budget label question ('What is your preferred budget?') sits adjacent to the ₹ answer with no visible separator on some breakpoints — but flex-wrap gap-x-4 keeps it functional; content displayed as 'What is your preferred budget?₹95,00,000' when text is concatenated in test dump but visually separated by the flex layout. Not a bug.",
+    "Concierge scoreProject uses PRICE_PER_SFT=5994 as a constant, but data has p.pricePerSft only on ongoing projects. Completed projects fall through with est=null, causing budget dimension to be neutral for them — correct behaviour for boutique estimation, but worth documenting."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "n/a", "frontend": "100%" },
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All 4 shipped features (Concierge, Map deep link, EMI tenure presets, Finance partners) pass on https://premium-residential-2.preview.emergentagent.com. Concierge testids follow slugify pattern e.g. concierge-option-3-bhk, concierge-option-75-l-1-cr, concierge-option-other-flexible, concierge-option-skip-for-now, concierge-option-villa-independent-home, concierge-option-joint-development, concierge-option-custom-budget/loan + concierge-custom-input-budget/loan + concierge-custom-submit-budget/loan. MapLibre carto tile 'Failed to fetch' errors on /project-map are pre-existing (external CDN, no code impact) — safe to ignore for feature testing.",
+  "rca of the issue": "n/a — no bugs found."
+}

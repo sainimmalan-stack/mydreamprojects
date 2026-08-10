@@ -372,6 +372,10 @@ export default function ProjectMap() {
       // eslint-disable-next-line no-console
       console.log("[maplibre] style loaded:", map.isStyleLoaded());
       resolveCollisions();
+      // deep link: /project-map?focus=office flies straight to the office marker
+      if (searchParams.get("focus") === "office") {
+        setTimeout(() => focusOffice(), 400);
+      }
     });
     map.on("moveend", resolveCollisions);
     if (process.env.NODE_ENV !== "production") window.__map = map;

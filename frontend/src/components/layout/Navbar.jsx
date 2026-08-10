@@ -7,6 +7,7 @@ const LINKS = [
   { to: "/", label: "Home", testid: "nav-home-link" },
   { to: "/projects", label: "Projects", testid: "nav-projects-link" },
   { to: "/emi-calculator", label: "EMI Calculator", testid: "nav-emi-link" },
+  { to: "/concierge", label: "Concierge", testid: "nav-concierge-link" },
   { to: "/project-map", label: "Our Map", testid: "nav-map-link" },
   { to: "/about", label: "About", testid: "nav-about-link" },
   { to: "/contact", label: "Contact", testid: "nav-contact-link" },

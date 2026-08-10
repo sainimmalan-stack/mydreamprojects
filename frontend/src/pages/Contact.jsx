@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Phone, MessageCircle, Navigation } from "lucide-react";
 
@@ -197,9 +198,14 @@ export default function Contact() {
           <div className="col-span-12 md:col-span-5 space-y-14 md:space-y-16">
             <Reveal>
               <p className="text-[10px] uppercase tracking-[0.4em] text-concrete mb-6">Contact Details</p>
-              <p className="font-display font-semibold uppercase tracking-tight text-xl text-bone mb-6">
+              <Link
+                to="/project-map?focus=office"
+                data-testid="contact-office-map-link"
+                className="group inline-flex items-center gap-2.5 font-display font-semibold uppercase tracking-tight text-xl text-bone mb-6 hover:text-ember transition-colors duration-300"
+              >
                 My Dream Projects
-              </p>
+                <ArrowUpRight className="w-[18px] h-[18px] text-concrete group-hover:text-ember group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-[color,transform] duration-300" strokeWidth={1.5} />
+              </Link>
               <div className="space-y-6">
                 {[PHONE_SAI, PHONE_AKHIL].map((p) => (
                   <div key={p.tel}>
