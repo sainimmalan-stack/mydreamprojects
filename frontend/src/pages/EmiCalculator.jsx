@@ -177,7 +177,7 @@ export default function EmiCalculator() {
                 testid="emi-amount"
               />
             </div>
-            <div className="space-y-4">
+            <div data-testid="emi-rate-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8 space-y-4">
               <SliderField
                 label="Interest Rate (P.A.)"
                 suffix="%"

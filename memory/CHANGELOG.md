@@ -975,3 +975,7 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - REVERTED the light-grey result panel per owner request: result card is back to the previous dark version (bg-coal, border-line, ember Monthly EMI, bone/ember split bar, ResultRow rows restored, lg: two-column breakpoints restored).
 - ONLY change kept: Loan Amount and Loan Tenure input areas now sit on subtle slightly-lighter grey panels (bg-bone/[0.045] + hairline border-bone/[0.08], p-5/md:p-8) — data-testids emi-amount-panel / emi-tenure-panel. Interest Rate section deliberately left plain.
 - Calculation logic, min ₹1,00,000, sliders, presets, typography, orange accents — all unchanged.
+
+## 2026-08-10 — EMI Interest Rate Panel Highlight (DONE, self-tested desktop/mobile)
+- Interest Rate (P.A.) section (slider + quick-rate buttons) wrapped in the same subtle grey highlight panel as Loan Amount and Loan Tenure (bg-bone/[0.045], border-bone/[0.08], p-5/md:p-8) — data-testid emi-rate-panel.
+- All three input sections now visually consistent; 8.5% default, orange slider, 1%–20% range, quick rates, calculation and result section untouched.
