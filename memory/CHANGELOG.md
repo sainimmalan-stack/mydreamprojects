@@ -962,3 +962,11 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Vasavi: full official Vasavi Elevators Pvt. Ltd. logo (cube icon + wordmark + tagline) downloaded from vasavielevators.in, white background flood-keyed to transparent (930x259). Previous icon-only/generic mark removed.
 - BrandSpecs presentation per owner: category label centered ABOVE logos on mobile with logos centered underneath (desktop keeps label-left / logos-right); KCP bumped to h-11/md:h-14, lifts to h-10/md:h-12 — visually comparable to other brands, aspect ratios preserved (verified <0.0005 rendered-vs-natural diff), no white wrapper boxes.
 - Same filenames (kcp.png/kone.png/vasavi.png) so the fix applies to all 19 project pages automatically; project lift assignments unchanged (KONE: Skylark/Summit; Vasavi: rest).
+
+## 2026-08-10 — EMI Calculator Result Panel Redesign (DONE, iteration_44 100% pass, 16/16)
+- Result area rebuilt as a separated premium light-grey financial panel (bg #E7E5DE, ink text, deep soft shadow) floating on the dark page — page itself stays dark.
+- Hierarchy: MONTHLY EMI = largest number (ink, ember accent rule); principal/interest split bar (ink + ember); Principal Amount + Total Interest side-by-side; Total Amount Payable full-width emphasized; subtle ink/15 dividers; orange used only for accents.
+- WhatsApp share button restyled for light panel (ember outline); note + all testids unchanged.
+- Layout breakpoints: two-column inputs/results now from md (iPad portrait side-by-side, was lg); mobile stays compact single column.
+- Inputs untouched: Loan Amount (min ₹1,00,000), Interest Rate, Tenure + presets + orange sliders; EMI formula unchanged (verified ₹50L/8.5%/20y → ₹43,391; live recalc + clamp verified).
+- Deleted unused ResultRow component.
