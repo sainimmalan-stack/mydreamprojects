@@ -103,6 +103,32 @@ export const ComingSoonElevation = ({ project, compact = false }) => (
     }
   >
     <Blueprint project={project} />
+    {compact ? (
+      <img
+        src="/assets/logo-icon.png"
+        alt=""
+        aria-hidden="true"
+        data-testid={`card-blueprint-logo-${project.slug}`}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-9 md:h-10 w-auto object-contain opacity-60 pointer-events-none select-none"
+      />
+    ) : (
+      <>
+        <img
+          src="/assets/logo-icon.png"
+          alt=""
+          aria-hidden="true"
+          data-testid="elevation-coming-soon-logo"
+          className="md:hidden absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 h-7 w-auto object-contain opacity-60 pointer-events-none select-none"
+        />
+        <img
+          src="/assets/logo-full-dark.png"
+          alt=""
+          aria-hidden="true"
+          data-testid="elevation-coming-soon-logo-full"
+          className="hidden md:block absolute left-1/2 top-[36%] lg:top-1/2 -translate-x-1/2 -translate-y-1/2 h-14 lg:h-24 w-auto object-contain opacity-90 pointer-events-none select-none"
+        />
+      </>
+    )}
     <div className={`absolute inset-0 flex flex-col justify-between ${compact ? "p-4" : "p-6 md:p-10"}`}>
       <div>
         <p className={`uppercase tracking-[0.4em] text-concrete ${compact ? "text-[8px]" : "text-[9px] md:text-[10px]"}`}>

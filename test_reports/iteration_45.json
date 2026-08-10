@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend-only verification of centered MDP logo inside the 'ELEVATION / COMING SOON' placeholder for the 6 ongoing projects. All required behaviors confirmed via Playwright on desktop 1920 and mobile 390.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ComingSoonElevation.jsx uses alt='' with aria-hidden — correct for decorative watermark.",
+    "opacity-90 on the desktop full logo is intentional but slightly stronger than 'subtle'; still non-distorted and readable. No action needed unless design wants softer.",
+    "Home BuildingNext is a text-row layout (no blueprint), so the logo does not need to appear there — expected."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "verified": {
+    "desktop_1920_ongoing_detail_pages": {
+      "my-dream-aurelia": "placeholder + full logo visible+loaded, mobile icon hidden, no overlap with COMING SOON (logo y=2061 h=96, COMING SOON y=2314), 3D PLAN button present",
+      "my-dream-elysium": "same as aurelia",
+      "my-dream-aura": "same as aurelia",
+      "my-dream-echelon": "same as aurelia",
+      "my-dream-vale": "same as aurelia",
+      "my-dream-ivy": "same as aurelia"
+    },
+    "mobile_390_aurelia_detail": "small icon visible (data-testid='elevation-coming-soon-logo', h=28px), full logo hidden, no horizontal overflow (scrollWidth=innerWidth=390)",
+    "completed_no_logo": "my-dream-skylark: NO elevation-coming-soon placeholder, NO logo — confirmed",
+    "projects_listing_filter_ongoing": "All 6 card-blueprint-logo-<slug> present and visible on desktop AND mobile",
+    "3d_plan_button": "Opens plan viewer (dialog/iframe detected) on aurelia detail",
+    "homepage_building_next": "Rendered normally as text-row layout (no blueprint cards used here by design)"
+  },
+  "context_for_next_testing_agent": "Elevation coming-soon logo work is complete. 6 ongoing slugs: aurelia, elysium, aura, echelon, vale, ivy. Completed projects like skylark/nest correctly skip the placeholder."
+}

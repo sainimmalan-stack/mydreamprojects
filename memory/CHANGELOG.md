@@ -984,3 +984,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Three separate highlight panels merged into ONE outer container (data-testid="emi-inputs-panel"; same bg-bone/[0.045] + border-bone/[0.08] + p-5/md:p-8 treatment) holding Loan Amount, Interest Rate and Loan Tenure.
 - Inner sections keep their testids (emi-amount-panel / emi-rate-panel / emi-tenure-panel), now separated only by subtle horizontal hairline dividers (border-t border-bone/[0.08], mt-7/pt-7, md:mt-10/md:pt-10) — no individual boxes.
 - All sliders, presets, toggles, limits and calculations unchanged; result panel unchanged; no horizontal overflow at 390px.
+
+## 2026-08-10 — Branded Logo in Ongoing-Project Elevation Placeholders (DONE, iteration_45 100% pass)
+- ComingSoonElevation blueprint placeholders now carry the official MDP logo centrally: full stacked light logo (logo-full-dark.png, h-14 lg:h-24) on desktop detail pages, small icon mark (logo-icon.png h-7) on mobile detail, icon (h-9/md:h-10) centered on compact project cards.
+- Position tuned per breakpoint (top-[40%] mobile / top-[36%] md / centered lg+) so the logo never overlaps the title or ELEVATION / COMING SOON / ONGOING messaging; blueprint linework, 3D PLAN button and all text unchanged.
+- Renders ONLY where no real elevation exists (all 6 ongoing: aurelia, elysium, aura, echelon, vale, ivy); completed projects with real photography untouched. No distortion — w-auto object-contain, pointer-events-none, aria-hidden.
