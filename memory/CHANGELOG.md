@@ -979,3 +979,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 ## 2026-08-10 — EMI Interest Rate Panel Highlight (DONE, self-tested desktop/mobile)
 - Interest Rate (P.A.) section (slider + quick-rate buttons) wrapped in the same subtle grey highlight panel as Loan Amount and Loan Tenure (bg-bone/[0.045], border-bone/[0.08], p-5/md:p-8) — data-testid emi-rate-panel.
 - All three input sections now visually consistent; 8.5% default, orange slider, 1%–20% range, quick rates, calculation and result section untouched.
+
+## 2026-08-10 — EMI Inputs Merged Into One Continuous Grey Block (DONE, self-tested desktop/mobile)
+- Three separate highlight panels merged into ONE outer container (data-testid="emi-inputs-panel"; same bg-bone/[0.045] + border-bone/[0.08] + p-5/md:p-8 treatment) holding Loan Amount, Interest Rate and Loan Tenure.
+- Inner sections keep their testids (emi-amount-panel / emi-rate-panel / emi-tenure-panel), now separated only by subtle horizontal hairline dividers (border-t border-bone/[0.08], mt-7/pt-7, md:mt-10/md:pt-10) — no individual boxes.
+- All sliders, presets, toggles, limits and calculations unchanged; result panel unchanged; no horizontal overflow at 390px.

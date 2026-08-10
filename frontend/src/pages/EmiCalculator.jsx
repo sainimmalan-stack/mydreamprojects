@@ -167,17 +167,18 @@ export default function EmiCalculator() {
 
         <div className="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-14 border-t border-line pt-6 md:pt-20">
           <Reveal className="col-span-12 lg:col-span-7 space-y-7 md:space-y-16 lg:pr-14">
-            <div data-testid="emi-amount-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8">
-              <SliderField
-                label="Loan Amount"
-                suffix="₹"
-                value={amount}
-                limits={LIMITS.amount}
-                onChange={setAmount}
-                testid="emi-amount"
-              />
-            </div>
-            <div data-testid="emi-rate-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8 space-y-4">
+            <div data-testid="emi-inputs-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8">
+              <div data-testid="emi-amount-panel">
+                <SliderField
+                  label="Loan Amount"
+                  suffix="₹"
+                  value={amount}
+                  limits={LIMITS.amount}
+                  onChange={setAmount}
+                  testid="emi-amount"
+                />
+              </div>
+              <div data-testid="emi-rate-panel" className="border-t border-bone/[0.08] mt-7 pt-7 md:mt-10 md:pt-10 space-y-4">
               <SliderField
                 label="Interest Rate (P.A.)"
                 suffix="%"
@@ -206,7 +207,7 @@ export default function EmiCalculator() {
                 ))}
               </div>
             </div>
-            <div data-testid="emi-tenure-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8">
+              <div data-testid="emi-tenure-panel" className="border-t border-bone/[0.08] mt-7 pt-7 md:mt-10 md:pt-10">
               <div className="flex items-center justify-between gap-6 mb-2">
                 <span className="text-[9px] uppercase tracking-[0.25em] text-concrete/70">Tenure in</span>
                 <div
@@ -260,6 +261,7 @@ export default function EmiCalculator() {
                     {t} yrs
                   </button>
                 ))}
+              </div>
               </div>
             </div>
             <div className="pt-2">
