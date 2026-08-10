@@ -23,7 +23,7 @@ const fmtINR = (n) => `₹${INR.format(Math.round(n))}`;
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
 const LIMITS = {
-  amount: { min: 500000, max: 50000000, step: 50000, hintMin: "₹5 L", hintMax: "₹5 Cr" },
+  amount: { min: 100000, max: 50000000, step: 50000, hintMin: "₹1 L", hintMax: "₹5 Cr" },
   rate: { min: 1, max: 20, step: 0.05, hintMin: "1%", hintMax: "20%" },
   years: { min: 1, max: 30, step: 1, hintMin: "1 yr", hintMax: "30 yrs" },
   months: { min: 6, max: 360, step: 6, hintMin: "6 mo", hintMax: "360 mo" },

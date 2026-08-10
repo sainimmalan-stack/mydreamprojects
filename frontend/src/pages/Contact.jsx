@@ -91,21 +91,21 @@ const OfficeSection = () => (
         your project, and experience My Dream Projects in person.
       </p>
     </Reveal>
-    <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 mt-10 md:mt-14">
-      <Reveal className="w-full md:w-[62%]">
+    <div className="flex flex-col lg:flex-row lg:items-start gap-4 md:gap-6 mt-10 md:mt-14">
+      <Reveal className="w-full lg:w-[62%]">
         <OfficePhoto
           src="/assets/office/office-exterior.webp"
           srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
-          sizes="(max-width: 768px) 100vw, 62vw"
+          sizes="(max-width: 1024px) 100vw, 62vw"
           alt="My Dream Projects two-storey container office at night with illuminated signage"
           testid="office-photo-primary"
         />
       </Reveal>
-      <Reveal delay={0.1} className="w-full md:w-[38%]">
+      <Reveal delay={0.1} className="w-full lg:w-[38%]">
         <OfficePhoto
           src="/assets/office/office-interior.webp"
           srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1672w"
-          sizes="(max-width: 768px) 100vw, 38vw"
+          sizes="(max-width: 1024px) 100vw, 38vw"
           alt="My Dream Projects office interior with desk and My Dream Projects logo on the wall"
           testid="office-photo-interior"
         />

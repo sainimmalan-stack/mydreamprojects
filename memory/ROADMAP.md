@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-10: EMI loan minimum now ₹1 lakh + office gallery stacks full-width on iPad portrait (4 viewports measured)
 - 2026-08-10: Stats card mobile overflow fixed + Avasa white line removed from asset + EMI quick-rate preset chips (self-tested, measured at 360/390px)
 - 2026-08-10: Map "Expected 2027" labels + EMI WhatsApp share button + compact mobile menu + single-screen mobile EMI calculator (self-tested)
 - 2026-08-10: Company email (adminmydreamprojects@gmail.com) across contact/footer + premium EMI Calculator page with nav + project-page Calculate EMI CTAs (iteration_40, 100% pass)
