@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight, Phone, MessageCircle, Navigation } from "luci
 
 const EASE = [0.16, 1, 0.3, 1];
 
-import { PHONE_SAI, PHONE_AKHIL, WHATSAPP_GREETING, MAPS_URL, waLink } from "../data/contact";
+import { PHONE_SAI, PHONE_AKHIL, WHATSAPP_GREETING, MAPS_URL, waLink, COMPANY_EMAIL } from "../data/contact";
 import useSeo from "../hooks/useSeo";
 
 const PROJECT_OPTIONS = [
@@ -213,6 +213,16 @@ export default function Contact() {
                     </a>
                   </div>
                 ))}
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-concrete mb-1.5">Email</p>
+                  <a
+                    href={COMPANY_EMAIL.mailto}
+                    data-testid="contact-email-link"
+                    className="font-display text-lg md:text-xl tracking-tight text-bone hover:text-ember transition-colors duration-300 break-all"
+                  >
+                    {COMPANY_EMAIL.display}
+                  </a>
+                </div>
               </div>
               <a
                 href={waLink(WHATSAPP_GREETING)}
@@ -298,6 +308,17 @@ export default function Contact() {
                     </p>
                   )}
                 </div>
+                <p className="text-xs text-concrete leading-relaxed">
+                  Prefer email? Write to us at{" "}
+                  <a
+                    href={COMPANY_EMAIL.mailto}
+                    data-testid="contact-form-email-link"
+                    className="text-bone hover:text-ember transition-colors duration-300"
+                  >
+                    {COMPANY_EMAIL.display}
+                  </a>{" "}
+                  — every enquiry reaches the founders directly.
+                </p>
               </form>
             </Reveal>
           </div>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { MAPS_URL } from "../../data/contact";
+import { MAPS_URL, COMPANY_EMAIL } from "../../data/contact";
 
 export const Footer = () => (
   <footer data-testid="site-footer" className="relative border-t border-line bg-ink">
@@ -20,6 +20,7 @@ export const Footer = () => (
             {[
               { to: "/", label: "Home", id: "footer-home-link" },
               { to: "/projects", label: "Projects", id: "footer-projects-link" },
+              { to: "/emi-calculator", label: "EMI Calculator", id: "footer-emi-link" },
               { to: "/project-map", label: "Our Map", id: "footer-map-link" },
               { to: "/about", label: "About", id: "footer-about-link" },
               { to: "/contact", label: "Contact", id: "footer-contact-link" },
@@ -57,6 +58,13 @@ export const Footer = () => (
               className="block text-sm text-bone/70 hover:text-ember transition-colors duration-300"
             >
               +91 95660 67922
+            </a>
+            <a
+              href={COMPANY_EMAIL.mailto}
+              data-testid="footer-email-link"
+              className="block text-sm text-bone/70 hover:text-ember transition-colors duration-300 break-all"
+            >
+              {COMPANY_EMAIL.display}
             </a>
           </div>
           <a

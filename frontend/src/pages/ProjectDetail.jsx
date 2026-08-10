@@ -34,6 +34,11 @@ export default function ProjectDetail() {
   const { prev, next } = getAdjacent(slug);
 
   const heroSrc = project.elevationModes?.night || project.cover;
+  const rateNum = project.pricePerSft ? Number(project.pricePerSft.replace(/[^0-9]/g, "")) : null;
+  const areaNum = project.unitDetails?.[0]?.saleableArea
+    ? Number(project.unitDetails[0].saleableArea.replace(/[^0-9.]/g, ""))
+    : null;
+  const emiPrefill = rateNum && areaNum ? Math.round((rateNum * areaNum) / 100000) * 100000 : null;
   const heroSrcSet = !project.cover
     ? undefined
     : project.elevationModes
@@ -145,6 +150,16 @@ export default function ProjectDetail() {
               >
                 {project.pricePerSft} / Sq.Ft.
               </span>
+            )}
+            {emiPrefill && (
+              <Link
+                to={`/emi-calculator?amount=${emiPrefill}`}
+                data-testid="calculate-emi-cta"
+                className="inline-flex items-center gap-2 border border-bone/25 bg-ink/40 backdrop-blur text-bone/90 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-4 py-2 hover:border-ember hover:text-ember transition-colors duration-300"
+              >
+                Calculate EMI
+                <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
+              </Link>
             )}
           </motion.div>
         </div>

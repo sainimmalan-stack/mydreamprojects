@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only iteration 40. Verified EMI Calculator page (/emi-calculator), Calculate EMI CTA chip on ongoing project detail pages, company email surfacing across Contact and Footer, and nav/mobile/footer sitemap entries. All targeted acceptance criteria pass; zero console errors on covered routes.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_changes": [
+    "EMI defaults (₹50,00,000 / 8.5% / 20yrs): monthly=₹43,391, principal=₹50,00,000, interest=₹54,13,879, total=₹1,04,13,879 — MATCHES expected values exactly (Indian ₹ formatting with lakh/crore grouping confirmed).",
+    "Instant recalc: setting amount=75,00,000 immediately updates monthly EMI to ₹65,087 (no submit needed).",
+    "Tenure unit toggle: switching to months converts 20 yrs → 240 mo; switching back → 20 yrs. Values preserved.",
+    "Edge cases: rate=1% works (75L/20yr = ₹34,492). amount 999999999 clamps to 50,000,000 (₹5Cr max). amount 100 clamps to 500,000 (₹5L min).",
+    "URL prefill: /emi-calculator?amount=7500000 initializes amount input to 7500000 and monthly EMI shows ₹65,087.",
+    "Aurelia (ongoing) CTA: [data-testid=calculate-emi-cta] href=/emi-calculator?amount=7500000 (₹5,994 × 1250 sft = 74,92,500 rounded to nearest lakh = ₹75L). Click navigates to prefilled calculator.",
+    "All 6 ongoing project detail pages show the CTA with correct prefill:\n  - my-dream-aurelia: amount=7500000 (1250 sft)\n  - my-dream-elysium: amount=7500000 (1250 sft)\n  - my-dream-aura:    amount=10100000 (1680 sft → 100,69,920 → 1,01,00,000)\n  - my-dream-echelon: amount=7100000 (1180 sft)\n  - my-dream-vale:    amount=10000000 (1665 sft → 99,79,010 → 1,00,00,000)\n  - my-dream-ivy:     amount=9600000  (1600 sft → 95,90,400 → 96,00,000)",
+    "All 13 completed project detail pages do NOT render calculate-emi-cta (verified nest, casa, avasa, skylark, glenmore, hillock, summit, griffin, selene, atlantis, perch, solace, zenith).",
+    "Desktop nav order: Home → Projects → EMI Calculator → Our Map → About → Contact (EMI Calculator sits between Projects and Our Map as required). Active state highlights when on /emi-calculator.",
+    "mobile-nav-emi-link present in mobile hamburger menu; footer-emi-link present in footer sitemap.",
+    "Company email surfaced correctly at three locations (all with href=mailto:adminmydreamprojects@gmail.com and visible text adminmydreamprojects@gmail.com): contact-email-link, contact-form-email-link, footer-email-link.",
+    "Founder phones UNCHANGED: Nimmala Sai +91 77804 29845, Kotapati Akhil +91 95660 67922 (both still present on /contact and in footer).",
+    "Responsive: /emi-calculator at 390px and 834px — no horizontal overflow (scrollWidth == viewport width).",
+    "Regression sweep zero console errors on: /, /projects, /projects/my-dream-nest, /projects/my-dream-ivy, /about, /contact, /emi-calculator. (/project-map not asserted here because networkidle waits on live Google Maps iframe; but no errors captured during its partial load — pre-existing behavior noted in iteration 39.)"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: In EmiCalculator.jsx, when tenure unit toggles years→months by multiplying by 12, values above 30*12=360 are clamped to 360 correctly; when toggling months→years with a value that rounds to 0, LIMITS.years.min=1 also clamps. Robust.",
+    "Nit: The URL prefill only reads searchParams once at init (useState lazy init). If a user navigates from one ongoing project to /emi-calculator?amount=X and then to another via a Link, React Router replaces params but the state won't reset. Not in scope for this iteration but worth noting if future flows chain multiple prefill navigations."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "n/a", "frontend": "100%" },
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "EMI Calculator + email additions are fully working on preview URL https://premium-residential-2.preview.emergentagent.com. Regression on prior features (project pages, elevations, plans, map, hero slideshow) untouched by this iteration and previously verified in iteration 39. Note: /project-map times out under Playwright wait_until='networkidle' because the Google Maps iframe keeps open connections — use 'domcontentloaded' for future navigations to that route.",
+  "rca of the issue": "n/a — no bugs found."
+}

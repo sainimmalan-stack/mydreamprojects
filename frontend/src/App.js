@@ -11,6 +11,7 @@ const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ProjectDetail = lazy(() => import("@/pages/ProjectDetail"));
 const ProjectMap = lazy(() => import("@/pages/ProjectMap"));
+const EmiCalculator = lazy(() => import("@/pages/EmiCalculator"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const ScrollToTop = () => {
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:slug" element={<ProjectDetail />} />
                 <Route path="/project-map" element={<ProjectMap />} />
+                <Route path="/emi-calculator" element={<EmiCalculator />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<NotFound />} />

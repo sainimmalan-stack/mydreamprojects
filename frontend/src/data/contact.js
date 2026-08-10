@@ -16,6 +16,10 @@ export const OFFICE = {
   lat: 17.5346875,
   lng: 78.3262031,
 };
+export const COMPANY_EMAIL = {
+  display: "adminmydreamprojects@gmail.com",
+  mailto: "mailto:adminmydreamprojects@gmail.com",
+};
 
 export const waLinkTo = (number, message) =>
   `https://wa.me/${number}?text=${encodeURIComponent(message)}`;

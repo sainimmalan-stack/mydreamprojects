@@ -899,3 +899,10 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - About.jsx founders: the image CONTAINER now carries fixed identical dimensions (mobile: w-full aspect-[4/5]; md+: exactly 352x440px, shrink-0, self-start) and the img simply fills it (w-full h-full object-cover, object-position 50% 45%). No computed aspect inference — containers can never drift apart or stretch with card content.
 - Measured: desktop 1920 both 352x440 same top; tablet 834 both 352x440; mobile 390 both 348x435. Faces natural on both.
 - NOTE: live site (mydreamprojects.in) needs a REDEPLOY to pick up this and the previous founder fix.
+
+## 2026-08-10 — Company Email + Premium EMI Calculator (DONE, tested iteration_40, 100% pass)
+- COMPANY_EMAIL = adminmydreamprojects@gmail.com in data/contact.js; surfaced at Contact Details (contact-email-link), note under enquiry form (contact-form-email-link), Footer office column (footer-email-link). Founder phones untouched.
+- New /emi-calculator page (src/pages/EmiCalculator.jsx): loan amount slider+input (₹5L–₹5Cr), interest rate 1–20% p.a., tenure with years/months toggle (auto-converts); instant reducing-balance EMI + total interest + total payable, en-IN ₹ formatting, principal/interest split bar, indicative-estimate disclaimer note. Custom .emi-slider styling in App.css (square ember thumb, hairline track).
+- Navigation: "EMI Calculator" in desktop nav (between Projects and Our Map), mobile menu, footer sitemap. Route lazy-loaded in App.js.
+- Project pages: "Calculate EMI" chip in hero meta row next to the ₹/Sq.Ft. chip — ongoing projects ONLY — deep-links to /emi-calculator?amount=<ratePerSft × first-unit saleable area, rounded to nearest lakh> which pre-fills the calculator. Completed projects show no CTA.
+- Verified: exact EMI math (₹50L/8.5%/20y = ₹43,391), instant recalc, clamps, prefills for all 6 ongoing, CTA absent on all 13 completed, responsive 390/834, zero console errors.
