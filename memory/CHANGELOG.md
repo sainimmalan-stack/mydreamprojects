@@ -913,3 +913,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Mobile menu compacted: links text-4xl→text-3xl, py-3→py-2, gap-2→gap-1, CTA pt-8→pt-6 — full menu + CTA ends at 645px on a 390x844 phone.
 - EMI page mobile compaction: page pt-24, header tightened (eyebrow mb-4, H1 8.5vw, description hidden on mobile), field spacing space-y-7, label rows mb-4, value inputs text-lg, results panel p-6 with Monthly EMI text-4xl, tighter bar/rows/note. Result: all 3 inputs + Monthly EMI figure visible within one 390x844 screen (result top at 813px). Desktop layout unchanged.
 - Verified: share text content exact, menu fits, map strings present, desktop EMI unchanged, zero console errors.
+
+## 2026-08-10 — Stats Mobile Overflow Fix + Avasa Line Fix + EMI Rate Presets (DONE, self-tested)
+1. Stats band (Home.jsx): numbers now scale responsively (clamp(1.5rem,7.6vw,3rem) on mobile, md:text-6xl lg:text-7xl unchanged), whitespace-nowrap, cells px-5/min-w-0 — "1,90,905" fits inside its card at 390px AND 360px with zero page horizontal overflow; labels wrap cleanly. Verified numerically (number 106px in 195px cell).
+2. Avasa white vertical line: root-caused to the ASSET itself — elevation-night.webp had an 8px near-white strip baked into its left edge (brightness ~240 vs ~44 overall). Cropped the strip from elevation-night.webp (2250→2242) and elevation-night-800.webp (800→797); updated elevationModes.width to 2242. Day/cover variants were clean (broad sky, no line). Card edge now clean.
+3. EMI rate presets: "Quick rates" chips 8.5% / 9% / 9.5% under the interest slider (emi-rate-preset-*); one tap sets the rate, active chip highlighted ember. Verified: 9.5% → ₹46,607, 8.5% → ₹43,391.

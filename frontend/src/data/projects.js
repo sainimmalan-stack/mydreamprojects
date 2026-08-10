@@ -150,7 +150,7 @@ const MY_DREAM_AVASA = {
   elevationModes: {
     day: "/assets/projects/my-dream-avasa/elevation-day.webp",
     night: "/assets/projects/my-dream-avasa/elevation-night.webp",
-    width: 2250,
+    width: 2242,
   },
   siteLocation: {
     url: "https://www.google.com/maps?q=G8MF+PXG+MY+Dream+Avasa%2C+Sai+Ambica+Colony%2C+Ameenpur%2C+Miyapur%2C+Hyderabad%2C+Telangana+502032&ftid=0x3bcb8d007573cfe7%3A0x35268543df407da9",

@@ -244,9 +244,9 @@ const Stats = () => {
           <div
             key={s.label}
             data-testid={s.testid || `stat-${s.label.toLowerCase()}`}
-            className={`px-6 md:px-10 py-12 md:py-20 ${i > 0 ? "border-l border-line" : ""} ${i > 1 ? "border-t lg:border-t-0 border-line" : ""} ${i === 3 ? "md:border-l-0 lg:border-l" : ""}`}
+            className={`min-w-0 px-5 md:px-10 py-12 md:py-20 ${i > 0 ? "border-l border-line" : ""} ${i > 1 ? "border-t lg:border-t-0 border-line" : ""} ${i === 3 ? "md:border-l-0 lg:border-l" : ""}`}
           >
-            <p className="font-display font-bold tracking-tighter text-5xl md:text-6xl lg:text-7xl text-bone tabular-nums">
+            <p className="font-display font-bold tracking-tighter text-[clamp(1.5rem,7.6vw,3rem)] md:text-6xl lg:text-7xl text-bone tabular-nums whitespace-nowrap">
               {typeof s.value === "number" ? (
                 <CountUp value={s.value} pad={s.pad} />
               ) : (

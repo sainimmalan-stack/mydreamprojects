@@ -174,14 +174,35 @@ export default function EmiCalculator() {
               onChange={setAmount}
               testid="emi-amount"
             />
-            <SliderField
-              label="Interest Rate (P.A.)"
-              suffix="%"
-              value={rate}
-              limits={LIMITS.rate}
-              onChange={setRate}
-              testid="emi-rate"
-            />
+            <div className="space-y-4">
+              <SliderField
+                label="Interest Rate (P.A.)"
+                suffix="%"
+                value={rate}
+                limits={LIMITS.rate}
+                onChange={setRate}
+                testid="emi-rate"
+              />
+              <div data-testid="emi-rate-presets" className="flex flex-wrap items-center gap-2">
+                <span className="text-[9px] uppercase tracking-[0.25em] text-concrete/70 mr-1">Quick rates</span>
+                {[8.5, 9, 9.5].map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    data-testid={`emi-rate-preset-${String(r).replace(".", "-")}`}
+                    aria-pressed={rate === r}
+                    onClick={() => setRate(r)}
+                    className={`px-3.5 py-1.5 border font-display font-semibold text-[10px] tracking-[0.15em] tabular-nums transition-colors duration-300 ${
+                      rate === r
+                        ? "border-ember bg-ember/10 text-ember"
+                        : "border-white/15 text-bone/50 hover:text-bone hover:border-bone/40"
+                    }`}
+                  >
+                    {r}%
+                  </button>
+                ))}
+              </div>
+            </div>
             <div>
               <div className="flex items-center justify-between gap-6 mb-2">
                 <span className="text-[9px] uppercase tracking-[0.25em] text-concrete/70">Tenure in</span>
