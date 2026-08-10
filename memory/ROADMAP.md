@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-10: EMI result panel REVERTED to previous dark design per owner; only Loan Amount + Loan Tenure inputs got subtle lighter-grey highlight panels (self-tested desktop/mobile)
 - 2026-08-10: EMI Calculator result section redesigned — light-grey premium financial panel on dark page, EMI-first hierarchy, iPad side-by-side layout (iteration_44, 100% pass)
 - 2026-08-10: Official KCP (annual-report mosaic), KONE (official 4-square) & Vasavi (full Pvt. Ltd. wordmark) logos replaced everywhere + centered mobile spec rows (iteration_43, 100% pass)
 - 2026-08-10: Mobile polish — Loan & Finance 2x2 bank grid + Brands & Specs visual-height balance (iteration_42, 100% pass)

@@ -970,3 +970,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Layout breakpoints: two-column inputs/results now from md (iPad portrait side-by-side, was lg); mobile stays compact single column.
 - Inputs untouched: Loan Amount (min ₹1,00,000), Interest Rate, Tenure + presets + orange sliders; EMI formula unchanged (verified ₹50L/8.5%/20y → ₹43,391; live recalc + clamp verified).
 - Deleted unused ResultRow component.
+
+## 2026-08-10 — EMI Calculator Revert + Subtle Input Highlights (DONE, self-tested desktop/mobile)
+- REVERTED the light-grey result panel per owner request: result card is back to the previous dark version (bg-coal, border-line, ember Monthly EMI, bone/ember split bar, ResultRow rows restored, lg: two-column breakpoints restored).
+- ONLY change kept: Loan Amount and Loan Tenure input areas now sit on subtle slightly-lighter grey panels (bg-bone/[0.045] + hairline border-bone/[0.08], p-5/md:p-8) — data-testids emi-amount-panel / emi-tenure-panel. Interest Rate section deliberately left plain.
+- Calculation logic, min ₹1,00,000, sliders, presets, typography, orange accents — all unchanged.

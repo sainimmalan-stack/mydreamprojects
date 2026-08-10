@@ -70,6 +70,18 @@ const SliderField = ({ label, suffix, value, limits, onChange, testid }) => (
   </div>
 );
 
+const ResultRow = ({ label, value, testid, strong = false }) => (
+  <div className="flex items-baseline justify-between gap-6">
+    <span className="text-[10px] uppercase tracking-[0.25em] text-concrete">{label}</span>
+    <span
+      data-testid={testid}
+      className={`font-display tracking-tight tabular-nums ${strong ? "text-xl md:text-2xl text-bone" : "text-lg text-bone/85"}`}
+    >
+      {value}
+    </span>
+  </div>
+);
+
 export default function EmiCalculator() {
   useSeo({
     title: "EMI Calculator | Home Loan EMI in Ameenpur | My Dream Projects",
@@ -154,15 +166,17 @@ export default function EmiCalculator() {
         </header>
 
         <div className="grid grid-cols-12 gap-x-6 gap-y-10 md:gap-y-14 border-t border-line pt-6 md:pt-20">
-          <Reveal className="col-span-12 md:col-span-7 space-y-7 md:space-y-12 lg:space-y-16 md:pr-10 lg:pr-14">
-            <SliderField
-              label="Loan Amount"
-              suffix="₹"
-              value={amount}
-              limits={LIMITS.amount}
-              onChange={setAmount}
-              testid="emi-amount"
-            />
+          <Reveal className="col-span-12 lg:col-span-7 space-y-7 md:space-y-16 lg:pr-14">
+            <div data-testid="emi-amount-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8">
+              <SliderField
+                label="Loan Amount"
+                suffix="₹"
+                value={amount}
+                limits={LIMITS.amount}
+                onChange={setAmount}
+                testid="emi-amount"
+              />
+            </div>
             <div className="space-y-4">
               <SliderField
                 label="Interest Rate (P.A.)"
@@ -192,7 +206,7 @@ export default function EmiCalculator() {
                 ))}
               </div>
             </div>
-            <div>
+            <div data-testid="emi-tenure-panel" className="bg-bone/[0.045] border border-bone/[0.08] p-5 md:p-8">
               <div className="flex items-center justify-between gap-6 mb-2">
                 <span className="text-[9px] uppercase tracking-[0.25em] text-concrete/70">Tenure in</span>
                 <div
@@ -260,55 +274,34 @@ export default function EmiCalculator() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.15} className="col-span-12 md:col-span-5">
-            <div
-              data-testid="emi-result-panel"
-              className="bg-[#E7E5DE] text-ink p-6 md:p-8 lg:p-10 md:sticky md:top-28 shadow-[0_50px_100px_-40px_rgba(0,0,0,0.75)]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-ember" aria-hidden="true" />
-                <p className="text-[10px] uppercase tracking-[0.35em] text-ink/55">Monthly EMI</p>
-              </div>
+          <Reveal delay={0.15} className="col-span-12 lg:col-span-5">
+            <div data-testid="emi-result-panel" className="border border-line bg-coal p-6 md:p-12 lg:sticky lg:top-28">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-concrete">Monthly EMI</p>
               <p
                 data-testid="emi-result-monthly"
-                className="font-display font-bold tracking-tighter text-4xl md:text-5xl xl:text-6xl text-ink mt-4 tabular-nums"
+                className="font-display font-bold tracking-tighter text-4xl md:text-6xl text-ember mt-3 tabular-nums"
               >
                 {fmtINR(emi)}
               </p>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-ink/50 mt-2">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-concrete mt-2">
                 per month · {months} months
               </p>
 
-              <div className="mt-6 md:mt-8">
-                <div className="flex h-1.5 w-full bg-ink/10" data-testid="emi-split-bar">
-                  <div className="bg-ink/70 transition-[width] duration-500" style={{ width: `${100 - interestShare}%` }} />
+              <div className="mt-6 md:mt-10">
+                <div className="flex h-1.5 w-full bg-bone/10" data-testid="emi-split-bar">
+                  <div className="bg-bone/70 transition-[width] duration-500" style={{ width: `${100 - interestShare}%` }} />
                   <div className="bg-ember transition-[width] duration-500" style={{ width: `${interestShare}%` }} />
                 </div>
-                <div className="flex justify-between mt-3 text-[9px] uppercase tracking-[0.2em] text-ink/55">
+                <div className="flex justify-between mt-3 text-[9px] uppercase tracking-[0.2em] text-concrete/80">
                   <span>Principal</span>
                   <span>Interest</span>
                 </div>
               </div>
 
-              <div className="mt-6 md:mt-8 pt-6 border-t border-ink/15 grid grid-cols-2 gap-x-6 gap-y-5">
-                <div>
-                  <p className="text-[9px] uppercase tracking-[0.25em] text-ink/50">Principal Amount</p>
-                  <p data-testid="emi-result-principal" className="font-display font-semibold text-lg md:text-xl text-ink/90 mt-1.5 tabular-nums">
-                    {fmtINR(amount)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[9px] uppercase tracking-[0.25em] text-ink/50">Total Interest</p>
-                  <p data-testid="emi-result-interest" className="font-display font-semibold text-lg md:text-xl text-ink/90 mt-1.5 tabular-nums">
-                    {fmtINR(interest)}
-                  </p>
-                </div>
-                <div className="col-span-2 pt-5 border-t border-ink/15 flex items-end justify-between gap-4">
-                  <p className="text-[9px] uppercase tracking-[0.25em] text-ink/50">Total Amount Payable</p>
-                  <p data-testid="emi-result-total" className="font-display font-bold text-xl md:text-2xl text-ink tabular-nums">
-                    {fmtINR(total)}
-                  </p>
-                </div>
+              <div className="mt-6 space-y-4 border-t border-line pt-6 md:mt-8 md:pt-8">
+                <ResultRow label="Principal Amount" value={fmtINR(amount)} testid="emi-result-principal" />
+                <ResultRow label="Total Interest Payable" value={fmtINR(interest)} testid="emi-result-interest" />
+                <ResultRow label="Total Amount Payable" value={fmtINR(total)} testid="emi-result-total" strong />
               </div>
 
               <a
@@ -316,13 +309,13 @@ export default function EmiCalculator() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="emi-whatsapp-share"
-                className="group mt-6 md:mt-8 inline-flex w-full items-center justify-center gap-2.5 border border-ember/70 text-ember font-display font-semibold text-[10px] uppercase tracking-[0.25em] px-6 py-4 hover:bg-ember hover:text-bone transition-[color,background-color] duration-400"
+                className="group mt-6 md:mt-8 inline-flex w-full items-center justify-center gap-2.5 border border-ember/60 text-ember font-display font-semibold text-[10px] uppercase tracking-[0.25em] px-6 py-4 hover:bg-ember hover:text-ink transition-[color,background-color] duration-400"
               >
                 <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                 Share this EMI on WhatsApp
               </a>
 
-              <p data-testid="emi-note" className="mt-6 md:mt-8 text-[10px] leading-relaxed tracking-wide text-ink/55 border-t border-ink/15 pt-5">
+              <p data-testid="emi-note" className="mt-6 md:mt-10 text-[10px] leading-relaxed tracking-wide text-concrete border-t border-line pt-6">
                 EMI shown is an indicative estimate. Actual EMI may vary based on lender terms,
                 interest rate and applicable charges.
               </p>
