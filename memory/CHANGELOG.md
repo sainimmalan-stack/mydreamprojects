@@ -930,3 +930,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - NEW /concierge page (src/pages/Concierge.jsx): 5-question guided consultation (intent/budget+custom/location/status/loan+custom) → deterministic scoring over real project data → top-3 recommendation cards (image, BHK, SFT, location, status, VIEW PROJECT). Joint Development → conversation panel (no cards). Villa → honest boutique-apartments note + most spacious picks. Quick actions: Our Map, Calculate EMI (loan-prefilled), Talk to Us, WhatsApp (summary message), Start over. Entry points: nav "Concierge", footer sitemap, Home teaser section (home-concierge, before final CTA), mobile-only floating button (hidden on /concierge).
 - Concierge card images: completed → night elevation; ongoing → 3D render fallback (cover is null for ongoing).
 - Verified: all flows, custom amounts (Indian grouping), EMI prefill exact, map deep-link from both direct URL and Contact link, responsive 390/834 (no overflow), zero console errors.
+
+## 2026-08-10 — Selected Work Swap + Concierge Removal + Partners Rename (DONE, self-tested)
+- Home Selected Work: Hillock + Solace replaced by Skylark + Perch (SELECTED_SLUGS = nest, skylark, perch). Layout/stagger unchanged, verified visually.
+- AI Property Concierge FULLY removed per owner request: deleted src/pages/Concierge.jsx, /concierge route, FloatingConcierge (App.js), nav + mobile menu + footer sitemap links, Home ConciergeTeaser section, Sparkles import. /concierge now 404s. Zero remaining references (grep-verified).
+- Finance section renamed to "Mortgage & Loan Partners" (owner confirmed genuine association); copy updated to "associated banking and finance partners"; non-endorsement disclaimer removed.
+- Verified: Selected Work trio + links, concierge fully gone (0 refs), partners section renders with new title, compile clean.

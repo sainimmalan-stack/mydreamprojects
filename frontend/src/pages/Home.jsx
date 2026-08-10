@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, animate, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
@@ -321,8 +321,8 @@ const Purpose = () => (
 
 const SELECTED_SLUGS = [
   "my-dream-nest",
-  "my-dream-hillock",
-  "my-dream-solace",
+  "my-dream-skylark",
+  "my-dream-perch",
 ];
 
 const SelectedWork = () => {
@@ -884,38 +884,6 @@ const Landowner = () => {
   );
 };
 
-const ConciergeTeaser = () => (
-  <section data-testid="home-concierge" className="border-t border-line">
-    <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-36 grid grid-cols-12 gap-x-6 gap-y-10 items-end">
-      <Reveal className="col-span-12 lg:col-span-8">
-        <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6 flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} />
-          AI Property Concierge
-        </p>
-        <h2 className="font-display font-bold uppercase tracking-tighter leading-[0.95] text-4xl md:text-6xl text-bone">
-          Find the right
-          <br />
-          home <span className="text-concrete">for you.</span>
-        </h2>
-        <p className="text-sm md:text-base text-bone/70 leading-relaxed max-w-xl mt-8">
-          Answer five simple questions and our concierge matches you with the most suitable My
-          Dream residence — drawn only from our real, verified portfolio.
-        </p>
-      </Reveal>
-      <Reveal delay={0.15} className="col-span-12 lg:col-span-4 lg:justify-self-end">
-        <Link
-          to="/concierge"
-          data-testid="home-concierge-cta"
-          className="group inline-flex items-center gap-3 bg-ember text-ink font-display font-semibold text-[11px] md:text-xs uppercase tracking-[0.2em] px-7 py-4 md:py-5 hover:bg-bone transition-colors duration-400"
-        >
-          Start the concierge
-          <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
-        </Link>
-      </Reveal>
-    </div>
-  </section>
-);
-
 const Cta = () => (
   <section data-testid="home-cta" className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
     <Reveal>
@@ -981,7 +949,6 @@ export default function Home() {
       <OfficeTeaser />
       <FoundersTeaser />
       <Landowner />
-      <ConciergeTeaser />
       <Cta />
     </>
   );

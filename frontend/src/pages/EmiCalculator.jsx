@@ -29,8 +29,7 @@ const LIMITS = {
   months: { min: 6, max: 360, step: 6, hintMin: "6 mo", hintMax: "360 mo" },
 };
 
-// Official brand marks of institutions our buyers commonly finance with.
-// Neutral naming by design — no endorsement is claimed or implied.
+// Official brand marks of our associated finance partners.
 const PARTNERS = [
   { id: "icici", name: "ICICI Bank", logo: "/assets/partners/icici-bank.svg" },
   { id: "sbi", name: "State Bank of India (SBI)", logo: "/assets/partners/sbi.svg" },
@@ -330,10 +329,10 @@ export default function EmiCalculator() {
 
         <div data-testid="finance-partners" className="mt-20 md:mt-28 border-t border-line pt-12 md:pt-16">
           <Reveal>
-            <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-5">Loan &amp; Finance Options</p>
+            <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-5">Mortgage &amp; Loan Partners</p>
             <p className="text-sm md:text-base text-bone/75 leading-relaxed max-w-xl">
-              Home-loan assistance for My Dream Projects buyers is commonly available through
-              India's leading financial institutions.
+              Home-loan assistance for My Dream Projects buyers is available through our
+              associated banking and finance partners.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
@@ -353,10 +352,6 @@ export default function EmiCalculator() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-[10px] leading-relaxed tracking-wide text-concrete/80 max-w-xl">
-              Logos are the property of their respective institutions, shown for buyer reference
-              only. They do not imply any endorsement of My Dream Projects.
-            </p>
           </Reveal>
         </div>
       </div>

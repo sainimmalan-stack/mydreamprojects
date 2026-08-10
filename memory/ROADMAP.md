@@ -12,7 +12,8 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
-- 2026-08-10: AI Property Concierge (/concierge, 5-question recommender over real data) + Contact→Map office deep-link + Loan & Finance Options section (official ICICI/SBI/LIC marks) + EMI tenure presets (iteration_41, 100% pass)
+- 2026-08-10: Selected Work now Nest/Skylark/Perch + AI Concierge fully removed + finance section renamed "Mortgage & Loan Partners" (self-tested)
+- 2026-08-10: AI Property Concierge built then REMOVED same day per owner request (code in git history if ever wanted back)
 - 2026-08-10: EMI loan minimum now ₹1 lakh + office gallery stacks full-width on iPad portrait (4 viewports measured)
 - 2026-08-10: Stats card mobile overflow fixed + Avasa white line removed from asset + EMI quick-rate preset chips (self-tested, measured at 360/390px)
 - 2026-08-10: Map "Expected 2027" labels + EMI WhatsApp share button + compact mobile menu + single-screen mobile EMI calculator (self-tested)
