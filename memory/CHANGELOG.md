@@ -989,3 +989,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - ComingSoonElevation blueprint placeholders now carry the official MDP logo centrally: full stacked light logo (logo-full-dark.png, h-14 lg:h-24) on desktop detail pages, small icon mark (logo-icon.png h-7) on mobile detail, icon (h-9/md:h-10) centered on compact project cards.
 - Position tuned per breakpoint (top-[40%] mobile / top-[36%] md / centered lg+) so the logo never overlaps the title or ELEVATION / COMING SOON / ONGOING messaging; blueprint linework, 3D PLAN button and all text unchanged.
 - Renders ONLY where no real elevation exists (all 6 ongoing: aurelia, elysium, aura, echelon, vale, ivy); completed projects with real photography untouched. No distortion — w-auto object-contain, pointer-events-none, aria-hidden.
+
+## 2026-08-13 — Production DB Write-Path Audit (DONE — no fix needed, verified live)
+- Audited backend/server.py: MongoDB is fully env-driven (os.environ['MONGO_URL'] + os.environ['DB_NAME'], no hardcoding, no defaults). Preview .env: mongodb://localhost:27017 / test_database. Production gets managed values injected at deploy time.
+- Root cause of "Production Databases: 0": MongoDB creates databases/collections LAZILY on first write — no enquiry had ever been submitted on the live site, so the production DB simply did not exist yet. Not a misconfiguration.
+- Live production proof: POST https://mydreamprojects.in/api/status wrote a marked doc (PRODUCTION-DB-WRITE-PATH-TEST-2026-08-10) and GET read it back. POST /api/enquiries/landowner returned id 6a7d596f457c750488819794 with whatsapp:"not_configured" (Meta creds absent in production — no WhatsApp sent; test used founder's own number, clearly marked "DB Write-Path Test (Emergent)", safe to delete).
+- DB-backed flows: landowner_enquiries + status_checks only. Project data is static (projects.js); admin creds are env-only with no DB routes — nothing else needed production DB wiring.
