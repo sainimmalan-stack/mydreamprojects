@@ -1,7 +1,8 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Header
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+from bson import ObjectId
 import os
 import re
 import logging
@@ -183,6 +184,44 @@ async def create_landowner_enquiry(data: LandownerEnquiryIn):
         raise
 
     return {"id": enquiry_id, "whatsapp": "accepted"}
+
+
+# ---------------- Admin: manage landowner enquiries (guarded by ADMIN_PASSWORD) ----------------
+
+def require_admin(x_admin_key: Optional[str]) -> None:
+    if not x_admin_key or x_admin_key != os.environ.get("ADMIN_PASSWORD"):
+        raise HTTPException(401, "Invalid admin key")
+
+
+@api_router.get("/admin/enquiries")
+async def list_landowner_enquiries(x_admin_key: Optional[str] = Header(default=None)):
+    require_admin(x_admin_key)
+    docs = await db.landowner_enquiries.find({}).sort("created_at", -1).to_list(200)
+    for d in docs:
+        d["id"] = str(d.pop("_id"))
+    return docs
+
+
+@api_router.delete("/admin/enquiries/{enquiry_id}")
+async def delete_landowner_enquiry(enquiry_id: str, x_admin_key: Optional[str] = Header(default=None)):
+    require_admin(x_admin_key)
+    try:
+        oid = ObjectId(enquiry_id)
+    except Exception:
+        raise HTTPException(400, "Invalid enquiry id")
+    result = await db.landowner_enquiries.delete_one({"_id": oid})
+    if result.deleted_count == 0:
+        raise HTTPException(404, "Enquiry not found")
+    return {"deleted": enquiry_id}
+
+
+@api_router.delete("/admin/status-checks/{check_id}")
+async def delete_status_check(check_id: str, x_admin_key: Optional[str] = Header(default=None)):
+    require_admin(x_admin_key)
+    result = await db.status_checks.delete_one({"id": check_id})
+    if result.deleted_count == 0:
+        raise HTTPException(404, "Status check not found")
+    return {"deleted": check_id}
 
 
 # Include the router in the main app
