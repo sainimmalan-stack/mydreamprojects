@@ -22,6 +22,21 @@ const ScrollToTop = () => {
   return null;
 };
 
+const CanonicalUrl = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "canonical");
+      document.head.appendChild(link);
+    }
+    const path = pathname !== "/" ? pathname.replace(/\/+$/, "") : "/";
+    link.setAttribute("href", `${window.location.origin}${path}`);
+  }, [pathname]);
+  return null;
+};
+
 function App() {
   return (
     <ReactLenis root options={{ lerp: 0.09, smoothWheel: true }}>
@@ -38,6 +53,7 @@ function App() {
         </div>
         <BrowserRouter>
           <ScrollToTop />
+          <CanonicalUrl />
           <Navbar />
           <main id="main-content" className="relative z-10">
             <Suspense fallback={<div className="min-h-[100svh] bg-ink" />}>
