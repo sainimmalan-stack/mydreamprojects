@@ -9,6 +9,8 @@
  * visual — a clean, uncluttered architectural render with no annotations.
  */
 
+import { Reg } from "./BrandMark";
+
 export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
   const config = project.configuration || project.flatMix;
   const configSuffix = project.configuration ? "Residence" : "Residences";
@@ -21,7 +23,7 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
     >
       <div className="px-5 md:px-8 pt-6 md:pt-8 pb-5 md:pb-6 border-b border-white/10">
         <div className="flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.25em] md:tracking-[0.4em] text-bone/40 whitespace-nowrap">
-          <span>My Dream Projects</span>
+          <span>My Dream Projects<Reg /></span>
           <span>Typical Floor Plan</span>
         </div>
         <h3 className="font-display font-semibold uppercase tracking-tighter text-2xl md:text-4xl text-bone mt-4 md:mt-5">
@@ -110,7 +112,7 @@ export const PlanSheet = ({ project, onOpen, mode = "2d", onModeChange }) => {
         )}
       </div>
       <div className="px-5 md:px-8 py-4 border-t border-white/10 flex items-center justify-between gap-4 text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.35em] text-bone/40 whitespace-nowrap">
-        <span>My Dream Projects · Ameenpur, Hyderabad</span>
+        <span>My Dream Projects<Reg /> · Ameenpur, Hyderabad</span>
         <span>Sheet {project.index}</span>
       </div>
     </div>

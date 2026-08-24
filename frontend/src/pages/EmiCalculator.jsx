@@ -84,9 +84,9 @@ const ResultRow = ({ label, value, testid, strong = false }) => (
 
 export default function EmiCalculator() {
   useSeo({
-    title: "EMI Calculator | Home Loan EMI in Ameenpur | My Dream Projects",
+    title: "EMI Calculator | Home Loan EMI in Ameenpur | My Dream Projects®",
     description:
-      "Calculate your home loan EMI instantly with the My Dream Projects EMI calculator. Adjust loan amount, interest rate and tenure to see your monthly EMI, total interest and total payable in ₹.",
+      "Calculate your home loan EMI instantly with the My Dream Projects® EMI calculator. Adjust loan amount, interest rate and tenure to see your monthly EMI, total interest and total payable in ₹.",
     image: "/assets/og-image.jpg",
   });
 
@@ -114,7 +114,7 @@ export default function EmiCalculator() {
 
   const shareUrl = `https://wa.me/?text=${encodeURIComponent(
     [
-      "Home Loan EMI Estimate — My Dream Projects",
+      "Home Loan EMI Estimate — My Dream Projects®",
       `Loan Amount: ${fmtINR(amount)}`,
       `Interest Rate: ${rate}% p.a.`,
       `Tenure: ${unit === "years" ? `${tenure} years` : `${tenure} months`} (${months} months)`,
@@ -329,7 +329,7 @@ export default function EmiCalculator() {
           <Reveal>
             <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-5">Mortgage &amp; Loan Partners</p>
             <p className="text-sm md:text-base text-bone/75 leading-relaxed max-w-xl">
-              Home-loan assistance for My Dream Projects buyers is available through our
+              Home-loan assistance for My Dream Projects® buyers is available through our
               associated banking and finance partners.
             </p>
           </Reveal>

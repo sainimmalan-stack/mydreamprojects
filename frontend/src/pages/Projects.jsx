@@ -28,9 +28,9 @@ export default function Projects() {
         : projects.filter((p) => p.status === filter);
 
   useSeo({
-    title: "Projects | My Dream Projects — Ameenpur, Hyderabad",
+    title: "Projects | My Dream Projects® — Ameenpur, Hyderabad",
     description:
-      "Browse all 19 My Dream Projects residential developments in Ameenpur, Hyderabad — 13 completed and 6 ongoing, with real elevations and floor plans.",
+      "Browse all 19 My Dream Projects® residential developments in Ameenpur, Hyderabad — 13 completed and 6 ongoing, with real elevations and floor plans.",
   });
 
   return (

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, animate, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
+import { Reg } from "../components/BrandMark";
 import { getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
@@ -128,7 +129,7 @@ const Hero = () => {
       <motion.div style={{ y }} className="max-w-[1600px] w-full mx-auto px-5 md:px-10 pb-10 md:pb-16">
         <MaskedLine delay={0.1}>
           <span className="inline-block bg-ink/60 backdrop-blur px-3 py-1.5 font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.45em] text-ember mb-6 md:mb-8">
-            My Dream Projects
+            My Dream Projects<Reg />
           </span>
         </MaskedLine>
         <h1 className="font-display font-bold uppercase tracking-tighter leading-[0.92] text-[14.5vw] md:text-[10vw] lg:text-[8.6vw] text-bone">
@@ -290,7 +291,7 @@ const Purpose = () => (
         </Reveal>
         <Reveal delay={0.2} className="mt-10 md:mt-14 max-w-2xl">
           <p className="text-base md:text-lg text-bone/85 leading-relaxed">
-            Since 2020, My Dream Projects has focused on creating thoughtfully planned residential
+            Since 2020, My Dream Projects® has focused on creating thoughtfully planned residential
             developments in Ameenpur. From efficient floor plans to contemporary architectural
             expressions, every project reflects our approach to practical, comfortable and
             considered living.
@@ -400,7 +401,7 @@ const Pricing = () => (
           the home you're considering.
         </p>
         <a
-          href={waLink("Hello My Dream Projects, I'd like to know the exact pricing and current availability for your ongoing projects in Ameenpur.")}
+          href={waLink("Hello My Dream Projects®, I'd like to know the exact pricing and current availability for your ongoing projects in Ameenpur.")}
           target="_blank"
           rel="noopener noreferrer"
           data-testid="pricing-whatsapp-button"
@@ -523,7 +524,7 @@ const OfficeTeaser = () => (
           src="/assets/office/office-exterior.webp"
           srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
           sizes="(max-width: 768px) 100vw, 58vw"
-          alt="My Dream Projects container office in Ameenpur"
+          alt="My Dream Projects® container office in Ameenpur"
           data-testid="office-teaser-image"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
@@ -539,7 +540,7 @@ const OfficeTeaser = () => (
           </h2>
           <p className="text-sm md:text-base text-bone/75 leading-relaxed mt-7 max-w-md">
             Designed and built by us, our two-level container office is a small expression of the
-            planning, design and construction approach behind My Dream Projects.
+            planning, design and construction approach behind My Dream Projects®.
           </p>
           <Link
             to="/about"
@@ -563,7 +564,7 @@ const FoundersTeaser = () => (
         <h2 className="font-display font-semibold uppercase tracking-tighter leading-[1.02] text-3xl md:text-4xl lg:text-5xl text-bone mt-6 max-w-3xl">
           The people behind
           <br />
-          <span className="text-concrete">My Dream Projects.</span>
+          <span className="text-concrete">My Dream Projects<Reg />.</span>
         </h2>
         <p className="text-sm md:text-base text-bone/75 leading-relaxed mt-7 max-w-xl">
           Built by two engineering friends. Driven by a shared vision.
@@ -598,7 +599,7 @@ const FoundersTeaser = () => (
               <div className="overflow-hidden">
                 <img
                   src={f.photo}
-                  alt={`${f.name}, Co-Founder of My Dream Projects`}
+                  alt={`${f.name}, Co-Founder of My Dream Projects®`}
                   data-testid={`${f.testid}-portrait`}
                   loading="lazy"
                   className="w-full aspect-[4/5] object-cover object-[50%_45%] block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
@@ -676,7 +677,7 @@ const Landowner = () => {
     setError("");
     setSubmitting(true);
     const message = [
-      "Hello My Dream Projects,",
+      "Hello My Dream Projects®,",
       "I own a plot of land and would like to discuss a development partnership.",
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
@@ -743,7 +744,7 @@ const Landowner = () => {
             </Reveal>
             <Reveal delay={0.2} className="mt-10 md:mt-14 max-w-2xl">
               <p className="text-base md:text-lg text-bone/85 leading-relaxed">
-                Own a plot in or around Hyderabad? Partner with My Dream Projects on a joint
+                Own a plot in or around Hyderabad? Partner with My Dream Projects® on a joint
                 development — we take care of design, approvals, construction and sales while your
                 land works for you.
               </p>
@@ -855,7 +856,7 @@ const Landowner = () => {
                             className="mt-0.5 w-4 h-4 shrink-0 accent-[#E85D22] cursor-pointer"
                           />
                           <span className="text-xs text-concrete leading-relaxed tracking-wide">
-                            I agree to receive a WhatsApp confirmation from My Dream Projects
+                            I agree to receive a WhatsApp confirmation from My Dream Projects®
                             regarding my enquiry.
                           </span>
                         </label>
@@ -932,9 +933,9 @@ const Cta = () => (
 
 export default function Home() {
   useSeo({
-    title: "My Dream Projects | Residential Projects in Ameenpur, Hyderabad",
+    title: "My Dream Projects® | Residential Projects in Ameenpur, Hyderabad",
     description:
-      "Explore My Dream Projects — thoughtfully planned residential developments in Ameenpur, Hyderabad. Discover our completed and ongoing projects, architectural elevations and floor plans.",
+      "Explore My Dream Projects® — thoughtfully planned residential developments in Ameenpur, Hyderabad. Discover our completed and ongoing projects, architectural elevations and floor plans.",
     image: "/assets/og-image.jpg",
   });
   return (

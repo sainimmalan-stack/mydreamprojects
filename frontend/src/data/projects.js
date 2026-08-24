@@ -48,7 +48,7 @@ const MY_DREAM_NEST = {
   totalFlats: 10,
   flatMix: "2 BHK + 3 BHK",
   description:
-    "My Dream Nest represents the beginning of the My Dream Projects journey. Completed in 2020, the residential development combines practical planning, comfortable living spaces and a contemporary architectural approach in Ameenpur.",
+    "My Dream Nest represents the beginning of the My Dream Projects® journey. Completed in 2020, the residential development combines practical planning, comfortable living spaces and a contemporary architectural approach in Ameenpur.",
   cover: "/assets/projects/my-dream-nest/elevation.jpg",
   elevationModes: {
     day: "/assets/projects/my-dream-nest/elevation-day.webp",
@@ -718,7 +718,7 @@ const MY_DREAM_AURELIA = {
   totalFlats: 15,
   flatMix: "2 BHK",
   description:
-    "My Dream Aurelia is an upcoming residential development by My Dream Projects in Ameenpur, thoughtfully planned for contemporary family living. The project is currently under development, with its architectural elevation to be revealed soon.",
+    "My Dream Aurelia is an upcoming residential development by My Dream Projects® in Ameenpur, thoughtfully planned for contemporary family living. The project is currently under development, with its architectural elevation to be revealed soon.",
   floorPlan: {
     pdf: "/assets/projects/my-dream-aurelia/floor-plan.pdf",
     preview: "/assets/projects/my-dream-aurelia/floor-plan-p1.jpg",
@@ -766,7 +766,7 @@ const MY_DREAM_ELYSIUM = {
   totalFlats: 15,
   flatMix: "2 BHK",
   description:
-    "My Dream Elysium is an ongoing residential development by My Dream Projects in Ameenpur, thoughtfully planned to combine contemporary living with efficient and comfortable residential spaces. Its architectural elevation is currently under development and will be revealed soon.",
+    "My Dream Elysium is an ongoing residential development by My Dream Projects® in Ameenpur, thoughtfully planned to combine contemporary living with efficient and comfortable residential spaces. Its architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
     pdf: "/assets/projects/my-dream-elysium/floor-plan.pdf",
     preview: "/assets/projects/my-dream-elysium/floor-plan-p1.jpg",
@@ -814,7 +814,7 @@ const MY_DREAM_AURA = {
   totalFlats: 10,
   flatMix: "2 BHK + 3 BHK",
   description:
-    "My Dream Aura is an ongoing residential development by My Dream Projects in Ameenpur, planned around comfortable family living, efficient spaces and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
+    "My Dream Aura is an ongoing residential development by My Dream Projects® in Ameenpur, planned around comfortable family living, efficient spaces and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
     pdf: "/assets/projects/my-dream-aura/floor-plan.pdf",
     preview: "/assets/projects/my-dream-aura/floor-plan-p1.jpg",
@@ -858,7 +858,7 @@ const MY_DREAM_ECHELON = {
   totalFlats: 10,
   flatMix: "2 BHK",
   description:
-    "My Dream Echelon is an ongoing residential development by My Dream Projects in Ameenpur, thoughtfully planned around contemporary family living, efficient layouts and comfortable residential spaces. The project’s architectural elevation is currently under development and will be revealed soon.",
+    "My Dream Echelon is an ongoing residential development by My Dream Projects® in Ameenpur, thoughtfully planned around contemporary family living, efficient layouts and comfortable residential spaces. The project’s architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
     pdf: "/assets/projects/my-dream-echelon/floor-plan.pdf",
     preview: "/assets/projects/my-dream-echelon/floor-plan-p1.jpg",
@@ -902,7 +902,7 @@ const MY_DREAM_VALE = {
   totalFlats: 10,
   flatMix: "2½ BHK + 3 BHK",
   description:
-    "My Dream Vale is an ongoing residential development by My Dream Projects in Ameenpur, thoughtfully planned to provide comfortable family living through efficient layouts and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
+    "My Dream Vale is an ongoing residential development by My Dream Projects® in Ameenpur, thoughtfully planned to provide comfortable family living through efficient layouts and contemporary residential design. The project’s architectural elevation is currently under development and will be revealed soon.",
   floorPlan: {
     pdf: "/assets/projects/my-dream-vale/floor-plan.pdf",
     preview: "/assets/projects/my-dream-vale/floor-plan-p1.jpg",

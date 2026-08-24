@@ -5,8 +5,8 @@ import useSeo from "../hooks/useSeo";
 
 export default function NotFound() {
   useSeo({
-    title: "Page Not Found | My Dream Projects",
-    description: "The page you're looking for couldn't be found. Explore My Dream Projects residential developments in Ameenpur, Hyderabad.",
+    title: "Page Not Found | My Dream Projects®",
+    description: "The page you're looking for couldn't be found. Explore My Dream Projects® residential developments in Ameenpur, Hyderabad.",
   });
 
   return (

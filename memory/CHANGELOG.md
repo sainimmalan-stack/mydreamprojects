@@ -1007,3 +1007,10 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - PLATFORM ACTION NEEDED: Emergent support (support@emergent.sh) must whitelist/adjust the WAF bot rule for path /emi-calculator on the production deployment. Evidence matrix ready to send.
 - Also completed: production test-record cleanup via new admin API — landowner_enquiries already empty (user removed via viewer), status_checks test doc deleted; production DB verified clean ([]).
 - User instructed: do NOT click "Validate Fix" in GSC until platform clears the 403.
+
+## 2026-08-24 — Registered Trademark Rollout: My Dream Projects® (DONE, iteration_46 100% pass, 9/9)
+- Site-wide audit + update: every visible/legal/SEO brand reference now shows "My Dream Projects®" (® not ™). ~60 occurrences across 15 files.
+- Display spots use subtle superscript via new src/components/BrandMark.jsx (Reg: sup, 0.5em, align-super, aria-hidden): navbar wordmark, hero eyebrow, plan-sheet header/footer, contact office caption, Home "My Dream Projects." span, Marquee item.
+- Plain ® char in: body copy, alt/aria, page titles, meta descriptions, OG/Twitter tags, JSON-LD org name (index.html), WhatsApp/EMI share message strings, data files (contact.js OFFICE.name + greetings, projects.js descriptions).
+- Intentionally UNCHANGED (technical): URLs/routes, slugs, filenames, testids, adminmydreamprojects@gmail.com, Google Maps URL, logo artwork assets (no duplicate ® on logo images).
+- Verified: no unmarked occurrences, no ®®, no ™, project names (My Dream Nest etc.) correctly carry NO ®, zero console errors, no layout shifts desktop+mobile.

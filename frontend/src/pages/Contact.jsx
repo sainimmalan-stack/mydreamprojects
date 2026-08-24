@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Phone, MessageCircle, Navigation } from "lucide-react";
+import { Reg } from "../components/BrandMark";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -89,7 +90,7 @@ const OfficeSection = () => (
       <p className="text-[10px] uppercase tracking-[0.4em] text-ember mb-6">Visit Our Office</p>
       <p className="text-sm md:text-base text-bone/75 leading-relaxed max-w-xl">
         More than a workplace, our office is where ideas become spaces. Come meet us, talk about
-        your project, and experience My Dream Projects in person.
+        your project, and experience My Dream Projects® in person.
       </p>
     </Reveal>
     <div className="flex flex-col lg:flex-row lg:items-start gap-4 md:gap-6 mt-10 md:mt-14">
@@ -98,7 +99,7 @@ const OfficeSection = () => (
           src="/assets/office/office-exterior.webp"
           srcSet="/assets/office/office-exterior-800.webp 800w, /assets/office/office-exterior-1600.webp 1448w"
           sizes="(max-width: 1024px) 100vw, 62vw"
-          alt="My Dream Projects two-storey container office at night with illuminated signage"
+          alt="My Dream Projects® two-storey container office at night with illuminated signage"
           testid="office-photo-primary"
         />
       </Reveal>
@@ -107,7 +108,7 @@ const OfficeSection = () => (
           src="/assets/office/office-interior.webp"
           srcSet="/assets/office/office-interior-800.webp 800w, /assets/office/office-interior.webp 1672w"
           sizes="(max-width: 1024px) 100vw, 38vw"
-          alt="My Dream Projects office interior with desk and My Dream Projects logo on the wall"
+          alt="My Dream Projects® office interior with desk and My Dream Projects® logo on the wall"
           testid="office-photo-interior"
         />
       </Reveal>
@@ -116,7 +117,7 @@ const OfficeSection = () => (
       <div className="flex flex-wrap items-center justify-between gap-6 mt-8 md:mt-10">
         <div>
           <p className="font-display font-semibold uppercase tracking-tight text-lg text-bone">
-            My Dream Projects — Office / Studio
+            My Dream Projects<Reg /> — Office / Studio
           </p>
           <p className="text-[10px] uppercase tracking-[0.3em] text-concrete mt-2">
             Ameenpur, Hyderabad
@@ -142,9 +143,9 @@ export default function Contact() {
   const [error, setError] = useState("");
 
   useSeo({
-    title: "Contact My Dream Projects | Ameenpur, Hyderabad",
+    title: "Contact My Dream Projects® | Ameenpur, Hyderabad",
     description:
-      "Talk to My Dream Projects about residential developments in Ameenpur, Hyderabad — call, WhatsApp or visit our two-level container office.",
+      "Talk to My Dream Projects® about residential developments in Ameenpur, Hyderabad — call, WhatsApp or visit our two-level container office.",
   });
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
@@ -157,7 +158,7 @@ export default function Contact() {
     }
     setError("");
     const message = [
-      "Hello My Dream Projects,",
+      "Hello My Dream Projects®,",
       `Name: ${form.name.trim()}`,
       `Phone: ${form.phone.trim()}`,
       `Interested In: ${form.project}`,
@@ -188,7 +189,7 @@ export default function Contact() {
           <Reveal delay={0.35} className="mt-8 max-w-xl">
             <p className="text-sm md:text-base text-bone/75 leading-relaxed">
               Planning your next home? Talk to us about our current developments, upcoming
-              projects or visit us at the My Dream Projects office in Ameenpur.
+              projects or visit us at the My Dream Projects® office in Ameenpur.
             </p>
           </Reveal>
           <QuickActions />
@@ -203,7 +204,7 @@ export default function Contact() {
                 data-testid="contact-office-map-link"
                 className="group inline-flex items-center gap-2.5 font-display font-semibold uppercase tracking-tight text-xl text-bone mb-6 hover:text-ember transition-colors duration-300"
               >
-                My Dream Projects
+                My Dream Projects®
                 <ArrowUpRight className="w-[18px] h-[18px] text-concrete group-hover:text-ember group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-[color,transform] duration-300" strokeWidth={1.5} />
               </Link>
               <div className="space-y-6">

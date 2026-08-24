@@ -160,7 +160,7 @@ const OfficeCard = ({ onClose }) => (
       <div className="w-[92px] md:w-[104px] shrink-0 relative overflow-hidden border-r border-line">
         <img
           src="/assets/office/office-exterior-800.webp"
-          alt="My Dream Projects — Office"
+          alt="My Dream Projects® — Office"
           data-testid="map-office-thumb"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -214,9 +214,9 @@ const OfficeCard = ({ onClose }) => (
 
 export default function ProjectMap() {
   useSeo({
-    title: "Our Map — My Dream Projects",
+    title: "Our Map — My Dream Projects®",
     description:
-      "19 developments. One growing neighbourhood. Explore every My Dream Projects location around Ameenpur, Hyderabad from a single map.",
+      "19 developments. One growing neighbourhood. Explore every My Dream Projects® location around Ameenpur, Hyderabad from a single map.",
     path: "/project-map",
   });
 
@@ -431,7 +431,7 @@ export default function ProjectMap() {
     const oel = document.createElement("button");
     oel.type = "button";
     oel.dataset.testid = "map-marker-office";
-    oel.setAttribute("aria-label", "My Dream Projects — Office");
+    oel.setAttribute("aria-label", "My Dream Projects® — Office");
     oel.className =
       "absolute top-0 left-0 touch-manipulation flex items-center justify-center p-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 bg-ember/90 border-ember/70 hover:bg-ember";
     oel.innerHTML = `
@@ -535,7 +535,7 @@ export default function ProjectMap() {
           transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
           className="text-sm md:text-base text-concrete leading-relaxed max-w-xl mt-6"
         >
-          19 developments. One growing neighbourhood. Explore every My Dream Projects location from a
+          19 developments. One growing neighbourhood. Explore every My Dream Projects® location from a
           single map.
         </motion.p>
       </section>

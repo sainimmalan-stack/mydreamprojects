@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Reg } from "../BrandMark";
 
 const LINKS = [
   { to: "/", label: "Home", testid: "nav-home-link" },
@@ -21,11 +22,11 @@ export const Logo = ({ onClick }) => (
   >
     <img
       src="/assets/logo-icon.png"
-      alt="My Dream Projects"
+      alt="My Dream Projects®"
       className="h-8 md:h-9 w-auto group-hover:scale-105 transition-transform duration-300"
     />
     <span className="font-display font-semibold text-sm md:text-base tracking-[0.18em] uppercase text-bone">
-      My Dream Projects
+      My Dream Projects<Reg />
     </span>
   </Link>
 );
@@ -119,7 +120,7 @@ export const Navbar = () => {
           >
             <div className="flex items-center justify-between px-5 h-20 border-b border-line">
               <Link to="/" onClick={() => setOpen(false)} data-testid="mobile-menu-logo">
-                <img src="/assets/logo-full-dark.png" alt="My Dream Projects" className="h-14 w-auto" />
+                <img src="/assets/logo-full-dark.png" alt="My Dream Projects®" className="h-14 w-auto" />
               </Link>
               <button
                 data-testid="mobile-menu-close"

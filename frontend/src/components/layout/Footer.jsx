@@ -9,7 +9,7 @@ export const Footer = () => (
         <div className="col-span-2 md:col-span-6 flex justify-center md:justify-start">
           <img
             src="/assets/logo-full-dark.png"
-            alt="My Dream Projects — You Dream, We Build"
+            alt="My Dream Projects® — You Dream, We Build"
             data-testid="footer-logo"
             className="w-40 md:w-48 h-auto self-start"
           />
@@ -81,7 +81,7 @@ export const Footer = () => (
       </div>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 pt-6 border-t border-line">
         <p className="text-[10px] uppercase tracking-[0.3em] text-concrete">
-          © {new Date().getFullYear()} My Dream Projects
+          © {new Date().getFullYear()} My Dream Projects®
         </p>
         <p className="text-[10px] uppercase tracking-[0.3em] text-concrete">
           Nimmala Sai · Kotapati Akhil

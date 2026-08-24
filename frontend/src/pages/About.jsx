@@ -19,7 +19,7 @@ const FOUNDERS = [
     wa: WHATSAPP_NUMBER,
     tel: PHONE_SAI.tel,
     bio: [
-      "Sai is the creative mind behind much of the identity of My Dream Projects. From project names, colour palettes, brochures and creative concepts to office design and landscaping, he takes an active role in shaping how every project is presented and experienced.",
+      "Sai is the creative mind behind much of the identity of My Dream Projects®. From project names, colour palettes, brochures and creative concepts to office design and landscaping, he takes an active role in shaping how every project is presented and experienced.",
       "Rather than being heavily involved in day-to-day site operations, his focus is primarily on creative direction, design thinking and the overall character of the brand and its developments.",
       "Away from work, Sai enjoys travelling, photography, music and off-roading.",
       "He is married to Amulya, and they have a son, Aadhyant.",
@@ -35,7 +35,7 @@ const FOUNDERS = [
     wa: WHATSAPP_NUMBER_AKHIL,
     tel: PHONE_AKHIL.tel,
     bio: [
-      "Akhil is the operational force behind My Dream Projects. He takes the lead on site execution, construction activities, customer coordination, workforce management and the day-to-day responsibilities required to take a project from plan to completion.",
+      "Akhil is the operational force behind My Dream Projects®. He takes the lead on site execution, construction activities, customer coordination, workforce management and the day-to-day responsibilities required to take a project from plan to completion.",
       "His calm and composed nature, combined with his hands-on involvement at the project level, complements Sai\u2019s creative approach and creates a clear balance between vision and execution within the company.",
       "Outside work, Akhil is a fitness enthusiast and a strongly family-oriented person, known for his calm-going personality.",
       "He is married to Yamuna, and they have a son, Ayaansh.",
@@ -93,20 +93,20 @@ const StoryText = () => (
               and complementary strengths.
             </p>
             <p className="text-sm md:text-base text-bone/85 leading-relaxed">
-              Years later, that friendship became the foundation of My Dream Projects. From choosing
+              Years later, that friendship became the foundation of My Dream Projects®. From choosing
               project names and shaping designs to managing construction and delivering homes, they
               built the company together from the ground up — largely through their own effort,
               learning and experience, without major backing from their families.
             </p>
             <p className="text-sm md:text-base text-concrete leading-relaxed">
-              Today, their different strengths define the way My Dream Projects operates: Sai shapes
+              Today, their different strengths define the way My Dream Projects® operates: Sai shapes
               the creative identity and vision, while Akhil drives execution and operations on the
               ground.
             </p>
           </Reveal>
           <Reveal delay={0.25} className="mt-12 md:mt-16 border-t border-line pt-10 md:pt-12 space-y-5">
             <p className="text-base md:text-lg text-bone/85 leading-relaxed">
-              My Dream Projects was founded in 2020 by Nimmala Sai and Kotapati Akhil with a shared
+              My Dream Projects® was founded in 2020 by Nimmala Sai and Kotapati Akhil with a shared
               vision—to create thoughtfully designed homes that bring together contemporary
               architecture, efficient planning and dependable construction.
             </p>
@@ -123,7 +123,7 @@ const StoryText = () => (
 );
 
 const JOURNEY = [
-  { year: "2020", event: "My Dream Projects founded" },
+  { year: "2020", event: "My Dream Projects® founded" },
   { year: "2020", event: "My Dream Nest — Our first project" },
   { year: "2021–2023", event: "Growing our residential portfolio" },
   { year: "2024–2025", event: "A growing architectural identity" },
@@ -187,7 +187,7 @@ const Founders = () => (
             <div className="overflow-hidden w-full aspect-[4/5] md:aspect-auto md:w-[352px] md:h-[440px] md:shrink-0 md:self-start">
               <img
                 src={f.photo}
-                alt={`${f.name}, Co-Founder of My Dream Projects`}
+                alt={`${f.name}, Co-Founder of My Dream Projects®`}
                 data-testid={`${f.testid}-portrait`}
                 loading="lazy"
                 className="w-full h-full object-cover object-[50%_45%] block group-hover:scale-[1.02] transition-transform duration-[1.2s]"
@@ -291,9 +291,9 @@ const Philosophy = () => (
 export default function About() {
   const { hash } = useLocation();
   useSeo({
-    title: "About My Dream Projects | Ameenpur, Hyderabad",
+    title: "About My Dream Projects® | Ameenpur, Hyderabad",
     description:
-      "Founded in 2020 by Nimmala Sai and Kotapati Akhil, My Dream Projects creates thoughtfully designed residential developments in Ameenpur, Hyderabad.",
+      "Founded in 2020 by Nimmala Sai and Kotapati Akhil, My Dream Projects® creates thoughtfully designed residential developments in Ameenpur, Hyderabad.",
     image: "/assets/og-image.jpg",
   });
   // deep links (/about#founders) land directly on the founders section

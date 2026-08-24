@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-24: My Dream Projects® registered-trademark rollout — site-wide audit, superscript ® on display brand marks, ® in all meta/SEO/JSON-LD/WhatsApp strings (iteration_46, 100% pass)
 - 2026-08-10: Official MDP logo now sits centrally in all 6 ongoing projects' "Elevation Coming Soon" placeholders (full logo desktop / icon mobile+cards) — iteration_45, 100% pass
 - 2026-08-10: EMI result panel REVERTED to previous dark design per owner; only Loan Amount + Loan Tenure inputs got subtle lighter-grey highlight panels (self-tested desktop/mobile)
 - 2026-08-10: EMI Calculator result section redesigned — light-grey premium financial panel on dark page, EMI-first hierarchy, iPad side-by-side layout (iteration_44, 100% pass)

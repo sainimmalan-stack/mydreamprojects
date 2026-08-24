@@ -23,13 +23,13 @@ export default function ProjectDetail() {
   const project = getProject(slug);
   useSeo({
     title: project
-      ? `${project.title} | Residential Project in Ameenpur | My Dream Projects`
-      : "Project | My Dream Projects",
+      ? `${project.title} | Residential Project in Ameenpur | My Dream Projects®`
+      : "Project | My Dream Projects®",
     description: project
-      ? `Explore ${project.title} by My Dream Projects in Ameenpur, Hyderabad. ${
+      ? `Explore ${project.title} by My Dream Projects® in Ameenpur, Hyderabad. ${
           project.status === "completed" ? `Completed in ${project.year}.` : "Currently under development."
         } View the project ${project.cover ? "elevation, details" : "details"} and residential floor plan.`
-      : "Residential project by My Dream Projects in Ameenpur, Hyderabad.",
+      : "Residential project by My Dream Projects® in Ameenpur, Hyderabad.",
     image: project?.cover || "/assets/og-image.jpg",
   });
   if (!project) return <Navigate to="/projects" replace />;
@@ -61,7 +61,7 @@ export default function ProjectDetail() {
             ...(project.status === "ongoing"
               ? {
                   enquire: waLink(
-                    `Hello My Dream Projects, I'm interested in ${project.title} (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?`
+                    `Hello My Dream Projects®, I'm interested in ${project.title} (Ameenpur, Hyderabad). Could you please share which units are currently available in this project?`
                   ),
                 }
               : {}),
