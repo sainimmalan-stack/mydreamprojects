@@ -7,45 +7,10 @@ import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
 import { projects } from "../data/projects";
 import { OFFICE, MAPS_URL } from "../data/contact";
 import { Blueprint } from "../components/ComingSoonElevation";
+import { MAP_STYLE, MAP_ATTRIBUTION } from "../components/mapStyle";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
-// Inline raster style (Carto Dark Matter raster tiles) — no glyph/sprite
-// dependencies, which are the usual cause of a blank canvas with vector styles.
-const MAP_STYLE = {
-  version: 8,
-  sources: {
-    "carto-dark": {
-      type: "raster",
-      tiles: [
-        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-      ],
-      tileSize: 512,
-      maxzoom: 19,
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    },
-  },
-  layers: [
-    {
-      id: "carto-dark",
-      type: "raster",
-      source: "carto-dark",
-      paint: {
-        // lift the black point + gentle contrast so roads, water and locality
-        // labels read clearly while staying a premium dark basemap
-        "raster-brightness-min": 0.09,
-        "raster-brightness-max": 1,
-        "raster-contrast": 0.15,
-        "raster-saturation": -0.1,
-        "raster-fade-duration": 0,
-      },
-    },
-  ],
-};
 
 const STATUS_DOT = {
   completed: "bg-emerald-400 shadow-[0_0_6px_1.5px_rgba(52,211,153,0.5)]",
@@ -359,9 +324,17 @@ export default function ProjectMap() {
       fitBoundsOptions: { padding: fitPadding(), maxZoom: 15.5 },
       pitch: 0,
       bearing: 0,
-      attributionControl: { compact: true },
+      attributionControl: { compact: true, customAttribution: MAP_ATTRIBUTION },
     });
     map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+    // keep attribution collapsed (info toggle) on narrow containers
+    const collapseAttrib = () => {
+      const c = map.getContainer();
+      const a = c.querySelector(".maplibregl-ctrl-attrib");
+      if (a && c.clientWidth < 640) a.classList.remove("maplibregl-compact-show");
+    };
+    map.on("load", collapseAttrib);
+    map.on("idle", collapseAttrib);
     // prevent accidental zoom jumps when tapping pins on touch devices
     map.doubleClickZoom.disable();
     map.on("error", (e) => {

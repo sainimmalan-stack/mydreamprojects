@@ -1,0 +1,22 @@
+{
+  "summary": "Frontend-only testing of MapLibre GL v4.7.1 + OpenFreeMap keyless dark map replacement (site map + main /project-map). All 7 requested test scenarios pass: per-project SiteMap renders dark vector basemap with visible streets, ember orange marker, zoom +/- controls, and compact attribution info toggle. Main /project-map renders vector basemap with all 19 project pins + office pin, filter buttons (all/completed/ongoing) work and update marker set, clicking a pin opens the project card popup. No 'API KEY REQUIRED' text found in DOM on any tested page. Mobile 390px: no horizontal overflow on either /project-map or /projects/my-dream-skylark; attribution stays collapsed (info button). Regression: both completed (skylark) and ongoing (aurelia) project detail pages render fully with the SiteMap embed and no missing-data errors after the 19 Google embed URL removals. Only console log related to maps is a benign '[maplibre] style loaded: true' info message — no errors, warnings, tile failures, or key-related messages.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "SiteMap.jsx header comment still references 'Carto Dark Matter raster tiles' — outdated after switch to OpenFreeMap vector; minor doc cleanup.",
+    "SiteMap useEffect deps [lat, lng] omit `title` (only used in aria-label) — acceptable since aria-label rebuild not critical, but eslint-react-hooks may warn.",
+    "Attribution collapse logic runs on every 'idle' event — cheap, but could be limited to 'load' + resize observer if desired."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "N/A (skipped)", "frontend": "100%" },
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "MapLibre GL is intentionally pinned to ^4.7.1 (v6 fails in this env). OpenFreeMap dark style is keyless. site-map-embed testid is on the container div; canvas is a child. Main /project-map uses shared MAP_STYLE. Marker count is 0 immediately after canvas mounts — wait 4-6s for vector tiles + custom markers to render before asserting count. Filter buttons: map-filter-all/completed/ongoing. Custom project card popup on /project-map does NOT use .maplibregl-popup class — it's a React overlay card; use screenshot/text checks instead."
+}

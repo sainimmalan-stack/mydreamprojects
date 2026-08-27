@@ -1014,3 +1014,11 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Plain ® char in: body copy, alt/aria, page titles, meta descriptions, OG/Twitter tags, JSON-LD org name (index.html), WhatsApp/EMI share message strings, data files (contact.js OFFICE.name + greetings, projects.js descriptions).
 - Intentionally UNCHANGED (technical): URLs/routes, slugs, filenames, testids, adminmydreamprojects@gmail.com, Google Maps URL, logo artwork assets (no duplicate ® on logo images).
 - Verified: no unmarked occurrences, no ®®, no ™, project names (My Dream Nest etc.) correctly carry NO ®, zero console errors, no layout shifts desktop+mobile.
+
+## 2026-08-27 — Keyless Dark Maps: API-KEY Watermark Eliminated (DONE, iteration_47 100% pass, 7/7)
+- ROOT CAUSE: CARTO Dark Matter raster endpoint (basemaps.cartocdn.com) started serving "API KEY REQUIRED" watermark tiles; project site sections also used Google keyless embed iframes (risk of Google overlays).
+- FIX: all maps now use MapLibre GL + OpenFreeMap dark vector style (tiles.openfreemap.org/styles/dark, OpenStreetMap data) — fully keyless, no API key/token anywhere.
+- maplibre-gl pinned DOWN to ^4.7.1: v6.2.0 empirically failed to request vector tiles here (0 pbf requests, black canvas, no errors); v4 renders perfectly. Do NOT upgrade without re-testing.
+- New components/SiteMap.jsx renders per-project site maps (dark basemap, ember marker, zoom controls, drag-pan; compact attribution force-collapsed on <640px containers). ProjectMap.jsx now imports shared MAP_STYLE/MAP_ATTRIBUTION from components/mapStyle.js.
+- Removed all 19 Google `embed` fields from projects.js (dead data). No user-facing API-key text remains anywhere.
+- Verified desktop+mobile: streets/labels readable, 19 pins + office pin on /project-map, filters + popups work, zero console errors, no "API KEY REQUIRED" in DOM, no horizontal overflow.

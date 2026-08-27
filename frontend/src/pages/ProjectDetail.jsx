@@ -8,6 +8,7 @@ import ElevationViewer from "../components/ElevationViewer";
 import ComingSoonElevation from "../components/ComingSoonElevation";
 import LoanPartners from "../components/LoanPartners";
 import BrandSpecs from "../components/BrandSpecs";
+import SiteMap from "../components/SiteMap";
 import PlanSheet from "../components/PlanSheet";
 import { getProject, getAdjacent } from "../data/projects";
 import { waLink } from "../data/contact";
@@ -487,14 +488,10 @@ export default function ProjectDetail() {
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
               className="col-span-12 md:col-span-8 border border-line overflow-hidden"
             >
-              <iframe
-                src={project.siteLocation.embed}
-                title={`${project.title} project site location map`}
-                data-testid="site-map-embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-                className="w-full h-[320px] md:h-[440px] block border-0"
+              <SiteMap
+                lat={project.siteLocation.lat}
+                lng={project.siteLocation.lng}
+                title={project.title}
               />
             </motion.div>
           </div>
