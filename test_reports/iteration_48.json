@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only Leaflet map re-implementation tested. Real OSM raster tiles render correctly with dark CSS filter, 19 project pins + office pin present, filters/zoom/attribution all functional, pin clicks and ?project= deep link show info cards, mobile 390px has no overflow with working chip selector, per-project SiteMap on skylark and aurelia loads tiles correctly, no maplibre/'API KEY REQUIRED' strings in DOM, and no JS/console errors. One bug: office info card (data-testid=map-office-card) never appears — neither on office pin click nor via ?focus=office deep link (map does zoom onto office pin on click, but the OfficeCard React overlay is not rendered).",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "ProjectMap / OfficeCard",
+        "issue": "Office info card never renders. Clicking the office pin flies the map to the office (marker highlights ember) but the OfficeCard overlay (data-testid='map-office-card') is not shown. Same problem via deep link /project-map?focus=office — additionally in that case the map does not even fly to the office (stays at fitVisible extent), so both focusOffice() call paths are affected. Project pin clicks and ?project=<slug> deep links work correctly and DO render map-info-card.",
+        "selector": "[data-testid='map-office-card']",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Office deep link ?focus=office",
+        "issue": "Handler in map 'load' event may not fire (Leaflet's map.on('load') is not guaranteed on initial fitBounds path) — so focusOffice() is never called. Suggest calling focusOffice() from a whenReady() callback or a separate useEffect keyed off searchParams after markers are placed.",
+        "affected_selectors": ["[data-testid='map-marker-office']", "[data-testid='map-office-card']"]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Debug why setSelected('office') via office marker click does not render the OfficeCard. The click handler on line 428 calls focusOffice() → setSelected('office'), yet selected==='office' render branch at line 612 never mounts the card. Verify state closure / stale ref (focusOffice is defined outside the useEffect and may capture stale setSelected? — actually setSelected identity is stable, so more likely selectedRef vs. selected mismatch or the click handler is being attached to an element replaced during highlight useEffect that rewrites el.className/innerHTML). Note: the highlight useEffect (line 442) rewrites el.className for the office branch too — it does NOT overwrite innerHTML for office, so click listener should survive; needs deeper inspection.",
+    "Fix ?focus=office deep link — move the focusOffice() dispatch out of map.on('load') into a whenReady()/useEffect that runs once markers are mounted. Currently the fly-to isn't happening on deep link at all."
+  ],
+  "critical_code_review_comments": [
+    "ProjectMap.jsx is 653 lines — consider splitting InfoCard/OfficeCard/marker builders into separate files.",
+    "map.on('load') is unreliable for post-init side effects; use map.whenReady() or a useEffect keyed on mapRef.current instead."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "n/a", "frontend": "~92% (11/12 checks pass; office card broken)" },
+  "seed_data_creation": "none",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All map functionality verified via Playwright at 1920x1080 and 390x844. Only the OFFICE info card is broken — both the pin click and the ?focus=office deep link fail to render [data-testid='map-office-card']. All other features (project pins, filters, zoom, attribution, ?project= deep link, mobile chips, SiteMap on /projects/my-dream-skylark and /projects/my-dream-aurelia, homepage & /projects regression) pass. Zero JS errors on all tested pages.",
+  "rca of the issue": "Office pin click: focusOffice() calls setSelected('office') and flyToWithOffset — the flyTo works (map zooms to office and pin highlights ember) but the React overlay {selected === 'office' && <OfficeCard/>} never mounts. Suspect: the office marker's click handler in useEffect[filter] captures a stale setSelected closure (unlikely since setState is stable), OR the highlight useEffect (line 442) resets el.className with a template that DIFFERS from the original creation template — specifically the office branch reassigns className but does not touch listeners; however if focusOffice is closed over an older render's selected state it still calls setSelected('office'). Most likely root cause: focusOffice is redefined every render but the click listener was bound to a specific closure inside the filter useEffect — that closure references the focusOffice from that render, which calls the same setSelected. State should update. Requires main-agent React DevTools inspection of `selected` state after click. Deep-link case has separate RCA: map.on('load') never fires on synchronous fitBounds init when tiles are cached, so the ?focus=office branch never executes. Fix: use map.whenReady() or a separate effect keyed on [searchParams, mapRef.current]."
+}

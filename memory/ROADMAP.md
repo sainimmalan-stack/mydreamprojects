@@ -12,6 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
+- 2026-08-27: Maps rebuilt on Leaflet + keyless OpenStreetMap tiles (dark CSS-filtered) — production MapLibre race eliminated; real roads/labels/water render (iteration_48 + fixes, verified preview; production verify pending redeploy)
 - 2026-08-27: Maps made fully keyless — "API KEY REQUIRED" watermark tiles eliminated; MapLibre + OpenFreeMap dark vector style everywhere (maplibre-gl pinned ^4.7.1, v6 broken here) (iteration_47, 100% pass)
 - 2026-08-24: My Dream Projects® registered-trademark rollout — site-wide audit, superscript ® on display brand marks, ® in all meta/SEO/JSON-LD/WhatsApp strings (iteration_46, 100% pass)
 - 2026-08-10: Official MDP logo now sits centrally in all 6 ongoing projects' "Elevation Coming Soon" placeholders (full logo desktop / icon mobile+cards) — iteration_45, 100% pass

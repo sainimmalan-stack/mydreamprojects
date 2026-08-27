@@ -1022,3 +1022,11 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - New components/SiteMap.jsx renders per-project site maps (dark basemap, ember marker, zoom controls, drag-pan; compact attribution force-collapsed on <640px containers). ProjectMap.jsx now imports shared MAP_STYLE/MAP_ATTRIBUTION from components/mapStyle.js.
 - Removed all 19 Google `embed` fields from projects.js (dead data). No user-facing API-key text remains anywhere.
 - Verified desktop+mobile: streets/labels readable, 19 pins + office pin on /project-map, filters + popups work, zero console errors, no "API KEY REQUIRED" in DOM, no horizontal overflow.
+
+## 2026-08-27 — Maps Rebuilt on Leaflet + OpenStreetMap (DONE, iteration_48 11/12 + fixes verified)
+- PRODUCTION ROOT CAUSE (why markers showed on black): production build raced inside MapLibre's vector pipeline — tiles fetched (pbf 200s) but every tile render threw "Cannot read properties of undefined (reading 'openmaptiles')"; preview worked (dev StrictMode double-mount masked the race). Combined with v6's silent vector failure, MapLibre was abandoned.
+- FINAL STACK: Leaflet 1.9.4 + keyless OSM raster tiles (tile.openstreetmap.org), dark-tuned via pointwise CSS filter (.mdp-dark-tile in index.css: invert/hue/brightness — no seams, markers unaffected). maplibre-gl package removed entirely.
+- Full behavior port to Leaflet: 19 numbered pins + ember office pin (divIcons), filters, pin info cards + office card, View All reset, fly-to with mobile offset emulation, collision relaxation (screen-space el transforms, geo untouched), deep links (?focus=office, ?project=slug), mobile chips, per-project SiteMap with ember teardrop pin, dark zoom controls, compact OSM attribution.
+- Fixed post-test: deep-link init moved from map.on('load') → map.whenReady() (verified: focus=office centers 17.5347,78.3262 @z16, card renders).
+- Verified preview desktop+mobile: real streets/localities/Ameenpur Lake render, zero console errors, no API-key text anywhere, pin clicks + cards work.
+- PENDING: production verification after user redeploys (production currently runs the broken maplibre build).

@@ -1,37 +1,47 @@
 import { useEffect, useRef } from "react";
-import { Map as MapLibreMap, Marker as MapLibreMarker, NavigationControl } from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import { MAP_STYLE, MAP_ATTRIBUTION } from "./mapStyle";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+// Keyless basemap: OpenStreetMap raster tiles, dark-tuned via the
+// `mdp-dark-tile` CSS filter in index.css. No API key, no token, ever.
+const OSM_TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+const OSM_ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 /**
  * SiteMap — keyless dark interactive map for a single project site.
- * Replaces the old Google Maps keyless iframe (which began showing Google
- * "API key required" overlays). MapLibre GL + OpenFreeMap dark vector style
- * (OpenStreetMap data) — no API key, dark theme matches the main project map.
+ * Leaflet + OpenStreetMap tiles (dark-filtered), ember pin at the site's
+ * real coordinates. Replaces the old Google keyless iframe (which began
+ * showing "API key required" overlays) and the Carto raster style (whose
+ * provider now watermarks tiles with "API KEY REQUIRED").
  */
 export const SiteMap = ({ lat, lng, title }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current) return undefined;
-    const map = new MapLibreMap({
-      container: containerRef.current,
-      style: MAP_STYLE,
-      center: [lng, lat],
+    const map = L.map(containerRef.current, {
+      center: [lat, lng],
       zoom: 15,
-      attributionControl: { compact: true, customAttribution: MAP_ATTRIBUTION },
+      zoomControl: false,
+      scrollWheelZoom: true,
+      doubleClickZoom: false,
+      attributionControl: true,
     });
-    map.addControl(new NavigationControl({ showCompass: false }), "top-right");
-    new MapLibreMarker({ color: "#E85D22" }).setLngLat([lng, lat]).addTo(map);
-    // keep attribution collapsed (info toggle) on narrow containers — the
-    // expanded box otherwise covers a large part of a small map
-    const collapseAttrib = () => {
-      const c = map.getContainer();
-      const a = c.querySelector(".maplibregl-ctrl-attrib");
-      if (a && c.clientWidth < 640) a.classList.remove("maplibregl-compact-show");
-    };
-    map.on("load", collapseAttrib);
-    map.on("idle", collapseAttrib);
+    map.attributionControl.setPrefix(false);
+    L.control.zoom({ position: "topright" }).addTo(map);
+    L.tileLayer(OSM_TILES, {
+      maxZoom: 19,
+      className: "mdp-dark-tile",
+      attribution: OSM_ATTRIBUTION,
+    }).addTo(map);
+    const pin = document.createElement("div");
+    pin.innerHTML = `<svg width="30" height="40" viewBox="0 0 30 40" fill="none" aria-hidden="true"><path d="M15 0C6.7 0 0 6.7 0 15c0 11.2 15 25 15 25s15-13.8 15-25C30 6.7 23.3 0 15 0Z" fill="#E85D22"/><circle cx="15" cy="15" r="5.5" fill="#0A0A0A"/></svg>`;
+    L.marker([lat, lng], {
+      icon: L.divIcon({ className: "mdp-site-pin", html: pin, iconSize: [30, 40], iconAnchor: [15, 40] }),
+      keyboard: false,
+      interactive: false,
+    }).addTo(map);
     return () => map.remove();
   }, [lat, lng]);
 

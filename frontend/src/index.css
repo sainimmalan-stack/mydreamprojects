@@ -80,3 +80,56 @@
         border-bottom-color: inherit;
     }
 }
+
+/* ---------------------------------------------------------------------------
+   Keyless Leaflet + OpenStreetMap maps — dark My Dream Projects treatment.
+   The tile filter is pointwise (invert + hue shift), so no seams appear
+   between tiles; pins/controls are styled to match the site palette.
+--------------------------------------------------------------------------- */
+.leaflet-container {
+    background: #0A0A0A;
+    font-family: inherit;
+    outline: none;
+}
+
+.mdp-dark-tile {
+    filter: invert(0.92) hue-rotate(185deg) brightness(0.78) contrast(0.92) saturate(0.32);
+}
+
+.leaflet-bar {
+    border: 1px solid rgba(244, 244, 240, 0.15) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.leaflet-bar a {
+    background: #121212 !important;
+    color: #F4F4F0 !important;
+    border-bottom: 1px solid rgba(244, 244, 240, 0.1) !important;
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+}
+
+.leaflet-bar a:hover {
+    background: #1C1C1A !important;
+}
+
+.leaflet-control-attribution {
+    background: rgba(10, 10, 10, 0.65) !important;
+    color: rgba(244, 244, 240, 0.4) !important;
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+}
+
+.leaflet-control-attribution a {
+    color: rgba(244, 244, 240, 0.55) !important;
+}
+
+.leaflet-marker-icon {
+    cursor: pointer;
+}
+
+.mdp-site-pin {
+    pointer-events: none;
+}

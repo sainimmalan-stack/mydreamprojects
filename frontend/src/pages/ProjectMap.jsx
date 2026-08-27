@@ -1,14 +1,30 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Map as MapLibreMap, Marker as MapLibreMarker, LngLatBounds, NavigationControl } from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
 import { projects } from "../data/projects";
 import { OFFICE, MAPS_URL } from "../data/contact";
 import { Blueprint } from "../components/ComingSoonElevation";
-import { MAP_STYLE, MAP_ATTRIBUTION } from "../components/mapStyle";
 import useSeo from "../hooks/useSeo";
+
+// Keyless basemap: OpenStreetMap raster tiles, dark-tuned via the
+// `mdp-dark-tile` CSS filter in index.css. No API key, no token, ever.
+const OSM_TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+const OSM_ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+// Leaflet flyTo has no pixel-offset option — emulate MapLibre's `offset`
+// (target appears `offset` px from screen centre) by shifting the centre.
+const flyToWithOffset = (map, latlng, zoom, offset, duration = 1.2) => {
+  let target = L.latLng(latlng[0], latlng[1]);
+  if (offset && (offset[0] || offset[1])) {
+    const tp = map.project(target, zoom);
+    target = map.unproject(tp.subtract(L.point(offset[0], offset[1])), zoom);
+  }
+  map.flyTo(target, zoom, { duration });
+};
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -205,17 +221,18 @@ export default function ProjectMap() {
   const fitVisible = (animate = true) => {
     const map = mapRef.current;
     if (!map) return;
-    const bounds = new LngLatBounds();
-    visible.forEach((p) => bounds.extend([p.siteLocation.lng, p.siteLocation.lat]));
-    bounds.extend([OFFICE.lng, OFFICE.lat]);
-    const cam = map.cameraForBounds(bounds, { padding: fitPadding(), maxZoom: 15.5 });
-    map.flyTo({
-      center: cam.center,
-      zoom: cam.zoom,
-      pitch: 0,
-      bearing: 0,
-      duration: animate ? 1000 : 0,
-    });
+    const bounds = L.latLngBounds(
+      visible.map((p) => [p.siteLocation.lat, p.siteLocation.lng])
+    );
+    bounds.extend([OFFICE.lat, OFFICE.lng]);
+    const pad = fitPadding();
+    const opts = {
+      paddingTopLeft: L.point(pad.left, pad.top),
+      paddingBottomRight: L.point(pad.right, pad.bottom),
+      maxZoom: 15.5,
+    };
+    if (animate) map.flyToBounds(bounds, { ...opts, duration: 1 });
+    else map.fitBounds(bounds, opts);
   };
 
   const focusOffice = () => {
@@ -227,14 +244,7 @@ export default function ProjectMap() {
     if (typeof window !== "undefined" && window.innerWidth < 1024 && containerRef.current) {
       containerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-    mapRef.current?.flyTo({
-      center: [OFFICE.lng, OFFICE.lat],
-      zoom: 16,
-      pitch: 0,
-      bearing: 0,
-      duration: 1200,
-      offset: mobileLift,
-    });
+    mapRef.current?.flyTo && flyToWithOffset(mapRef.current, [OFFICE.lat, OFFICE.lng], 16, mobileLift, 1.2);
   };
 
   // marker collision handling: iterative relaxation — any two pins closer than
@@ -244,9 +254,9 @@ export default function ProjectMap() {
     const map = mapRef.current;
     if (!map || markersRef.current.length === 0) return;
     const MIN = 32; // px — minimum separation between pill centres
-    const pts = markersRef.current.map(({ marker }) => {
-      const p = map.project(marker.getLngLat());
-      return { marker, bx: p.x, by: p.y, x: p.x, y: p.y };
+    const pts = markersRef.current.map(({ marker, el }) => {
+      const pt = map.latLngToContainerPoint(marker.getLatLng());
+      return { el, bx: pt.x, by: pt.y, x: pt.x, y: pt.y };
     });
     for (let iter = 0; iter < 40; iter++) {
       let moved = false;
@@ -277,7 +287,12 @@ export default function ProjectMap() {
       if (!moved) break;
     }
     pts.forEach((p) =>
-      p.marker.setOffset([Math.round(p.x - p.bx), Math.round(p.y - p.by)])
+      // centre the pill on its point (translate -50%,-50%) plus the
+      // collision-relaxation offset — screen-space only, geo never changes
+      p.el.style.setProperty(
+        "transform",
+        `translate(calc(-50% + ${Math.round(p.x - p.bx)}px), calc(-50% + ${Math.round(p.y - p.by)}px))`
+      )
     );
   };
 
@@ -301,49 +316,42 @@ export default function ProjectMap() {
         typeof window !== "undefined" && window.innerWidth < 1024
           ? [0, -Math.round(window.innerHeight * 0.13)]
           : [0, 0];
-      mapRef.current.flyTo({
-        center: [p.siteLocation.lng, p.siteLocation.lat],
-        zoom: 16,
-        pitch: 0,
-        bearing: 0,
-        duration: 1200,
-        offset: mobileLift,
-      });
+      mapRef.current.flyTo && flyToWithOffset(mapRef.current, [p.siteLocation.lat, p.siteLocation.lng], 16, mobileLift, 1.2);
     }
   };
 
   // init map once
   useEffect(() => {
     if (mapRef.current || !containerRef.current) return;
-    const bounds = new LngLatBounds();
-    projects.forEach((p) => bounds.extend([p.siteLocation.lng, p.siteLocation.lat]));
-    const map = new MapLibreMap({
-      container: containerRef.current,
-      style: MAP_STYLE,
-      bounds,
-      fitBoundsOptions: { padding: fitPadding(), maxZoom: 15.5 },
-      pitch: 0,
-      bearing: 0,
-      attributionControl: { compact: true, customAttribution: MAP_ATTRIBUTION },
+    const bounds = L.latLngBounds(
+      projects.map((p) => [p.siteLocation.lat, p.siteLocation.lng])
+    );
+    const pad = fitPadding();
+    const map = L.map(containerRef.current, {
+      zoomControl: false,
+      scrollWheelZoom: true,
+      doubleClickZoom: false, // prevent accidental zoom jumps when tapping pins on touch devices
+      minZoom: 13,
+      maxZoom: 18,
+      maxBounds: L.latLngBounds([17.44, 78.24], [17.62, 78.42]),
+      maxBoundsViscosity: 0.85,
+      zoomSnap: 0.25,
+      zoomDelta: 0.5,
+      attributionControl: true,
     });
-    map.addControl(new NavigationControl({ showCompass: false }), "top-right");
-    // keep attribution collapsed (info toggle) on narrow containers
-    const collapseAttrib = () => {
-      const c = map.getContainer();
-      const a = c.querySelector(".maplibregl-ctrl-attrib");
-      if (a && c.clientWidth < 640) a.classList.remove("maplibregl-compact-show");
-    };
-    map.on("load", collapseAttrib);
-    map.on("idle", collapseAttrib);
-    // prevent accidental zoom jumps when tapping pins on touch devices
-    map.doubleClickZoom.disable();
-    map.on("error", (e) => {
-      // eslint-disable-next-line no-console
-      console.error("[maplibre] tile/style error:", e?.error?.message || e);
+    map.attributionControl.setPrefix(false);
+    L.control.zoom({ position: "topright" }).addTo(map);
+    L.tileLayer(OSM_TILES, {
+      maxZoom: 19,
+      className: "mdp-dark-tile",
+      attribution: OSM_ATTRIBUTION,
+    }).addTo(map);
+    map.fitBounds(bounds, {
+      paddingTopLeft: L.point(pad.left, pad.top),
+      paddingBottomRight: L.point(pad.right, pad.bottom),
+      maxZoom: 15.5,
     });
-    map.on("load", () => {
-      // eslint-disable-next-line no-console
-      console.log("[maplibre] style loaded:", map.isStyleLoaded());
+    map.whenReady(() => {
       resolveCollisions();
       // deep link: /project-map?focus=office flies straight to the office marker
       if (searchParams.get("focus") === "office") {
@@ -389,14 +397,15 @@ export default function ProjectMap() {
       // raise hovered marker above overlapping neighbours so clustered
       // pins (e.g. 01-04) stay individually clickable
       el.addEventListener("mouseenter", () => {
-        el.style.zIndex = 5;
+        marker.setZIndexOffset(1000);
       });
       el.addEventListener("mouseleave", () => {
-        el.style.zIndex = selectedRef.current === p.slug ? 6 : "";
+        marker.setZIndexOffset(selectedRef.current === p.slug ? 1200 : 0);
       });
-      const marker = new MapLibreMarker({ element: el })
-        .setLngLat([p.siteLocation.lng, p.siteLocation.lat])
-        .addTo(map);
+      const marker = L.marker([p.siteLocation.lat, p.siteLocation.lng], {
+        icon: L.divIcon({ className: "mdp-pin", html: el, iconSize: [0, 0], iconAnchor: [0, 0] }),
+        keyboard: false,
+      }).addTo(map);
       markersRef.current.push({ slug: p.slug, marker, el });
     });
     // office marker — distinctive ember building icon, never numbered,
@@ -411,18 +420,19 @@ export default function ProjectMap() {
       <svg class="w-3.5 h-3.5 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M2 22h20"/><path d="M9 6h1"/><path d="M9 10h1"/><path d="M9 14h1"/><path d="M14 6h1"/><path d="M14 10h1"/><path d="M14 14h1"/><path d="M10 22v-3h4v3"/></svg>
     `;
     oel.addEventListener("mouseenter", () => {
-      oel.style.zIndex = 5;
+      officeMarker.setZIndexOffset(1000);
     });
     oel.addEventListener("mouseleave", () => {
-      oel.style.zIndex = selectedRef.current === "office" ? 6 : "";
+      officeMarker.setZIndexOffset(selectedRef.current === "office" ? 1200 : 0);
     });
     oel.addEventListener("click", (e) => {
       e.stopPropagation();
       focusOffice();
     });
-    const officeMarker = new MapLibreMarker({ element: oel })
-      .setLngLat([OFFICE.lng, OFFICE.lat])
-      .addTo(map);
+    const officeMarker = L.marker([OFFICE.lat, OFFICE.lng], {
+      icon: L.divIcon({ className: "mdp-pin", html: oel, iconSize: [0, 0], iconAnchor: [0, 0] }),
+      keyboard: false,
+    }).addTo(map);
     markersRef.current.push({ slug: "office", marker: officeMarker, el: oel, office: true });
     fitVisible(true);
     resolveCollisions();
@@ -430,10 +440,10 @@ export default function ProjectMap() {
 
   // highlight selected marker without full rebuild
   useEffect(() => {
-    markersRef.current.forEach(({ slug, el, office }) => {
+    markersRef.current.forEach(({ slug, el, marker, office }) => {
       if (office) {
         const isOfficeSel = selected === "office";
-        el.style.zIndex = isOfficeSel ? 6 : "";
+        marker.setZIndexOffset(isOfficeSel ? 1200 : 0);
         el.className = `absolute top-0 left-0 touch-manipulation flex items-center justify-center p-1.5 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
           isOfficeSel
             ? "bg-ember border-ember shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]"
@@ -443,7 +453,7 @@ export default function ProjectMap() {
       }
       const isSel = slug === selected;
       const p = projects.find((x) => x.slug === slug);
-      el.style.zIndex = isSel ? 6 : "";
+      marker.setZIndexOffset(isSel ? 1200 : 0);
       el.className = `absolute top-0 left-0 touch-manipulation flex items-center gap-1 pl-1.5 pr-2 py-1 border backdrop-blur-md cursor-pointer transition-colors duration-300 ${
         isSel
           ? "bg-ember border-ember shadow-[0_0_12px_2px_rgba(232,93,34,0.5)]"
