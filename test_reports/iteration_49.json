@@ -1,0 +1,47 @@
+{
+  "summary": "Frontend-only verification of the new site-wide WhatsAppFloat component and the /project-map InfoCard WhatsApp button. All acceptance criteria from the review request pass. Light regression on map + project navigation OK.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "WhatsAppFloat.jsx is clean and self-contained (~99 lines). useEffect deps array is empty which is correct (session-scoped prompt).",
+    "The float button sits at fixed bottom-right z-40 and the landowner dialog (z-50) correctly overlays it — elementFromPoint over the float region returned an element outside [data-testid=whatsapp-float] confirming the dialog covers it.",
+    "InfoCard href in ProjectMap.jsx correctly interpolates project.title into the wa.me message (verified 'My Dream Perch' encoded in href).",
+    "sessionStorage key 'mdp-wa-prompt-seen' is set BEFORE the auto-hide timer resolves, so refreshes within the same session correctly suppress the prompt (verified via navigation to /projects — no reappear).",
+    "The ® character is preserved as %C2%AE in wa.me URLs as expected — brand-intentional per request."
+  ],
+  "verifications": {
+    "float_button_visible_all_pages": {
+      "/": true, "/projects": true, "/projects/my-dream-nest": true,
+      "/projects/my-dream-skylark": true, "/project-map": true,
+      "/about": true, "/contact": true, "/emi-calculator": true
+    },
+    "bottom_right_position_all_pages": true,
+    "prompt_appears_first_load_2_8s": true,
+    "prompt_auto_hides_after_6s": true,
+    "prompt_no_reappear_on_navigation": true,
+    "href_project_specific_on_skylark": "wa.me/917780429845?text=...I'm interested in My Dream Skylark...",
+    "href_project_specific_on_nest": "wa.me/917780429845?text=...I'm interested in My Dream Nest...",
+    "href_generic_on_about_map_home_contact_emi_projects": "wa.me/917780429845?text=...I'm interested in your residential projects in Ameenpur...",
+    "map_info_card_whatsapp_button": {
+      "visible": true,
+      "href_contains_project_name": true,
+      "sits_alongside_view_project_and_get_directions": true
+    },
+    "landowner_dialog_covers_float_button": "covered (z-50 > z-40 confirmed via elementFromPoint)",
+    "mobile_390px_horizontal_overflow": {"/": 0, "/projects/my-dream-nest": 0, "/project-map": 0},
+    "mobile_390px_button_offsets": "20px from right, 20px from bottom on all tested pages — no overlap with mobile chip bar (chip row sits above the button as seen in screenshot)",
+    "console_errors_relevant": "none (only 1 Cloudflare cdn-cgi beacon abort, which is ignored per request)"
+  },
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "WhatsAppFloat + map InfoCard WhatsApp addition are fully verified on iteration_49. No open issues. Prompt is session-once via sessionStorage key 'mdp-wa-prompt-seen' — clear it before re-testing prompt behavior."
+}

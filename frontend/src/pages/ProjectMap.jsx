@@ -3,9 +3,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, X, LocateFixed } from "lucide-react";
+import { ArrowUpRight, ArrowRight, X, LocateFixed, MessageCircle } from "lucide-react";
 import { projects } from "../data/projects";
-import { OFFICE, MAPS_URL } from "../data/contact";
+import { OFFICE, MAPS_URL, waLink } from "../data/contact";
 import { Blueprint } from "../components/ComingSoonElevation";
 import useSeo from "../hooks/useSeo";
 
@@ -101,7 +101,7 @@ const InfoCard = ({ project, onClose }) => (
           {project.status}
           {project.year && project.year !== "—" ? ` · ${project.status === "ongoing" ? "Expected " : ""}${project.year}` : ""}
         </p>
-        <div className="flex items-center gap-5 mt-4">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mt-4">
           <Link
             to={`/projects/${project.slug}`}
             data-testid="map-view-project"
@@ -110,6 +110,16 @@ const InfoCard = ({ project, onClose }) => (
             View Project
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
           </Link>
+          <a
+            href={waLink(`Hello My Dream Projects®, I'm interested in ${project.title} at Ameenpur, Hyderabad. Please share price and availability details.`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="map-info-whatsapp"
+            className="group inline-flex items-center gap-1.5 text-[10px] font-display font-semibold uppercase tracking-[0.2em] text-bone/70 hover:text-ember transition-colors duration-300"
+          >
+            WhatsApp
+            <MessageCircle className="w-3.5 h-3.5" strokeWidth={2} />
+          </a>
           <a
             href={project.siteLocation.url}
             target="_blank"

@@ -1030,3 +1030,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Fixed post-test: deep-link init moved from map.on('load') → map.whenReady() (verified: focus=office centers 17.5347,78.3262 @z16, card renders).
 - Verified preview desktop+mobile: real streets/localities/Ameenpur Lake render, zero console errors, no API-key text anywhere, pin clicks + cards work.
 - PENDING: production verification after user redeploys (production currently runs the broken maplibre build).
+
+## 2026-09-14 — Site-Wide WhatsApp Float + Map Card WhatsApp Button (DONE, iteration_49 100% pass)
+- New components/WhatsAppFloat.jsx mounted in App.js (after Footer): fixed bottom-right ember button (w-12/14, z-40) on EVERY page; context-aware wa.me message (project pages include project title, others generic; target +91 77804 29845). Session-once "Chat with us on WhatsApp" prompt (2.8s in, auto-minimises at 6s, X dismiss, sessionStorage mdp-wa-prompt-seen). Verified: no horizontal overflow, no overlap with map chips/footer, dialogs (z-50) cover it, focus ring + aria-labels.
+- /project-map InfoCard gained "WhatsApp" action (data-testid map-info-whatsapp) beside View Project/Get Directions with project-specific message.
+- Also confirmed: production mydreamprojects.in/project-map now renders the Leaflet+OSM map correctly (28 tiles, pins, info cards) — the Leaflet rebuild is live.

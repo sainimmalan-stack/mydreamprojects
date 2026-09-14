@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ReactLenis } from "lenis/react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Home from "@/pages/Home";
 
 const Projects = lazy(() => import("@/pages/Projects"));
@@ -70,6 +71,7 @@ function App() {
             </Suspense>
           </main>
           <Footer />
+          <WhatsAppFloat />
         </BrowserRouter>
       </div>
     </ReactLenis>
