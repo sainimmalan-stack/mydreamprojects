@@ -1042,3 +1042,15 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - ACCEPTANCE VERIFIED on preview with genuine CDP touch taps at 390px: 01 NEST, 02 CASA, 03 AVASA, 06 SOLACE, 08 GRIFFIN, 12 GLENMORE — each opens the CORRECT project card; touch-close works. Desktop real-click pass on same six: all correct. Zero console errors.
 - NOTE: earlier desktop "failure" in one run was test-harness timing (clicking while map flyTo was animating), not an app bug.
 - PENDING: user redeploy to ship to production.
+
+## 2026-09-14 — Map Project Details: Bulletproof Mobile Bottom Sheet (DONE, acceptance 6/6 touch + desktop)
+- ROOT CAUSES found by tracing marker→state→render on production + iPhone-class emulation:
+  1. Pin cluster overlap: collision gap (32px) < pill width (~36px) < finger (~44px) → taps hit NEIGHBOURING pins (tap AVASA opened NEST; tap AURA opened GLENMORE) — looked like "details don't open".
+  2. Details card rendered INSIDE the Leaflet container (overflow-hidden + pane z-indexes 400-700 vs card z-20) — fragile compositing on iOS Safari.
+- FIX (map library, tiles, design, markers all preserved):
+  - attachReliableTap(): native click + Leaflet marker tap + guarded iOS touchend (12px move guard so drags still pan). Re-entry guards via selectedRef prevent double-fire.
+  - Mobile collision separation 52px + invisible 8px tap halo (mobile-only CSS pseudo).
+  - Details UI split by viewport (isDesktop matchMedia): desktop = existing in-map card; mobile = NEW fixed bottom sheet (map-project-sheet / map-office-sheet, z-70, ember top border, drag handle, safe-area padding) rendered OUTSIDE the map — cannot be clipped/covered. Same `selected` state drives markers, chips, list, sheet.
+  - Fly-to lift raised to 0.22h so the pin stays visible above the sheet.
+- VERIFIED (genuine CDP touch taps @390px): 01 NEST/02 CASA/03 AVASA/06 SOLACE/08 GRIFFIN/12 GLENMORE — each opens correct sheet; close via touch X; switch without closing (CASA→AVASA); chip tap → same sheet; VIEW PROJECT → /projects/<slug>; WhatsApp href contains project name; office pin → office sheet. Desktop: in-map card + View All intact. Zero console errors.
+- PENDING: redeploy to production.

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight, X, LocateFixed, MessageCircle } from "lucide-react";
 import { projects } from "../data/projects";
 import { OFFICE, MAPS_URL, waLink } from "../data/contact";
@@ -26,6 +26,47 @@ const flyToWithOffset = (map, latlng, zoom, offset, duration = 1.2) => {
   map.flyTo(target, zoom, { duration });
 };
 
+// Bulletproof marker activation: native click, Leaflet's own tap synthesis
+// AND a raw iOS touchend fallback with a movement guard — a finger drag
+// (>12px) still pans the map instead of opening a project.
+const attachReliableTap = (el, marker, handler) => {
+  el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    handler();
+  });
+  marker.on("click", handler);
+  let sx = 0;
+  let sy = 0;
+  let moved = false;
+  el.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.touches[0];
+      sx = t.clientX;
+      sy = t.clientY;
+      moved = false;
+    },
+    { passive: true }
+  );
+  el.addEventListener(
+    "touchmove",
+    (e) => {
+      const t = e.touches[0];
+      if (Math.hypot(t.clientX - sx, t.clientY - sy) > 12) moved = true;
+    },
+    { passive: true }
+  );
+  el.addEventListener(
+    "touchend",
+    (e) => {
+      if (moved) return;
+      e.preventDefault(); // suppress the synthesized click — fire exactly once
+      handler();
+    },
+    { passive: false }
+  );
+};
+
 const EASE = [0.16, 1, 0.3, 1];
 
 const STATUS_DOT = {
@@ -46,7 +87,7 @@ const fitPadding = () =>
     ? { top: 48, bottom: 96, left: 24, right: 24 }
     : { top: 90, bottom: 90, left: 60, right: 60 };
 
-const InfoCard = ({ project, onClose }) => (
+const InfoCard = ({ project, onClose, sheet = false }) => (
   <motion.div
     key={project.slug}
     data-testid="map-info-card"
@@ -54,7 +95,13 @@ const InfoCard = ({ project, onClose }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 16 }}
     transition={{ duration: 0.45, ease: EASE }}
-    className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
+    className={
+      sheet
+        ? "relative w-full bg-ink"
+        : // desktop floats inside the map; on mobile the fixed bottom sheet
+          // (map-project-sheet) carries this card instead
+          "max-lg:hidden absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
+    }
   >
     <div className="flex">
       <div className="w-24 md:w-28 shrink-0 border-r border-line">
@@ -138,14 +185,18 @@ const InfoCard = ({ project, onClose }) => (
 
 /* ------------------------------ office card ------------------------------ */
 
-const OfficeCard = ({ onClose }) => (
+const OfficeCard = ({ onClose, sheet = false }) => (
   <motion.div
     initial={{ opacity: 0, y: 16 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 10 }}
     transition={{ duration: 0.5, ease: EASE }}
     data-testid="map-office-card"
-    className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
+    className={
+      sheet
+        ? "relative w-full bg-ink"
+        : "max-lg:hidden absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:w-[360px] z-20 bg-ink/92 backdrop-blur-xl border border-line"
+    }
   >
     <div className="flex">
       <div className="w-[92px] md:w-[104px] shrink-0 relative overflow-hidden border-r border-line">
@@ -246,10 +297,11 @@ export default function ProjectMap() {
   };
 
   const focusOffice = () => {
+    if (selectedRef.current === "office") return; // dual click/touch paths
     setSelected("office");
     const mobileLift =
       typeof window !== "undefined" && window.innerWidth < 1024
-        ? [0, -Math.round(window.innerHeight * 0.13)]
+        ? [0, -Math.round(window.innerHeight * 0.22)] // pin lands above the bottom sheet
         : [0, 0];
     if (typeof window !== "undefined" && window.innerWidth < 1024 && containerRef.current) {
       containerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -314,19 +366,33 @@ export default function ProjectMap() {
   );
   const selectedProject = selected ? projects.find((p) => p.slug === selected) : null;
 
+  // details UI: desktop floats a card inside the map, mobile uses the fixed
+  // bottom sheet — render only the active variant so the DOM stays singular
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== "undefined" && window.innerWidth >= 1024
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const fn = () => setIsDesktop(mq.matches);
+    fn();
+    mq.addEventListener("change", fn);
+    return () => mq.removeEventListener("change", fn);
+  }, []);
+
   const focusProject = (slug, fly = true) => {
+    if (selectedRef.current === slug) return; // dual click/touch paths
     setSelected(slug);
     const p = projects.find((x) => x.slug === slug);
-    // on phones, bring the map (and its bottom card) into the viewport
+    // on phones, bring the map (and its bottom sheet) into the viewport
     if (typeof window !== "undefined" && window.innerWidth < 1024 && containerRef.current) {
       containerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     if (mapRef.current && p && fly) {
-      // on phones the info card sits at the bottom of the map — nudge the
-      // target up so the pin stays visible above the card
+      // on phones the details sheet rises from the bottom — nudge the
+      // target up so the pin stays visible above the sheet
       const mobileLift =
         typeof window !== "undefined" && window.innerWidth < 1024
-          ? [0, -Math.round(window.innerHeight * 0.13)]
+          ? [0, -Math.round(window.innerHeight * 0.22)]
           : [0, 0];
       mapRef.current.flyTo && flyToWithOffset(mapRef.current, [p.siteLocation.lat, p.siteLocation.lng], 16, mobileLift, 1.2);
     }
@@ -400,12 +466,13 @@ export default function ProjectMap() {
         <span class="w-1 h-1 rounded-full ${isSel ? "bg-ink" : STATUS_DOT[p.status]}"></span>
         <span class="font-display font-semibold text-[9px] tracking-[0.15em] ${isSel ? "text-ink" : "text-bone"}">${p.index}</span>
       `;
-      el.addEventListener("click", (e) => {
-        e.stopPropagation();
-        // collided pins are visually fanned out by resolveCollisions(),
-        // so the tapped marker is always the intended project
-        focusProject(p.slug, true);
-      });
+      const marker = L.marker([p.siteLocation.lat, p.siteLocation.lng], {
+        icon: L.divIcon({ className: "mdp-pin", html: el, iconSize: [0, 0], iconAnchor: [0, 0] }),
+        keyboard: false,
+      }).addTo(map);
+      // collided pins are visually fanned out by resolveCollisions(),
+      // so the tapped marker is always the intended project
+      attachReliableTap(el, marker, () => focusProject(p.slug, true));
       // raise hovered marker above overlapping neighbours so clustered
       // pins (e.g. 01-04) stay individually clickable
       el.addEventListener("mouseenter", () => {
@@ -414,10 +481,6 @@ export default function ProjectMap() {
       el.addEventListener("mouseleave", () => {
         marker.setZIndexOffset(selectedRef.current === p.slug ? 1200 : 0);
       });
-      const marker = L.marker([p.siteLocation.lat, p.siteLocation.lng], {
-        icon: L.divIcon({ className: "mdp-pin", html: el, iconSize: [0, 0], iconAnchor: [0, 0] }),
-        keyboard: false,
-      }).addTo(map);
       markersRef.current.push({ slug: p.slug, marker, el });
     });
     // office marker — distinctive ember building icon, never numbered,
@@ -437,14 +500,11 @@ export default function ProjectMap() {
     oel.addEventListener("mouseleave", () => {
       officeMarker.setZIndexOffset(selectedRef.current === "office" ? 1200 : 0);
     });
-    oel.addEventListener("click", (e) => {
-      e.stopPropagation();
-      focusOffice();
-    });
     const officeMarker = L.marker([OFFICE.lat, OFFICE.lng], {
       icon: L.divIcon({ className: "mdp-pin", html: oel, iconSize: [0, 0], iconAnchor: [0, 0] }),
       keyboard: false,
     }).addTo(map);
+    attachReliableTap(oel, officeMarker, focusOffice);
     markersRef.current.push({ slug: "office", marker: officeMarker, el: oel, office: true });
     fitVisible(true);
     resolveCollisions();
@@ -612,7 +672,7 @@ export default function ProjectMap() {
                 View All Projects
               </button>
             )}
-            {selectedProject && (
+            {isDesktop && selectedProject && (
               <InfoCard
                 project={selectedProject}
                 onClose={() => {
@@ -621,7 +681,7 @@ export default function ProjectMap() {
                 }}
               />
             )}
-            {selected === "office" && (
+            {isDesktop && selected === "office" && (
               <OfficeCard
                 onClose={() => {
                   setSelected(null);
@@ -630,6 +690,55 @@ export default function ProjectMap() {
               />
             )}
           </div>
+
+          {/* mobile bottom sheet — FIXED position, rendered outside the map so
+              no leaflet pane, overflow or stacking context can ever hide it.
+              Shares the same `selected` state as markers, chips and list. */}
+          <AnimatePresence>
+            {!isDesktop && selectedProject && (
+              <motion.div
+                key={`sheet-${selectedProject.slug}`}
+                data-testid="map-project-sheet"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="lg:hidden fixed inset-x-0 bottom-0 z-[70] bg-ink border-t-2 border-ember shadow-[0_-24px_60px_rgba(0,0,0,0.75)] max-h-[72svh] overflow-y-auto"
+                style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+              >
+                <div className="w-10 h-1 bg-bone/25 mx-auto mt-2.5" aria-hidden="true" />
+                <InfoCard
+                  project={selectedProject}
+                  sheet
+                  onClose={() => {
+                    setSelected(null);
+                    fitVisible(true);
+                  }}
+                />
+              </motion.div>
+            )}
+            {!isDesktop && selected === "office" && (
+              <motion.div
+                key="sheet-office"
+                data-testid="map-office-sheet"
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="lg:hidden fixed inset-x-0 bottom-0 z-[70] bg-ink border-t-2 border-ember shadow-[0_-24px_60px_rgba(0,0,0,0.75)] max-h-[72svh] overflow-y-auto"
+                style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+              >
+                <div className="w-10 h-1 bg-bone/25 mx-auto mt-2.5" aria-hidden="true" />
+                <OfficeCard
+                  sheet
+                  onClose={() => {
+                    setSelected(null);
+                    fitVisible(true);
+                  }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* mobile compact selector */}
           <div
