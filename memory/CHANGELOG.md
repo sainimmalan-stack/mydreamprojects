@@ -1054,3 +1054,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
   - Fly-to lift raised to 0.22h so the pin stays visible above the sheet.
 - VERIFIED (genuine CDP touch taps @390px): 01 NEST/02 CASA/03 AVASA/06 SOLACE/08 GRIFFIN/12 GLENMORE — each opens correct sheet; close via touch X; switch without closing (CASA→AVASA); chip tap → same sheet; VIEW PROJECT → /projects/<slug>; WhatsApp href contains project name; office pin → office sheet. Desktop: in-map card + View All intact. Zero console errors.
 - PENDING: redeploy to production.
+
+## 2026-09-14 — Bottom Sheet Portal Fix (float overlap eliminated) (DONE)
+- ROOT CAUSE of "floating WhatsApp button covers the sheet's WhatsApp action": the sheet (z-70) was trapped inside a framer-motion transform ancestor's stacking context, so the root-level float (z-40) painted ABOVE it. Measured: float rect overlapped the sheet's WhatsApp link rect.
+- FIX: sheet now rendered via createPortal to document.body at z-[80] — escapes every ancestor stacking context; the opaque sheet fully covers the float while open. Verified by hit-test: elementFromPoint on the sheet's WhatsApp link returns the link itself.
+- ACCEPTANCE re-run @390px touch: 01 NEST/02 CASA/03 AVASA/06/08/12 — sheet opens per marker, title visible (23px), image visible, VIEW PROJECT/WHATSAPP/GET DIRECTIONS all visible & hittable, touch-close works, no horizontal overflow, map stays usable above the sheet. Desktop in-map card unaffected.
+- PENDING: redeploy.

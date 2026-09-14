@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -691,10 +692,12 @@ export default function ProjectMap() {
             )}
           </div>
 
-          {/* mobile bottom sheet — FIXED position, rendered outside the map so
-              no leaflet pane, overflow or stacking context can ever hide it.
+          {/* mobile bottom sheet — portalled to <body> and FIXED, so no leaflet
+              pane, overflow, transform ancestor or stacking context can ever
+              hide it or let the floating WhatsApp button cover it.
               Shares the same `selected` state as markers, chips and list. */}
-          <AnimatePresence>
+          {createPortal(
+            <AnimatePresence>
             {!isDesktop && selectedProject && (
               <motion.div
                 key={`sheet-${selectedProject.slug}`}
@@ -703,7 +706,7 @@ export default function ProjectMap() {
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="lg:hidden fixed inset-x-0 bottom-0 z-[70] bg-ink border-t-2 border-ember shadow-[0_-24px_60px_rgba(0,0,0,0.75)] max-h-[72svh] overflow-y-auto"
+                className="lg:hidden fixed inset-x-0 bottom-0 z-[80] bg-ink border-t-2 border-ember shadow-[0_-24px_60px_rgba(0,0,0,0.75)] max-h-[72svh] overflow-y-auto"
                 style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
               >
                 <div className="w-10 h-1 bg-bone/25 mx-auto mt-2.5" aria-hidden="true" />
@@ -725,7 +728,7 @@ export default function ProjectMap() {
                 animate={{ y: 0 }}
                 exit={{ y: "100%" }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="lg:hidden fixed inset-x-0 bottom-0 z-[70] bg-ink border-t-2 border-ember shadow-[0_-24px_60px_rgba(0,0,0,0.75)] max-h-[72svh] overflow-y-auto"
+                className="lg:hidden fixed inset-x-0 bottom-0 z-[80] bg-ink border-t-2 border-ember shadow-[0_-24px_60px_rgba(0,0,0,0.75)] max-h-[72svh] overflow-y-auto"
                 style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
               >
                 <div className="w-10 h-1 bg-bone/25 mx-auto mt-2.5" aria-hidden="true" />
@@ -738,7 +741,9 @@ export default function ProjectMap() {
                 />
               </motion.div>
             )}
-          </AnimatePresence>
+            </AnimatePresence>,
+            document.body
+          )}
 
           {/* mobile compact selector */}
           <div

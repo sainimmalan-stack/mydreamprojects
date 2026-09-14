@@ -12,7 +12,7 @@ Prioritized backlog. Completed work lives in CHANGELOG.md.
 - **Site Progress Updates**: dated construction progress galleries for each ongoing project — DO NOT implement until the user shares real site photos
 
 ## Recently completed (see CHANGELOG.md)
-- 2026-09-14: Map details made bulletproof — mobile bottom sheet (fixed, outside map) + triple-redundant marker tap (click/Leaflet/touchend) + 52px pin separation; acceptance 6/6 markers on touch + desktop (needs redeploy)
+- 2026-09-14: Sheet portalled to body (z-80) — float-button overlap eliminated; acceptance 6/6 markers with title+image+actions fully visible on iPhone-sized touch tests (needs redeploy)
 - 2026-09-14: Site-wide floating WhatsApp enquiry button (context-aware messages, session-once prompt) + WhatsApp action in map info cards (iteration_49, 100% pass); Leaflet map confirmed live on production
 - 2026-08-27: Maps rebuilt on Leaflet + keyless OpenStreetMap tiles (dark CSS-filtered) — production MapLibre race eliminated; real roads/labels/water render (iteration_48 + fixes, verified preview; production verify pending redeploy)
 - 2026-08-27: Maps made fully keyless — "API KEY REQUIRED" watermark tiles eliminated; MapLibre + OpenFreeMap dark vector style everywhere (maplibre-gl pinned ^4.7.1, v6 broken here) (iteration_47, 100% pass)
