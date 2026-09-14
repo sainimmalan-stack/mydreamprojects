@@ -263,7 +263,9 @@ export default function ProjectMap() {
   const resolveCollisions = () => {
     const map = mapRef.current;
     if (!map || markersRef.current.length === 0) return;
-    const MIN = 32; // px — minimum separation between pill centres
+    // minimum separation between pill centres — wider on mobile so clustered
+    // pins (01-04 around the office, 15-17 etc.) never overlap tap targets
+    const MIN = window.innerWidth < 768 ? 52 : 32;
     const pts = markersRef.current.map(({ marker, el }) => {
       const pt = map.latLngToContainerPoint(marker.getLatLng());
       return { el, bx: pt.x, by: pt.y, x: pt.x, y: pt.y };

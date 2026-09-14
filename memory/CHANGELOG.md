@@ -1035,3 +1035,10 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - New components/WhatsAppFloat.jsx mounted in App.js (after Footer): fixed bottom-right ember button (w-12/14, z-40) on EVERY page; context-aware wa.me message (project pages include project title, others generic; target +91 77804 29845). Session-once "Chat with us on WhatsApp" prompt (2.8s in, auto-minimises at 6s, X dismiss, sessionStorage mdp-wa-prompt-seen). Verified: no horizontal overflow, no overlap with map chips/footer, dialogs (z-50) cover it, focus ring + aria-labels.
 - /project-map InfoCard gained "WhatsApp" action (data-testid map-info-whatsapp) beside View Project/Get Directions with project-specific message.
 - Also confirmed: production mydreamprojects.in/project-map now renders the Leaflet+OSM map correctly (28 tiles, pins, info cards) — the Leaflet rebuild is live.
+
+## 2026-09-14 — Map Marker Tap Root Cause Fixed: Clustered Pins Swallowing Taps (DONE)
+- ROOT CAUSE (user-reported "popup not opening" on production): on mobile viewports the pin collision-relaxation minimum gap (32px) was SMALLER than the pill width (~36px) and far below finger size (~44px), so clustered markers (01-04 around office, 15-17, etc.) physically overlapped — taps hit a neighbouring pin (e.g. tap 03 AVASA → opened NEST card; tap 15 AURA → GLENMORE card), looking like a broken/wrong popup. Desktop clicks were fine.
+- FIX (no library change, no design change): responsive collision separation in resolveCollisions (52px below 768px, 32px desktop) + invisible tap halo (.mdp-pin button::before inset:-8px, scoped to mobile only via media query) so every pin has a ~52px touch target without visual change. Desktop untouched.
+- ACCEPTANCE VERIFIED on preview with genuine CDP touch taps at 390px: 01 NEST, 02 CASA, 03 AVASA, 06 SOLACE, 08 GRIFFIN, 12 GLENMORE — each opens the CORRECT project card; touch-close works. Desktop real-click pass on same six: all correct. Zero console errors.
+- NOTE: earlier desktop "failure" in one run was test-harness timing (clicking while map flyTo was animating), not an app bug.
+- PENDING: user redeploy to ship to production.

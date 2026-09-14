@@ -133,3 +133,17 @@
 .mdp-site-pin {
     pointer-events: none;
 }
+
+/* enlarge map pin tap targets invisibly (fingers need ~44px) without
+   changing the visual pill size — the hit halo stays transparent */
+.mdp-pin button {
+    position: absolute;
+}
+
+@media (max-width: 767px) {
+    .mdp-pin button::before {
+        content: "";
+        position: absolute;
+        inset: -8px;
+    }
+}
