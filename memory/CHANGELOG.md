@@ -1060,3 +1060,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - FIX: sheet now rendered via createPortal to document.body at z-[80] — escapes every ancestor stacking context; the opaque sheet fully covers the float while open. Verified by hit-test: elementFromPoint on the sheet's WhatsApp link returns the link itself.
 - ACCEPTANCE re-run @390px touch: 01 NEST/02 CASA/03 AVASA/06/08/12 — sheet opens per marker, title visible (23px), image visible, VIEW PROJECT/WHATSAPP/GET DIRECTIONS all visible & hittable, touch-close works, no horizontal overflow, map stays usable above the sheet. Desktop in-map card unaffected.
 - PENDING: redeploy.
+
+## 2026-09-14 — Final Map Interaction Verification (NO CHANGES NEEDED, all user requirements already satisfied)
+- Full acceptance matrix @390px touch on preview: 01 NEST, 02 CASA, 03 AVASA, plus Solace/Glenmore/Griffin — tapped pin highlights ember, sheet eyebrow ("PROJECT 12" for Solace etc.) + title + image + status all correspond to the tapped marker (note: test initially mis-mapped slugs to numbers — actual data: 05=Glenmore, 06=Hillock, 12=Solace; app is internally consistent).
+- close → tap another → new details: PASS (Casa→Nest). Chip tap shares same state/panel: PASS. Close leaves clean map: PASS.
+- Float-vs-sheet overlap: eliminated via portal (previous entry).
+- No code changes this round — user's list already satisfied by the sheet+portal build. PENDING: redeploy.
