@@ -1,116 +1,131 @@
 {
-  "theme": "dark",
-  "typography": {
-    "headings": {
-      "font": "Outfit, Clash Display, or Playfair Display",
-      "style": "Premium, structural, and uppercase for section titles. Use tight tracking (tracking-tighter) for large headings to mimic architectural precision."
-    },
-    "body": {
-      "font": "Manrope, Inter, or DM Sans",
-      "style": "Clean, highly legible, modern sans-serif. Loose line-height (leading-relaxed)."
-    }
+  "project_context": {
+    "scope": "Redesign ONLY the Projects listing page (/projects) for a premium real-estate website.",
+    "theme": "Dark Luxury Architectural",
+    "restrictions": "Keep existing header, footer, homepage, project detail functionality, logo, typography style, and the black/orange/white color system. 19 projects exactly (13 completed, 6 ongoing). No external imagery needed (local assets used)."
   },
   "colors": {
-    "primary_background": "#0A0A0A",
-    "primary_text": "#F4F4F0",
-    "accent_orange": "#E85D22",
-    "concrete_grey": "#7A7A7A",
-    "warm_beige": "#D9D4C7",
-    "surface": "#121212",
-    "border_subtle": "rgba(255,255,255,0.1)"
-  },
-  "visual_enhancers": [
-    "Subtle noise/grain overlay spanning the entire site for physical depth.",
-    "1px structural grid lines in subtle white/grey opacity (border-white/10).",
-    "Optical clarity glassmorphism for sticky navigation (backdrop-blur-xl bg-black/60).",
-    "Avoid standard box-shadows. Use sharp architectural borders."
-  ],
-  "components": [
-    {
-      "name": "Kinetic Hero",
-      "instructions": "Full viewport height. Use Framer Motion to animate large typography ('YOU DREAM. WE BUILD.'). Wrap text lines in 'overflow-hidden' divs and animate inner 'motion.h1' from y: '100%' to y: 0. Stagger the lines for a cinematic reveal."
+    "background": {
+      "primary": "#0A0A0A",
+      "overlay": "rgba(10, 10, 10, 0.4)",
+      "filter_inactive": "rgba(244, 244, 240, 0.03)"
     },
-    {
-      "name": "Editorial Marquee",
-      "instructions": "Use 'react-fast-marquee'. Extremely slow speed. Use massive outline text (text-transparent stroke-white/20) traversing horizontally."
+    "text": {
+      "primary": "#F4F4F0",
+      "secondary": "rgba(244, 244, 240, 0.6)",
+      "muted": "rgba(244, 244, 240, 0.3)"
     },
-    {
-      "name": "Manifesto Chapters",
-      "instructions": "Vertical list of numbered principles (e.g. 01, 02). As user scrolls, use Framer Motion 'whileInView' to reveal text and number. High contrast numbers in accent_orange or concrete_grey."
+    "accent": {
+      "primary": "#E85D22",
+      "hover": "#ff753a"
     },
-    {
-      "name": "Project Index & Filter",
-      "instructions": "Grid-based or list-based layout. Include a filter toggle for 'Completed (13)' vs 'Ongoing (6)'. DO NOT use actual building images. Use solid blocks of charcoal/beige or the provided concrete textures as placeholders with the project name overlaid beautifully."
-    },
-    {
-      "name": "Project Detail Template",
-      "instructions": "Reusable layout. Large abstract header area, modular grid for stats (Location, Status, Type) with concrete lines, and ample whitespace."
-    },
-    {
-      "name": "Navigation",
-      "instructions": "Desktop: Fixed/Sticky with backdrop-blur. Logo left, links center, 'LET'S TALK ->' CTA on right in accent color. Mobile: Hamburger opening a full-screen Framer Motion overlay (100vh)."
-    },
-    {
-      "name": "Design-Only Contact Form",
-      "instructions": "Minimalist fields (border-b only, no full boxes). Deep architectural feel. Use Shadcn inputs with custom styling."
+    "borders": {
+      "hairline": "rgba(244, 244, 240, 0.1)",
+      "focus": "rgba(232, 93, 34, 0.5)"
     }
-  ],
-  "grids_layouts": {
-    "spacing": "Generous. Use p-12, p-24, or p-32 for section padding. Negative space is a feature.",
-    "alignment": "Strict architectural grid. Break standard symmetry. Use 'Tetris' grid modes (col-span-8, col-span-4) for visual tension."
   },
-  "motion_and_animations": {
-    "smooth_scroll": "Wrap the app root in ReactLenis from '@studio-freight/react-lenis' for premium physics.",
-    "scroll_reveals": "Use framer-motion 'whileInView' with 'viewport={{ once: true, margin: \"-100px\" }}'.",
-    "parallax": "Use 'useScroll' and 'useTransform' for a subtle hero background parallax or 3D float moment."
+  "typography": {
+    "rules": "Preserve existing Clash Display style (or geometric equivalent) for headings and numbers. Uppercase heavily used for architectural feel.",
+    "hierarchy": {
+      "page_title": "text-5xl md:text-7xl uppercase tracking-tight leading-none text-[#F4F4F0]",
+      "eyebrow": "text-sm tracking-[0.2em] uppercase text-[#E85D22]",
+      "project_number": "text-6xl md:text-8xl font-light text-[#F4F4F0]/10",
+      "project_title": "text-3xl md:text-5xl uppercase tracking-tight text-[#F4F4F0]",
+      "project_meta": "text-sm uppercase tracking-wider text-[#F4F4F0]/60",
+      "filter_text": "text-xs md:text-sm uppercase tracking-[0.1em]"
+    }
   },
-  "accessibility": {
-    "contrast": "Ensure text passes APCA contrast ratios against the dark backgrounds.",
-    "reduced_motion": "Respect 'prefers-reduced-motion' via Framer Motion's useReducedMotion hook.",
-    "testing": "All interactive elements MUST include data-testid (e.g., data-testid='nav-contact-button')."
+  "layouts": {
+    "directions_considered": [
+      {
+        "name": "Direction 1: The Interactive Editorial List",
+        "concept": "Massive text-only rows. Hovering over a row reveals a floating cinematic video box attached to the cursor.",
+        "pros": "Extremely avant-garde and Godly.website-esque.",
+        "cons": "Bad for mobile (touch devices don't have hover). Fails requirement to show standard photos."
+      },
+      {
+        "name": "Direction 2: The Cinematic Asymmetrical Grid (RECOMMENDED)",
+        "concept": "Breaks the uniform 3-column grid into a 12-column masonry-style grid with tension. Projects alternate in emphasis (e.g., Hero size vs Supporting size).",
+        "pros": "Accommodates videos beautifully, creates visual rhythm, scales perfectly to mobile as edge-to-edge full-bleed cards."
+      }
+    ],
+    "recommended_spec": {
+      "page_container": "max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 pt-32 pb-48",
+      "header_section": "flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24 border-b border-[#F4F4F0]/10 pb-12",
+      "filters": {
+        "container": "flex flex-wrap gap-3",
+        "pill": "px-6 py-3 rounded-full border border-[#F4F4F0]/10 transition-all duration-300 flex items-center gap-2",
+        "pill_active": "bg-[#E85D22] border-[#E85D22] text-[#0A0A0A]",
+        "pill_inactive": "bg-transparent text-[#F4F4F0]/60 hover:text-[#F4F4F0] hover:border-[#F4F4F0]/30",
+        "count_badge": "text-[10px] px-2 py-0.5 rounded-full bg-black/20"
+      },
+      "grid": "grid grid-cols-1 md:grid-cols-12 gap-y-24 md:gap-x-12",
+      "card_rhythm": [
+        "Card 1: col-span-12 (Massive Hero layout)",
+        "Card 2: col-span-7, Card 3: col-span-5 (Asymmetrical pair)",
+        "Card 4: col-span-5, Card 5: col-span-7 (Reversed pair)",
+        "Card 6: col-span-12 (Breaker row)",
+        "Loop this pattern for the remaining projects."
+      ]
+    }
   },
-  "media": {
-    "strategy": "Minimal abstract placeholders. NO fake building imagery, hard-hats, or apartment stocks.",
-    "image_urls": {
-      "concrete_texture_1": {
-        "url": "https://images.unsplash.com/photo-1617713965103-9fda56c89fad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwyfHxyYXclMjBjb25jcmV0ZSUyMHRleHR1cmUlMjBtaW5pbWFsfGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-        "description": "Minimal concrete texture",
-        "category": "project_placeholder"
+  "components": {
+    "project_card": {
+      "wrapper": "group relative flex flex-col gap-6 cursor-pointer",
+      "media_slot": {
+        "container": "relative w-full overflow-hidden bg-black/20 border border-[#F4F4F0]/5",
+        "aspect_ratios": "Hero (12-col): aspect-[21/9] or aspect-[16/9]. Standard (5/7-col): aspect-[4/3] or aspect-[3/4]. Mobile: aspect-[4/5] edge-to-edge.",
+        "image": "absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105",
+        "video_layer": "absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none (Placeholder for <video> tags)",
+        "overlay": "absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent z-20 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500"
       },
-      "concrete_texture_2": {
-        "url": "https://images.unsplash.com/photo-1579492450119-80542d516179?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwxfHxyYXclMjBjb25jcmV0ZSUyMHRleHR1cmUlMjBtaW5pbWFsfGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-        "description": "Black and white concrete",
-        "category": "project_placeholder"
-      },
-      "abstract_architectural_1": {
-        "url": "https://images.unsplash.com/photo-1637088059539-ad62cba57895?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyYWwlMjBtaW5pbWFsJTIwc2hhZG93fGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-        "description": "Dark abstract minimal architecture",
-        "category": "project_placeholder"
-      },
-      "abstract_architectural_2": {
-        "url": "https://images.unsplash.com/photo-1632667680404-572c57873c21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFyY2hpdGVjdHVyYWwlMjBtaW5pbWFsJTIwc2hhZG93fGVufDB8fHx8MTc4NjAyMjU4OHww&ixlib=rb-4.1.0&q=85",
-        "description": "Building abstract shadows",
-        "category": "project_placeholder"
+      "metadata": {
+        "container": "flex flex-col gap-2 relative z-30",
+        "header_row": "flex justify-between items-start w-full",
+        "number_badge": "absolute -top-12 -left-4 md:-left-8 text-7xl md:text-9xl font-black text-[#F4F4F0]/[0.03] select-none pointer-events-none z-0",
+        "title": "text-2xl md:text-4xl uppercase tracking-tight text-[#F4F4F0] group-hover:text-[#E85D22] transition-colors duration-300 z-10",
+        "type_location": "text-sm text-[#F4F4F0]/60 uppercase tracking-widest flex items-center gap-2",
+        "status_badge": {
+          "completed": "inline-flex items-center gap-2 text-xs tracking-widest text-[#F4F4F0]/80 border border-[#F4F4F0]/20 px-3 py-1",
+          "ongoing": "inline-flex items-center gap-2 text-xs tracking-widest text-[#E85D22] border border-[#E85D22]/30 bg-[#E85D22]/10 px-3 py-1",
+          "ongoing_pulse": "w-1.5 h-1.5 rounded-full bg-[#E85D22] animate-pulse"
+        }
       }
     }
   },
-  "instructions_to_main_agent": [
-    "Run `yarn add framer-motion @studio-freight/react-lenis react-fast-marquee react-router-dom lucide-react`.",
-    "Replace default boilerplate in `src/App.js` with a HashRouter/BrowserRouter setup containing Home, Projects, About, Contact, and ProjectDetail routes.",
-    "Implement the kinetic line-by-line reveal in the Home hero section. This is a hard requirement for the Awwwards feel.",
-    "Mock the 19 projects data (13 completed, 6 ongoing) in a reusable data file (e.g., `src/data/projects.js`).",
-    "Use solid color rectangles with the project title overlaid OR the provided concrete/abstract textures as project placeholders.",
-    "Ensure 'LET'S TALK' CTA is highly visible in nav.",
-    "Apply smooth scrolling using Lenis to the entire app root."
-  ],
+  "motion": {
+    "page_load": "Framer motion staggered fade-up for header and filter pills (y: 20, opacity: 0 -> y: 0, opacity: 1, duration 0.8s).",
+    "scroll_reveal": "Cards enter viewport with subtle upward drift and blur reveal (y: 40, filter: 'blur(10px)', opacity: 0).",
+    "filter_transition": "Use <motion.div layout> for the grid so when 'Completed' or 'Ongoing' is selected, cards smoothly glide into their new grid positions.",
+    "hover_state": "Image scales up slowly (scale 1.05 over 1.5s). Metadata slides up slightly (y: -5px) to indicate clickability."
+  },
+  "mobile_behavior": {
+    "layout": "Grid switches to 1 column. Edge-to-edge media (negative horizontal margins).",
+    "media": "Instead of hover to play video, the video should trigger via IntersectionObserver when 50% in view.",
+    "filters": "Horizontal scrollable flex row without scrollbars (overflow-x-auto, no-scrollbar)."
+  },
+  "accessibility": {
+    "focus": "Focus states MUST be high contrast. Use 'focus-visible:ring-2 focus-visible:ring-[#E85D22] focus-visible:outline-none' on all interactive elements.",
+    "aria": "Use aria-current='page' on active filters. Include aria-labels for projects.",
+    "contrast": "Ensure project metadata maintains at least 4.5:1 contrast against the #0A0A0A background."
+  },
+  "testing": {
+    "data_testids": {
+      "page": "projects-page",
+      "filter_all": "filter-all-button",
+      "filter_completed": "filter-completed-button",
+      "filter_ongoing": "filter-ongoing-button",
+      "project_card": "project-card-{slug}",
+      "project_link": "project-link-{slug}"
+    }
+  },
   "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
-    "DO NOT use generic centered text alignment globally.",
-    "DO NOT use generic gradients or standard blue SaaS colors. Stick to the premium deep charcoal, concrete, beige, and orange palette.",
-    "Use 2-3x more padding than usual (e.g., py-24 or py-32 for sections).",
-    "Include 'data-testid' attributes on all interactive elements (MUST DO).",
-    "Implement subtle hover states (e.g., slightly changing border color, opacity, or a small y-translate).",
-    "NEVER use generic placeholder imagery or dummy text loops. Use provided abstract architectural textures.",
-    "Never use `transition: all`. Target specific properties.",
-    "Avoid emojis for icons."
+    "Do NOT change the header, footer, or any other pages. Redesign ONLY the /projects listing area.",
+    "Enforce the specific data structure exactly: 19 projects (01-19), 13 Completed, 6 Ongoing.",
+    "Video tags should be added but empty/placeholder src for now, wired to show on hover (desktop) or scroll (mobile).",
+    "Use Framer Motion for the layout transitions when filtering the grid (layout prop is essential here).",
+    "Create depth through layering: the giant project numbers should sit BEHIND the project images visually.",
+    "Ensure the ember orange (#E85D22) is used sparingly as an accent for active states and hover intents to maintain the luxury feel.",
+    "Do NOT use transparent backgrounds for dropdowns or floating headers (though not strictly applicable as header shouldn't be touched)."
   ]
 }

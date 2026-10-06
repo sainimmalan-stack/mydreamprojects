@@ -1066,3 +1066,10 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - close → tap another → new details: PASS (Casa→Nest). Chip tap shares same state/panel: PASS. Close leaves clean map: PASS.
 - Float-vs-sheet overlap: eliminated via portal (previous entry).
 - No code changes this round — user's list already satisfied by the sheet+portal build. PENDING: redeploy.
+
+## 2026-10-06 — Projects Listing Cinematic Redesign (PREVIEW ONLY — awaiting owner review, NOT deployed)
+- /projects rebuilt as a "Cinematic Asymmetrical Grid" (design blueprint in /app/design_guidelines.json): 12-col rhythm [hero 12 → wide 7 + tall 5 (dropped) → tall 5 + wide 7 (dropped)] looping; final item closes full-bleed. Desktop-only spans (literal Tailwind classes), mobile single column.
+- New components/CinematicProjectCard.jsx (old ProjectCard.jsx UNTOUCHED — still used by homepage): ghost index number behind media, slow 1.5s hover zoom, hover scrim, blur-rise scroll reveals, title→ember hover. Preserved ALL existing card functionality: day/night toggle (lazy day load), 3D Plan chip + FloorPlanViewer, status badges (green sold-out / ember ongoing pulse), price line.
+- VIDEO-READY: cards support `project.video` — a dormant <video> layer (hover-play on desktop, IntersectionObserver-play on mobile, poster-first). No video assets exist in the workspace yet (checked: assets DB has only images/PDFs) — owner to provide the ZIP videos later; no dummy data added.
+- Header: existing eyebrow + giant PROJECTS title + right-aligned stat line; filters now rounded-full pills with count badges, horizontally scrollable on mobile (existing filter behavior/URLs unchanged).
+- Verified: grid geometry exact (200px margins, 7/5 splits), no overflow desktop+mobile, filters 13/6 counts, card→detail navigation, homepage untouched. NOT deployed per owner instruction.
