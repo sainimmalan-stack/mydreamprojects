@@ -1,57 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sun, Moon, Box } from "lucide-react";
 import ComingSoonElevation from "./ComingSoonElevation";
 import FloorPlanViewer from "./FloorPlanViewer";
+import { useCardVideo, videoPosterFor } from "./useCardVideo";
 
 const EASE = [0.16, 1, 0.3, 1];
-
-// Centralized playback manager: every card video reports its visibility ratio;
-// after each change (rAF-throttled) exactly ONE winner — the most-visible video
-// above the 0.55 threshold — plays, all others pause. Deterministic, no
-// promise races: any play() that resolves late is re-evaluated by settle().
-const cardVideos = new Map(); // video -> { ratio }
-let settleScheduled = false;
-
-const settle = () => {
-  settleScheduled = false;
-  let best = null;
-  let bestRatio = 0.55; // must be meaningfully visible
-  cardVideos.forEach((info, v) => {
-    if (info.ratio > bestRatio) {
-      best = v;
-      bestRatio = info.ratio;
-    }
-  });
-  cardVideos.forEach((_, v) => {
-    if (v === best) {
-      if (v.paused) {
-        v.play()
-          .then(() => settleSoon()) // late resolution: re-verify v is still the winner
-          .catch(() => {});
-      }
-    } else if (!v.paused) {
-      v.pause();
-    }
-  });
-};
-
-const settleSoon = () => {
-  if (settleScheduled) return;
-  settleScheduled = true;
-  requestAnimationFrame(settle);
-};
-
-const reportRatio = (v, ratio) => {
-  cardVideos.set(v, { ratio });
-  settleSoon();
-};
-
-const unregisterVideo = (v) => {
-  cardVideos.delete(v);
-  settleSoon();
-};
 
 /**
  * CinematicProjectCard — editorial card for the redesigned /projects index.
@@ -66,15 +21,13 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
   const [mode, setMode] = useState("night");
   const [dayTouched, setDayTouched] = useState(false);
   const [plan3dOpen, setPlan3dOpen] = useState(false);
-  const [armed, setArmed] = useState(false);
   const videoRef = useRef(null);
   const mediaRef = useRef(null);
   const hasVideo = Boolean(project.video);
   const modes = !hasVideo && project.cover && project.elevationModes ? project.elevationModes : null;
   // poster frame extracted from the SAME video — never the elevation image
-  const videoPoster = hasVideo
-    ? project.video.replace("/assets/videos/", "/assets/videos/posters/").replace(/\.mp4$/, "-poster.jpg")
-    : null;
+  const videoPoster = videoPosterFor(project.video);
+  const armed = useCardVideo(videoRef, mediaRef, hasVideo);
 
   const aspect =
     variant === "hero"
@@ -86,39 +39,6 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
     variant === "hero"
       ? "(max-width: 768px) 100vw, 1600px"
       : "(max-width: 768px) 100vw, 60vw";
-
-  // lazy arm: the video file is only requested once the card nears the viewport
-  useEffect(() => {
-    if (!hasVideo || !mediaRef.current) return undefined;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setArmed(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "400px" }
-    );
-    io.observe(mediaRef.current);
-    return () => io.disconnect();
-  }, [hasVideo]);
-
-  // report visibility to the central playback manager (autoplay when
-  // ≥55% visible, pause on scroll-away, strictly one video playing)
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!armed || !v) return undefined;
-    const io = new IntersectionObserver(
-      ([entry]) => reportRatio(v, entry.intersectionRatio),
-      { threshold: [0, 0.25, 0.55, 0.75, 1] }
-    );
-    io.observe(v);
-    return () => {
-      io.disconnect();
-      v.pause();
-      unregisterVideo(v);
-    };
-  }, [armed]);
 
   return (
     <motion.div

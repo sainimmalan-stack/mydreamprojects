@@ -1099,3 +1099,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - User request: ALL 19 / COMPLETED 13 / ONGOING 6 must fit fully on one mobile row, no clipping/horizontal scroll.
 - Change (Projects.jsx only, mobile): label 11px->10px, tracking 0.25em->0.12em, px-4->px-3, inner gap-2->gap-1.5, row gap-2.5->gap-2, count chip px-1.5->px-1. Desktop restored via md: classes (unchanged: 11px, 0.25em, px-5 py-2.5).
 - Verified at 375px and 360px: all three fully on one row, no scroll (scrollWidth==clientWidth), right edge 334px < viewport, height 35.5px tappable, counts visible, orange active state intact; desktop measurements identical. Not published.
+
+## 2026-10-07 — Cinematic video teasers on Home featured projects
+- User picked backlog item: same auto-playing video treatment for the 3 featured projects (Nest, Skylark, Perch) in Home Selected Work.
+- Extracted shared playback manager into src/components/useCardVideo.js (single-winner settle logic + lazy-arm hook + videoPosterFor helper); CinematicProjectCard refactored to consume it (behaviour identical).
+- ProjectCard.jsx (Home-only usage): video layer with same-video poster, lazy arm (0 downloads until near viewport), autoplay muted/inline when ≥55% visible, pauses for single playback; elevation images and dead day/night toggle hidden on video cards, consistent with /projects.
+- Verified (real Chrome, H.264): 0 videos in DOM before section approached; 3 armed with correct posters; exactly 1 playing and advancing (2.48s→4.01s); mobile 375px same; /projects regression advancing; no console errors. Screenshots desktop+mobile confirm layout/badges/3D chips unchanged. Not published.

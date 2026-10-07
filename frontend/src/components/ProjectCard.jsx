@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sun, Moon, Box } from "lucide-react";
 import ComingSoonElevation from "./ComingSoonElevation";
 import FloorPlanViewer from "./FloorPlanViewer";
+import { useCardVideo, videoPosterFor } from "./useCardVideo";
 
 const TONES = [
   { surface: "bg-coal", index: "text-outline", title: "text-bone", meta: "text-concrete" },
@@ -16,7 +17,12 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
   const [mode, setMode] = useState("night");
   const [dayTouched, setDayTouched] = useState(false);
   const [plan3dOpen, setPlan3dOpen] = useState(false);
-  const modes = project.cover && project.elevationModes ? project.elevationModes : null;
+  const videoRef = useRef(null);
+  const mediaRef = useRef(null);
+  const hasVideo = Boolean(project.video);
+  const modes = !hasVideo && project.cover && project.elevationModes ? project.elevationModes : null;
+  // cinematic video teaser — same treatment as the /projects index cards
+  const armed = useCardVideo(videoRef, mediaRef, hasVideo);
   const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
   return (
     <motion.div
@@ -32,6 +38,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
         className="group block"
       >
         <div
+          ref={mediaRef}
           className={`relative overflow-hidden ${project.cover ? "bg-coal" : t.surface} ${aspect} border border-line group-hover:border-ember/40 transition-colors duration-500`}
         >
           {modes ? (
@@ -109,7 +116,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
                 </button>
               </div>
             </>
-          ) : project.cover ? (
+          ) : !hasVideo && project.cover ? (
             <img
               src={project.cover}
               srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
@@ -119,7 +126,24 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
               className="texture-img absolute inset-0 w-full h-full object-cover"
             />
           ) : (
-            <ComingSoonElevation project={project} compact />
+            !hasVideo && <ComingSoonElevation project={project} compact />
+          )}
+          {/* cinematic video teaser — lazy-armed, visibility-driven playback;
+              poster frame from the SAME video shows instantly while it loads.
+              No z-index: later siblings (status badge, 3D chip) stay on top. */}
+          {hasVideo && armed && (
+            <video
+              ref={videoRef}
+              src={project.video}
+              poster={videoPosterFor(project.video)}
+              data-testid={`card-video-${project.slug}`}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            />
           )}
           {project.plan3d && (
             <button
