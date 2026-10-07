@@ -89,7 +89,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-          className="flex gap-2.5 mt-10 md:mt-14 overflow-x-auto pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-2 md:gap-2.5 mt-10 md:mt-14 overflow-x-auto pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           role="tablist"
         >
           {FILTERS.map((f) => (
@@ -100,7 +100,7 @@ export default function Projects() {
               aria-current={filter === f.key ? "page" : undefined}
               data-testid={`filter-${f.key}-button`}
               onClick={() => setFilter(f.key)}
-              className={`shrink-0 flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.25em] px-4 py-2 md:px-5 md:py-2.5 rounded-full border transition-[color,background-color,border-color] duration-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember ${
+              className={`shrink-0 flex items-center gap-1.5 md:gap-2 font-display text-[10px] md:text-[11px] uppercase tracking-[0.12em] md:tracking-[0.25em] px-3 py-2 md:px-5 md:py-2.5 rounded-full border transition-[color,background-color,border-color] duration-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember ${
                 filter === f.key
                   ? "bg-ember border-ember text-ink font-semibold"
                   : "border-line text-concrete hover:text-bone hover:border-bone/30"
@@ -108,7 +108,7 @@ export default function Projects() {
             >
               {f.label}
               <span
-                className={`text-[9px] px-1.5 py-0.5 rounded-full ${
+                className={`text-[9px] px-1 md:px-1.5 py-0.5 rounded-full ${
                   filter === f.key ? "bg-ink/20" : "bg-bone/5 text-concrete"
                 }`}
               >

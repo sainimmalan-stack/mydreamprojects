@@ -1094,3 +1094,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - User request: ALL/COMPLETED/ONGOING pills felt ~15-20% too heavy on mobile.
 - Change (Projects.jsx only): mobile padding px-5 py-2.5 -> px-4 py-2; desktop unchanged via md:px-5 md:py-2.5. Fonts, colours, orange active state, counts, single-row scroll all preserved.
 - Verified at 375px: height 39.5->35.5px, padX 20->16px, padY 10->8px, all three on one row, active bg rgb(232,93,34); desktop measurements unchanged. Not published.
+
+## 2026-10-07 — Filter pills fit one mobile row without scrolling
+- User request: ALL 19 / COMPLETED 13 / ONGOING 6 must fit fully on one mobile row, no clipping/horizontal scroll.
+- Change (Projects.jsx only, mobile): label 11px->10px, tracking 0.25em->0.12em, px-4->px-3, inner gap-2->gap-1.5, row gap-2.5->gap-2, count chip px-1.5->px-1. Desktop restored via md: classes (unchanged: 11px, 0.25em, px-5 py-2.5).
+- Verified at 375px and 360px: all three fully on one row, no scroll (scrollWidth==clientWidth), right edge 334px < viewport, height 35.5px tappable, counts visible, orange active state intact; desktop measurements identical. Not published.
