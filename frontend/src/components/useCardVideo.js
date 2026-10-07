@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 // video above the 0.55 threshold — plays, all others pause. Deterministic,
 // no promise races: any play() that resolves late is re-verified by settle().
 const cardVideos = new Map(); // video -> { ratio }
+// videos that must NEVER be auto-started by the manager (tap-to-play only,
+// e.g. the brand film) — they are still paused when another video wins
+const manualPlayVideos = new Set();
 let settleScheduled = false;
 
 const settle = () => {
@@ -23,7 +26,7 @@ const settle = () => {
       // iOS Safari checks the muted IDL *property* (not the attribute) for
       // autoplay eligibility — enforce it right before every play()
       v.muted = true;
-      if (v.paused) {
+      if (v.paused && !manualPlayVideos.has(v)) {
         v.play()
           .then(() => settleSoon()) // late resolution: re-verify v is still the winner
           .catch(() => {});
@@ -75,7 +78,7 @@ export const videoPosterFor = (src) =>
  * pauses when scrolled away, and yields to the single most-visible card.
  * Returns `armed` — mount the <video> element only once armed.
  */
-export const useCardVideo = (videoRef, mediaRef, hasVideo) => {
+export const useCardVideo = (videoRef, mediaRef, hasVideo, { manualPlay = false } = {}) => {
   const [armed, setArmed] = useState(false);
 
   // lazy arm: the video file is only requested once the card nears the viewport
@@ -98,6 +101,7 @@ export const useCardVideo = (videoRef, mediaRef, hasVideo) => {
   useEffect(() => {
     const v = videoRef.current;
     if (!armed || !v) return undefined;
+    if (manualPlay) manualPlayVideos.add(v);
     const io = new IntersectionObserver(
       ([entry]) => reportRatio(v, entry.intersectionRatio),
       { threshold: [0, 0.25, 0.55, 0.75, 1] }
@@ -110,10 +114,11 @@ export const useCardVideo = (videoRef, mediaRef, hasVideo) => {
     return () => {
       io.disconnect();
       v.removeEventListener("play", onPlay);
+      manualPlayVideos.delete(v);
       v.pause();
       unregisterVideo(v);
     };
-  }, [armed, videoRef]);
+  }, [armed, videoRef, manualPlay]);
 
   return armed;
 };

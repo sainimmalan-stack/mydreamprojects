@@ -332,11 +332,11 @@ const Purpose = () => (
 const BrandFilm = () => {
   const frameRef = useRef(null);
   const videoRef = useRef(null);
-  // lazy-armed ~400px before the frame scrolls into view, then autoplays
-  // muted/inline/looping while ≥55% visible and pauses when scrolled away —
-  // sharing the site-wide single-winner arbitration with the project cards
-  const armed = useCardVideo(videoRef, frameRef, true);
-  const [paused, setPaused] = useState(false);
+  // lazy-armed ~400px before the frame scrolls into view; registered with the
+  // site-wide arbitration as MANUAL-ONLY — it never autoplays: a tap starts
+  // it (the cards yield), and it pauses when scrolled away or a card plays
+  const armed = useCardVideo(videoRef, frameRef, true, { manualPlay: true });
+  const [paused, setPaused] = useState(true);
 
   const togglePlay = () => {
     const v = videoRef.current;
@@ -347,8 +347,8 @@ const BrandFilm = () => {
 
   return (
     <section data-testid="brand-film-section" className="border-t border-line bg-coal">
-      <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-24 md:py-40">
-        <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
+      <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-14 md:py-32">
+        <div className="grid grid-cols-12 gap-6 mb-8 md:mb-16">
           <Reveal className="col-span-12 md:col-span-3">
             <p className="text-[10px] uppercase tracking-[0.4em] text-ember">The Brand Film</p>
           </Reveal>
@@ -371,13 +371,11 @@ const BrandFilm = () => {
               <video
                 ref={(el) => {
                   videoRef.current = el;
-                  // iOS Safari: the muted *property* must be set for autoplay —
-                  // React's muted attribute alone does not guarantee it
+                  // iOS Safari: the muted *property* must be set reliably
                   if (el) el.muted = true;
                 }}
                 poster={BRAND_FILM_POSTER}
                 data-testid="brand-film-video"
-                autoPlay
                 muted
                 loop
                 playsInline
@@ -406,10 +404,13 @@ const BrandFilm = () => {
                 )}
               </span>
             </div>
-            <span className="absolute bottom-4 left-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] bg-ink/55 backdrop-blur px-2.5 py-1.5 text-bone pointer-events-none">
-              My Dream Projects<Reg /> — Brand Film · 1 Min
-            </span>
           </div>
+          <p
+            data-testid="brand-film-label"
+            className="mt-4 text-[10px] uppercase tracking-[0.25em] text-concrete"
+          >
+            My Dream Projects<Reg /> — Brand Film · 1 Min
+          </p>
         </Reveal>
       </div>
     </section>
