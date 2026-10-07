@@ -1073,3 +1073,12 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - VIDEO-READY: cards support `project.video` — a dormant <video> layer (hover-play on desktop, IntersectionObserver-play on mobile, poster-first). No video assets exist in the workspace yet (checked: assets DB has only images/PDFs) — owner to provide the ZIP videos later; no dummy data added.
 - Header: existing eyebrow + giant PROJECTS title + right-aligned stat line; filters now rounded-full pills with count badges, horizontally scrollable on mobile (existing filter behavior/URLs unchanged).
 - Verified: grid geometry exact (200px margins, 7/5 splits), no overflow desktop+mobile, filters 13/6 counts, card→detail navigation, homepage untouched. NOT deployed per owner instruction.
+
+## 2026-10-07 — 19 Project Videos Connected to Cinematic Index (PREVIEW ONLY — awaiting owner approval, NOT deployed)
+- Extracted Emergent Film.zip (129MB, 22 MP4s): 19 project videos mapped strictly by folder number → slug; OFFICE EXTERIOR / OFFICE INTERIOR / OUR MAP / logo excluded.
+- Videos are 720p24 H.264, 3.5-8MB, no audio — already the mobile-friendly target; used ORIGINAL streams unaltered (stream-copy + faststart moov for instant start). No fake 1080p upscale (would add size, zero quality).
+- Saved to /app/frontend/public/assets/videos/<slug>.mp4; projects.js gained `video:` on all 19 (verified index↔slug↔file 19/19 OK).
+- CinematicProjectCard video layer: lazy-arm (IntersectionObserver 400px rootMargin — zero video requests on page open), autoplay muted/loop/playsInline when ≥55% visible, pause on scroll-away; elevation image remains as poster until first frame (and if video unavailable).
+- Single playback: centralized ratio-based manager (module registry + rAF-throttled settle picks the MOST-VISIBLE card ≥0.55 ratio; all others pause; late play() resolutions re-verify). Fixes the deterministic pair-row case (two cards visible → highest-visibility wins).
+- DEBUG NOTE: Playwright's bundled Chromium lacks H.264 codecs (false "no supported streams") — video tests must run with executable_path=/usr/bin/google-chrome. Test scripts in /tmp (verify_videos2.py, verify_playback.py) — ephemeral.
+- Verified (real Chrome): 19/19 mapped+decodable desktop+mobile; lazy (0-2 reqs at open, rest on scroll); ≤1 playing; pause on scroll-away; no overflow; card→detail navigation intact; day/night + 3D chips + filters unchanged. Screenshots show real footage mid-play.

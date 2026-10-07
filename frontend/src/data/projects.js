@@ -37,6 +37,7 @@ export const PRICING = {
 const MY_DREAM_NEST = {
   id: 1,
   slug: "my-dream-nest",
+  video: "/assets/videos/my-dream-nest.mp4",
   index: "01",
   title: "My Dream Nest",
   status: "completed",
@@ -86,6 +87,7 @@ const MY_DREAM_NEST = {
 const MY_DREAM_CASA = {
   id: 2,
   slug: "my-dream-casa",
+  video: "/assets/videos/my-dream-casa.mp4",
   index: "02",
   title: "My Dream Casa",
   status: "completed",
@@ -135,6 +137,7 @@ const MY_DREAM_CASA = {
 const MY_DREAM_AVASA = {
   id: 3,
   slug: "my-dream-avasa",
+  video: "/assets/videos/my-dream-avasa.mp4",
   index: "03",
   title: "My Dream Avasa",
   status: "completed",
@@ -184,6 +187,7 @@ const MY_DREAM_AVASA = {
 const MY_DREAM_SKYLARK = {
   id: 4,
   slug: "my-dream-skylark",
+  video: "/assets/videos/my-dream-skylark.mp4",
   index: "04",
   title: "My Dream Skylark",
   status: "completed",
@@ -237,6 +241,7 @@ const MY_DREAM_SKYLARK = {
 const MY_DREAM_GLENMORE = {
   id: 5,
   slug: "my-dream-glenmore",
+  video: "/assets/videos/my-dream-glenmore.mp4",
   index: "05",
   title: "My Dream Glenmore",
   status: "completed",
@@ -287,6 +292,7 @@ const MY_DREAM_GLENMORE = {
 const MY_DREAM_HILLOCK = {
   id: 6,
   slug: "my-dream-hillock",
+  video: "/assets/videos/my-dream-hillock.mp4",
   index: "06",
   title: "My Dream Hillock",
   status: "completed",
@@ -336,6 +342,7 @@ const MY_DREAM_HILLOCK = {
 const MY_DREAM_SUMMIT = {
   id: 7,
   slug: "my-dream-summit",
+  video: "/assets/videos/my-dream-summit.mp4",
   index: "07",
   title: "My Dream Summit",
   status: "completed",
@@ -390,6 +397,7 @@ const MY_DREAM_SUMMIT = {
 const MY_DREAM_GRIFFIN = {
   id: 8,
   slug: "my-dream-griffin",
+  video: "/assets/videos/my-dream-griffin.mp4",
   index: "08",
   title: "My Dream Griffin",
   status: "completed",
@@ -440,6 +448,7 @@ const MY_DREAM_GRIFFIN = {
 const MY_DREAM_SELENE = {
   id: 9,
   slug: "my-dream-selene",
+  video: "/assets/videos/my-dream-selene.mp4",
   index: "09",
   title: "My Dream Selene",
   status: "completed",
@@ -490,6 +499,7 @@ const MY_DREAM_SELENE = {
 const MY_DREAM_ATLANTIS = {
   id: 10,
   slug: "my-dream-atlantis",
+  video: "/assets/videos/my-dream-atlantis.mp4",
   index: "10",
   title: "My Dream Atlantis",
   status: "completed",
@@ -543,6 +553,7 @@ const MY_DREAM_ATLANTIS = {
 const MY_DREAM_PERCH = {
   id: 11,
   slug: "my-dream-perch",
+  video: "/assets/videos/my-dream-perch.mp4",
   index: "11",
   title: "My Dream Perch",
   status: "completed",
@@ -593,6 +604,7 @@ const MY_DREAM_PERCH = {
 const MY_DREAM_SOLACE = {
   id: 12,
   slug: "my-dream-solace",
+  video: "/assets/videos/my-dream-solace.mp4",
   index: "12",
   title: "My Dream Solace",
   status: "completed",
@@ -643,6 +655,7 @@ const MY_DREAM_SOLACE = {
 const MY_DREAM_ZENITH = {
   id: 13,
   slug: "my-dream-zenith",
+  video: "/assets/videos/my-dream-zenith.mp4",
   index: "13",
   title: "My Dream Zenith",
   status: "completed",
@@ -693,6 +706,7 @@ const MY_DREAM_ZENITH = {
 const MY_DREAM_AURELIA = {
   id: 14,
   slug: "my-dream-aurelia",
+  video: "/assets/videos/my-dream-aurelia.mp4",
   index: "14",
   title: "My Dream Aurelia",
   status: "ongoing",
@@ -740,6 +754,7 @@ const MY_DREAM_AURELIA = {
 const MY_DREAM_ELYSIUM = {
   id: 15,
   slug: "my-dream-elysium",
+  video: "/assets/videos/my-dream-elysium.mp4",
   index: "15",
   title: "My Dream Elysium",
   status: "ongoing",
@@ -787,6 +802,7 @@ const MY_DREAM_ELYSIUM = {
 const MY_DREAM_AURA = {
   id: 16,
   slug: "my-dream-aura",
+  video: "/assets/videos/my-dream-aura.mp4",
   index: "16",
   title: "My Dream Aura",
   status: "ongoing",
@@ -830,6 +846,7 @@ const MY_DREAM_AURA = {
 const MY_DREAM_ECHELON = {
   id: 17,
   slug: "my-dream-echelon",
+  video: "/assets/videos/my-dream-echelon.mp4",
   index: "17",
   title: "My Dream Echelon",
   status: "ongoing",
@@ -873,6 +890,7 @@ const MY_DREAM_ECHELON = {
 const MY_DREAM_VALE = {
   id: 18,
   slug: "my-dream-vale",
+  video: "/assets/videos/my-dream-vale.mp4",
   index: "18",
   title: "My Dream Vale",
   status: "ongoing",
@@ -916,6 +934,7 @@ const MY_DREAM_VALE = {
 const MY_DREAM_IVY = {
   id: 19,
   slug: "my-dream-ivy",
+  video: "/assets/videos/my-dream-ivy.mp4",
   index: "19",
   title: "My Dream Ivy",
   status: "ongoing",

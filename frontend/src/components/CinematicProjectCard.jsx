@@ -7,17 +7,68 @@ import FloorPlanViewer from "./FloorPlanViewer";
 
 const EASE = [0.16, 1, 0.3, 1];
 
+// Centralized playback manager: every card video reports its visibility ratio;
+// after each change (rAF-throttled) exactly ONE winner — the most-visible video
+// above the 0.55 threshold — plays, all others pause. Deterministic, no
+// promise races: any play() that resolves late is re-evaluated by settle().
+const cardVideos = new Map(); // video -> { ratio }
+let settleScheduled = false;
+
+const settle = () => {
+  settleScheduled = false;
+  let best = null;
+  let bestRatio = 0.55; // must be meaningfully visible
+  cardVideos.forEach((info, v) => {
+    if (info.ratio > bestRatio) {
+      best = v;
+      bestRatio = info.ratio;
+    }
+  });
+  cardVideos.forEach((_, v) => {
+    if (v === best) {
+      if (v.paused) {
+        v.play()
+          .then(() => settleSoon()) // late resolution: re-verify v is still the winner
+          .catch(() => {});
+      }
+    } else if (!v.paused) {
+      v.pause();
+    }
+  });
+};
+
+const settleSoon = () => {
+  if (settleScheduled) return;
+  settleScheduled = true;
+  requestAnimationFrame(settle);
+};
+
+const reportRatio = (v, ratio) => {
+  cardVideos.set(v, { ratio });
+  settleSoon();
+};
+
+const unregisterVideo = (v) => {
+  cardVideos.delete(v);
+  settleSoon();
+};
+
 /**
  * CinematicProjectCard — editorial card for the redesigned /projects index.
- * Poster-first media slot with a ready-made <video> layer: the moment a
- * project gains a `video` asset it plays on hover (desktop) / in-view
- * (mobile) with no further layout work. Until then the poster image shows.
+ * Video behaviour: nothing downloads until the card nears the viewport
+ * (lazy arm), then the muted/looped/playsInline clip autoplays only while
+ * ≥55% visible, pauses when scrolled away, and pauses any other card that
+ * was playing. The elevation poster image stays visible until the first
+ * frame is ready (and forever if the video is unavailable).
  */
 export const CinematicProjectCard = ({ project, variant = "standard", drop = false }) => {
   const [mode, setMode] = useState("night");
   const [dayTouched, setDayTouched] = useState(false);
   const [plan3dOpen, setPlan3dOpen] = useState(false);
+  const [armed, setArmed] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef(null);
+  const mediaRef = useRef(null);
   const modes = project.cover && project.elevationModes ? project.elevationModes : null;
   const hasVideo = Boolean(project.video);
 
@@ -32,22 +83,38 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
       ? "(max-width: 768px) 100vw, 1600px"
       : "(max-width: 768px) 100vw, 60vw";
 
-  // video affordances — dormant until project.video assets are connected
+  // lazy arm: the video file is only requested once the card nears the viewport
   useEffect(() => {
-    if (!hasVideo || !videoRef.current) return undefined;
-    const v = videoRef.current;
-    const coarse = window.matchMedia("(hover: none)").matches;
-    if (!coarse) return undefined; // desktop: hover handlers on the link
+    if (!hasVideo || !mediaRef.current) return undefined;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) v.play().catch(() => {});
-        else v.pause();
+        if (entry.isIntersecting) {
+          setArmed(true);
+          io.disconnect();
+        }
       },
-      { threshold: 0.5 }
+      { rootMargin: "400px" }
     );
-    io.observe(v);
+    io.observe(mediaRef.current);
     return () => io.disconnect();
   }, [hasVideo]);
+
+  // report visibility to the central playback manager (autoplay when
+  // ≥55% visible, pause on scroll-away, strictly one video playing)
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!armed || !v) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => reportRatio(v, entry.intersectionRatio),
+      { threshold: [0, 0.25, 0.55, 0.75, 1] }
+    );
+    io.observe(v);
+    return () => {
+      io.disconnect();
+      v.pause();
+      unregisterVideo(v);
+    };
+  }, [armed]);
 
   return (
     <motion.div
@@ -63,8 +130,6 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
         data-testid={`project-card-${project.slug}`}
         aria-label={`View ${project.title} project details`}
         className="group block relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
-        onMouseEnter={() => videoRef.current?.play().catch(() => {})}
-        onMouseLeave={() => videoRef.current?.pause()}
       >
         {/* ghost index number behind the media — editorial depth layer */}
         <span
@@ -79,6 +144,7 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
         </span>
 
         <div
+          ref={mediaRef}
           className={`relative z-10 overflow-hidden bg-coal border border-line group-hover:border-ember/40 transition-colors duration-500 ${aspect}`}
         >
           {modes ? (
@@ -127,8 +193,9 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
             </div>
           )}
 
-          {/* cinematic video layer — activates automatically once project.video exists */}
-          {hasVideo && (
+          {/* cinematic video layer — lazy-armed, visibility-driven playback;
+              the elevation image underneath acts as the poster until ready */}
+          {hasVideo && armed && (
             <video
               ref={videoRef}
               src={project.video}
@@ -137,8 +204,11 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
               loop
               playsInline
               preload="metadata"
+              onCanPlay={() => setVideoReady(true)}
               aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 z-10 pointer-events-none ${
+                videoReady ? "opacity-100" : "opacity-0"
+              }`}
             />
           )}
 
