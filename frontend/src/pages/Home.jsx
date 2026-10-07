@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, animate, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, animate, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check, Play, Pause } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { Reg } from "../components/BrandMark";
@@ -12,34 +12,10 @@ import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-// Hero slideshow — night elevations of the 8 selected completed projects only.
-// Skylark always leads; the sequence loops continuously.
-const HERO_SLIDE_ORDER = [
-  "my-dream-skylark",
-  "my-dream-nest",
-  "my-dream-casa",
-  "my-dream-avasa",
-  "my-dream-hillock",
-  "my-dream-griffin",
-  "my-dream-perch",
-  "my-dream-solace",
-];
-const HERO_SLIDES = HERO_SLIDE_ORDER.map(getProject)
-  .filter((p) => p?.elevationModes?.night)
-  .map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    src: p.elevationModes.night,
-    srcSet: `${p.elevationModes.night.replace(".webp", "-800.webp")} 800w, ${p.elevationModes.night} ${p.elevationModes.width || 1402}w`,
-    link: `/projects/${p.slug}`,
-  }));
-const SLIDE_MS = 4000;
-const FADE_MS = 1600;
-
 // The Brand Film — the uploaded 1-minute MY DREAM PROJECTS® film (web-optimized
-// 6MB version; a lighter 640px cut is served under 768px). It lives in its own
-// cinematic section below the intro — NEVER behind the hero. The poster frame
-// is taken from the film itself, so no foreign frame flashes before playback.
+// 6MB version; a lighter 640px cut is served under 768px). It IS the homepage
+// opening visual — the first section after the header. The poster frame is
+// taken from the film itself, so no foreign frame flashes before playback.
 const BRAND_FILM = "/assets/videos/brand-film.mp4";
 const BRAND_FILM_MOBILE = "/assets/videos/brand-film-mobile.mp4";
 const BRAND_FILM_POSTER = "/assets/videos/posters/brand-film-poster.jpg";
@@ -57,85 +33,86 @@ const MaskedLine = ({ children, delay = 0, className = "" }) => (
   </span>
 );
 
-const Hero = () => {
-  const ref = useRef(null);
-  const reduce = useReducedMotion();
-  const [slide, setSlide] = useState(0);
-  const [loaded, setLoaded] = useState(() => new Set([0]));
-  const count = HERO_SLIDES.length;
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
-  const imgY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
+// Opening — the 1-minute MY DREAM PROJECTS® brand film IS the first visual of
+// the homepage. Full-bleed at its native 16:9 (object-contain: never stretched
+// or cropped, letterboxed only on ultra-wide screens), autoplay muted/inline
+// where the browser reliably allows it — otherwise the film's own poster and a
+// tap-to-play button remain. It pauses when scrolled past via the shared
+// single-winner arbitration. No website typography is overlaid on the film.
+const BrandFilmOpening = () => {
+  const frameRef = useRef(null);
+  const videoRef = useRef(null);
+  const armed = useCardVideo(videoRef, frameRef, true);
+  const [paused, setPaused] = useState(true);
 
-  useEffect(() => {
-    const t = setInterval(() => {
-      setSlide((s) => {
-        const next = (s + 1) % count;
-        return loaded.has(next) ? next : s;
-      });
-    }, SLIDE_MS);
-    return () => clearInterval(t);
-  }, [count, loaded]);
-
-  // Render only the fading-out, active and preloading-next slides.
-  const windowIdx = [...new Set([(slide - 1 + count) % count, slide, (slide + 1) % count])];
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) v.play().catch(() => {});
+    else v.pause();
+  };
 
   return (
-    <section ref={ref} data-testid="home-hero" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-      <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10">
-        {windowIdx.map((i) => {
-          const s = HERO_SLIDES[i];
-          return (
-            <div key={s.slug} className="absolute inset-0">
-              <motion.img
-                src={s.src}
-                srcSet={s.srcSet}
-                sizes="100vw"
-                alt={i === slide ? `${s.title} residential apartment elevation in Ameenpur — night view` : ""}
-                aria-hidden={i !== slide}
-                data-testid={i === 0 ? "hero-elevation-image" : `hero-slide-${s.slug}`}
-                fetchPriority={i === 0 ? "high" : undefined}
-                draggable={false}
-                onLoad={() => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))}
-                initial={false}
-                animate={
-                  reduce || i !== slide
-                    ? { scale: 1, x: 0, y: 0 }
-                    : { scale: 1.02, x: 0, y: 0 }
-                }
-                transition={{ duration: (SLIDE_MS + FADE_MS) / 1000, ease: "linear" }}
-                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity ${
-                  i === slide ? "opacity-100 duration-[1600ms] ease-out" : "opacity-0 duration-[1600ms] ease-in"
-                }`}
-              />
-            </div>
-          );
-        })}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/30 pointer-events-none" />
-      </motion.div>
-
-      {windowIdx.map((i) => {
-        const s = HERO_SLIDES[i];
-        return (
-          <Link
-            key={`caption-${s.slug}`}
-            to={s.link}
-            data-testid={`hero-caption-${s.slug}`}
-            aria-hidden={i !== slide}
-            tabIndex={i === slide ? 0 : -1}
-            className={`group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right transition-opacity duration-[2400ms] ease-in-out ${
-              i === slide ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
+    <section data-testid="brand-film-opening" className="pt-16 md:pt-20 bg-ink border-b border-line">
+      <div
+        ref={frameRef}
+        data-testid="brand-film-frame"
+        onClick={togglePlay}
+        className="relative overflow-hidden bg-ink w-full aspect-video max-h-[calc(100svh-4rem)] md:max-h-[calc(100svh-5rem)] cursor-pointer group"
+      >
+        {armed && (
+          <video
+            ref={(el) => {
+              videoRef.current = el;
+              // iOS Safari: the muted *property* must be set for autoplay —
+              // React's muted attribute alone does not guarantee it
+              if (el) el.muted = true;
+            }}
+            poster={BRAND_FILM_POSTER}
+            data-testid="brand-film-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            webkit-playsinline="true"
+            preload="auto"
+            onPlay={() => setPaused(false)}
+            onPause={() => setPaused(true)}
+            className="absolute inset-0 w-full h-full object-contain"
           >
-            <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
-            <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90 group-hover:text-ember transition-colors duration-300">
-              {s.title}
-            </p>
-          </Link>
-        );
-      })}
+            <source media="(max-width: 768px)" src={BRAND_FILM_MOBILE} type="video/mp4" />
+            <source src={BRAND_FILM} type="video/mp4" />
+          </video>
+        )}
+        {/* centre state icon — solid in the paused/poster state, whisper-quiet on hover while playing */}
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500 ${
+            paused ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          }`}
+        >
+          <span className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-bone/25 bg-ink/55 backdrop-blur flex items-center justify-center text-bone">
+            {paused ? (
+              <Play className="w-5 h-5 md:w-6 md:h-6 ml-0.5" strokeWidth={1.5} />
+            ) : (
+              <Pause className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
+            )}
+          </span>
+        </div>
+      </div>
+      <p
+        data-testid="brand-film-label"
+        className="max-w-[1600px] mx-auto px-5 md:px-10 mt-4 pb-4 text-[10px] uppercase tracking-[0.25em] text-concrete"
+      >
+        My Dream Projects<Reg /> — Brand Film · 1 Min
+      </p>
+    </section>
+  );
+};
 
-      <motion.div style={{ y }} className="max-w-[1600px] w-full mx-auto px-5 md:px-10 pb-10 md:pb-16">
+// Brand introduction — headline, short intro and CTA, directly under the film.
+const Intro = () => (
+  <section data-testid="home-intro" className="max-w-[1600px] w-full mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-20 md:pb-32">
         <MaskedLine delay={0.1}>
           <span className="inline-block bg-ink/60 backdrop-blur px-3 py-1.5 font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.45em] text-ember mb-6 md:mb-8">
             My Dream Projects<Reg />
@@ -189,10 +166,8 @@ const Hero = () => {
             Ameenpur, Hyderabad · Since 2020
           </p>
         </motion.div>
-      </motion.div>
     </section>
   );
-};
 
 const CountUp = ({ value, pad = 0 }) => {
   const ref = useRef(null);
@@ -329,93 +304,6 @@ const Purpose = () => (
   </section>
 );
 
-const BrandFilm = () => {
-  const frameRef = useRef(null);
-  const videoRef = useRef(null);
-  // lazy-armed ~400px before the frame scrolls into view; registered with the
-  // site-wide arbitration as MANUAL-ONLY — it never autoplays: a tap starts
-  // it (the cards yield), and it pauses when scrolled away or a card plays
-  const armed = useCardVideo(videoRef, frameRef, true, { manualPlay: true });
-  const [paused, setPaused] = useState(true);
-
-  const togglePlay = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (v.paused) v.play().catch(() => {});
-    else v.pause();
-  };
-
-  return (
-    <section data-testid="brand-film-section" className="border-t border-line bg-coal">
-      <div className="max-w-[1600px] mx-auto px-5 md:px-10 py-14 md:py-32">
-        <div className="grid grid-cols-12 gap-6 mb-8 md:mb-16">
-          <Reveal className="col-span-12 md:col-span-3">
-            <p className="text-[10px] uppercase tracking-[0.4em] text-ember">The Brand Film</p>
-          </Reveal>
-          <Reveal delay={0.1} className="col-span-12 md:col-span-9">
-            <h2 className="font-display font-semibold uppercase tracking-tighter leading-[1.02] text-3xl md:text-5xl text-bone">
-              One minute.
-              <br />
-              <span className="text-concrete">Everything we stand for.</span>
-            </h2>
-          </Reveal>
-        </div>
-        <Reveal>
-          <div
-            ref={frameRef}
-            data-testid="brand-film-frame"
-            onClick={togglePlay}
-            className="relative overflow-hidden border border-line bg-ink aspect-video cursor-pointer group"
-          >
-            {armed && (
-              <video
-                ref={(el) => {
-                  videoRef.current = el;
-                  // iOS Safari: the muted *property* must be set reliably
-                  if (el) el.muted = true;
-                }}
-                poster={BRAND_FILM_POSTER}
-                data-testid="brand-film-video"
-                muted
-                loop
-                playsInline
-                webkit-playsinline="true"
-                preload="metadata"
-                onPlay={() => setPaused(false)}
-                onPause={() => setPaused(true)}
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source media="(max-width: 768px)" src={BRAND_FILM_MOBILE} type="video/mp4" />
-                <source src={BRAND_FILM} type="video/mp4" />
-              </video>
-            )}
-            {/* centre state icon — solid when paused, whisper-quiet on hover while playing */}
-            <div
-              aria-hidden="true"
-              className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500 ${
-                paused ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-              }`}
-            >
-              <span className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-bone/25 bg-ink/55 backdrop-blur flex items-center justify-center text-bone">
-                {paused ? (
-                  <Play className="w-5 h-5 md:w-6 md:h-6 ml-0.5" strokeWidth={1.5} />
-                ) : (
-                  <Pause className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
-                )}
-              </span>
-            </div>
-          </div>
-          <p
-            data-testid="brand-film-label"
-            className="mt-4 text-[10px] uppercase tracking-[0.25em] text-concrete"
-          >
-            My Dream Projects<Reg /> — Brand Film · 1 Min
-          </p>
-        </Reveal>
-      </div>
-    </section>
-  );
-};
 
 const SELECTED_SLUGS = [
   "my-dream-nest",
@@ -1037,11 +925,11 @@ export default function Home() {
   });
   return (
     <>
-      <Hero />
+      <BrandFilmOpening />
+      <Intro />
+      <SelectedWork />
       <Stats />
       <Purpose />
-      <BrandFilm />
-      <SelectedWork />
       <Pricing />
       <Journey />
       <BuildingNext />
