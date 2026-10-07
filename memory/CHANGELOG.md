@@ -1151,3 +1151,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Poster is now a real <img> base layer (fetchPriority=high) beneath the video — first paint is always the film's own frame; no blank/flash possible.
 - Controls: large centre play button shows ONLY in paused/poster state; while playing, a minimal 36px round pause chip bottom-right replaces it (stopPropagation, tap toggles).
 - Verified iPhone-emu + WebKit (Safari engine) + desktop: autoplay muted/inline/loop advancing on all three, centre icon hidden while playing, chip tap pauses (centre play returns), frame tap resumes, label under frame, Intro section immediately after, no elevation/slideshow remnants. NOT published.
+
+## 2026-10-07 — Brand film: zero-crop + label removed + chip-only control
+- Frame back to aspect-video at ALL widths with object-contain on poster img AND video — the complete film frame is always visible on mobile, no cover cropping anywhere; natural 16:9 fills mobile width.
+- "MY DREAM PROJECTS® — BRAND FILM · 1 MIN" label removed entirely; film section flows directly into the Intro (YOU DREAM. WE BUILD.) with normal spacing.
+- Large centre play button removed; single minimal round chip (top-right — moved from bottom-right after discovering collision with the WhatsApp float on desktop, where clicks were intercepted) toggles play/pause in both states; frame tap still toggles.
+- Verified iPhone-emu + WebKit (Safari engine, incl. DOM-click toggle: plays at load, chip pauses, chip resumes) + desktop: contain fit, ratio 1.778, autoplay muted/inline/loop advancing, no label, no centre control, intro next. NOT published.
