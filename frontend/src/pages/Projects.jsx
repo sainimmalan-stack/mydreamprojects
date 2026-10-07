@@ -100,7 +100,7 @@ export default function Projects() {
               aria-current={filter === f.key ? "page" : undefined}
               data-testid={`filter-${f.key}-button`}
               onClick={() => setFilter(f.key)}
-              className={`shrink-0 flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.25em] px-5 py-2.5 rounded-full border transition-[color,background-color,border-color] duration-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember ${
+              className={`shrink-0 flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.25em] px-4 py-2 md:px-5 md:py-2.5 rounded-full border transition-[color,background-color,border-color] duration-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember ${
                 filter === f.key
                   ? "bg-ember border-ember text-ink font-semibold"
                   : "border-line text-concrete hover:text-bone hover:border-bone/30"

@@ -1089,3 +1089,8 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Generated 19 poster JPGs (representative frames sampled at 15/30/45% of duration, richest frame picked) into frontend/public/assets/videos/posters/ via ffmpeg; no video files or project data modified.
 - Day/night toggle on listing cards is hidden for video projects (video covered those images anyway); elevation images remain on detail pages/galleries.
 - Verified: 0 elevation imgs in video cards (desktop+mobile DOM assertions), posters render immediately, assets serve 200. NOTE: headless test Chromium cannot decode H.264 (DEMUXER_ERROR) — live playback re-verified by user in real browser. NOT published (user request).
+
+## 2026-10-07 — Slimmer mobile filter buttons on /projects
+- User request: ALL/COMPLETED/ONGOING pills felt ~15-20% too heavy on mobile.
+- Change (Projects.jsx only): mobile padding px-5 py-2.5 -> px-4 py-2; desktop unchanged via md:px-5 md:py-2.5. Fonts, colours, orange active state, counts, single-row scroll all preserved.
+- Verified at 375px: height 39.5->35.5px, padX 20->16px, padY 10->8px, all three on one row, active bg rgb(232,93,34); desktop measurements unchanged. Not published.
