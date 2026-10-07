@@ -58,8 +58,18 @@ const BrandFilmOpening = () => {
         ref={frameRef}
         data-testid="brand-film-frame"
         onClick={togglePlay}
-        className="relative overflow-hidden bg-ink w-full aspect-video max-h-[calc(100svh-4rem)] md:max-h-[calc(100svh-5rem)] cursor-pointer group"
+        className="relative overflow-hidden bg-ink w-full aspect-[4/3] sm:aspect-video max-h-[calc(100svh-4rem)] md:max-h-[calc(100svh-5rem)] cursor-pointer group"
       >
+        {/* film's own poster as the base layer — the very first paint is never
+            blank and never a foreign/elevation image */}
+        <img
+          src={BRAND_FILM_POSTER}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover sm:object-contain"
+        />
         {armed && (
           <video
             ref={(el) => {
@@ -78,27 +88,38 @@ const BrandFilmOpening = () => {
             preload="auto"
             onPlay={() => setPaused(false)}
             onPause={() => setPaused(true)}
-            className="absolute inset-0 w-full h-full object-contain"
+            className="absolute inset-0 w-full h-full object-cover sm:object-contain"
           >
             <source media="(max-width: 768px)" src={BRAND_FILM_MOBILE} type="video/mp4" />
             <source src={BRAND_FILM} type="video/mp4" />
           </video>
         )}
-        {/* centre state icon — solid in the paused/poster state, whisper-quiet on hover while playing */}
+        {/* large centre play button — poster/paused state only, never while playing */}
         <div
           aria-hidden="true"
           className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500 ${
-            paused ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+            paused ? "opacity-100" : "opacity-0"
           }`}
         >
           <span className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-bone/25 bg-ink/55 backdrop-blur flex items-center justify-center text-bone">
-            {paused ? (
-              <Play className="w-5 h-5 md:w-6 md:h-6 ml-0.5" strokeWidth={1.5} />
-            ) : (
-              <Pause className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
-            )}
+            <Play className="w-5 h-5 md:w-6 md:h-6 ml-0.5" strokeWidth={1.5} />
           </span>
         </div>
+        {/* minimal control while playing — small chip, bottom-right */}
+        {!paused && (
+          <button
+            type="button"
+            data-testid="brand-film-pause-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePlay();
+            }}
+            aria-label="Pause the brand film"
+            className="absolute bottom-3.5 right-3.5 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-ink/55 backdrop-blur border border-bone/15 text-bone/80 hover:text-ember hover:border-ember/60 transition-colors duration-300"
+          >
+            <Pause className="w-3.5 h-3.5" strokeWidth={1.8} />
+          </button>
+        )}
       </div>
       <p
         data-testid="brand-film-label"
