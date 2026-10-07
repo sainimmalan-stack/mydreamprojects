@@ -50,6 +50,12 @@ const unregisterVideo = (v) => {
   settleSoon();
 };
 
+// Lower-level access for the hero rotation player: it reports the ACTIVE
+// video's visibility into the same single-winner arbitration the cards use,
+// and untracks the old video each time the rotation advances.
+export const reportCardRatio = reportRatio;
+export const untrackCardVideo = unregisterVideo;
+
 // iOS Safari suspends videos when the tab/app is backgrounded — re-evaluate
 // playback when the page becomes visible again (resume behaviour).
 if (typeof document !== "undefined") {

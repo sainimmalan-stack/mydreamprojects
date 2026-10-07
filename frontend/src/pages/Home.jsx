@@ -4,19 +4,23 @@ import { motion, animate, useScroll, useTransform, useReducedMotion } from "fram
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { Reg } from "../components/BrandMark";
-import { useCardVideo, videoPosterFor } from "../components/useCardVideo";
-import { getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
+import { reportCardRatio, untrackCardVideo, videoPosterFor } from "../components/useCardVideo";
+import { projects, getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-// Hero background — the approved My Dream Skylark cinematic video, looping
-// behind the headline. Its poster frame comes from the SAME video, so no
-// foreign frame ever flashes before playback; the dark scrim stays as the
-// loading fallback and the poster remains if autoplay is blocked.
-const HERO_PROJECT = getProject("my-dream-skylark");
+// Hero background — a sequential cinematic rotation of all 13 completed-project
+// videos in strict index order (01 Nest → 13 Zenith, then restart). Each clip
+// plays fully before a smooth crossfade to the next; every layer's poster comes
+// from its OWN video so no foreign frame ever flashes; the dark scrim stays as
+// the loading fallback and the poster remains if autoplay is blocked.
+const HERO_PROJECTS = projects
+  .filter((p) => p.status === "completed" && p.video)
+  .sort((a, b) => parseInt(a.index, 10) - parseInt(b.index, 10));
+const HERO_FADE_MS = 1600;
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -34,48 +38,90 @@ const MaskedLine = ({ children, delay = 0, className = "" }) => (
 const Hero = () => {
   const ref = useRef(null);
   const reduce = useReducedMotion();
-  const videoRef = useRef(null);
+  const [idx, setIdx] = useState(0);
+  const currentVideoRef = useRef(null);
+  const ratioRef = useRef(1);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
   const imgY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
-  // same lazy-arm + single-playback arbitration as the project cards — the
-  // hero is above the fold so it arms and autoplays immediately on load,
-  // and pauses when scrolled away
-  useCardVideo(videoRef, ref, Boolean(HERO_PROJECT?.video));
+
+  // hero visibility feeds the shared single-winner arbitration for the ACTIVE
+  // video (pauses when scrolled away, resumes on return — like the cards)
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        ratioRef.current = entry.intersectionRatio;
+        if (currentVideoRef.current) reportCardRatio(currentVideoRef.current, entry.intersectionRatio);
+      },
+      { threshold: [0, 0.25, 0.55, 0.75, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // rotation advanced → hand the new active video to the playback manager;
+  // the outgoing one pauses (it freezes under the crossfade) and untracks
+  useEffect(() => {
+    const v = currentVideoRef.current;
+    if (!v) return undefined;
+    v.muted = true; // iOS Safari requires the muted *property* for autoplay
+    reportCardRatio(v, ratioRef.current);
+    return () => {
+      v.pause();
+      untrackCardVideo(v);
+    };
+  }, [idx]);
+
+  const count = HERO_PROJECTS.length;
+  const current = HERO_PROJECTS[idx];
+  const advance = () => setIdx((i) => (i + 1) % count);
+  // prev fades out while current fades in; next is preloaded and ready
+  const windowIdx = [...new Set([(idx - 1 + count) % count, idx, (idx + 1) % count])];
 
   return (
     <section ref={ref} data-testid="home-hero" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-      <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10">
-        <video
-          ref={(el) => {
-            videoRef.current = el;
-            // iOS Safari: the muted *property* must be set for autoplay —
-            // React's muted attribute alone does not guarantee it
-            if (el) el.muted = true;
-          }}
-          src={HERO_PROJECT?.video}
-          poster={videoPosterFor(HERO_PROJECT?.video)}
-          data-testid="hero-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          webkit-playsinline="true"
-          preload="auto"
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-[112%] object-cover object-center"
-        />
+      <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10 bg-ink">
+        {windowIdx.map((pos) => {
+          const p = HERO_PROJECTS[pos];
+          const active = pos === idx;
+          return (
+            <video
+              key={p.slug}
+              ref={(el) => {
+                if (active) currentVideoRef.current = el;
+                if (el) el.muted = true; // iOS Safari: muted property, not just attribute
+              }}
+              src={p.video}
+              poster={videoPosterFor(p.video)}
+              data-testid={active ? "hero-video" : `hero-video-queued-${p.slug}`}
+              autoPlay={active}
+              muted
+              playsInline
+              webkit-playsinline="true"
+              preload={active ? "auto" : "metadata"}
+              onEnded={active ? advance : undefined}
+              onError={active ? advance : undefined}
+              aria-hidden="true"
+              className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity ${
+                active ? "opacity-100 ease-out" : "opacity-0 ease-in"
+              }`}
+              style={{ transitionDuration: `${HERO_FADE_MS}ms` }}
+            />
+          );
+        })}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/30 pointer-events-none" />
       </motion.div>
 
       <Link
-        to={`/projects/${HERO_PROJECT.slug}`}
-        data-testid={`hero-caption-${HERO_PROJECT.slug}`}
+        to={`/projects/${current.slug}`}
+        data-testid={`hero-caption-${current.slug}`}
         className="group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right"
       >
         <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
         <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90 group-hover:text-ember transition-colors duration-300">
-          {HERO_PROJECT.title}
+          {current.title}
         </p>
       </Link>
 
