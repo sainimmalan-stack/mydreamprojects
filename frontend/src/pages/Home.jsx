@@ -4,6 +4,7 @@ import { motion, animate, useScroll, useTransform, useReducedMotion } from "fram
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { Reg } from "../components/BrandMark";
+import { useCardVideo, videoPosterFor } from "../components/useCardVideo";
 import { getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
@@ -11,29 +12,11 @@ import useSeo from "../hooks/useSeo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-// Hero slideshow — night elevations of the 8 selected completed projects only.
-// Skylark always leads; the sequence loops continuously.
-const HERO_SLIDE_ORDER = [
-  "my-dream-skylark",
-  "my-dream-nest",
-  "my-dream-casa",
-  "my-dream-avasa",
-  "my-dream-hillock",
-  "my-dream-griffin",
-  "my-dream-perch",
-  "my-dream-solace",
-];
-const HERO_SLIDES = HERO_SLIDE_ORDER.map(getProject)
-  .filter((p) => p?.elevationModes?.night)
-  .map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    src: p.elevationModes.night,
-    srcSet: `${p.elevationModes.night.replace(".webp", "-800.webp")} 800w, ${p.elevationModes.night} ${p.elevationModes.width || 1402}w`,
-    link: `/projects/${p.slug}`,
-  }));
-const SLIDE_MS = 4000;
-const FADE_MS = 1600;
+// Hero background — the approved My Dream Skylark cinematic video, looping
+// behind the headline. Its poster frame comes from the SAME video, so no
+// foreign frame ever flashes before playback; the dark scrim stays as the
+// loading fallback and the poster remains if autoplay is blocked.
+const HERO_PROJECT = getProject("my-dream-skylark");
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
   <span className={`block overflow-hidden ${className}`}>
@@ -51,80 +34,50 @@ const MaskedLine = ({ children, delay = 0, className = "" }) => (
 const Hero = () => {
   const ref = useRef(null);
   const reduce = useReducedMotion();
-  const [slide, setSlide] = useState(0);
-  const [loaded, setLoaded] = useState(() => new Set([0]));
-  const count = HERO_SLIDES.length;
+  const videoRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
   const imgY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
-
-  useEffect(() => {
-    const t = setInterval(() => {
-      setSlide((s) => {
-        const next = (s + 1) % count;
-        return loaded.has(next) ? next : s;
-      });
-    }, SLIDE_MS);
-    return () => clearInterval(t);
-  }, [count, loaded]);
-
-  // Render only the fading-out, active and preloading-next slides.
-  const windowIdx = [...new Set([(slide - 1 + count) % count, slide, (slide + 1) % count])];
+  // same lazy-arm + single-playback arbitration as the project cards — the
+  // hero is above the fold so it arms and autoplays immediately on load,
+  // and pauses when scrolled away
+  useCardVideo(videoRef, ref, Boolean(HERO_PROJECT?.video));
 
   return (
     <section ref={ref} data-testid="home-hero" className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
       <motion.div style={{ y: imgY }} className="absolute inset-0 -z-10">
-        {windowIdx.map((i) => {
-          const s = HERO_SLIDES[i];
-          return (
-            <div key={s.slug} className="absolute inset-0">
-              <motion.img
-                src={s.src}
-                srcSet={s.srcSet}
-                sizes="100vw"
-                alt={i === slide ? `${s.title} residential apartment elevation in Ameenpur — night view` : ""}
-                aria-hidden={i !== slide}
-                data-testid={i === 0 ? "hero-elevation-image" : `hero-slide-${s.slug}`}
-                fetchPriority={i === 0 ? "high" : undefined}
-                draggable={false}
-                onLoad={() => setLoaded((prev) => (prev.has(i) ? prev : new Set(prev).add(i)))}
-                initial={false}
-                animate={
-                  reduce || i !== slide
-                    ? { scale: 1, x: 0, y: 0 }
-                    : { scale: 1.02, x: 0, y: 0 }
-                }
-                transition={{ duration: (SLIDE_MS + FADE_MS) / 1000, ease: "linear" }}
-                className={`absolute inset-0 w-full h-[112%] object-cover object-center transition-opacity ${
-                  i === slide ? "opacity-100 duration-[1600ms] ease-out" : "opacity-0 duration-[1600ms] ease-in"
-                }`}
-              />
-            </div>
-          );
-        })}
+        <video
+          ref={(el) => {
+            videoRef.current = el;
+            // iOS Safari: the muted *property* must be set for autoplay —
+            // React's muted attribute alone does not guarantee it
+            if (el) el.muted = true;
+          }}
+          src={HERO_PROJECT?.video}
+          poster={videoPosterFor(HERO_PROJECT?.video)}
+          data-testid="hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          webkit-playsinline="true"
+          preload="auto"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-[112%] object-cover object-center"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/30 pointer-events-none" />
       </motion.div>
 
-      {windowIdx.map((i) => {
-        const s = HERO_SLIDES[i];
-        return (
-          <Link
-            key={`caption-${s.slug}`}
-            to={s.link}
-            data-testid={`hero-caption-${s.slug}`}
-            aria-hidden={i !== slide}
-            tabIndex={i === slide ? 0 : -1}
-            className={`group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right transition-opacity duration-[2400ms] ease-in-out ${
-              i === slide ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
-            <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90 group-hover:text-ember transition-colors duration-300">
-              {s.title}
-            </p>
-          </Link>
-        );
-      })}
+      <Link
+        to={`/projects/${HERO_PROJECT.slug}`}
+        data-testid={`hero-caption-${HERO_PROJECT.slug}`}
+        className="group absolute top-24 md:top-28 right-5 md:right-10 z-10 text-right"
+      >
+        <span className="block w-6 h-px bg-ember ml-auto mb-2.5" />
+        <p className="font-display text-[10px] md:text-xs font-semibold uppercase tracking-[0.35em] text-bone/90 group-hover:text-ember transition-colors duration-300">
+          {HERO_PROJECT.title}
+        </p>
+      </Link>
 
       <motion.div style={{ y }} className="max-w-[1600px] w-full mx-auto px-5 md:px-10 pb-10 md:pb-16">
         <MaskedLine delay={0.1}>
