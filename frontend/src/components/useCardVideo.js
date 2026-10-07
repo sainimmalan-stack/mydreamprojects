@@ -20,6 +20,9 @@ const settle = () => {
   });
   cardVideos.forEach((_, v) => {
     if (v === best) {
+      // iOS Safari checks the muted IDL *property* (not the attribute) for
+      // autoplay eligibility — enforce it right before every play()
+      v.muted = true;
       if (v.paused) {
         v.play()
           .then(() => settleSoon()) // late resolution: re-verify v is still the winner
@@ -46,6 +49,14 @@ const unregisterVideo = (v) => {
   cardVideos.delete(v);
   settleSoon();
 };
+
+// iOS Safari suspends videos when the tab/app is backgrounded — re-evaluate
+// playback when the page becomes visible again (resume behaviour).
+if (typeof document !== "undefined") {
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) settleSoon();
+  });
+}
 
 // Poster frame extracted from the SAME video — never the elevation image.
 export const videoPosterFor = (src) =>
@@ -86,8 +97,13 @@ export const useCardVideo = (videoRef, mediaRef, hasVideo) => {
       { threshold: [0, 0.25, 0.55, 0.75, 1] }
     );
     io.observe(v);
+    // native autoPlay (and any late async start) must re-enter single-winner
+    // arbitration — playback beginning is not an intersection change
+    const onPlay = () => settleSoon();
+    v.addEventListener("play", onPlay);
     return () => {
       io.disconnect();
+      v.removeEventListener("play", onPlay);
       v.pause();
       unregisterVideo(v);
     };

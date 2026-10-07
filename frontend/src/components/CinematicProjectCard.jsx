@@ -124,13 +124,20 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
               so the elevation image never flashes before playback starts */}
           {hasVideo && armed && (
             <video
-              ref={videoRef}
+              ref={(el) => {
+                videoRef.current = el;
+                // iOS Safari: the muted *property* must be set for autoplay —
+                // React's muted attribute alone does not guarantee it
+                if (el) el.muted = true;
+              }}
               src={project.video}
               poster={videoPoster}
               data-testid={`card-video-${project.slug}`}
+              autoPlay
               muted
               loop
               playsInline
+              webkit-playsinline="true"
               preload="metadata"
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none"
