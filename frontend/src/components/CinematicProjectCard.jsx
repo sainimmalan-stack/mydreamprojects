@@ -58,19 +58,23 @@ const unregisterVideo = (v) => {
  * Video behaviour: nothing downloads until the card nears the viewport
  * (lazy arm), then the muted/looped/playsInline clip autoplays only while
  * ≥55% visible, pauses when scrolled away, and pauses any other card that
- * was playing. The elevation poster image stays visible until the first
- * frame is ready (and forever if the video is unavailable).
+ * was playing. While the clip loads, the video's own poster frame (extracted
+ * from the same video) is shown — the elevation image is never used as a
+ * stand-in, it remains available on the project detail pages and galleries.
  */
 export const CinematicProjectCard = ({ project, variant = "standard", drop = false }) => {
   const [mode, setMode] = useState("night");
   const [dayTouched, setDayTouched] = useState(false);
   const [plan3dOpen, setPlan3dOpen] = useState(false);
   const [armed, setArmed] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef(null);
   const mediaRef = useRef(null);
-  const modes = project.cover && project.elevationModes ? project.elevationModes : null;
   const hasVideo = Boolean(project.video);
+  const modes = !hasVideo && project.cover && project.elevationModes ? project.elevationModes : null;
+  // poster frame extracted from the SAME video — never the elevation image
+  const videoPoster = hasVideo
+    ? project.video.replace("/assets/videos/", "/assets/videos/posters/").replace(/\.mp4$/, "-poster.jpg")
+    : null;
 
   const aspect =
     variant === "hero"
@@ -178,7 +182,7 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
                 }`}
               />
             </>
-          ) : project.cover ? (
+          ) : !hasVideo && project.cover ? (
             <img
               src={project.cover}
               srcSet={`${project.cover.replace("elevation.jpg", "elevation-800.webp")} 800w, ${project.cover.replace("elevation.jpg", "elevation-1600.webp")} 1600w`}
@@ -188,27 +192,28 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
               className="texture-img absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
             />
           ) : (
-            <div className="absolute inset-0 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105">
-              <ComingSoonElevation project={project} compact />
-            </div>
+            !hasVideo && (
+              <div className="absolute inset-0 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105">
+                <ComingSoonElevation project={project} compact />
+              </div>
+            )
           )}
 
           {/* cinematic video layer — lazy-armed, visibility-driven playback;
-              the elevation image underneath acts as the poster until ready */}
+              the video's own poster frame shows instantly while it loads,
+              so the elevation image never flashes before playback starts */}
           {hasVideo && armed && (
             <video
               ref={videoRef}
               src={project.video}
+              poster={videoPoster}
               data-testid={`card-video-${project.slug}`}
               muted
               loop
               playsInline
               preload="metadata"
-              onCanPlay={() => setVideoReady(true)}
               aria-hidden="true"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 z-10 pointer-events-none ${
-                videoReady ? "opacity-100" : "opacity-0"
-              }`}
+              className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none"
             />
           )}
 

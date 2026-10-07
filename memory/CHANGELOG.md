@@ -1082,3 +1082,10 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Single playback: centralized ratio-based manager (module registry + rAF-throttled settle picks the MOST-VISIBLE card ≥0.55 ratio; all others pause; late play() resolutions re-verify). Fixes the deterministic pair-row case (two cards visible → highest-visibility wins).
 - DEBUG NOTE: Playwright's bundled Chromium lacks H.264 codecs (false "no supported streams") — video tests must run with executable_path=/usr/bin/google-chrome. Test scripts in /tmp (verify_videos2.py, verify_playback.py) — ephemeral.
 - Verified (real Chrome): 19/19 mapped+decodable desktop+mobile; lazy (0-2 reqs at open, rest on scroll); ≤1 playing; pause on scroll-away; no overflow; card→detail navigation intact; day/night + 3D chips + filters unchanged. Screenshots show real footage mid-play.
+
+## 2026-10-07 — Remove elevation-image flash before project videos
+- User reported: on /projects cards, the static elevation image flashed ~0.5-1s before the video started.
+- Fix (CinematicProjectCard.jsx only): video cards no longer render elevation/cover/ComingSoon images; the <video> now carries a poster frame extracted from the SAME video, visible instantly until playback begins (muted, inline, loop, single-playback manager unchanged).
+- Generated 19 poster JPGs (representative frames sampled at 15/30/45% of duration, richest frame picked) into frontend/public/assets/videos/posters/ via ffmpeg; no video files or project data modified.
+- Day/night toggle on listing cards is hidden for video projects (video covered those images anyway); elevation images remain on detail pages/galleries.
+- Verified: 0 elevation imgs in video cards (desktop+mobile DOM assertions), posters render immediately, assets serve 200. NOTE: headless test Chromium cannot decode H.264 (DEMUXER_ERROR) — live playback re-verified by user in real browser. NOT published (user request).
