@@ -1157,3 +1157,12 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - "MY DREAM PROJECTS® — BRAND FILM · 1 MIN" label removed entirely; film section flows directly into the Intro (YOU DREAM. WE BUILD.) with normal spacing.
 - Large centre play button removed; single minimal round chip (top-right — moved from bottom-right after discovering collision with the WhatsApp float on desktop, where clicks were intercepted) toggles play/pause in both states; frame tap still toggles.
 - Verified iPhone-emu + WebKit (Safari engine, incl. DOM-click toggle: plays at load, chip pauses, chip resumes) + desktop: contain fit, ratio 1.778, autoplay muted/inline/loop advancing, no label, no centre control, intro next. NOT published.
+
+## 2026-10-07 — iPad video playback hardening (site-wide)
+- User report: iPad videos frozen / not autoplaying / poster flash / fullscreen risk. Deep-dive found four real gaps, all in the shared player (useCardVideo.js) — no visual changes:
+  1. iPad Safari can leave play() PENDING forever (no reject) → silent frozen frame. Fix: 2.5s settle-timeout marks the video autoplay-blocked.
+  2. No recovery path when autoplay is rejected (Low Power Mode). Fix: blocked videos get a clean centered tap-to-play button (appears ONLY when blocked); tap starts playback immediately via playVideoNow.
+  3. Explicit tap could be instantly re-paused by a more-visible card ("tap does nothing"). Fix: 10s winner-pin for user-tapped videos + immediate pause of others.
+  4. autoPlay-started videos could briefly escape single-winner arbitration (observer hadn't reported yet). Fix: synchronous ratio registration on the play event. Plus pageshow listener for iOS bfcache restores (frozen after tab switch).
+- Debugging notes for future agents: headless Chrome CANNOT simulate muted-autoplay rejection (flag ineffective); native autoPlay self-heals script-level play() rejections, hiding the button in ms — test the fallback by dispatching the mdp:autoplayblocked event manually. Strict-winner ties: first reporter wins.
+- Verified: iPad WebKit (Safari engine, iPad gen 7 profile) + iPad Chromium: brand film autoplays muted/inline/loop/contain; Selected Work exactly 1 playing, film yields; /projects exactly 1 playing, no elevation imgs; fallback button shows on block, tap plays+advances, button hides; normal flow shows zero buttons. Debug instrumentation removed after testing. NOT published.

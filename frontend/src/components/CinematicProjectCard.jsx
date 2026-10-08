@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sun, Moon, Box } from "lucide-react";
+import { ArrowUpRight, Sun, Moon, Box, Play } from "lucide-react";
 import ComingSoonElevation from "./ComingSoonElevation";
 import FloorPlanViewer from "./FloorPlanViewer";
-import { useCardVideo, videoPosterFor } from "./useCardVideo";
+import { useCardVideo, videoPosterFor, playVideoNow } from "./useCardVideo";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -27,7 +27,7 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
   const modes = !hasVideo && project.cover && project.elevationModes ? project.elevationModes : null;
   // poster frame extracted from the SAME video — never the elevation image
   const videoPoster = videoPosterFor(project.video);
-  const armed = useCardVideo(videoRef, mediaRef, hasVideo);
+  const { armed, blocked } = useCardVideo(videoRef, mediaRef, hasVideo);
 
   const aspect =
     variant === "hero"
@@ -142,6 +142,24 @@ export const CinematicProjectCard = ({ project, variant = "standard", drop = fal
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none"
             />
+          )}
+
+          {/* iPad/Safari autoplay fallback — appears ONLY if the browser
+              rejected autoplay; one tap starts the clip immediately */}
+          {hasVideo && blocked && (
+            <button
+              type="button"
+              data-testid={`card-play-${project.slug}`}
+              aria-label={`Play the ${project.title} film`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                playVideoNow(videoRef.current);
+              }}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full border border-bone/25 bg-ink/55 backdrop-blur flex items-center justify-center text-bone hover:text-ember hover:border-ember/60 transition-colors duration-300"
+            >
+              <Play className="w-4 h-4 ml-0.5" strokeWidth={1.5} />
+            </button>
           )}
 
           {/* bottom scrim for legibility on hover */}

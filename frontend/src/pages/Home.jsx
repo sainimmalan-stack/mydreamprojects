@@ -4,7 +4,7 @@ import { motion, animate, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, ArrowDown, MessageCircle, Phone, Navigation, Check, Play, Pause } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
 import { Reg } from "../components/BrandMark";
-import { useCardVideo } from "../components/useCardVideo";
+import { useCardVideo, playVideoNow } from "../components/useCardVideo";
 import { getProject, projectStats, PRICING, BUSINESS_STATS } from "../data/projects";
 import { waLink, waLinkTo, WHATSAPP_GREETING, PHONE_SAI, PHONE_AKHIL, MAPS_URL, WHATSAPP_NUMBER, WHATSAPP_NUMBER_AKHIL, founderIntroMessage } from "../data/contact";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
@@ -42,13 +42,13 @@ const MaskedLine = ({ children, delay = 0, className = "" }) => (
 const BrandFilmOpening = () => {
   const frameRef = useRef(null);
   const videoRef = useRef(null);
-  const armed = useCardVideo(videoRef, frameRef, true);
+  const { armed } = useCardVideo(videoRef, frameRef, true);
   const [paused, setPaused] = useState(true);
 
   const togglePlay = () => {
     const v = videoRef.current;
     if (!v) return;
-    if (v.paused) v.play().catch(() => {});
+    if (v.paused) playVideoNow(v); // user gesture: starts immediately, clears any autoplay-blocked flag
     else v.pause();
   };
 

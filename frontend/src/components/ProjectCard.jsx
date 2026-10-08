@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sun, Moon, Box } from "lucide-react";
+import { ArrowUpRight, Sun, Moon, Box, Play } from "lucide-react";
 import ComingSoonElevation from "./ComingSoonElevation";
 import FloorPlanViewer from "./FloorPlanViewer";
-import { useCardVideo, videoPosterFor } from "./useCardVideo";
+import { useCardVideo, videoPosterFor, playVideoNow } from "./useCardVideo";
 
 const TONES = [
   { surface: "bg-coal", index: "text-outline", title: "text-bone", meta: "text-concrete" },
@@ -22,7 +22,7 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
   const hasVideo = Boolean(project.video);
   const modes = !hasVideo && project.cover && project.elevationModes ? project.elevationModes : null;
   // cinematic video teaser — same treatment as the /projects index cards
-  const armed = useCardVideo(videoRef, mediaRef, hasVideo);
+  const { armed, blocked } = useCardVideo(videoRef, mediaRef, hasVideo);
   const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
   return (
     <motion.div
@@ -151,6 +151,24 @@ export const ProjectCard = ({ project, aspect = "aspect-[4/5]", tone = 0, homeMe
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
+          )}
+
+          {/* iPad/Safari autoplay fallback — appears ONLY if the browser
+              rejected autoplay; one tap starts the clip immediately */}
+          {hasVideo && blocked && (
+            <button
+              type="button"
+              data-testid={`card-play-${project.slug}`}
+              aria-label={`Play the ${project.title} film`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                playVideoNow(videoRef.current);
+              }}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-14 h-14 rounded-full border border-bone/25 bg-ink/55 backdrop-blur flex items-center justify-center text-bone hover:text-ember hover:border-ember/60 transition-colors duration-300"
+            >
+              <Play className="w-4 h-4 ml-0.5" strokeWidth={1.5} />
+            </button>
           )}
           {project.plan3d && (
             <button
