@@ -21,9 +21,20 @@ const BRAND_FILM_MOBILE = "/assets/videos/brand-film-mobile.mp4";
 const BRAND_FILM_POSTER = "/assets/videos/posters/brand-film-poster.jpg";
 
 const MaskedLine = ({ children, delay = 0, className = "" }) => (
-  <span className={`block overflow-hidden ${className}`}>
+  <span
+    className={`block overflow-hidden ${className}`}
+    style={{
+      // breathing room inside the clip box: tight leading (0.92) otherwise
+      // clips glyph tops mid-animation; negative margins keep the visual
+      // layout pixel-identical (no layout shift, space reserved from frame 1)
+      paddingTop: "0.16em",
+      marginTop: "-0.16em",
+      paddingBottom: "0.12em",
+      marginBottom: "-0.12em",
+    }}
+  >
     <motion.span
-      className="block"
+      className="block will-change-transform"
       initial={{ y: "110%" }}
       animate={{ y: 0 }}
       transition={{ duration: 1.1, delay, ease: EASE }}

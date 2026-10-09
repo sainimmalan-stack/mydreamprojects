@@ -1172,3 +1172,9 @@ Dated implementation log. Core requirements: PRD.md. Pending work: ROADMAP.md.
 - Fix: brand-film-poster.jpg regenerated from the film's own title card (3.5s: MDP logo + MY DREAM PROJECTS + YOU DREAM. WE BUILD. on black, 17KB, faster first paint). No code changes needed — section order/video source were already correct.
 - Live-site audit via curl: live bundle already serves the brand-film opening (no slideshow), but still has the OLD Selene poster and LACKS the iPad hardening (playVideoNow) — a redeploy is required for those.
 - Verified preview (iPhone emulation + iPad WebKit): first section = brand-film-opening, poster img + poster attr = new logo card, zero slideshow images, film autoplays (t advancing), order film → intro(YOU DREAM. WE BUILD.) → selected-work → stats, identical after hard reload. NOT published — user presses Deploy after checking preview.
+
+## 2026-10-09 — Opening animation glitch fixes (heading clip + logo jump + layout shift)
+- Heading clip: Home's MaskedLine mask box got breathing room (paddingTop/Bottom 0.16em/0.12em with compensating negative margins) — tight leading-[0.92] no longer clips glyph tops during the rise animation; layout pixel-identical. Inner span now will-change-transform for clean Safari compositing.
+- Logo jump/flicker: poster was the film's fully-formed 3.5s logo card while the video starts from black → visible snap on playback. Poster regenerated from the film's actual opening moment (0.5s, faint emerging logo) so poster→video is continuous; the logo now blooms smoothly. (Film's own loop end fades to black → seamless 60s loop.)
+- Layout shift: film frame + h1 bounding boxes measured identical at 0.3/0.9/1.6/2.6/4.0s on iPhone and iPad (WebKit = real Safari engine) — zero shift; heading screenshots show no clipping at any animation point.
+- Brand-film placement, playback fixes, colours, typography, spacing all unchanged. NOT published.
